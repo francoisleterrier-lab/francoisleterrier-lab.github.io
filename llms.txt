@@ -30,5 +30,17 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Référencement local Google + Google Business Profile.
 - Premier échange offert, sans engagement, contenu validé avant publication.
 
+## Pages du site
+- Accueil : https://francoisleterrier-lab.github.io/
+- À propos (page entité) : https://francoisleterrier-lab.github.io/a-propos.html
+- Community manager à Muret : https://francoisleterrier-lab.github.io/community-manager-muret.html
+- Community manager à Carbonne : https://francoisleterrier-lab.github.io/community-manager-carbonne.html
+- Community manager à Rieumes : https://francoisleterrier-lab.github.io/community-manager-rieumes.html
+- Community manager à Eaunes : https://francoisleterrier-lab.github.io/community-manager-eaunes.html
+- Community manager à Seysses : https://francoisleterrier-lab.github.io/community-manager-seysses.html
+- Community manager à Fonsorbes : https://francoisleterrier-lab.github.io/community-manager-fonsorbes.html
+- Community manager au Fauga : https://francoisleterrier-lab.github.io/community-manager-le-fauga.html
+- Community manager à Noé : https://francoisleterrier-lab.github.io/community-manager-noe.html
+
 ## Contact
 Téléphone 06 98 20 02 08 — Email francois.leterrier@gmail.com — Zone Sud-Toulousain (31410).
