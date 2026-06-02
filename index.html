@@ -12,10 +12,11 @@
 <meta name="description" content="Community manager et création de sites internet à Lavernose-Lacasse (31410), Toulouse & Sud-Toulousain. Gestion Facebook, Instagram, Google Business et sites vitrines pour artisans, commerçants et indépendants. Premier échange offert.">
 <meta name="keywords" content="community manager Toulouse, community manager Sud-Toulousain, création site internet Lavernose-Lacasse, gestion réseaux sociaux, Facebook Instagram Google Business, site vitrine artisan, référencement local 31410">
 <meta name="author" content="François Leterrier">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#06070e">
 <link rel="canonical" href="https://francoisleterrier-lab.github.io/">
 <link rel="alternate" hreflang="fr-fr" href="https://francoisleterrier-lab.github.io/">
+<link rel="alternate" hreflang="x-default" href="https://francoisleterrier-lab.github.io/">
 
 <!-- ============ SEO LOCAL — GÉOLOCALISATION ============ -->
 <meta name="geo.region" content="FR-31">
@@ -37,6 +38,7 @@
 <meta name="twitter:image" content="https://francoisleterrier-lab.github.io/og-image.png">
 
 <!-- ============ FAVICON (logo FL) ============ -->
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
 <link rel="shortcut icon" href="favicon-180.png">
@@ -46,106 +48,111 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- ============ DONNÉES STRUCTURÉES — SEO LOCAL ============ -->
+<!-- ============ DONNÉES STRUCTURÉES — SEO LOCAL + GEO (graph consolidé) ============ -->
+<!-- TODO François : compléter "sameAs" avec Instagram, LinkedIn et la fiche Google Business ; ajouter photo-francois.jpg (portrait) quand disponible. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "François Leterrier — Community Manager & Création web",
-  "image": "https://francoisleterrier-lab.github.io/og-image.png",
-  "url": "https://francoisleterrier-lab.github.io/",
-  "telephone": "+33698200208",
-  "email": "francois.leterrier.cmw@gmail.com",
-  "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "49938528400025" },
-  "priceRange": "€€",
-  "description": "Community manager et création de sites internet pour artisans, commerçants et indépendants du Sud-Toulousain. Gestion Facebook, Instagram, Google Business et sites vitrines.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Lavernose-Lacasse",
-    "postalCode": "31410",
-    "addressRegion": "Occitanie",
-    "addressCountry": "FR"
-  },
-  "geo": { "@type": "GeoCoordinates", "latitude": 43.4206, "longitude": 1.2519 },
-  "hasMap": "https://www.google.com/maps/place/Lavernose-Lacasse",
-  "areaServed": [
-    { "@type": "City", "name": "Toulouse" },
-    { "@type": "City", "name": "Lavernose-Lacasse" },
-    { "@type": "City", "name": "Muret" },
-    { "@type": "City", "name": "Carbonne" },
-    { "@type": "City", "name": "Rieumes" },
-    { "@type": "City", "name": "Eaunes" },
-    { "@type": "City", "name": "Saint-Lys" },
-    { "@type": "City", "name": "Le Fauga" },
-    { "@type": "City", "name": "Noé" },
-    { "@type": "City", "name": "Longages" },
-    { "@type": "City", "name": "Auterive" },
-    { "@type": "AdministrativeArea", "name": "Sud-Toulousain" },
-    { "@type": "AdministrativeArea", "name": "Haute-Garonne" }
-  ],
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" }
-  ],
-  "founder": { "@type": "Person", "name": "François Leterrier", "jobTitle": "Community Manager & Créateur de sites internet" },
-  "contactPoint": { "@type": "ContactPoint", "telephone": "+33698200208", "contactType": "customer service", "areaServed": "FR", "availableLanguage": "French" },
-  "knowsAbout": ["Community management", "Réseaux sociaux", "Création de site internet", "Référencement local", "Google Business Profile", "SEO local Toulouse"],
-  "makesOffer": [
-    { "@type": "Offer", "name": "Gestion des réseaux sociaux", "priceCurrency": "EUR", "price": "180", "description": "Formules mensuelles à partir de 180 € / mois." },
-    { "@type": "Offer", "name": "Création de site internet", "priceCurrency": "EUR", "price": "590", "description": "Sites vitrines à partir de 590 €." }
-  ],
-  "sameAs": ["https://www.facebook.com/francoisleterrierweb"]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "Quel est le tarif d'un community manager dans le Sud-Toulousain ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "La gestion de vos réseaux sociaux démarre à 180 € / mois pour la formule Essentiel (2 publications par mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois (4 publications + modération) est la plus choisie. Toutes les formules sont sans engagement." }
+      "@type": ["ProfessionalService","LocalBusiness"],
+      "@id": "https://francoisleterrier-lab.github.io/#business",
+      "name": "François Leterrier — Community Manager & Création de site internet",
+      "description": "Gestion des réseaux sociaux (Facebook, Instagram, Google Business) et création de sites internet pour artisans, commerçants et indépendants de Toulouse et du Sud-Toulousain.",
+      "url": "https://francoisleterrier-lab.github.io/",
+      "image": "https://francoisleterrier-lab.github.io/og-image.png",
+      "logo": "https://francoisleterrier-lab.github.io/logo.webp",
+      "telephone": "+33698200208",
+      "email": "francois.leterrier.cmw@gmail.com",
+      "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "49938528400025" },
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressRegion": "Occitanie", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 43.4206, "longitude": 1.2519 },
+      "hasMap": "https://www.google.com/maps/place/Lavernose-Lacasse",
+      "areaServed": [
+        { "@type": "City", "name": "Lavernose-Lacasse" },
+        { "@type": "City", "name": "Toulouse" },
+        { "@type": "City", "name": "Muret" },
+        { "@type": "City", "name": "Carbonne" },
+        { "@type": "City", "name": "Rieumes" },
+        { "@type": "City", "name": "Eaunes" },
+        { "@type": "City", "name": "Seysses" },
+        { "@type": "City", "name": "Fonsorbes" },
+        { "@type": "City", "name": "Le Fauga" },
+        { "@type": "City", "name": "Noé" },
+        { "@type": "AdministrativeArea", "name": "Sud-Toulousain" },
+        { "@type": "AdministrativeArea", "name": "Haute-Garonne" }
+      ],
+      "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00", "description": "Sur rendez-vous" },
+      "founder": { "@id": "https://francoisleterrier-lab.github.io/#francois" },
+      "knowsAbout": ["Community management","Réseaux sociaux","Facebook","Instagram","Google Business Profile","Création de site internet","Référencement local","SEO local Toulouse"],
+      "makesOffer": [
+        { "@type": "Offer", "name": "Gestion des réseaux sociaux", "priceCurrency": "EUR", "price": "180", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "180", "priceCurrency": "EUR", "unitText": "MONTH" } },
+        { "@type": "Offer", "name": "Création de site internet", "priceCurrency": "EUR", "price": "590" }
+      ],
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+33698200208", "contactType": "customer service", "areaServed": "FR", "availableLanguage": "French" },
+      "sameAs": ["https://www.facebook.com/francoisleterrierweb"]
     },
     {
-      "@type": "Question",
-      "name": "Combien coûte la création d'un site internet ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Un site une page (landing) démarre à 590 €. Un site vitrine complet jusqu'à 5 pages, avec design sur-mesure et référencement local, démarre à 1 400 €. Les projets e-commerce ou sur-mesure sont sur devis." }
+      "@type": "Person",
+      "@id": "https://francoisleterrier-lab.github.io/#francois",
+      "name": "François Leterrier",
+      "jobTitle": "Community Manager & Créateur de sites internet",
+      "url": "https://francoisleterrier-lab.github.io/a-propos.html",
+      "telephone": "+33698200208",
+      "email": "francois.leterrier.cmw@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" },
+      "worksFor": { "@id": "https://francoisleterrier-lab.github.io/#business" },
+      "knowsAbout": ["Community management","Réseaux sociaux","Google Business Profile","Création de site internet","Référencement local"],
+      "areaServed": "Sud-Toulousain",
+      "sameAs": ["https://www.facebook.com/francoisleterrierweb"]
     },
     {
-      "@type": "Question",
-      "name": "Faut-il s'engager sur la durée ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Non. Les formules réseaux sociaux sont sans engagement, facturées au mois, résiliables avec un préavis de 30 jours. Vous validez chaque contenu avant publication." }
+      "@type": "WebSite",
+      "@id": "https://francoisleterrier-lab.github.io/#website",
+      "url": "https://francoisleterrier-lab.github.io/",
+      "name": "François Leterrier — Community Manager & Création web",
+      "inLanguage": "fr-FR",
+      "publisher": { "@id": "https://francoisleterrier-lab.github.io/#business" }
     },
     {
-      "@type": "Question",
-      "name": "Dans quelle zone intervenez-vous ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "J'interviens à Lavernose-Lacasse (31410), à Toulouse et dans tout le Sud-Toulousain : Muret, Carbonne, Rieumes, Eaunes, Saint-Lys, Le Fauga, Noé, Longages, Auterive et alentours. Les échanges peuvent se faire sur place ou à distance." }
+      "@type": "Service",
+      "@id": "https://francoisleterrier-lab.github.io/#service-cm",
+      "serviceType": "Gestion de réseaux sociaux",
+      "url": "https://francoisleterrier-lab.github.io/community-manager.html",
+      "provider": { "@id": "https://francoisleterrier-lab.github.io/#business" },
+      "areaServed": { "@type": "AdministrativeArea", "name": "Sud-Toulousain" },
+      "description": "Gestion de Facebook, Instagram et Google Business : visuels, rédaction, publications régulières et modération. Dès 180 €/mois."
     },
     {
-      "@type": "Question",
-      "name": "Pouvez-vous améliorer mon référencement sur Google ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Chaque site vitrine inclut le référencement local (SEO) : optimisation des pages, balises, vitesse, et mise en place ou optimisation de votre fiche Google Business Profile pour apparaître sur Google Maps dans le Sud-Toulousain. C'est le levier numéro un pour être trouvé par vos clients de proximité." }
+      "@type": "Service",
+      "@id": "https://francoisleterrier-lab.github.io/#service-web",
+      "serviceType": "Création de site internet",
+      "url": "https://francoisleterrier-lab.github.io/creation-site-internet.html",
+      "provider": { "@id": "https://francoisleterrier-lab.github.io/#business" },
+      "areaServed": { "@type": "AdministrativeArea", "name": "Sud-Toulousain" },
+      "description": "Création de sites vitrines modernes, responsives et optimisés pour le référencement local. Dès 590 €."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier-lab.github.io/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://francoisleterrier-lab.github.io/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Quel est le tarif d'un community manager dans le Sud-Toulousain ?", "acceptedAnswer": { "@type": "Answer", "text": "La gestion de vos réseaux sociaux démarre à 180 € / mois pour la formule Essentiel (2 publications par mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois est la plus choisie. Toutes les formules sont sans engagement." } },
+        { "@type": "Question", "name": "Combien coûte la création d'un site internet ?", "acceptedAnswer": { "@type": "Answer", "text": "Un site une page démarre à 590 €, un site vitrine complet (jusqu'à 5 pages, design sur-mesure et référencement local) à 1 400 €. Les projets e-commerce ou sur-mesure sont établis sur devis." } },
+        { "@type": "Question", "name": "Faut-il s'engager sur la durée ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Les formules réseaux sociaux sont sans engagement, facturées au mois et résiliables avec un préavis de 30 jours. Vous validez chaque contenu avant publication." } },
+        { "@type": "Question", "name": "Dans quelle zone intervenez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "À Lavernose-Lacasse (31410), à Toulouse et dans tout le Sud-Toulousain : Muret, Carbonne, Rieumes, Eaunes, Seysses, Fonsorbes, Le Fauga, Noé et alentours, sur place ou à distance." } },
+        { "@type": "Question", "name": "Je n'ai aucun contenu ni photo, c'est un problème ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Je rédige les textes, je crée les visuels et je peux organiser un shooting photo local. On part de votre activité réelle, même en démarrant de zéro." } },
+        { "@type": "Question", "name": "Pouvez-vous améliorer mon référencement sur Google ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Chaque site vitrine inclut le référencement local (SEO) et la mise en place ou l'optimisation de votre fiche Google Business Profile pour apparaître sur Google Maps dans le Sud-Toulousain." } }
+      ]
     }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "François Leterrier — Community Manager & Création web",
-  "url": "https://francoisleterrier-lab.github.io/",
-  "inLanguage": "fr-FR",
-  "publisher": {
-    "@type": "Person",
-    "name": "François Leterrier",
-    "jobTitle": "Community Manager & Créateur de sites internet",
-    "knowsLanguage": "fr",
-    "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" },
-    "areaServed": "Sud-Toulousain",
-    "telephone": "+33698200208",
-    "email": "francois.leterrier.cmw@gmail.com"
-  }
 }
 </script>
 
