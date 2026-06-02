@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://www.francoisleterrier.fr/sitemap.xml
+Sitemap: https://francoisleterrier-lab.github.io/sitemap.xml
