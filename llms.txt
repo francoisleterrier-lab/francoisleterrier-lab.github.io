@@ -32,6 +32,10 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 
 ## Pages du site
 - Accueil : https://francoisleterrier-lab.github.io/
+- Community manager (réseaux sociaux) : https://francoisleterrier-lab.github.io/community-manager.html
+- Création de site internet : https://francoisleterrier-lab.github.io/creation-site-internet.html
+- Tarifs : https://francoisleterrier-lab.github.io/tarifs.html
+- Contact : https://francoisleterrier-lab.github.io/contact.html
 - À propos (page entité) : https://francoisleterrier-lab.github.io/a-propos.html
 - Community manager à Muret : https://francoisleterrier-lab.github.io/community-manager-muret.html
 - Community manager à Carbonne : https://francoisleterrier-lab.github.io/community-manager-carbonne.html
