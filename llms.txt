@@ -8,7 +8,7 @@
 - Zone d'intervention : Lavernose-Lacasse, Toulouse, Muret, Carbonne, Rieumes, Eaunes, Saint-Lys, Le Fauga, Noé, Longages, Auterive et tout le Sud-Toulousain (Haute-Garonne, 31)
 - Adresse : Lavernose-Lacasse, 31410, Occitanie, France
 - Téléphone : 06 98 20 02 08
-- Email : francois.leterrier@gmail.com
+- Email : francois.leterrier.cmw@gmail.com
 - Site : https://francoisleterrier-lab.github.io/
 
 ## Services
@@ -44,4 +44,4 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Blog (conseils CM, SEO local, sites) : https://francoisleterrier-lab.github.io/blog/
 
 ## Contact
-Téléphone 06 98 20 02 08 — Email francois.leterrier@gmail.com — Zone Sud-Toulousain (31410).
+Téléphone 06 98 20 02 08 — Email francois.leterrier.cmw@gmail.com — Zone Sud-Toulousain (31410).
