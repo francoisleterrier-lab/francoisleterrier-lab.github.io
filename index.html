@@ -37,6 +37,7 @@
 <link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
 <link rel="shortcut icon" href="favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -430,6 +431,9 @@
   .field textarea{resize:vertical;min-height:110px;}
   .form .btn{width:100%;justify-content:center;margin-top:4px;}
   .form .fineprint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.6;}
+  .form .fineprint a,.form .consent a{color:var(--cyan);}
+  .form .consent{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin-bottom:16px;cursor:pointer;line-height:1.5;}
+  .form .consent input{margin-top:3px;flex:none;width:16px;height:16px;accent-color:var(--cyan);}
 
   /* ============ FOOTER ============ */
   footer.ft{background:#05060c;color:var(--muted);padding:60px 0 30px;border-top:1px solid var(--line);}
@@ -559,6 +563,7 @@
         <div class="stat"><div class="v">2–4</div><div class="l">Posts / mois</div></div>
         <div class="stat"><div class="v">100%</div><div class="l">Local</div></div>
       </div>
+      <div style="text-align:center;font-size:9.5px;color:#69728a;margin-top:12px;letter-spacing:.12em;text-transform:uppercase;">Aperçu d'illustration</div>
     </aside>
   </div>
 </section>
@@ -871,16 +876,24 @@
       </div>
     </div>
 
-    <form class="form reveal" id="contactForm" novalidate>
+    <form class="form reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
       <h3>Demander un devis ou un échange</h3>
       <p>Réponse sous 48h en moyenne. Champs marqués * obligatoires.</p>
+
+      <!-- ⚠️ Web3Forms : remplacez la valeur ci-dessous par votre clé gratuite obtenue sur web3forms.com -->
+      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS_ICI">
+      <input type="hidden" name="subject" value="Nouvelle demande depuis le site — François Leterrier">
+      <input type="hidden" name="from_name" value="Site François Leterrier">
+      <input type="hidden" name="redirect" value="https://francoisleterrier-lab.github.io/merci.html">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
       <div class="frow">
         <div class="field"><label for="name">Nom *</label><input id="name" name="name" type="text" required placeholder="Votre nom"></div>
         <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" placeholder="06 ..."></div>
       </div>
       <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required placeholder="vous@exemple.fr"></div>
-      <div class="field"><label for="subject">Votre besoin</label>
-        <select id="subject" name="subject">
+      <div class="field"><label for="besoin">Votre besoin</label>
+        <select id="besoin" name="besoin">
           <option>Gestion de mes réseaux sociaux</option>
           <option>Création d'un site internet</option>
           <option>Les deux</option>
@@ -888,11 +901,12 @@
         </select>
       </div>
       <div class="field"><label for="message">Votre message *</label><textarea id="message" name="message" required placeholder="Parlez-moi de votre activité et de ce que vous cherchez..."></textarea></div>
+      <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
       <button class="btn btn-primary" type="submit">
         Envoyer ma demande
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
-      <p class="fineprint">En envoyant ce formulaire, vous acceptez d'être recontacté. Vos données ne sont jamais cédées à des tiers.</p>
+      <p class="fineprint">Vos données ne sont jamais cédées à des tiers. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
     </form>
   </div>
 </section>
@@ -927,7 +941,7 @@
     </div>
     <div class="ft-bottom">
       <span>© <span id="year">2026</span> François Leterrier — Tous droits réservés.</span>
-      <span><a href="#top">Mentions légales</a> · <a href="#top">Confidentialité</a> · Fait avec ♥ dans le Sud-Toulousain</span>
+      <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · Fait avec ♥ dans le Sud-Toulousain</span>
     </div>
   </div>
 </footer>
@@ -973,22 +987,8 @@
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // contact form -> mailto (sans backend). Remplaçable par Formspree/Netlify Forms.
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    if(!this.checkValidity()){ this.reportValidity(); return; }
-    const f = this;
-    const body =
-      "Nom: " + f.name.value + "\n" +
-      "Email: " + f.email.value + "\n" +
-      "Téléphone: " + (f.phone.value || "—") + "\n" +
-      "Besoin: " + f.subject.value + "\n\n" +
-      f.message.value;
-    const url = "mailto:francois.leterrier@gmail.com"
-      + "?subject=" + encodeURIComponent("Demande de devis — " + f.name.value)
-      + "&body=" + encodeURIComponent(body);
-    window.location.href = url;
-  });
+  // Le formulaire est envoyé nativement vers Web3Forms (POST), qui redirige vers merci.html.
+  // (Pensez à renseigner votre clé access_key dans le champ caché du formulaire.)
 </script>
 </body>
 </html>
