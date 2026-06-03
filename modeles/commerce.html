@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Boutique Margaux — Mode & accessoires (modèle de site)</title>
+<meta name="description" content="Modèle de site pour commerce / boutique, réalisé par François Leterrier. Exemple : produits phares, click & collect, services, localisation, horaires.">
+<meta name="theme-color" content="#171419">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#171419;--ink2:#2a2630;--pink:#d6336c;--pink2:#ff5c8a;--cream:#faf7f5;--soft:#f2ece9;--muted:#7a7280;--line:#ece4e0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.dsp{font-family:'Outfit',system-ui,sans-serif;letter-spacing:-.02em;}
+  a{color:var(--pink);text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .demo{background:var(--ink);color:#f3edf0;text-align:center;font-size:13px;padding:9px 16px;font-weight:500;}
+  .demo a{color:var(--pink2);font-weight:700;}
+  /* announce */
+  .ann{background:var(--pink);color:#fff;text-align:center;font-weight:600;font-size:13.5px;padding:8px 16px;letter-spacing:.02em;}
+  header{position:sticky;top:0;z-index:20;background:rgba(250,247,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:16px;}
+  .logo{font-family:'Outfit';font-weight:800;font-size:23px;color:var(--ink);}
+  .logo span{color:var(--pink);}
+  .menu{display:flex;gap:26px;align-items:center;}
+  .menu a{color:var(--ink);font-weight:600;font-size:15px;}
+  .menu a:hover{color:var(--pink);}
+  .btn{display:inline-block;background:var(--ink);color:#fff;font-weight:700;padding:12px 24px;border-radius:8px;font-size:14.5px;font-family:'Outfit';transition:transform .2s,background .2s;}
+  .btn:hover{transform:translateY(-2px);background:var(--ink2);}
+  .btn-pink{background:var(--pink);}.btn-pink:hover{background:var(--pink2);}
+  .btn-ghost{background:transparent;border:2px solid var(--ink);color:var(--ink);}
+  /* hero */
+  .hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;right:-80px;top:-80px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(214,51,108,.5),transparent 65%);}
+  .hero .wrap{position:relative;z-index:2;padding:88px 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
+  .kicker{display:inline-block;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--pink2);font-weight:700;margin-bottom:18px;background:rgba(255,92,138,.12);border:1px solid rgba(255,92,138,.3);padding:6px 14px;border-radius:30px;}
+  .hero h1{font-size:clamp(38px,6vw,66px);line-height:1.02;font-weight:800;}
+  .hero h1 span{color:var(--pink2);}
+  .hero p{margin-top:18px;font-size:18px;color:#cfc7d3;max-width:44ch;}
+  .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .hphoto{aspect-ratio:1;border-radius:20px;background:linear-gradient(150deg,#d6336c,#ff8fb0 70%,#ffd1a6);display:flex;align-items:center;justify-content:center;font-size:120px;box-shadow:0 30px 70px -30px rgba(214,51,108,.7);}
+  /* sections */
+  section{padding:80px 0;}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:12px;}
+  h2{font-size:clamp(28px,4.2vw,44px);line-height:1.08;font-weight:800;color:var(--ink);}
+  .lead{font-size:18px;color:var(--muted);max-width:60ch;margin-top:14px;}
+  .center{text-align:center;}.center .lead{margin:14px auto 0;}
+  /* produits */
+  .prods{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+  .prod:hover{transform:translateY(-5px);box-shadow:0 24px 44px -26px rgba(23,20,25,.4);}
+  .prod .im{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:60px;}
+  .pi1{background:linear-gradient(150deg,#ffd1dc,#ff8fb0);}
+  .pi2{background:linear-gradient(150deg,#d8e6ff,#9bb8ff);}
+  .pi3{background:linear-gradient(150deg,#fff0c2,#ffd16b);}
+  .pi4{background:linear-gradient(150deg,#d6f5e3,#8fe3b3);}
+  .prod .b{padding:18px;}
+  .prod h3{font-size:17px;margin-bottom:4px;}
+  .prod .pr{font-family:'Outfit';font-weight:700;color:var(--pink);font-size:18px;}
+  .prod .cc{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1c7a4a;background:#e2f7ea;border-radius:20px;padding:3px 10px;}
+  /* services */
+  .serv{background:var(--ink);color:#fff;}
+  .serv h2{color:#fff;}
+  .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+  .s{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:30px;}
+  .s .ic{font-size:34px;margin-bottom:14px;}
+  .s h3{font-size:20px;color:var(--pink2);margin-bottom:8px;}
+  .s p{font-size:15px;color:#cfc7d3;}
+  /* infos */
+  .infos{background:var(--soft);}
+  .isplit{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .imap{min-height:300px;border-radius:16px;background:linear-gradient(150deg,#2a2630,#171419);display:flex;align-items:center;justify-content:center;font-size:70px;color:#fff;position:relative;overflow:hidden;}
+  .imap small{position:absolute;bottom:14px;left:16px;font-family:'Inter';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+  .hours{list-style:none;margin-top:18px;}
+  .hours li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;}
+  .hours b{font-family:'Outfit';}
+  /* visit */
+  .visit{text-align:center;background:linear-gradient(120deg,#d6336c,#ff5c8a);color:#fff;}
+  .visit h2{color:#fff;}
+  .visit p{color:#ffe3ec;max-width:48ch;margin:14px auto 28px;font-size:18px;}
+  /* footer */
+  .ffoot{background:#0f0d12;color:#a59caf;text-align:center;padding:40px 24px;font-size:14px;}
+  .ffoot .made{background:rgba(255,92,138,.12);border:1px solid rgba(255,92,138,.4);border-radius:10px;padding:18px;max-width:660px;margin:0 auto 18px;}
+  .ffoot .made b{color:var(--pink2);}
+  .ffoot .made a{color:#fff;font-weight:700;text-decoration:underline;}
+  @media(max-width:900px){.menu{display:none;}.hero .wrap{grid-template-columns:1fr;}.prods{grid-template-columns:1fr 1fr;}.sgrid{grid-template-columns:1fr;}.isplit{grid-template-columns:1fr;gap:28px;}}
+  @media(max-width:480px){.prods{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <div class="demo">✦ Modèle de démonstration — <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">je veux un site comme celui-ci →</a></div>
+  <div class="ann">✨ Nouvelle collection en boutique — Click &amp; Collect disponible</div>
+
+  <header><div class="wrap nav">
+    <div class="logo">Boutique <span>Margaux</span></div>
+    <nav class="menu">
+      <a href="#produits">Produits</a>
+      <a href="#services">Services</a>
+      <a href="#infos">Nous trouver</a>
+      <a class="btn" href="#visit">Click &amp; Collect</a>
+    </nav>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <div>
+      <span class="kicker">Mode &amp; accessoires · Sud-Toulousain</span>
+      <h1>Votre boutique de <span>quartier</span>, en mieux.</h1>
+      <p>Une sélection mode et accessoires choisie avec soin, le conseil d'une équipe passionnée, et le Click &amp; Collect pour récupérer vos coups de cœur en boutique.</p>
+      <div class="cta">
+        <a class="btn btn-pink" href="#produits">Découvrir la sélection</a>
+        <a class="btn btn-ghost" href="#infos" style="border-color:#fff;color:#fff;">Nous rendre visite</a>
+      </div>
+    </div>
+    <div class="hphoto">🛍️</div>
+  </div></section>
+
+  <section id="produits"><div class="wrap center">
+    <div class="eyebrow">Nos coups de cœur</div>
+    <h2>Produits phares</h2>
+    <p class="lead">Un aperçu de la sélection du moment — réservez en Click &amp; Collect.</p>
+    <div class="prods" style="text-align:left;">
+      <div class="prod"><div class="im pi1">👜</div><div class="b"><h3>Sac en cuir</h3><div class="pr">79€</div><span class="cc">Click &amp; Collect</span></div></div>
+      <div class="prod"><div class="im pi2">🧥</div><div class="b"><h3>Veste mi-saison</h3><div class="pr">95€</div><span class="cc">Click &amp; Collect</span></div></div>
+      <div class="prod"><div class="im pi3">👜</div><div class="b"><h3>Foulard imprimé</h3><div class="pr">29€</div><span class="cc">Click &amp; Collect</span></div></div>
+      <div class="prod"><div class="im pi4">👟</div><div class="b"><h3>Baskets tendance</h3><div class="pr">69€</div><span class="cc">Click &amp; Collect</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="serv" id="services"><div class="wrap">
+    <div class="eyebrow" style="color:var(--pink2);">Nos services</div>
+    <h2>Plus qu'une boutique</h2>
+    <div class="sgrid">
+      <div class="s"><div class="ic">🛍️</div><h3>Click &amp; Collect</h3><p>Réservez en ligne, récupérez en boutique en 2h. Pratique et sans frais.</p></div>
+      <div class="s"><div class="ic">💬</div><h3>Conseil personnalisé</h3><p>Une équipe à l'écoute pour vous guider et trouver la pièce qui vous va vraiment.</p></div>
+      <div class="s"><div class="ic">🎁</div><h3>Emballage cadeau</h3><p>Offert toute l'année. On emballe joliment vos cadeaux pour toutes les occasions.</p></div>
+    </div>
+  </div></section>
+
+  <section class="infos" id="infos"><div class="wrap isplit">
+    <div>
+      <div class="eyebrow">Nous trouver</div>
+      <h2>Venez nous voir</h2>
+      <p class="lead">En plein centre, facile d'accès. On vous accueille avec le sourire.</p>
+      <ul class="hours">
+        <li><b>Lundi</b><span>Fermé</span></li>
+        <li><b>Mardi – Vendredi</b><span>10h – 19h</span></li>
+        <li><b>Samedi</b><span>10h – 19h30</span></li>
+        <li><b>Dimanche</b><span>10h – 13h</span></li>
+      </ul>
+      <p style="margin-top:16px;font-weight:600;">📍 12 rue du Commerce · 31410 Sud-Toulousain</p>
+    </div>
+    <div class="imap">🗺️<small>Votre carte Google / localisation</small></div>
+  </div></section>
+
+  <section class="visit" id="visit"><div class="wrap">
+    <div class="eyebrow" style="color:#fff;">Click &amp; Collect</div>
+    <h2>Repérez, réservez, récupérez</h2>
+    <p>Réservez vos articles en ligne et venez les récupérer en boutique quand ça vous arrange.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn" href="tel:+33500000000" style="background:#fff;color:var(--pink);">📞 05 00 00 00 00</a>
+      <a class="btn btn-ghost" href="#" style="border-color:#fff;color:#fff;">Suivez-nous sur Instagram</a>
+    </div>
+  </div></section>
+
+  <footer class="ffoot">
+    <div class="made">✦ Ceci est un <b>site-modèle de démonstration</b> (boutique fictive). Conçu et réalisable par <b>François Leterrier</b> — création de site internet dans le Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Boutique Margaux — modèle de site commerce · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:#a59caf;text-decoration:underline;">francoisleterrier.fr</a>
+  </footer>
+</body>
+</html>
