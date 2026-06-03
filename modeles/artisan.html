@@ -5,179 +5,182 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
 <title>Dubois & Fils — Plomberie · Chauffage · Dépannage (modèle de site)</title>
-<meta name="description" content="Modèle de site pour artisan du bâtiment (plombier, électricien, chauffagiste), réalisé par François Leterrier. Exemple : services, zone, devis, avis.">
-<meta name="theme-color" content="#0f2740">
+<meta name="description" content="Modèle de site landing conversion pour artisan du bâtiment, réalisé par François Leterrier.">
+<meta name="theme-color" content="#0c2236">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#0f2740;--navy2:#17395a;--orange:#f3641a;--orange2:#ff7a33;--light:#f4f6f9;--ink:#1a2733;--muted:#5f7184;--line:#e3e9f0;}
+  :root{--navy:#0c2236;--navy2:#13344f;--steel:#eef2f6;--orange:#f15a24;--orange2:#ff7a40;--ink:#15212b;--muted:#5d7184;--line:#dde5ec;}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3,.dsp{font-family:'Sora',system-ui,sans-serif;letter-spacing:-.01em;}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.dsp{font-family:'Archivo',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;text-transform:none;}
   a{color:var(--orange);text-decoration:none;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-  .demo{background:var(--ink);color:#eaf1f8;text-align:center;font-size:13px;padding:9px 16px;font-weight:500;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .demo{background:#08161f;color:#cfe0ee;text-align:center;font-size:12.5px;padding:7px;}
   .demo a{color:var(--orange2);font-weight:700;}
-  /* urgences strip */
-  .urg{background:var(--orange);color:#fff;text-align:center;font-weight:700;font-size:14px;padding:8px 16px;}
-  /* header */
-  header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 14px -8px rgba(15,39,64,.3);}
-  .nav{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:16px;}
-  .logo{font-family:'Sora';font-weight:800;font-size:21px;color:var(--navy);display:flex;align-items:center;gap:10px;}
-  .logo .mk{width:38px;height:38px;border-radius:9px;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;}
-  .menu{display:flex;gap:24px;align-items:center;}
-  .menu a{color:var(--navy);font-weight:600;font-size:15px;}
-  .menu a:hover{color:var(--orange);}
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-weight:700;padding:13px 24px;border-radius:8px;font-size:15px;font-family:'Sora';transition:transform .2s,background .2s;}
-  .btn:hover{background:var(--orange2);transform:translateY(-2px);}
-  .btn-navy{background:var(--navy);}.btn-navy:hover{background:var(--navy2);}
-  .btn-ghost{background:transparent;border:2px solid #fff;color:#fff;}
-  /* hero */
-  .hero{background:linear-gradient(120deg,#0f2740,#17395a);color:#fff;position:relative;overflow:hidden;}
-  .hero::before{content:"";position:absolute;right:-100px;top:-100px;width:520px;height:520px;background:radial-gradient(circle,rgba(243,100,26,.28),transparent 65%);}
-  .hero .wrap{position:relative;z-index:2;padding:84px 24px 88px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
-  .badge-line{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:7px 15px;font-size:13px;font-weight:600;margin-bottom:20px;}
-  .hero h1{font-size:clamp(34px,5.2vw,56px);line-height:1.05;font-weight:800;}
+  /* conversion bar */
+  .cbar{position:sticky;top:0;z-index:40;background:var(--navy);color:#fff;border-bottom:3px solid var(--orange);}
+  .cbar .in{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:1180px;margin:0 auto;gap:14px;}
+  .cbar .lg{font-family:'Archivo';font-weight:900;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
+  .cbar .lg .m{background:var(--orange);width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;}
+  .cbar .ph{display:flex;gap:10px;align-items:center;}
+  .cbar .tel{font-family:'Archivo';font-weight:800;font-size:18px;color:#fff;}
+  .cbar .cta{background:var(--orange);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:6px;}
+  .cbar .cta:hover{background:var(--orange2);}
+  /* hero with form */
+  .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;}
+  .hero::before{content:"";position:absolute;top:0;bottom:0;right:0;width:46%;background:linear-gradient(135deg,var(--navy2),#0a1b2b);clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding:66px 24px 70px;}
+  .hero .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(241,90,36,.16);border:1px solid rgba(241,90,36,.5);color:var(--orange2);border-radius:5px;padding:7px 14px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px;}
+  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.02;font-weight:900;}
   .hero h1 span{color:var(--orange2);}
-  .hero p{margin-top:18px;font-size:18px;color:#cfdcea;max-width:48ch;}
-  .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
-  .trust{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap;}
-  .trust div{font-size:13px;color:#cfdcea;}
-  .trust b{display:block;font-family:'Sora';font-size:26px;color:#fff;}
-  .hcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:28px;}
-  .hcard h3{font-size:19px;margin-bottom:14px;}
-  .hcard ul{list-style:none;}
-  .hcard li{padding:9px 0 9px 28px;position:relative;color:#dde7f1;font-size:15px;border-bottom:1px solid rgba(255,255,255,.08);}
-  .hcard li::before{content:"✓";position:absolute;left:0;color:var(--orange2);font-weight:800;}
-  /* sections */
-  section{padding:80px 0;}
-  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:12px;}
-  h2{font-size:clamp(28px,4vw,42px);line-height:1.1;font-weight:800;color:var(--navy);}
-  .lead{font-size:18px;color:var(--muted);max-width:62ch;margin-top:14px;}
-  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
-  .svc{background:var(--light);border:1px solid var(--line);border-radius:14px;padding:28px;transition:transform .2s,box-shadow .2s;}
-  .svc:hover{transform:translateY(-4px);box-shadow:0 20px 40px -22px rgba(15,39,64,.4);}
-  .svc .ic{width:54px;height:54px;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;}
-  .svc h3{font-size:20px;color:var(--navy);margin-bottom:8px;}
-  .svc p{font-size:15px;color:var(--muted);}
-  /* zone */
-  .zone{background:var(--light);}
-  .zsplit{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-  .zmap{min-height:300px;border-radius:14px;background:linear-gradient(135deg,#17395a,#0f2740);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-size:70px;}
-  .zmap small{position:absolute;bottom:14px;left:16px;font-family:'Inter';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;}
-  .chip{background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 15px;font-size:14px;font-weight:600;color:var(--navy);}
-  /* avis */
-  .avis{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
-  .av{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;}
-  .stars{color:#f5a623;font-size:17px;letter-spacing:2px;margin-bottom:12px;}
-  .av p{font-size:15px;color:var(--ink);font-style:italic;}
-  .av .who{margin-top:14px;font-weight:700;color:var(--navy);font-size:14px;font-style:normal;}
-  /* devis */
-  .devis{background:linear-gradient(120deg,#0f2740,#17395a);color:#fff;text-align:center;}
-  .devis h2{color:#fff;}
-  .devis p{color:#cfdcea;max-width:52ch;margin:14px auto 28px;font-size:18px;}
+  .hero .sub{margin-top:18px;font-size:17.5px;color:#bcd0e0;max-width:46ch;}
+  .hero ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;}
+  .hero ul li{padding-left:30px;position:relative;font-size:15.5px;color:#dfe9f1;}
+  .hero ul li::before{content:"✓";position:absolute;left:0;color:var(--orange2);font-family:'Archivo';font-weight:900;}
+  /* quote form card */
+  .qform{background:#fff;border-radius:12px;padding:30px;box-shadow:0 30px 70px -28px rgba(0,0,0,.55);}
+  .qform h3{color:var(--navy);font-size:22px;margin-bottom:4px;}
+  .qform p{color:var(--muted);font-size:13.5px;margin-bottom:18px;}
+  .qform label{display:block;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
+  .qform input,.qform select{width:100%;border:1.5px solid var(--line);border-radius:7px;padding:12px 13px;font-size:14.5px;font-family:'Inter';margin-bottom:13px;color:var(--ink);}
+  .qform input:focus,.qform select:focus{outline:none;border-color:var(--orange);}
+  .qform button{width:100%;background:var(--orange);color:#fff;font-family:'Archivo';font-weight:800;font-size:16px;border:none;border-radius:7px;padding:15px;cursor:pointer;transition:background .2s;}
+  .qform button:hover{background:var(--orange2);}
+  .qform .rea{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;}
+  /* trust band */
+  .trust{background:var(--orange);color:#fff;}
+  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  .trust .t{text-align:center;padding:30px 16px;border-right:1px solid rgba(255,255,255,.25);}
+  .trust .t:last-child{border-right:none;}
+  .trust .t b{display:block;font-family:'Archivo';font-weight:900;font-size:34px;line-height:1;}
+  .trust .t span{font-size:13px;letter-spacing:.03em;opacity:.95;}
+  /* zigzag services */
+  .serv{padding:90px 0 30px;}
+  .serv .head{max-width:680px;margin-bottom:20px;}
+  .serv .head .ey{color:var(--orange);font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;}
+  .serv .head h2{font-size:clamp(28px,4vw,42px);color:var(--navy);margin-top:8px;}
+  .zz{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:46px 0;border-bottom:1px solid var(--line);}
+  .zz:nth-child(even) .vis{order:2;}
+  .vis{height:260px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:80px;color:#fff;}
+  .v1{background:linear-gradient(135deg,#13344f,#f15a24);}
+  .v2{background:linear-gradient(135deg,#0c2236,#2b8ccc);}
+  .v3{background:linear-gradient(135deg,#f15a24,#0c2236);}
+  .zz .tx .num{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--orange);letter-spacing:.1em;}
+  .zz .tx h3{font-size:27px;color:var(--navy);margin:6px 0 10px;}
+  .zz .tx p{color:var(--muted);font-size:16px;max-width:48ch;}
+  .zz .tx .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
+  .zz .tx .tags span{background:var(--steel);color:var(--navy);font-size:13px;font-weight:600;border-radius:5px;padding:5px 12px;}
+  /* process timeline */
+  .proc{background:var(--navy);color:#fff;padding:90px 0;}
+  .proc .head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .proc .head .ey{color:var(--orange2);font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;}
+  .proc .head h2{font-size:clamp(28px,4vw,42px);margin-top:8px;}
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;}
+  .timeline::before{content:"";position:absolute;top:26px;left:12%;right:12%;height:2px;background:rgba(241,90,36,.4);}
+  .ts{text-align:center;position:relative;}
+  .ts .c{width:54px;height:54px;border-radius:50%;background:var(--orange);color:#fff;font-family:'Archivo';font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:2;border:4px solid var(--navy);}
+  .ts h4{font-family:'Archivo';font-size:18px;margin-bottom:6px;}
+  .ts p{font-size:14px;color:#bcd0e0;}
+  /* big testimonial */
+  .testi{padding:90px 24px;text-align:center;max-width:880px;margin:0 auto;}
+  .testi .stars{color:#f5a623;font-size:24px;letter-spacing:4px;}
+  .testi blockquote{font-family:'Archivo';font-weight:700;font-size:clamp(24px,3.4vw,34px);color:var(--navy);line-height:1.3;margin:22px 0;letter-spacing:-.01em;}
+  .testi .who{color:var(--muted);font-weight:600;}
+  /* final cta */
+  .fcta{background:linear-gradient(135deg,#f15a24,#ff7a40);color:#fff;text-align:center;padding:80px 24px;}
+  .fcta h2{font-size:clamp(30px,4.4vw,46px);}
+  .fcta p{font-size:18px;opacity:.95;margin:14px auto 26px;max-width:48ch;}
+  .fcta .b{display:inline-flex;gap:10px;background:#fff;color:var(--orange);font-family:'Archivo';font-weight:800;font-size:18px;padding:16px 30px;border-radius:8px;}
   /* footer */
-  .ffoot{background:#0a1a2c;color:#9fb2c5;text-align:center;padding:40px 24px;font-size:14px;}
-  .ffoot .made{background:rgba(243,100,26,.12);border:1px solid rgba(243,100,26,.4);border-radius:10px;padding:18px;max-width:660px;margin:0 auto 18px;}
-  .ffoot .made b{color:var(--orange2);}
-  .ffoot .made a{color:#fff;font-weight:700;text-decoration:underline;}
-  @media(max-width:860px){.menu{display:none;}.hero .wrap{grid-template-columns:1fr;}.services,.avis{grid-template-columns:1fr;}.zsplit{grid-template-columns:1fr;gap:28px;}}
+  .ff{background:#08161f;color:#90a6b8;text-align:center;padding:40px 24px;font-size:13.5px;}
+  .ff .made{background:rgba(241,90,36,.12);border:1px solid rgba(241,90,36,.4);border-radius:8px;padding:18px;max-width:660px;margin:0 auto 16px;}
+  .ff .made b{color:var(--orange2);}.ff .made a{color:#fff;font-weight:700;text-decoration:underline;}
+  @media(max-width:880px){.hero .wrap{grid-template-columns:1fr;}.hero::before{display:none;}.trust .wrap{grid-template-columns:1fr 1fr;}.trust .t:nth-child(2){border-right:none;}.zz{grid-template-columns:1fr;gap:22px;padding:34px 0;}.zz:nth-child(even) .vis{order:0;}.timeline{grid-template-columns:1fr;gap:30px;}.timeline::before{display:none;}.cbar .tel{display:none;}}
 </style>
 </head>
 <body>
-  <div class="demo">✦ Modèle de démonstration — <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">je veux un site comme celui-ci →</a></div>
-  <div class="urg">🚨 Dépannage d'urgence 7j/7 — 05&nbsp;00&nbsp;00&nbsp;00&nbsp;00</div>
+  <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
 
-  <header><div class="wrap nav">
-    <div class="logo"><span class="mk">🔧</span> Dubois &amp; Fils</div>
-    <nav class="menu">
-      <a href="#services">Services</a>
-      <a href="#zone">Zone</a>
-      <a href="#avis">Avis</a>
-      <a class="btn" href="#devis">Devis gratuit</a>
-    </nav>
-  </div></header>
+  <div class="cbar"><div class="in">
+    <div class="lg"><span class="m">🔧</span> Dubois &amp; Fils</div>
+    <div class="ph"><span class="tel">📞 05 00 00 00 00</span><a class="cta" href="#devis">Devis gratuit</a></div>
+  </div></div>
 
   <section class="hero"><div class="wrap">
     <div>
-      <span class="badge-line">⭐ Artisan de confiance · 20 ans d'expérience</span>
-      <h1>Plomberie, chauffage &amp; <span>dépannage</span> dans le Sud-Toulousain.</h1>
-      <p>Une intervention rapide, un travail soigné et un devis clair avant de commencer. Pour les particuliers et les professionnels.</p>
-      <div class="cta">
-        <a class="btn" href="#devis">Demander un devis gratuit</a>
-        <a class="btn btn-ghost" href="tel:+33500000000">📞 Nous appeler</a>
-      </div>
-      <div class="trust">
-        <div><b>20 ans</b>d'expérience</div>
-        <div><b>+1500</b>interventions</div>
-        <div><b>4,9/5</b>avis clients</div>
-      </div>
-    </div>
-    <div class="hcard">
-      <h3>Pourquoi nous choisir ?</h3>
+      <span class="badge">🚨 Dépannage 7j/7 · 20 ans d'expérience</span>
+      <h1>Une fuite ? Une panne ?<br><span>On intervient vite.</span></h1>
+      <p class="sub">Plomberie, chauffage et dépannage dans tout le Sud-Toulousain. Travail soigné, devis clair, artisans assurés.</p>
       <ul>
-        <li>Devis gratuit et sans engagement</li>
         <li>Intervention sous 24–48h</li>
-        <li>Artisan assuré &amp; garantie décennale</li>
-        <li>Tarifs transparents, pas de surprise</li>
-        <li>Dépannage d'urgence 7j/7</li>
+        <li>Devis gratuit et sans engagement</li>
+        <li>Garantie décennale &amp; artisans certifiés</li>
       </ul>
     </div>
+    <form class="qform" id="devis" onsubmit="return false;">
+      <h3>Devis gratuit en 30 s</h3>
+      <p>Décrivez votre besoin, on vous rappelle.</p>
+      <label for="n">Votre nom</label>
+      <input id="n" type="text" placeholder="Nom et prénom">
+      <label for="t">Téléphone</label>
+      <input id="t" type="tel" placeholder="06 00 00 00 00">
+      <label for="b">Votre besoin</label>
+      <select id="b"><option>Dépannage urgent</option><option>Plomberie</option><option>Chauffage / chaudière</option><option>Rénovation salle de bain</option><option>Autre</option></select>
+      <button type="submit">Être rappelé →</button>
+      <div class="rea">⏱️ Réponse sous 2h en journée</div>
+    </form>
   </div></section>
 
-  <section id="services"><div class="wrap">
-    <div class="eyebrow">Nos services</div>
-    <h2>Ce que nous faisons</h2>
-    <p class="lead">Une équipe d'artisans qualifiés pour tous vos travaux de plomberie et de chauffage.</p>
-    <div class="services">
-      <div class="svc"><div class="ic">🚿</div><h3>Plomberie</h3><p>Installation et rénovation de salles de bain, recherche de fuite, débouchage, robinetterie.</p></div>
-      <div class="svc"><div class="ic">🔥</div><h3>Chauffage</h3><p>Pose et entretien de chaudières, pompes à chaleur, radiateurs. Contrats d'entretien annuels.</p></div>
-      <div class="svc"><div class="ic">🛠️</div><h3>Dépannage</h3><p>Fuite, panne de chauffe-eau, canalisation bouchée : intervention rapide 7j/7 en urgence.</p></div>
-      <div class="svc"><div class="ic">🏠</div><h3>Rénovation</h3><p>Rénovation complète de salle de bain et cuisine, du conseil à la réalisation clé en main.</p></div>
-      <div class="svc"><div class="ic">💧</div><h3>Sanitaire</h3><p>Installation de WC, douches à l'italienne, adoucisseurs d'eau et systèmes économes.</p></div>
-      <div class="svc"><div class="ic">🌿</div><h3>Économies d'énergie</h3><p>Conseils et solutions pour réduire vos factures : PAC, thermostats, aides MaPrimeRénov'.</p></div>
+  <div class="trust"><div class="wrap">
+    <div class="t"><b>20 ans</b><span>d'expérience</span></div>
+    <div class="t"><b>1 500+</b><span>interventions</span></div>
+    <div class="t"><b>4,9/5</b><span>sur 230 avis</span></div>
+    <div class="t"><b>7j/7</b><span>en urgence</span></div>
+  </div></div>
+
+  <section class="serv"><div class="wrap">
+    <div class="head"><div class="ey">Nos métiers</div><h2>Un savoir-faire complet</h2></div>
+    <div class="zz">
+      <div class="vis v1">🚿</div>
+      <div class="tx"><div class="num">01 — PLOMBERIE</div><h3>Plomberie & sanitaire</h3><p>Recherche de fuite, débouchage, robinetterie, installation de WC et douches à l'italienne. Du dépannage au neuf.</p><div class="tags"><span>Fuite</span><span>Débouchage</span><span>Salle de bain</span></div></div>
+    </div>
+    <div class="zz">
+      <div class="vis v2">🔥</div>
+      <div class="tx"><div class="num">02 — CHAUFFAGE</div><h3>Chauffage & chaudières</h3><p>Pose et entretien de chaudières, pompes à chaleur et radiateurs. Contrats d'entretien annuels et conseils économies d'énergie.</p><div class="tags"><span>Chaudière</span><span>Pompe à chaleur</span><span>Entretien</span></div></div>
+    </div>
+    <div class="zz">
+      <div class="vis v3">🛠️</div>
+      <div class="tx"><div class="num">03 — URGENCE</div><h3>Dépannage 7j/7</h3><p>Fuite, panne de chauffe-eau, canalisation bouchée : on se déplace en urgence, week-ends et jours fériés compris.</p><div class="tags"><span>7j/7</span><span>Rapide</span><span>Toutes urgences</span></div></div>
     </div>
   </div></section>
 
-  <section class="zone" id="zone"><div class="wrap zsplit">
-    <div>
-      <div class="eyebrow">Zone d'intervention</div>
-      <h2>Nous intervenons près de chez vous</h2>
-      <p class="lead">Basés dans le Sud-Toulousain, nous nous déplaçons dans tout le secteur, rapidement.</p>
-      <div class="chips">
-        <span class="chip">Lavernose-Lacasse</span><span class="chip">Muret</span><span class="chip">Carbonne</span>
-        <span class="chip">Rieumes</span><span class="chip">Eaunes</span><span class="chip">Seysses</span>
-        <span class="chip">Le Fauga</span><span class="chip">Noé</span><span class="chip">Toulouse Sud</span>
-      </div>
-    </div>
-    <div class="zmap">📍<small>Votre carte / zone d'intervention</small></div>
-  </div></section>
-
-  <section id="avis"><div class="wrap">
-    <div class="eyebrow">Avis clients</div>
-    <h2>Ils nous ont fait confiance</h2>
-    <div class="avis">
-      <div class="av"><div class="stars">★★★★★</div><p>« Intervention rapide pour une fuite un dimanche. Travail nickel et tarif honnête. Je recommande. »</p><div class="who">— Sandrine M., Muret</div></div>
-      <div class="av"><div class="stars">★★★★★</div><p>« Ils ont rénové toute notre salle de bain. Sérieux, propres, dans les délais. Un vrai plaisir. »</p><div class="who">— Karim B., Carbonne</div></div>
-      <div class="av"><div class="stars">★★★★★</div><p>« Changement de chaudière impeccable, devis clair expliqué en détail. Artisans de confiance. »</p><div class="who">— Patrick L., Eaunes</div></div>
+  <section class="proc"><div class="wrap">
+    <div class="head"><div class="ey">Comment ça marche</div><h2>Simple, du premier appel à la facture</h2></div>
+    <div class="timeline">
+      <div class="ts"><div class="c">1</div><h4>Vous appelez</h4><p>Vous décrivez votre besoin, on évalue l'urgence.</p></div>
+      <div class="ts"><div class="c">2</div><h4>Devis gratuit</h4><p>Un devis clair et détaillé, validé avant tout.</p></div>
+      <div class="ts"><div class="c">3</div><h4>Intervention</h4><p>On intervient proprement, dans les délais convenus.</p></div>
+      <div class="ts"><div class="c">4</div><h4>Garantie</h4><p>Travail garanti, conseils d'entretien offerts.</p></div>
     </div>
   </div></section>
 
-  <section class="devis" id="devis"><div class="wrap">
-    <div class="eyebrow" style="color:var(--orange2);">Devis gratuit</div>
-    <h2>Un projet ? Une urgence ?</h2>
-    <p>Recevez un devis gratuit sous 24h. Décrivez-nous votre besoin, on s'occupe du reste.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a class="btn" href="tel:+33500000000">📞 05 00 00 00 00</a>
-      <a class="btn btn-ghost" href="#">✉️ Formulaire de contact</a>
-    </div>
-  </div></section>
+  <section class="testi">
+    <div class="stars">★★★★★</div>
+    <blockquote>« Intervention un dimanche pour une fuite, en moins de 2h. Travail nickel et tarif honnête. Des artisans comme on en cherche tous. »</blockquote>
+    <div class="who">— Sandrine M., Muret · client depuis 2021</div>
+  </section>
 
-  <footer class="ffoot">
-    <div class="made">✦ Ceci est un <b>site-modèle de démonstration</b> (entreprise fictive). Conçu et réalisable par <b>François Leterrier</b> — création de site internet dans le Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
-    Dubois &amp; Fils — modèle de site artisan · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:#9fb2c5;text-decoration:underline;">francoisleterrier.fr</a>
+  <section class="fcta">
+    <h2>Un problème de plomberie ou de chauffage ?</h2>
+    <p>Devis gratuit sous 24h. Appelez maintenant ou demandez à être rappelé.</p>
+    <a class="b" href="tel:+33500000000">📞 05 00 00 00 00</a>
+  </section>
+
+  <footer class="ff">
+    <div class="made">Site-modèle de démonstration (entreprise fictive), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Dubois &amp; Fils · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:#90a6b8;text-decoration:underline;">francoisleterrier.fr</a>
   </footer>
 </body>
 </html>

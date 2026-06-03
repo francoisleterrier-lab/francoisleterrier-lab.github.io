@@ -5,167 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
 <title>Le Comptoir des Cépages — Bar à vin & tapas (modèle de site)</title>
-<meta name="description" content="Modèle de site pour bar à vin / restaurant, réalisé par François Leterrier. Exemple de site vitrine appétissant : carte, ambiance, réservation.">
-<meta name="theme-color" content="#6e1423">
+<meta name="description" content="Modèle de site immersif pour bar à vin / restaurant, réalisé par François Leterrier.">
+<meta name="theme-color" content="#140a0c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--wine:#6e1423;--wine2:#8c2230;--cream:#f8f3ea;--ink:#2a1416;--muted:#7a6a64;--gold:#bd9b5e;--line:#e8ddcd;}
+  :root{--bg:#140a0c;--bg2:#1e0f12;--cream:#f3e9da;--gold:#c9a86a;--wine:#7e1f2d;--muted:#a08e84;}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;}
-  a{color:var(--wine);text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-  /* ruban démo */
-  .demo{background:var(--ink);color:#f8f3ea;text-align:center;font-size:13px;padding:9px 16px;font-weight:500;}
-  .demo a{color:var(--gold);font-weight:700;}
-  /* header */
-  header{position:sticky;top:0;z-index:20;background:rgba(248,243,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .nav{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:16px;}
-  .logo{font-family:'Playfair Display',serif;font-weight:800;font-size:22px;color:var(--wine);letter-spacing:.01em;}
-  .logo span{color:var(--gold);}
-  .menu{display:flex;gap:26px;align-items:center;}
-  .menu a{color:var(--ink);font-weight:500;font-size:15px;}
-  .menu a:hover{color:var(--wine);}
-  .btn{display:inline-block;background:var(--wine);color:#fff;font-weight:600;padding:12px 22px;border-radius:4px;font-size:14.5px;letter-spacing:.02em;transition:background .2s,transform .2s;}
-  .btn:hover{background:var(--wine2);transform:translateY(-2px);}
-  .btn-gold{background:var(--gold);color:#2a1416;}
-  .btn-ghost{background:transparent;border:1px solid var(--wine);color:var(--wine);}
-  /* hero */
-  .hero{position:relative;background:linear-gradient(135deg,#5a0f1d,#7e1f2d 55%,#9c3340);color:#f8f3ea;overflow:hidden;}
-  .hero::after{content:"🍷";position:absolute;right:-30px;bottom:-50px;font-size:340px;opacity:.06;transform:rotate(-10deg);}
-  .hero .wrap{padding:90px 24px 96px;position:relative;z-index:2;}
-  .kicker{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;}
-  .hero h1{font-size:clamp(40px,7vw,76px);line-height:1.02;font-weight:800;letter-spacing:-.01em;max-width:14ch;}
-  .hero p{margin-top:20px;font-size:19px;max-width:52ch;color:#f0e3d6;}
-  .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
-  /* sections */
-  section{padding:80px 0;}
-  .eyebrow{font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;}
-  h2{font-size:clamp(30px,4.5vw,46px);line-height:1.08;font-weight:800;color:var(--wine);}
-  .lead{font-size:18px;color:var(--muted);max-width:60ch;margin-top:16px;}
-  .split{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center;}
-  .photo{border-radius:8px;min-height:340px;background:linear-gradient(135deg,#7e1f2d,#bd9b5e);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:90px;box-shadow:0 24px 60px -28px rgba(110,20,35,.6);}
-  .photo small{position:absolute;bottom:14px;left:16px;font-family:'Inter';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.75);}
-  /* carte */
-  .carte{background:#fff;}
-  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 48px;margin-top:36px;}
-  .item{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line);}
-  .item .n{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--ink);}
-  .item .d{font-size:13.5px;color:var(--muted);margin-top:2px;}
-  .item .p{font-family:'Playfair Display',serif;font-weight:700;color:var(--wine);font-size:18px;white-space:nowrap;}
-  /* galerie */
-  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px;}
-  .tile{border-radius:8px;min-height:200px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-weight:600;font-size:14px;letter-spacing:.02em;}
-  .t1{background:linear-gradient(160deg,#6e1423,#b5485a);}
-  .t2{background:linear-gradient(160deg,#3c2a18,#bd9b5e);}
-  .t3{background:linear-gradient(160deg,#2a1416,#7e1f2d);}
-  .t4{background:linear-gradient(160deg,#8c2230,#d99a5f);}
-  .t5{background:linear-gradient(160deg,#52323a,#bd9b5e);}
-  .t6{background:linear-gradient(160deg,#6e1423,#3c2a18);}
-  /* infos */
-  .infos{background:var(--ink);color:#f0e3d6;}
-  .infos h2{color:#fff;}
-  .icards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
-  .icard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:28px;}
-  .icard h3{font-size:20px;color:var(--gold);margin-bottom:10px;}
-  .icard p{font-size:15px;color:#e6d8cb;}
-  .icard b{color:#fff;}
-  /* cta final */
-  .book{text-align:center;background:linear-gradient(135deg,#5a0f1d,#8c2230);color:#fff;}
-  .book h2{color:#fff;}
-  .book p{color:#f0e3d6;max-width:50ch;margin:14px auto 28px;font-size:18px;}
-  /* footer demo */
-  .ffoot{background:#1c0e10;color:#cbb8b2;text-align:center;padding:40px 24px;font-size:14px;}
-  .ffoot .made{background:rgba(189,155,94,.12);border:1px solid rgba(189,155,94,.4);border-radius:10px;padding:18px;max-width:640px;margin:0 auto 18px;}
-  .ffoot .made b{color:var(--gold);}
-  .ffoot .made a{color:#fff;font-weight:700;text-decoration:underline;}
-  @media(max-width:820px){.menu{display:none;}.split{grid-template-columns:1fr;gap:30px;}.menu-grid{grid-template-columns:1fr;}.gal,.icards{grid-template-columns:1fr 1fr;}}
-  @media(max-width:520px){.gal,.icards{grid-template-columns:1fr;}}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--cream);background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.01em;}
+  a{color:var(--gold);text-decoration:none;}
+  .demo{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(20,10,12,.6);backdrop-filter:blur(6px);color:var(--cream);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em;}
+  .demo a{color:var(--gold);font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:11px;}
+  /* top bar */
+  .bar{position:fixed;top:32px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 46px;transition:background .3s,padding .3s;}
+  .bar.solid{background:rgba(20,10,12,.92);backdrop-filter:blur(10px);padding:14px 46px;}
+  .bar .logo{font-family:'Cormorant Garamond';font-weight:700;font-size:26px;color:var(--cream);}
+  .bar .logo em{color:var(--gold);font-style:italic;}
+  .bar .resa{border:1px solid var(--gold);color:var(--gold);padding:10px 22px;border-radius:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s;}
+  .bar .resa:hover{background:var(--gold);color:var(--bg);}
+  /* side dots */
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
+  .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);opacity:.5;transition:opacity .2s,transform .2s;}
+  .dots a:hover{opacity:1;transform:scale(1.4);background:var(--gold);}
+  /* hero full screen */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(126,31,45,.55),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(201,168,106,.18),transparent 55%);}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg) 92%);}
+  .hero .in{position:relative;z-index:2;max-width:900px;}
+  .hero .pre{font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
+  .hero h1{font-size:clamp(48px,9vw,118px);line-height:.95;font-weight:600;}
+  .hero h1 em{display:block;font-style:italic;color:var(--gold);font-weight:500;}
+  .hero p{margin:28px auto 0;max-width:46ch;font-size:18px;color:#d8c9bb;font-weight:300;}
+  .hero .cta{margin-top:40px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  .lk{font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:15px 30px;transition:.25s;}
+  .lk-fill{background:var(--gold);color:var(--bg);}.lk-fill:hover{background:var(--cream);}
+  .lk-out{border:1px solid rgba(243,233,218,.4);color:var(--cream);}.lk-out:hover{border-color:var(--gold);color:var(--gold);}
+  .scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;color:var(--gold);font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.8;animation:fl 2s ease-in-out infinite;}
+  @keyframes fl{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  /* story asymmetric */
+  .story{max-width:1180px;margin:0 auto;padding:120px 46px;display:grid;grid-template-columns:0.9fr 1.1fr;gap:0;align-items:center;}
+  .story .big{font-family:'Cormorant Garamond';font-style:italic;font-size:clamp(60px,12vw,150px);line-height:.85;color:var(--wine);opacity:.9;}
+  .story .big span{display:block;color:var(--gold);}
+  .story .tx h2{font-size:clamp(30px,4vw,44px);margin-bottom:18px;}
+  .story .tx p{color:#cbbaad;margin-bottom:16px;max-width:48ch;}
+  /* carte full bleed */
+  .carte{background:var(--bg2);padding:120px 24px;border-top:1px solid rgba(201,168,106,.15);border-bottom:1px solid rgba(201,168,106,.15);}
+  .carte .h{text-align:center;max-width:680px;margin:0 auto 60px;}
+  .carte .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
+  .carte h2{font-size:clamp(38px,6vw,64px);margin-top:14px;}
+  .ard{max-width:860px;margin:0 auto;display:grid;gap:0;}
+  .row{display:flex;align-items:baseline;gap:14px;padding:22px 0;border-bottom:1px solid rgba(201,168,106,.14);}
+  .row .n{font-family:'Cormorant Garamond';font-size:25px;color:var(--cream);white-space:nowrap;}
+  .row .dt{flex:1;border-bottom:1px dotted rgba(201,168,106,.4);transform:translateY(-5px);}
+  .row .pr{font-family:'Cormorant Garamond';font-size:25px;color:var(--gold);}
+  .row .ds{flex-basis:100%;font-size:13.5px;color:var(--muted);margin-top:-4px;letter-spacing:.02em;}
+  /* ambiance horizontal */
+  .amb{padding:120px 0;}
+  .amb .h{text-align:center;margin-bottom:50px;}
+  .amb .h h2{font-size:clamp(34px,5vw,52px);}
+  .amb .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
+  .amb .strip::-webkit-scrollbar{height:6px;}.amb .strip::-webkit-scrollbar-thumb{background:var(--wine);border-radius:6px;}
+  .amb .ph{flex:none;width:300px;height:420px;scroll-snap-align:center;border-radius:2px;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:24px;color:#fff;position:relative;}
+  .p1{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#7e1f2d,#c9a86a);}
+  .p2{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#3a2418,#c9a86a);}
+  .p3{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#52131f,#a06a3a);}
+  .p4{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#7e1f2d,#3a2418);}
+  .p5{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#9c3340,#c9a86a);}
+  /* infos + resa */
+  .resa-sec{background:linear-gradient(135deg,#52131f,#7e1f2d);padding:120px 24px;text-align:center;}
+  .resa-sec .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
+  .resa-sec h2{font-size:clamp(38px,6vw,68px);margin:16px 0;}
+  .resa-sec .hours{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:34px 0 40px;}
+  .resa-sec .hours div{text-align:center;}
+  .resa-sec .hours b{display:block;font-family:'Cormorant Garamond';font-size:22px;color:var(--gold);}
+  .resa-sec .hours span{font-size:13px;letter-spacing:.06em;color:#e6d4c6;}
+  /* float resa */
+  .float{position:fixed;bottom:22px;right:22px;z-index:55;background:var(--gold);color:var(--bg);padding:14px 22px;border-radius:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);}
+  /* footer */
+  .ff{background:#0c0608;text-align:center;padding:50px 24px;color:var(--muted);font-size:13px;}
+  .ff .made{border:1px solid rgba(201,168,106,.3);border-radius:2px;padding:18px;max-width:640px;margin:0 auto 18px;color:#cbbaad;}
+  .ff .made b{color:var(--gold);}.ff .made a{color:var(--cream);text-decoration:underline;}
+  @media(max-width:820px){.bar{padding:18px 22px;}.dots{display:none;}.story{grid-template-columns:1fr;gap:30px;padding:80px 24px;}.float{display:none;}}
 </style>
 </head>
 <body>
-  <div class="demo">✦ Modèle de démonstration — <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">je veux un site comme celui-ci →</a></div>
+  <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
 
-  <header><div class="wrap nav">
-    <div class="logo">Le Comptoir <span>des Cépages</span></div>
-    <nav class="menu">
-      <a href="#carte">La carte</a>
-      <a href="#ambiance">Ambiance</a>
-      <a href="#infos">Infos</a>
-      <a class="btn" href="#reserver">Réserver</a>
-    </nav>
-  </div></header>
+  <div class="bar" id="bar">
+    <div class="logo">Le Comptoir <em>des Cépages</em></div>
+    <a class="resa" href="#reserver">Réserver</a>
+  </div>
 
-  <section class="hero"><div class="wrap">
-    <div class="kicker">Bar à vin · Tapas · Sud-Toulousain</div>
-    <h1>Le bon verre, la bonne assiette, la bonne ambiance.</h1>
-    <p>Une cave vivante et une cuisine de partage, au cœur du village. Vins de vignerons, planches généreuses et soirées qui s'étirent.</p>
+  <nav class="dots" aria-label="Navigation">
+    <a href="#hero" title="Accueil"></a>
+    <a href="#story" title="La maison"></a>
+    <a href="#carte" title="La carte"></a>
+    <a href="#ambiance" title="Ambiance"></a>
+    <a href="#reserver" title="Réserver"></a>
+  </nav>
+
+  <header class="hero" id="hero"><div class="in">
+    <div class="pre">Bar à vin · Tapas · Sud-Toulousain</div>
+    <h1>Le vin se<em>raconte ici.</em></h1>
+    <p>Une cave vivante, une cuisine de partage, et des soirées qui s'étirent. Bienvenue au comptoir.</p>
     <div class="cta">
-      <a class="btn btn-gold" href="#reserver">Réserver une table</a>
-      <a class="btn btn-ghost" href="#carte" style="border-color:#f0e3d6;color:#f8f3ea;">Voir la carte</a>
+      <a class="lk lk-fill" href="#reserver">Réserver une table</a>
+      <a class="lk lk-out" href="#carte">Découvrir la carte</a>
     </div>
-  </div></section>
+  </div>
+  <div class="scrollcue">défiler ↓</div>
+  </header>
 
-  <section><div class="wrap split">
-    <div>
-      <div class="eyebrow">La maison</div>
-      <h2>Un comptoir où le vin se raconte.</h2>
-      <p class="lead">Ici, pas de carte interminable : une sélection vivante de vins de vignerons, qui change au fil des saisons et des coups de cœur. À déguster au verre, accompagnés de planches de charcuterie, de fromages affinés et de petites assiettes à partager.</p>
-      <p class="lead">On vous conseille, on débouche, on partage. C'est tout l'esprit de la maison.</p>
+  <section class="story" id="story">
+    <div class="big">Vins<span>vivants.</span></div>
+    <div class="tx">
+      <h2>Une sélection qui a une âme</h2>
+      <p>Ici, pas de carte interminable. Une sélection vivante de vins de vignerons, qui change au fil des saisons et de nos coups de cœur, à déguster au verre.</p>
+      <p>On vous conseille, on débouche, on partage. Accompagnés de planches généreuses et de petites assiettes à se passer de main en main.</p>
     </div>
-    <div class="photo">🍷<small>Votre photo — l'ambiance du lieu</small></div>
-  </div></section>
+  </section>
 
-  <section class="carte" id="carte"><div class="wrap">
-    <div class="eyebrow">La carte</div>
-    <h2>Quelques suggestions</h2>
-    <p class="lead">Une sélection qui évolue chaque semaine. Voici un aperçu.</p>
-    <div class="menu-grid">
-      <div class="item"><div><div class="n">Planche de charcuterie</div><div class="d">Sélection de charcuteries fines, cornichons, pain de campagne</div></div><div class="p">16€</div></div>
-      <div class="item"><div><div class="n">Planche de fromages affinés</div><div class="d">5 fromages, confiture de cerises noires, noix</div></div><div class="p">15€</div></div>
-      <div class="item"><div><div class="n">Planche mixte</div><div class="d">Le meilleur des deux, pour partager à deux</div></div><div class="p">22€</div></div>
-      <div class="item"><div><div class="n">Croquettes maison</div><div class="d">Jambon-comté, sauce relevée</div></div><div class="p">9€</div></div>
-      <div class="item"><div><div class="n">Verre de vin du moment</div><div class="d">Au choix parmi notre ardoise de vignerons</div></div><div class="p">dès 5€</div></div>
-      <div class="item"><div><div class="n">Bouteille découverte</div><div class="d">On vous guide selon vos goûts</div></div><div class="p">dès 24€</div></div>
+  <section class="carte" id="carte">
+    <div class="h"><div class="pre">L'ardoise du moment</div><h2>La carte</h2></div>
+    <div class="ard">
+      <div class="row"><span class="n">Planche de charcuterie</span><span class="dt"></span><span class="pr">16</span><span class="ds">Charcuteries fines, cornichons, pain de campagne</span></div>
+      <div class="row"><span class="n">Planche de fromages affinés</span><span class="dt"></span><span class="pr">15</span><span class="ds">Cinq fromages, confiture de cerises noires, noix</span></div>
+      <div class="row"><span class="n">Planche mixte à partager</span><span class="dt"></span><span class="pr">22</span><span class="ds">Le meilleur des deux mondes, pour deux</span></div>
+      <div class="row"><span class="n">Croquettes maison</span><span class="dt"></span><span class="pr">9</span><span class="ds">Jambon-comté, sauce relevée</span></div>
+      <div class="row"><span class="n">Verre de vin du moment</span><span class="dt"></span><span class="pr">5+</span><span class="ds">Au choix sur notre ardoise de vignerons</span></div>
     </div>
-  </div></section>
+  </section>
 
-  <section id="ambiance"><div class="wrap">
-    <div class="eyebrow">Ambiance</div>
-    <h2>L'esprit du lieu</h2>
-    <div class="gal">
-      <div class="tile t1">La salle</div>
-      <div class="tile t2">La cave</div>
-      <div class="tile t3">Les planches</div>
-      <div class="tile t4">La terrasse</div>
-      <div class="tile t5">Les soirées</div>
-      <div class="tile t6">L'équipe</div>
+  <section class="amb" id="ambiance">
+    <div class="h"><h2>L'ambiance de la maison</h2></div>
+    <div class="strip">
+      <div class="ph p1">La salle</div>
+      <div class="ph p2">La cave</div>
+      <div class="ph p3">Les planches</div>
+      <div class="ph p4">La terrasse</div>
+      <div class="ph p5">Les soirées</div>
     </div>
-  </div></section>
+  </section>
 
-  <section class="infos" id="infos"><div class="wrap">
-    <div class="eyebrow">Infos pratiques</div>
-    <h2>Nous trouver</h2>
-    <div class="icards">
-      <div class="icard"><h3>Horaires</h3><p><b>Mar – Jeu</b> · 18h – 23h<br><b>Ven – Sam</b> · 18h – 1h<br><b>Dim – Lun</b> · Fermé</p></div>
-      <div class="icard"><h3>Adresse</h3><p>Place du Village<br>31410 Sud-Toulousain<br><b>Parking à proximité</b></p></div>
-      <div class="icard"><h3>Réservation</h3><p>Par téléphone<br><b>05 00 00 00 00</b><br>Groupes & privatisation possibles</p></div>
-    </div>
-  </div></section>
-
-  <section class="book" id="reserver"><div class="wrap">
-    <div class="eyebrow" style="color:var(--gold);">Réserver</div>
+  <section class="resa-sec" id="reserver">
+    <div class="pre">Réservation</div>
     <h2>On vous garde une place ?</h2>
-    <p>Réservez votre table en un appel. Pour les groupes et les événements, parlons-en.</p>
-    <a class="btn btn-gold" href="tel:+33500000000">📞 Réserver maintenant</a>
-  </div></section>
+    <div class="hours">
+      <div><b>Mar – Jeu</b><span>18h – 23h</span></div>
+      <div><b>Ven – Sam</b><span>18h – 1h</span></div>
+      <div><b>Dim – Lun</b><span>Fermé</span></div>
+    </div>
+    <a class="lk lk-fill" href="tel:+33500000000">📞 Réserver — 05 00 00 00 00</a>
+  </section>
 
-  <footer class="ffoot">
-    <div class="made">✦ Ceci est un <b>site-modèle de démonstration</b> (établissement fictif). Conçu et réalisable par <b>François Leterrier</b> — création de site internet dans le Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
-    Le Comptoir des Cépages — modèle de site bar à vin · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:#cbb8b2;text-decoration:underline;">francoisleterrier.fr</a>
+  <a class="float" href="#reserver">Réserver</a>
+
+  <footer class="ff">
+    <div class="made">Site-modèle de démonstration (établissement fictif), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Le Comptoir des Cépages · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
   </footer>
+
+  <script>
+    var bar=document.getElementById('bar');
+    addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);},{passive:true});
+  </script>
 </body>
 </html>
