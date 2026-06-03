@@ -66,7 +66,27 @@
   .mbody p{font-size:14px;color:var(--muted);margin:0 0 16px;flex:1;}
   .mbody .go{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;color:#08111f;background:var(--grad);border-radius:30px;padding:10px 18px;align-self:flex-start;}
   .note{font-size:13.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:12px;padding:14px 16px;margin:6px 0 30px;}
-  @media(max-width:720px){.mgrid{grid-template-columns:1fr;}}
+  /* plateformes */
+  .plat-sec{margin:48px 0 8px;}
+  .plat-sec h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(24px,4vw,34px);color:#fff;letter-spacing:-.01em;}
+  .plat-sec .psub{color:var(--muted);font-size:16px;margin:10px 0 26px;max-width:64ch;}
+  .plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .plat{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s;}
+  .plat:hover{transform:translateY(-4px);border-color:var(--line2);}
+  .plat .ph{height:62px;display:flex;align-items:center;padding:0 18px;font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;color:#fff;}
+  .plat .bd{padding:15px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1;}
+  .plat .bd p{font-size:13.5px;color:var(--muted);margin:0;line-height:1.55;}
+  .plat .for{font-size:12.5px;color:#c8d0e2;}
+  .plat .for b{color:#fff;}
+  .plat .tag2{margin-top:auto;padding-top:4px;font-size:12px;font-weight:700;color:var(--cyan);}
+  .ph-code{background:var(--grad);color:#08111f;}
+  .ph-wp{background:#1d6a8c;}
+  .ph-wix{background:#15171a;border-bottom:2px solid #fbbd2e;}
+  .ph-shopify{background:#5a8f3c;}
+  .ph-square{background:#0b0b0b;}
+  .ph-webflow{background:#3a47e0;}
+  @media(max-width:720px){.mgrid,.plat-grid{grid-template-columns:1fr;}}
+  @media(min-width:721px) and (max-width:980px){.plat-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -118,6 +138,38 @@
       </a>
 
     </div>
+
+    <section class="plat-sec">
+      <h2>Sur quelle plateforme créer votre site ?</h2>
+      <p class="psub">Je m'adapte à votre projet, votre budget et la façon dont vous voulez gérer votre site. Voici les technologies sur lesquelles j'interviens — du sur-mesure 100 % personnalisé aux grandes plateformes que vous pourrez piloter vous-même.</p>
+      <div class="plat-grid">
+        <div class="plat">
+          <div class="ph ph-code">Sur-mesure · Code</div>
+          <div class="bd"><p>Site codé à la main (HTML/CSS), hébergé sur GitHub Pages, Netlify ou Vercel. Le top en vitesse, référencement et design unique.</p><div class="for"><b>Idéal pour :</b> se démarquer, performance et SEO maximum.</div><span class="tag2">Exemples : les 4 modèles ci-dessus ↑</span></div>
+        </div>
+        <div class="plat">
+          <div class="ph ph-wp">WordPress</div>
+          <div class="bd"><p>Le CMS le plus répandu au monde. Site évolutif, blog intégré, que vous pouvez mettre à jour vous-même.</p><div class="for"><b>Idéal pour :</b> sites riches, blogs, contenu régulier.</div><span class="tag2">Création &amp; personnalisation</span></div>
+        </div>
+        <div class="plat">
+          <div class="ph ph-wix">Wix</div>
+          <div class="bd"><p>Éditeur visuel tout-en-un, simple à prendre en main. Mise en ligne rapide, hébergement inclus.</p><div class="for"><b>Idéal pour :</b> petit budget, gestion simple en autonomie.</div><span class="tag2">Création &amp; mise en page</span></div>
+        </div>
+        <div class="plat">
+          <div class="ph ph-shopify">Shopify</div>
+          <div class="bd"><p>La référence de la boutique en ligne : catalogue, paiement, livraison, gestion des commandes.</p><div class="for"><b>Idéal pour :</b> vendre en ligne (e-commerce).</div><span class="tag2">Boutique clé en main</span></div>
+        </div>
+        <div class="plat">
+          <div class="ph ph-square">Squarespace</div>
+          <div class="bd"><p>Des sites élégants et clé en main, au design soigné. Parfait pour mettre en valeur des visuels.</p><div class="for"><b>Idéal pour :</b> créatifs, portfolios, image premium.</div><span class="tag2">Création &amp; design</span></div>
+        </div>
+        <div class="plat">
+          <div class="ph ph-webflow">Webflow</div>
+          <div class="bd"><p>Design avancé et animations soignées, sans coder. Un puissant entre-deux entre le sur-mesure et les éditeurs.</p><div class="for"><b>Idéal pour :</b> design ambitieux avec autonomie.</div><span class="tag2">Création &amp; animations</span></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:22px;">💡 Bon à savoir : <strong>chaque modèle présenté plus haut peut être réalisé sur la plateforme de votre choix.</strong> On choisit ensemble la solution la plus adaptée à votre budget et à votre façon de travailler.</p>
+    </section>
 
     <div class="ctabox">
       <h3>Vous voulez un site comme ça ?</h3>
