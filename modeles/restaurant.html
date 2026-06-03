@@ -31,8 +31,8 @@
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);opacity:.5;transition:opacity .2s,transform .2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--gold);}
   /* hero full screen */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,rgba(126,31,45,.55),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(201,168,106,.18),transparent 55%);}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:#140a0c url('https://images.unsplash.com/photo-1597290282695-edc43d0e7129?fm=jpg&q=60&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat;}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,12,.72),rgba(20,10,12,.9)),radial-gradient(ellipse at 50% 30%,rgba(126,31,45,.42),transparent 60%);}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg) 92%);}
   .hero .in{position:relative;z-index:2;max-width:900px;}
   .hero .pre{font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
@@ -69,11 +69,12 @@
   .amb .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
   .amb .strip::-webkit-scrollbar{height:6px;}.amb .strip::-webkit-scrollbar-thumb{background:var(--wine);border-radius:6px;}
   .amb .ph{flex:none;width:300px;height:420px;scroll-snap-align:center;border-radius:2px;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:24px;color:#fff;position:relative;}
-  .p1{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#7e1f2d,#c9a86a);}
-  .p2{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#3a2418,#c9a86a);}
-  .p3{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#52131f,#a06a3a);}
-  .p4{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#7e1f2d,#3a2418);}
-  .p5{background:linear-gradient(180deg,rgba(20,10,12,.1),rgba(20,10,12,.85)),linear-gradient(135deg,#9c3340,#c9a86a);}
+  .ph{background-size:cover;background-position:center;}
+  .p1{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1547595628-c61a29f496f0?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
+  .p2{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
+  .p3{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1678572823447-45fc146df43c?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hhcmN1dGVyaWUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D');}
+  .p4{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1586800687177-069ba4e4f5c4?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
+  .p5{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1616631124348-c63521eb484c?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hhcmN1dGVyaWUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D');}
   /* infos + resa */
   .resa-sec{background:linear-gradient(135deg,#52131f,#7e1f2d);padding:120px 24px;text-align:center;}
   .resa-sec .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}

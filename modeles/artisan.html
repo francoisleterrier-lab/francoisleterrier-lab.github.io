@@ -30,7 +30,7 @@
   .cbar .cta:hover{background:var(--orange2);}
   /* hero with form */
   .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;}
-  .hero::before{content:"";position:absolute;top:0;bottom:0;right:0;width:46%;background:linear-gradient(135deg,var(--navy2),#0a1b2b);clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);}
+  .hero::before{content:"";position:absolute;top:0;bottom:0;right:0;width:46%;background:linear-gradient(135deg,rgba(12,34,54,.8),rgba(10,27,43,.45)),url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D') center/cover;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);}
   .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding:66px 24px 70px;}
   .hero .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(241,90,36,.16);border:1px solid rgba(241,90,36,.5);color:var(--orange2);border-radius:5px;padding:7px 14px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px;}
   .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.02;font-weight:900;}
@@ -64,9 +64,10 @@
   .zz{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:46px 0;border-bottom:1px solid var(--line);}
   .zz:nth-child(even) .vis{order:2;}
   .vis{height:260px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:80px;color:#fff;}
-  .v1{background:linear-gradient(135deg,#13344f,#f15a24);}
-  .v2{background:linear-gradient(135deg,#0c2236,#2b8ccc);}
-  .v3{background:linear-gradient(135deg,#f15a24,#0c2236);}
+  .vis{background-size:cover;background-position:center;}
+  .v1{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYmF0aHJvb218ZW58MHx8MHx8fDA%3D');}
+  .v2{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1542013936693-884638332954?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D');}
+  .v3{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1620653713380-7a34b773fef8?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D');}
   .zz .tx .num{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--orange);letter-spacing:.1em;}
   .zz .tx h3{font-size:27px;color:var(--navy);margin:6px 0 10px;}
   .zz .tx p{color:var(--muted);font-size:16px;max-width:48ch;}
@@ -143,15 +144,15 @@
   <section class="serv"><div class="wrap">
     <div class="head"><div class="ey">Nos métiers</div><h2>Un savoir-faire complet</h2></div>
     <div class="zz">
-      <div class="vis v1">🚿</div>
+      <div class="vis v1" role="img" aria-label="Salle de bain rénovée"></div>
       <div class="tx"><div class="num">01 — PLOMBERIE</div><h3>Plomberie & sanitaire</h3><p>Recherche de fuite, débouchage, robinetterie, installation de WC et douches à l'italienne. Du dépannage au neuf.</p><div class="tags"><span>Fuite</span><span>Débouchage</span><span>Salle de bain</span></div></div>
     </div>
     <div class="zz">
-      <div class="vis v2">🔥</div>
+      <div class="vis v2" role="img" aria-label="Intervention chauffage"></div>
       <div class="tx"><div class="num">02 — CHAUFFAGE</div><h3>Chauffage & chaudières</h3><p>Pose et entretien de chaudières, pompes à chaleur et radiateurs. Contrats d'entretien annuels et conseils économies d'énergie.</p><div class="tags"><span>Chaudière</span><span>Pompe à chaleur</span><span>Entretien</span></div></div>
     </div>
     <div class="zz">
-      <div class="vis v3">🛠️</div>
+      <div class="vis v3" role="img" aria-label="Dépannage en urgence"></div>
       <div class="tx"><div class="num">03 — URGENCE</div><h3>Dépannage 7j/7</h3><p>Fuite, panne de chauffe-eau, canalisation bouchée : on se déplace en urgence, week-ends et jours fériés compris.</p><div class="tags"><span>7j/7</span><span>Rapide</span><span>Toutes urgences</span></div></div>
     </div>
   </div></section>
