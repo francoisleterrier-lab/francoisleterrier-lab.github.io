@@ -9,7 +9,7 @@
 - Adresse : Lavernose-Lacasse, 31410, Occitanie, France
 - Téléphone : 06 98 20 02 08
 - Email : francois.leterrier.cmw@gmail.com
-- Site : https://francoisleterrier-lab.github.io/
+- Site : https://francoisleterrier.fr/
 
 ## Services
 1. Gestion des réseaux sociaux (Facebook, Instagram, Google Business Profile) : création de visuels et de textes, programmation, modération, bilans de performance.
@@ -31,21 +31,21 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Premier échange offert, sans engagement, contenu validé avant publication.
 
 ## Pages du site
-- Accueil : https://francoisleterrier-lab.github.io/
-- Community manager (réseaux sociaux) : https://francoisleterrier-lab.github.io/community-manager.html
-- Création de site internet : https://francoisleterrier-lab.github.io/creation-site-internet.html
-- Tarifs : https://francoisleterrier-lab.github.io/tarifs.html
-- Contact : https://francoisleterrier-lab.github.io/contact.html
-- À propos (page entité) : https://francoisleterrier-lab.github.io/a-propos.html
-- Community manager à Muret : https://francoisleterrier-lab.github.io/community-manager-muret.html
-- Community manager à Carbonne : https://francoisleterrier-lab.github.io/community-manager-carbonne.html
-- Community manager à Rieumes : https://francoisleterrier-lab.github.io/community-manager-rieumes.html
-- Community manager à Eaunes : https://francoisleterrier-lab.github.io/community-manager-eaunes.html
-- Community manager à Seysses : https://francoisleterrier-lab.github.io/community-manager-seysses.html
-- Community manager à Fonsorbes : https://francoisleterrier-lab.github.io/community-manager-fonsorbes.html
-- Community manager au Fauga : https://francoisleterrier-lab.github.io/community-manager-le-fauga.html
-- Community manager à Noé : https://francoisleterrier-lab.github.io/community-manager-noe.html
-- Blog (conseils CM, SEO local, sites) : https://francoisleterrier-lab.github.io/blog/
+- Accueil : https://francoisleterrier.fr/
+- Community manager (réseaux sociaux) : https://francoisleterrier.fr/community-manager.html
+- Création de site internet : https://francoisleterrier.fr/creation-site-internet.html
+- Tarifs : https://francoisleterrier.fr/tarifs.html
+- Contact : https://francoisleterrier.fr/contact.html
+- À propos (page entité) : https://francoisleterrier.fr/a-propos.html
+- Community manager à Muret : https://francoisleterrier.fr/community-manager-muret.html
+- Community manager à Carbonne : https://francoisleterrier.fr/community-manager-carbonne.html
+- Community manager à Rieumes : https://francoisleterrier.fr/community-manager-rieumes.html
+- Community manager à Eaunes : https://francoisleterrier.fr/community-manager-eaunes.html
+- Community manager à Seysses : https://francoisleterrier.fr/community-manager-seysses.html
+- Community manager à Fonsorbes : https://francoisleterrier.fr/community-manager-fonsorbes.html
+- Community manager au Fauga : https://francoisleterrier.fr/community-manager-le-fauga.html
+- Community manager à Noé : https://francoisleterrier.fr/community-manager-noe.html
+- Blog (conseils CM, SEO local, sites) : https://francoisleterrier.fr/blog/
 
 ## Contact
 Téléphone 06 98 20 02 08 — Email francois.leterrier.cmw@gmail.com — Zone Sud-Toulousain (31410).

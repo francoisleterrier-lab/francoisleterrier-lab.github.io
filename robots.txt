@@ -28,4 +28,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://francoisleterrier-lab.github.io/sitemap.xml
+Sitemap: https://francoisleterrier.fr/sitemap.xml
