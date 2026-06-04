@@ -509,6 +509,21 @@
   .avis-google .stars{color:#f5a623;font-size:20px;letter-spacing:3px;}
   .avis-google p{color:var(--muted);font-size:14.5px;margin:0;}
   .avis-google .gbtn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:11px 20px;font-size:14px;}
+  /* pourquoi me choisir */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px;}
+  .why-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:transform .2s,border-color .2s;}
+  .why-card:hover{transform:translateY(-3px);border-color:var(--cyan);}
+  .why-card .ic{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .why-card h3{font-family:'Bricolage Grotesque';font-weight:700;font-size:17.5px;color:#fff;margin-bottom:6px;}
+  .why-card p{color:var(--muted);font-size:14.5px;line-height:1.6;margin:0;}
+  .why-card b{color:#cdd5e6;}
+  /* diagnostic gratuit (lead magnet) */
+  .diag{background:linear-gradient(120deg,rgba(34,211,238,.12),rgba(168,85,247,.12));border:1px solid var(--line2,rgba(255,255,255,.16));border-radius:22px;padding:40px;text-align:center;position:relative;overflow:hidden;}
+  .diag .eyebrow{justify-content:center;}
+  .diag h2{font-size:clamp(26px,4vw,38px);}
+  .diag p{color:#aab2c6;max-width:56ch;margin:14px auto 24px;font-size:16.5px;}
+  .diag .free{display:inline-block;background:var(--grad);color:#08111f;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-radius:30px;padding:6px 14px;margin-bottom:8px;}
+  @media(max-width:760px){.why-grid{grid-template-columns:1fr;}.diag{padding:30px 22px;}}
 </style>
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="70o1z25QpySuipMTMk7FMg" async></script>
 </head>
@@ -661,6 +676,35 @@
       <div class="step reveal"><div class="n">2</div><h3>Je propose</h3><p>Une stratégie claire et un calendrier de contenus (ou une maquette de site) adaptés à votre budget.</p></div>
       <div class="step reveal"><div class="n">3</div><h3>Je crée</h3><p>Visuels, textes, vidéos ou pages : je produis tout. Vous validez avant chaque mise en ligne.</p></div>
       <div class="step reveal"><div class="n">4</div><h3>On améliore</h3><p>Bilans réguliers, ajustements et recommandations pour faire grandir votre présence mois après mois.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POURQUOI ME CHOISIR ============ -->
+<section class="section" id="pourquoi">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Pourquoi me choisir</span>
+      <h2>Ce qui me distingue des autres.</h2>
+      <p>Dans un marché plein d'agences et de freelances, voici ce que vous ne trouverez pas partout.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <span class="ic">🤝</span>
+        <div><h3>Deux métiers, un seul interlocuteur</h3><p><b>Réseaux sociaux ET création de site</b>, réunis. La plupart ne font que l'un ou l'autre — vous, vous n'avez pas à jongler entre plusieurs prestataires.</p></div>
+      </div>
+      <div class="why-card">
+        <span class="ic">📍</span>
+        <div><h3>100 % local, dans le Sud-Toulousain</h3><p>Je connais votre secteur et votre clientèle. Un <b>partenaire de proximité, joignable</b> — pas une agence anonyme ni un réseau national.</p></div>
+      </div>
+      <div class="why-card">
+        <span class="ic">💶</span>
+        <div><h3>Des tarifs clairs, affichés</h3><p>Vous savez à quoi vous attendre <b>dès le départ</b> : dès 180 €/mois pour les réseaux, dès 590 € pour un site. Pas de devis opaque.</p></div>
+      </div>
+      <div class="why-card">
+        <span class="ic">⚡</span>
+        <div><h3>Un site rapide et bien référencé</h3><p>Site <b>sur-mesure, léger et optimisé</b> pour Google — pas un template lourd qui rame. La vitesse, c'est plus de visiteurs transformés en clients.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -913,6 +957,19 @@
   </div>
 </section>
 
+<!-- ============ DIAGNOSTIC GRATUIT (lead magnet) ============ -->
+<section class="section" id="diagnostic">
+  <div class="wrap">
+    <div class="diag reveal">
+      <span class="free">Offert · sans engagement</span>
+      <span class="eyebrow">Pas sûr de vos priorités&nbsp;?</span>
+      <h2>Recevez votre diagnostic en ligne <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">gratuit</span>.</h2>
+      <p>Je passe au crible votre présence actuelle — <b>réseaux sociaux + Google</b> — et je vous renvoie <b>3 actions concrètes</b> pour gagner en visibilité. Que vous travailliez avec moi ou non.</p>
+      <a class="btn btn-primary" href="#contact">Demander mon diagnostic gratuit →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CONTACT ============ -->
 <section class="section contact" id="contact">
   <div class="wrap contact-in">
@@ -970,6 +1027,7 @@
       <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required placeholder="vous@exemple.fr"></div>
       <div class="field"><label for="besoin">Votre besoin</label>
         <select id="besoin" name="besoin">
+          <option>🎁 Mon diagnostic en ligne gratuit</option>
           <option>Gestion de mes réseaux sociaux</option>
           <option>Création d'un site internet</option>
           <option>Les deux</option>
