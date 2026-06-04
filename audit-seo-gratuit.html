@@ -62,7 +62,6 @@
   h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:-.02em;color:#fff;}
   h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .sub{margin:14px auto 0;max-width:54ch;color:#aab2c6;font-size:16.5px;}
-  /* form */
   .tool{max-width:620px;margin:30px auto 0;}
   .field{display:flex;gap:10px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:8px;}
   .field input{flex:1;background:transparent;border:none;color:#fff;font-family:'Manrope';font-size:16px;padding:12px 14px;outline:none;}
@@ -71,12 +70,10 @@
   .field button:hover{transform:translateY(-1px);}
   .field button:disabled{opacity:.6;cursor:wait;transform:none;}
   .hint{text-align:center;font-size:12.5px;color:#69728a;margin-top:10px;}
-  /* loader */
   .load{display:none;text-align:center;padding:40px 0;color:var(--muted);}
   .load.show{display:block;}
   .spin{width:42px;height:42px;border-radius:50%;border:3px solid rgba(255,255,255,.12);border-top-color:var(--cyan);margin:0 auto 16px;animation:sp 1s linear infinite;}
   @keyframes sp{to{transform:rotate(360deg);}}
-  /* results */
   .res{display:none;max-width:760px;margin:10px auto 0;padding:0 0 30px;}
   .res.show{display:block;}
   .scorecard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;margin-bottom:22px;}
@@ -88,27 +85,36 @@
   .verdict h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:#fff;margin-bottom:6px;}
   .verdict p{color:#c4cbdb;font-size:14.5px;}
   .verdict .site{color:var(--cyan);font-weight:600;word-break:break-all;}
+  .seclabel{font-family:'Bricolage Grotesque';font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:6px 2px 12px;}
   .checks{display:flex;flex-direction:column;gap:10px;}
-  .chk{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;}
+  .chk{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 18px;display:flex;gap:14px;align-items:flex-start;}
   .chk .dot{flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;}
   .chk.ok .dot{background:rgba(52,211,153,.15);color:var(--ok);}
   .chk.warn .dot{background:rgba(251,191,36,.15);color:var(--warn);}
   .chk.bad .dot{background:rgba(248,113,113,.15);color:var(--bad);}
   .chk .t{font-weight:700;color:#fff;font-size:15px;}
   .chk .d{font-size:13.5px;color:var(--muted);margin-top:2px;}
+  /* zone floutée (freemium) */
+  .locked{position:relative;margin-top:12px;}
+  .locked .blurred{filter:blur(5px);pointer-events:none;user-select:none;opacity:.9;}
+  .lock-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;background:linear-gradient(180deg,rgba(6,7,14,.35) 0%,rgba(6,7,14,.82) 55%);border-radius:16px;}
+  .lock-cta .ring{width:58px;height:58px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.4);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;}
+  .lock-cta h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:#fff;margin-bottom:6px;}
+  .lock-cta p{color:#c4cbdb;font-size:14.5px;max-width:42ch;margin-bottom:18px;}
+  .lock-cta p b{color:#fff;}
   .err{display:none;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.35);border-radius:14px;padding:18px;color:#f3c7c7;font-size:14.5px;text-align:center;max-width:620px;margin:18px auto 0;}
   .err.show{display:block;}
-  /* cta */
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:13px 26px;font-size:14.5px;box-shadow:0 0 24px -6px rgba(34,211,238,.6);}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-ghost{background:transparent;border:1px solid var(--line2);color:var(--txt);box-shadow:none;}
   .ctabox{margin:26px auto 0;max-width:760px;background:linear-gradient(120deg,rgba(34,211,238,.1),rgba(168,85,247,.1));border:1px solid var(--line2);border-radius:18px;padding:30px;text-align:center;}
   .ctabox h3{font-family:'Bricolage Grotesque';font-size:21px;color:#fff;margin-bottom:8px;}
   .ctabox p{color:#aab2c6;font-size:15px;margin-bottom:18px;}
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:13px 26px;font-size:14.5px;box-shadow:0 0 24px -6px rgba(34,211,238,.6);}
-  .btn:hover{transform:translateY(-2px);}
-  .btn-ghost{background:transparent;border:1px solid var(--line2);color:var(--txt);box-shadow:none;margin-left:8px;}
+  .ctabox .btn-ghost{margin-left:8px;}
   .note{max-width:760px;margin:34px auto 0;font-size:12.5px;color:#69728a;text-align:center;line-height:1.7;}
   footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;margin-top:30px;}
   footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
-  @media(max-width:560px){.field{flex-direction:column;}.field button{padding:13px;}.scorecard{flex-direction:column;}.verdict{text-align:center;}}
+  @media(max-width:560px){.field{flex-direction:column;}.field button{padding:13px;}.scorecard{flex-direction:column;}.verdict{text-align:center;}.ctabox .btn-ghost{margin:10px 0 0;}}
 </style>
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="70o1z25QpySuipMTMk7FMg" async></script>
 </head>
@@ -132,7 +138,7 @@
     </div>
   </div></section>
 
-  <div class="load" id="load"><div class="spin"></div>Analyse en cours…</div>
+  <div class="load" id="load"><div class="spin"></div>Analyse en cours… (jusqu'à 15&nbsp;s sur certains sites)</div>
   <div class="err wrap" id="err"></div>
 
   <section class="res wrap" id="res">
@@ -144,7 +150,19 @@
         <p style="margin-top:6px;">Site analysé : <span class="site" id="siteName"></span></p>
       </div>
     </div>
-    <div class="checks" id="checks"></div>
+
+    <div class="seclabel">Aperçu de l'audit</div>
+    <div class="checks" id="checksFree"></div>
+
+    <div class="locked" id="locked">
+      <div class="checks blurred" id="checksLocked"></div>
+      <div class="lock-cta">
+        <div class="ring">🔒</div>
+        <h3>L'audit complet est offert</h3>
+        <p><b id="lockCount">+12 critères détaillés</b> sont analysés (données structurées, réseaux, contenu, technique…). Recevez le <b>rapport complet + votre plan d'action priorisé</b>, gratuitement et sans engagement.</p>
+        <a class="btn" id="unlockBtn" href="contact.html">Débloquer mon audit complet →</a>
+      </div>
+    </div>
 
     <div class="ctabox">
       <h3>Envie de passer au vert sur tous les points&nbsp;?</h3>
@@ -166,98 +184,139 @@
 
     function normalize(u){ u=(u||'').trim(); if(!u) return ''; if(!/^https?:\/\//i.test(u)) u='https://'+u; return u; }
 
+    function fetchVia(purl, isJson){
+      var ctrl=new AbortController(), to=setTimeout(function(){ctrl.abort();}, 9000);
+      return fetch(purl,{signal:ctrl.signal}).then(function(r){ clearTimeout(to); if(!r.ok) throw 0; return r.text(); })
+        .then(function(txt){ if(isJson){ var j=JSON.parse(txt); return j.contents||''; } return txt; })
+        .then(function(html){ if(!html || html.length<120) throw 0; return html; });
+    }
     function fetchHtml(url){
-      // 2 proxys CORS en fallback
-      var proxies=[
-        'https://api.allorigins.win/raw?url='+encodeURIComponent(url),
-        'https://corsproxy.io/?url='+encodeURIComponent(url)
+      var chain=[
+        ['https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(url),false],
+        ['https://api.allorigins.win/raw?url='+encodeURIComponent(url),false],
+        ['https://corsproxy.io/?url='+encodeURIComponent(url),false],
+        ['https://api.allorigins.win/get?url='+encodeURIComponent(url),true]
       ];
-      function tryAt(i){
-        if(i>=proxies.length) return Promise.reject(new Error('proxy'));
-        return fetch(proxies[i]).then(function(r){ if(!r.ok) throw new Error('http'); return r.text(); })
-          .then(function(t){ if(!t||t.length<80) throw new Error('empty'); return t; })
-          .catch(function(){ return tryAt(i+1); });
-      }
-      return tryAt(0);
+      var i=0;
+      function next(){ if(i>=chain.length) return Promise.reject(0); var c=chain[i++]; return fetchVia(c[0],c[1]).catch(next); }
+      return next();
     }
 
     function analyze(html, finalUrl){
       var doc=new DOMParser().parseFromString(html,'text/html');
-      var checks=[], score=0, max=0;
-      function push(label, status, pts, ptsMax, detail){ checks.push({label:label,status:status,detail:detail}); score+=pts; max+=ptsMax; }
+      var free=[], locked=[], score=0, max=0;
+      function add(arr,label,status,pts,ptsMax,detail){ arr.push({label:label,status:status,detail:detail}); score+=pts; max+=ptsMax; }
 
-      // Titre
+      // ---- ALERTE noindex (visible) ----
+      var rob=doc.querySelector('meta[name="robots"]'); var robc=rob?(rob.getAttribute('content')||''):'';
+      if(/noindex/i.test(robc)) add(free,'⚠️ Le site bloque Google (noindex)','bad',0,6,'Votre page demande à Google de NE PAS l\'indexer : elle est invisible dans les recherches. À corriger en priorité absolue.');
+      else add(free,'Indexable par Google','ok',6,6,'Aucune balise « noindex » : votre page peut être référencée.');
+
+      // ---- Titre (visible) ----
       var t=((doc.querySelector('title')||{}).textContent||'').trim();
-      if(!t) push('Balise titre (Title)','bad',0,12,'Aucune balise &lt;title&gt; trouvée — c\'est le signal n°1 pour Google.');
-      else if(t.length<30||t.length>65) push('Balise titre (Title)','warn',7,12,'Présente mais '+t.length+' caractères (idéal 30–60). « '+t.slice(0,55)+'… »');
-      else push('Balise titre (Title)','ok',12,12,'Bonne longueur ('+t.length+' caractères).');
+      if(!t) add(free,'Balise titre (Title)','bad',0,12,'Aucune balise &lt;title&gt; — c\'est le signal n°1 pour Google.');
+      else if(t.length<30||t.length>65) add(free,'Balise titre (Title)','warn',7,12,'Présente mais '+t.length+' caractères (idéal 30–60).');
+      else add(free,'Balise titre (Title)','ok',12,12,'Bonne longueur ('+t.length+' caractères).');
 
-      // Meta description
+      // ---- Meta description (visible) ----
       var md=doc.querySelector('meta[name="description"]'); var mdc=md?(md.getAttribute('content')||'').trim():'';
-      if(!mdc) push('Meta description','bad',0,12,'Absente — elle améliore votre taux de clic dans Google.');
-      else if(mdc.length<70||mdc.length>165) push('Meta description','warn',7,12,'Présente mais '+mdc.length+' caractères (idéal 120–160).');
-      else push('Meta description','ok',12,12,'Bonne longueur ('+mdc.length+' caractères).');
+      if(!mdc) add(free,'Meta description','bad',0,12,'Absente — elle améliore votre taux de clic dans Google.');
+      else if(mdc.length<70||mdc.length>165) add(free,'Meta description','warn',7,12,'Présente mais '+mdc.length+' caractères (idéal 120–160).');
+      else add(free,'Meta description','ok',12,12,'Bonne longueur ('+mdc.length+' caractères).');
 
-      // H1
+      // ---- H1 (visible) ----
       var h1=doc.querySelectorAll('h1');
-      if(h1.length===0) push('Titre principal (H1)','bad',0,10,'Aucun H1 — Google ne sait pas de quoi parle la page.');
-      else if(h1.length===1) push('Titre principal (H1)','ok',10,10,'Un seul H1, parfait.');
-      else push('Titre principal (H1)','warn',5,10,h1.length+' balises H1 (il ne devrait y en avoir qu\'une).');
+      if(h1.length===0) add(free,'Titre principal (H1)','bad',0,10,'Aucun H1 — Google ne sait pas de quoi parle la page.');
+      else if(h1.length===1) add(free,'Titre principal (H1)','ok',10,10,'Un seul H1, parfait.');
+      else add(free,'Titre principal (H1)','warn',5,10,h1.length+' balises H1 (il ne devrait y en avoir qu\'une).');
 
-      // Viewport (mobile)
-      if(doc.querySelector('meta[name="viewport"]')) push('Compatible mobile','ok',10,10,'Balise viewport présente.');
-      else push('Compatible mobile','bad',0,10,'Pas de viewport — le site rend mal sur mobile (majorité du trafic).');
+      // ---- Mobile (visible) ----
+      if(doc.querySelector('meta[name="viewport"]')) add(free,'Compatible mobile','ok',10,10,'Balise viewport présente.');
+      else add(free,'Compatible mobile','bad',0,10,'Pas de viewport — rend mal sur mobile (majorité du trafic).');
 
-      // HTTPS
-      if(/^https:/i.test(finalUrl)) push('HTTPS (sécurité)','ok',8,8,'Le site est sécurisé en HTTPS.');
-      else push('HTTPS (sécurité)','bad',0,8,'Pas de HTTPS — pénalisant pour le SEO et la confiance.');
+      // ---- HTTPS (visible) ----
+      if(/^https:/i.test(finalUrl)) add(free,'HTTPS (sécurité)','ok',8,8,'Le site est sécurisé en HTTPS.');
+      else add(free,'HTTPS (sécurité)','bad',0,8,'Pas de HTTPS — pénalisant pour le SEO et la confiance.');
 
-      // Lang
+      // ===== PARTIE FLOUTÉE =====
+
+      // Hiérarchie titres
+      var nh2=doc.querySelectorAll('h2').length, nh3=doc.querySelectorAll('h3').length;
+      if(nh2>=2) add(locked,'Structure des titres (H2/H3)','ok',6,6,nh2+' H2 et '+nh3+' H3 — bonne hiérarchie de contenu.');
+      else if(nh2===1) add(locked,'Structure des titres (H2/H3)','warn',3,6,'1 seul H2 — structurez davantage votre contenu.');
+      else add(locked,'Structure des titres (H2/H3)','bad',0,6,'Aucun H2 — contenu mal structuré pour Google.');
+
+      // Langue
       var lang=doc.documentElement.getAttribute('lang');
-      if(lang) push('Langue déclarée','ok',6,6,'Attribut lang = « '+lang+' ».');
-      else push('Langue déclarée','warn',2,6,'Pas d\'attribut lang sur &lt;html&gt;.');
+      if(lang) add(locked,'Langue déclarée','ok',5,5,'Attribut lang = « '+lang+' ».');
+      else add(locked,'Langue déclarée','warn',1,5,'Pas d\'attribut lang sur &lt;html&gt;.');
 
       // Canonical
-      if(doc.querySelector('link[rel="canonical"]')) push('URL canonique','ok',8,8,'Balise canonical présente (évite le contenu dupliqué).');
-      else push('URL canonique','warn',3,8,'Pas de canonical — risque de contenu dupliqué.');
+      if(doc.querySelector('link[rel="canonical"]')) add(locked,'URL canonique','ok',8,8,'Balise canonical présente (évite le contenu dupliqué).');
+      else add(locked,'URL canonique','warn',3,8,'Pas de canonical — risque de contenu dupliqué.');
 
       // Open Graph
       var og=doc.querySelector('meta[property="og:title"]')&&doc.querySelector('meta[property="og:image"]');
-      if(og) push('Partage réseaux (Open Graph)','ok',8,8,'Balises Open Graph présentes (bel aperçu sur Facebook/LinkedIn).');
-      else push('Partage réseaux (Open Graph)','warn',3,8,'Open Graph incomplet — aperçu pauvre quand on partage le lien.');
+      if(og) add(locked,'Partage réseaux (Open Graph)','ok',8,8,'Open Graph présent (bel aperçu sur Facebook/LinkedIn).');
+      else add(locked,'Partage réseaux (Open Graph)','warn',3,8,'Open Graph incomplet — aperçu pauvre au partage.');
 
-      // JSON-LD
-      if(doc.querySelector('script[type="application/ld+json"]')) push('Données structurées (Schema)','ok',10,10,'JSON-LD présent — aide Google et les IA à vous comprendre.');
-      else push('Données structurées (Schema)','warn',2,10,'Aucune donnée structurée — vous passez à côté des résultats enrichis.');
+      // Twitter cards
+      if(doc.querySelector('meta[name="twitter:card"]')) add(locked,'Twitter / X Cards','ok',4,4,'Cartes Twitter présentes.');
+      else add(locked,'Twitter / X Cards','warn',1,4,'Pas de Twitter Card — aperçu basique sur X.');
+
+      // JSON-LD + types
+      var lds=doc.querySelectorAll('script[type="application/ld+json"]'); var types=[];
+      lds.forEach(function(s){ try{ var j=JSON.parse(s.textContent); (Array.isArray(j)?j:[j]).forEach(function(o){ if(o&&o['@type']) types.push([].concat(o['@type']).join(',')); if(o&&o['@graph']) o['@graph'].forEach(function(g){ if(g['@type']) types.push([].concat(g['@type']).join(',')); }); }); }catch(e){} });
+      if(lds.length) add(locked,'Données structurées (Schema)','ok',10,10,'JSON-LD présent'+(types.length?' ('+types.slice(0,4).join(', ')+')':'')+' — aide Google et les IA.');
+      else add(locked,'Données structurées (Schema)','warn',2,10,'Aucune donnée structurée — vous passez à côté des résultats enrichis.');
+
+      // Favicon
+      if(doc.querySelector('link[rel*="icon"]')) add(locked,'Favicon','ok',4,4,'Favicon déclaré.');
+      else add(locked,'Favicon','warn',1,4,'Pas de favicon — détail qui fait pro.');
 
       // Images alt
       var imgs=doc.querySelectorAll('img'), withAlt=0;
       imgs.forEach(function(im){ var a=im.getAttribute('alt'); if(a!==null&&a.trim()!=='') withAlt++; });
-      if(imgs.length===0) push('Textes alternatifs (images)','warn',4,8,'Aucune image détectée.');
-      else { var pct=Math.round(withAlt/imgs.length*100);
-        if(pct>=80) push('Textes alternatifs (images)','ok',8,8,pct+'% des images ont un attribut alt.');
-        else if(pct>=40) push('Textes alternatifs (images)','warn',4,8,'Seulement '+pct+'% des images ont un alt (accessibilité + SEO image).');
-        else push('Textes alternatifs (images)','bad',0,8,'Seulement '+pct+'% des images ont un alt.'); }
+      if(imgs.length===0) add(locked,'Textes alternatifs (images)','warn',4,8,'Aucune image détectée.');
+      else { var pc=Math.round(withAlt/imgs.length*100);
+        if(pc>=80) add(locked,'Textes alternatifs (images)','ok',8,8,pc+'% des '+imgs.length+' images ont un attribut alt.');
+        else if(pc>=40) add(locked,'Textes alternatifs (images)','warn',4,8,'Seulement '+pc+'% des images ont un alt (accessibilité + SEO).');
+        else add(locked,'Textes alternatifs (images)','bad',0,8,'Seulement '+pc+'% des images ont un alt.'); }
 
       // Contenu
-      var bodyClone=doc.body?doc.body.cloneNode(true):null, words=0;
-      if(bodyClone){ bodyClone.querySelectorAll('script,style,noscript').forEach(function(n){n.remove();});
-        words=(bodyClone.textContent||'').trim().split(/\s+/).filter(Boolean).length; }
-      if(words>=300) push('Quantité de contenu','ok',8,8,'~'+words+' mots — assez de contenu pour bien se référencer.');
-      else if(words>=120) push('Quantité de contenu','warn',4,8,'~'+words+' mots — un peu léger, ajoutez du texte utile.');
-      else push('Quantité de contenu','bad',0,8,'~'+words+' mots — trop peu de texte pour Google.');
+      var bc=doc.body?doc.body.cloneNode(true):null, words=0;
+      if(bc){ bc.querySelectorAll('script,style,noscript,svg').forEach(function(n){n.remove();}); words=(bc.textContent||'').trim().split(/\s+/).filter(Boolean).length; }
+      if(words>=300) add(locked,'Quantité de contenu','ok',8,8,'~'+words+' mots — assez de contenu pour bien se référencer.');
+      else if(words>=120) add(locked,'Quantité de contenu','warn',4,8,'~'+words+' mots — un peu léger.');
+      else add(locked,'Quantité de contenu','bad',0,8,'~'+words+' mots — trop peu de texte pour Google.');
 
-      // Noindex (alerte bonus, n'enlève pas de points mais signale)
-      var rob=doc.querySelector('meta[name="robots"]'); var robc=rob?(rob.getAttribute('content')||''):'';
-      if(/noindex/i.test(robc)) checks.unshift({label:'⚠️ Le site bloque Google (noindex)',status:'bad',detail:'Votre page demande à Google de NE PAS l\'indexer. Elle est invisible dans les recherches ! À corriger en urgence.'});
+      // Liens internes
+      var host=''; try{host=new URL(finalUrl).host;}catch(e){}
+      var nLinks=doc.querySelectorAll('a[href]').length;
+      if(nLinks>=10) add(locked,'Maillage interne','ok',5,5,nLinks+' liens sur la page — bonne navigation.');
+      else if(nLinks>=4) add(locked,'Maillage interne','warn',3,5,'Seulement '+nLinks+' liens — ajoutez des liens internes.');
+      else add(locked,'Maillage interne','bad',0,5,'Très peu de liens ('+nLinks+') — navigation pauvre.');
+
+      // Réseaux sociaux
+      var social=/facebook\.com|instagram\.com|linkedin\.com|twitter\.com|x\.com|tiktok\.com|youtube\.com/i.test(html);
+      if(social) add(locked,'Réseaux sociaux liés','ok',5,5,'Des liens vers vos réseaux sont présents.');
+      else add(locked,'Réseaux sociaux liés','warn',1,5,'Aucun lien vers des réseaux sociaux détecté.');
+
+      // hreflang
+      if(doc.querySelector('link[rel="alternate"][hreflang]')) add(locked,'Balises hreflang','ok',3,3,'Hreflang présent (langue/région déclarées).');
+      else add(locked,'Balises hreflang','warn',1,3,'Pas de hreflang (utile si plusieurs langues/régions).');
 
       var pct=Math.round(score/max*100);
-      return {checks:checks, pct:pct};
+      return {free:free, locked:locked, pct:pct};
+    }
+
+    function chkHtml(c){
+      var icons={ok:'✓',warn:'!',bad:'✕'};
+      return '<div class="chk '+c.status+'"><span class="dot">'+icons[c.status]+'</span><div><div class="t">'+c.label+'</div><div class="d">'+c.detail+'</div></div></div>';
     }
 
     function render(data, finalUrl){
-      var pct=data.pct;
-      var color = pct>=80?'var(--ok)' : pct>=55?'var(--warn)' : 'var(--bad)';
+      var pct=data.pct, color = pct>=80?'var(--ok)' : pct>=55?'var(--warn)' : 'var(--bad)';
       var g=document.getElementById('gauge');
       g.style.background='conic-gradient('+color+' '+(pct*3.6)+'deg, rgba(255,255,255,.08) 0deg)';
       var sv=document.getElementById('scoreVal'); sv.innerHTML=pct+'<small>/ 100</small>'; sv.style.color=color;
@@ -266,10 +325,9 @@
       if(pct>=80){vt.textContent='Très bon score 👏';vp.textContent='Votre site est solide. Quelques détails à peaufiner pour viser le sans-faute.';}
       else if(pct>=55){vt.textContent='Peut mieux faire 💪';vp.textContent='Des bases correctes, mais plusieurs points freinent votre visibilité. Ça se corrige vite.';}
       else {vt.textContent='Du potentiel inexploité 🚀';vp.textContent='Votre site laisse beaucoup de visibilité sur la table. Bonne nouvelle : tout est rattrapable.';}
-      var icons={ok:'✓',warn:'!',bad:'✕'};
-      document.getElementById('checks').innerHTML=data.checks.map(function(c){
-        return '<div class="chk '+c.status+'"><span class="dot">'+icons[c.status]+'</span><div><div class="t">'+c.label+'</div><div class="d">'+c.detail+'</div></div></div>';
-      }).join('');
+      document.getElementById('checksFree').innerHTML=data.free.map(chkHtml).join('');
+      document.getElementById('checksLocked').innerHTML=data.locked.map(chkHtml).join('');
+      document.getElementById('lockCount').textContent='+'+data.locked.length+' critères détaillés';
       document.getElementById('psiBtn').href='https://pagespeed.web.dev/report?url='+encodeURIComponent(finalUrl);
       res.classList.add('show'); res.scrollIntoView({behavior:'smooth',block:'start'});
     }
@@ -286,7 +344,7 @@
         render(data, url);
       }).catch(function(){
         load.classList.remove('show'); btn.disabled=false; btn.textContent='Analyser mon site →';
-        errBox.innerHTML='😕 Impossible d\'analyser ce site pour le moment (site protégé, hors-ligne, ou service d\'analyse momentanément surchargé). Vérifiez l\'adresse et réessayez dans un instant — ou <a href="contact.html">demandez-moi un audit manuel</a>.';
+        errBox.innerHTML='😕 Impossible de lire ce site automatiquement (souvent un site protégé type Cloudflare, ou hors-ligne). Pas de souci : <a href="contact.html">demandez-moi votre audit manuel gratuit</a>, je l\'analyse à la main et je vous envoie le rapport complet.';
         errBox.classList.add('show'); errBox.scrollIntoView({behavior:'smooth',block:'center'});
       });
     });
