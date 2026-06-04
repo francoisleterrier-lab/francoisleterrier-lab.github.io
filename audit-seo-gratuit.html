@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Audit SEO gratuit — testez votre site en 30 secondes | François Leterrier</title>
-<meta name="description" content="Outil d'audit SEO gratuit : entrez l'adresse de votre site et obtenez un score sur 100 avec des recommandations concrètes. Par François Leterrier, Sud-Toulousain.">
+<meta name="description" content="Outil d'audit SEO gratuit : entrez l'adresse de votre site et obtenez un score sur 100 avec un rapport détaillé. Par François Leterrier, Sud-Toulousain.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#06070e">
 <link rel="canonical" href="https://francoisleterrier.fr/audit-seo-gratuit.html">
@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:title" content="Audit SEO gratuit — testez votre site en 30 secondes">
-<meta property="og:description" content="Un score sur 100 + des recommandations concrètes pour votre site. Gratuit, instantané.">
+<meta property="og:description" content="Un score sur 100 + un rapport détaillé pour votre site. Gratuit, instantané.">
 <meta property="og:image" content="https://francoisleterrier.fr/og-image.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://francoisleterrier.fr/audit-seo-gratuit.html">
@@ -76,7 +76,7 @@
   @keyframes sp{to{transform:rotate(360deg);}}
   .res{display:none;max-width:760px;margin:10px auto 0;padding:0 0 30px;}
   .res.show{display:block;}
-  .scorecard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;margin-bottom:22px;}
+  .scorecard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;margin-bottom:8px;}
   .gauge{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;position:relative;}
   .gauge::after{content:"";position:absolute;inset:12px;background:var(--panel);border-radius:50%;}
   .gauge .val{position:relative;z-index:2;font-family:'Bricolage Grotesque';font-weight:800;font-size:42px;color:#fff;line-height:1;}
@@ -85,23 +85,32 @@
   .verdict h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:#fff;margin-bottom:6px;}
   .verdict p{color:#c4cbdb;font-size:14.5px;}
   .verdict .site{color:var(--cyan);font-weight:600;word-break:break-all;}
-  .seclabel{font-family:'Bricolage Grotesque';font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:6px 2px 12px;}
-  .checks{display:flex;flex-direction:column;gap:10px;}
-  .chk{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 18px;display:flex;gap:14px;align-items:flex-start;}
-  .chk .dot{flex:none;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;}
+  /* catégories */
+  .cat-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:22px 2px 11px;}
+  .cat-head .cn{font-family:'Bricolage Grotesque';font-weight:700;font-size:16.5px;color:#fff;display:flex;align-items:center;gap:9px;}
+  .cat-head .cn .e{font-size:18px;}
+  .cat-head .right{display:flex;align-items:center;gap:10px;}
+  .bar{height:7px;border-radius:7px;background:rgba(255,255,255,.08);width:110px;overflow:hidden;}
+  .bar i{display:block;height:100%;border-radius:7px;}
+  .cat-head .pc{font-family:'Bricolage Grotesque';font-weight:800;font-size:14px;min-width:38px;text-align:right;}
+  .checks{display:flex;flex-direction:column;gap:9px;}
+  .chk{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 16px;display:flex;gap:13px;align-items:flex-start;}
+  .chk .dot{flex:none;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;}
   .chk.ok .dot{background:rgba(52,211,153,.15);color:var(--ok);}
   .chk.warn .dot{background:rgba(251,191,36,.15);color:var(--warn);}
   .chk.bad .dot{background:rgba(248,113,113,.15);color:var(--bad);}
-  .chk .t{font-weight:700;color:#fff;font-size:15px;}
-  .chk .d{font-size:13.5px;color:var(--muted);margin-top:2px;}
-  /* zone floutée (freemium) */
-  .locked{position:relative;margin-top:12px;}
-  .locked .blurred{filter:blur(5px);pointer-events:none;user-select:none;opacity:.9;max-height:440px;overflow:hidden;}
-  .lock-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;background:linear-gradient(180deg,rgba(6,7,14,.35) 0%,rgba(6,7,14,.82) 55%);border-radius:16px;}
+  .chk .t{font-weight:700;color:#fff;font-size:14.5px;}
+  .chk .d{font-size:13px;color:var(--muted);margin-top:2px;}
+  /* zone floutée freemium */
+  .locked{position:relative;margin-top:8px;}
+  .locked .blurred{filter:blur(5px);pointer-events:none;user-select:none;opacity:.92;max-height:560px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent);}
+  .lock-cta{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;background:linear-gradient(180deg,rgba(6,7,14,.35) 0%,rgba(6,7,14,.86) 60%);border-radius:16px;}
   .lock-cta .ring{width:58px;height:58px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.4);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;}
   .lock-cta h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;color:#fff;margin-bottom:6px;}
-  .lock-cta p{color:#c4cbdb;font-size:14.5px;max-width:42ch;margin-bottom:18px;}
+  .lock-cta p{color:#c4cbdb;font-size:14.5px;max-width:44ch;margin-bottom:18px;}
   .lock-cta p b{color:#fff;}
+  .lock-cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:18px;}
+  .lock-cats span{font-size:12px;color:#cdd5e6;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:30px;padding:5px 12px;}
   .err{display:none;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.35);border-radius:14px;padding:18px;color:#f3c7c7;font-size:14.5px;text-align:center;max-width:620px;margin:18px auto 0;}
   .err.show{display:block;}
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:13px 26px;font-size:14.5px;box-shadow:0 0 24px -6px rgba(34,211,238,.6);}
@@ -114,7 +123,7 @@
   .note{max-width:760px;margin:34px auto 0;font-size:12.5px;color:#69728a;text-align:center;line-height:1.7;}
   footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;margin-top:30px;}
   footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
-  @media(max-width:560px){.field{flex-direction:column;}.field button{padding:13px;}.scorecard{flex-direction:column;}.verdict{text-align:center;}.ctabox .btn-ghost{margin:10px 0 0;}}
+  @media(max-width:560px){.field{flex-direction:column;}.field button{padding:13px;}.scorecard{flex-direction:column;}.verdict{text-align:center;}.bar{width:80px;}.ctabox .btn-ghost{margin:10px 0 0;}}
 </style>
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="70o1z25QpySuipMTMk7FMg" async></script>
 </head>
@@ -125,9 +134,9 @@
   </div></header>
 
   <section class="hero"><div class="wrap">
-    <span class="tag">Outil gratuit</span>
+    <span class="tag">Outil gratuit · 38 points contrôlés</span>
     <h1>Votre site est-il <span>bien optimisé&nbsp;?</span></h1>
-    <p class="sub">Entrez l'adresse de votre site et obtenez en 30 secondes un <strong>score sur 100</strong> avec des recommandations concrètes. Gratuit, instantané, sans inscription.</p>
+    <p class="sub">Entrez l'adresse de votre site et obtenez en 30 secondes un <strong>score sur 100</strong> avec un rapport détaillé en 6 catégories. Gratuit, instantané, sans inscription.</p>
 
     <div class="tool">
       <form id="auditForm" class="field">
@@ -151,15 +160,15 @@
       </div>
     </div>
 
-    <div class="seclabel">Aperçu de l'audit</div>
-    <div class="checks" id="checksFree"></div>
+    <div id="freeZone"></div>
 
     <div class="locked" id="locked">
-      <div class="checks blurred" id="checksLocked"></div>
+      <div id="lockedZone" class="blurred"></div>
       <div class="lock-cta">
         <div class="ring">🔒</div>
         <h3>L'audit complet est offert</h3>
-        <p><b id="lockCount">+12 critères détaillés</b> sont analysés (données structurées, réseaux, contenu, technique…). Recevez le <b>rapport complet + votre plan d'action priorisé</b>, gratuitement et sans engagement.</p>
+        <p><b id="lockCount">+30 critères</b> répartis en 5 catégories supplémentaires (technique, mobile, données structurées, contenu, local &amp; liens). Recevez le <b>rapport complet + votre plan d'action priorisé</b>, gratuitement.</p>
+        <div class="lock-cats" id="lockCats"></div>
         <a class="btn" id="unlockBtn" href="contact.html">Débloquer mon audit complet →</a>
       </div>
     </div>
@@ -172,7 +181,7 @@
     </div>
   </section>
 
-  <p class="note">Cet outil analyse les principaux signaux SEO « on-page » de votre page d'accueil (balises, structure, mobile, données structurées…). Il donne une première photo, pas un audit exhaustif — pour ça, <a href="contact.html">parlons-en</a>. Outil proposé par François Leterrier, community manager &amp; création de site dans le Sud-Toulousain.</p>
+  <p class="note">Cet outil analyse les principaux signaux SEO « on-page » de votre page d'accueil (balises, structure, mobile, technique, données structurées, contenu, signaux locaux…). Il donne une première photo, pas un audit exhaustif — pour ça, <a href="contact.html">parlons-en</a>. Outil proposé par François Leterrier, community manager &amp; création de site dans le Sud-Toulousain.</p>
 
   <footer><div class="wrap">© <span id="y">2026</span> François Leterrier · Lavernose-Lacasse 31410 — <a href="index.html">Accueil</a> · <a href="creation-site-internet.html">Création de site</a> · <a href="contact.html">Contact</a> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
 
@@ -204,130 +213,153 @@
 
     function analyze(html, finalUrl){
       var doc=new DOMParser().parseFromString(html,'text/html');
-      var free=[], locked=[], score=0, max=0;
-      function add(arr,label,status,pts,ptsMax,detail){ arr.push({label:label,status:status,detail:detail}); score+=pts; max+=ptsMax; }
-
-      // ---- ALERTE noindex (visible) ----
-      var rob=doc.querySelector('meta[name="robots"]'); var robc=rob?(rob.getAttribute('content')||''):'';
-      if(/noindex/i.test(robc)) add(free,'⚠️ Le site bloque Google (noindex)','bad',0,6,'Votre page demande à Google de NE PAS l\'indexer : elle est invisible dans les recherches. À corriger en priorité absolue.');
-      else add(free,'Indexable par Google','ok',6,6,'Aucune balise « noindex » : votre page peut être référencée.');
-
-      // ---- Titre (visible) ----
-      var t=((doc.querySelector('title')||{}).textContent||'').trim();
-      if(!t) add(free,'Balise titre (Title)','bad',0,12,'Aucune balise &lt;title&gt; — c\'est le signal n°1 pour Google.');
-      else if(t.length<30||t.length>65) add(free,'Balise titre (Title)','warn',7,12,'Présente mais '+t.length+' caractères (idéal 30–60).');
-      else add(free,'Balise titre (Title)','ok',12,12,'Bonne longueur ('+t.length+' caractères).');
-
-      // ---- Meta description (visible) ----
-      var md=doc.querySelector('meta[name="description"]'); var mdc=md?(md.getAttribute('content')||'').trim():'';
-      if(!mdc) add(free,'Meta description','bad',0,12,'Absente — elle améliore votre taux de clic dans Google.');
-      else if(mdc.length<70||mdc.length>165) add(free,'Meta description','warn',7,12,'Présente mais '+mdc.length+' caractères (idéal 120–160).');
-      else add(free,'Meta description','ok',12,12,'Bonne longueur ('+mdc.length+' caractères).');
-
-      // ---- H1 (visible) ----
-      var h1=doc.querySelectorAll('h1');
-      if(h1.length===0) add(free,'Titre principal (H1)','bad',0,10,'Aucun H1 — Google ne sait pas de quoi parle la page.');
-      else if(h1.length===1) add(free,'Titre principal (H1)','ok',10,10,'Un seul H1, parfait.');
-      else add(free,'Titre principal (H1)','warn',5,10,h1.length+' balises H1 (il ne devrait y en avoir qu\'une).');
-
-      // ---- Mobile (visible) ----
-      if(doc.querySelector('meta[name="viewport"]')) add(free,'Compatible mobile','ok',10,10,'Balise viewport présente.');
-      else add(free,'Compatible mobile','bad',0,10,'Pas de viewport — rend mal sur mobile (majorité du trafic).');
-
-      // ---- HTTPS (visible) ----
-      if(/^https:/i.test(finalUrl)) add(free,'HTTPS (sécurité)','ok',8,8,'Le site est sécurisé en HTTPS.');
-      else add(free,'HTTPS (sécurité)','bad',0,8,'Pas de HTTPS — pénalisant pour le SEO et la confiance.');
-
-      // ===== PARTIE FLOUTÉE =====
-
-      // Hiérarchie titres
-      var nh2=doc.querySelectorAll('h2').length, nh3=doc.querySelectorAll('h3').length;
-      if(nh2>=2) add(locked,'Structure des titres (H2/H3)','ok',6,6,nh2+' H2 et '+nh3+' H3 — bonne hiérarchie de contenu.');
-      else if(nh2===1) add(locked,'Structure des titres (H2/H3)','warn',3,6,'1 seul H2 — structurez davantage votre contenu.');
-      else add(locked,'Structure des titres (H2/H3)','bad',0,6,'Aucun H2 — contenu mal structuré pour Google.');
-
-      // Langue
-      var lang=doc.documentElement.getAttribute('lang');
-      if(lang) add(locked,'Langue déclarée','ok',5,5,'Attribut lang = « '+lang+' ».');
-      else add(locked,'Langue déclarée','warn',1,5,'Pas d\'attribut lang sur &lt;html&gt;.');
-
-      // Canonical
-      if(doc.querySelector('link[rel="canonical"]')) add(locked,'URL canonique','ok',8,8,'Balise canonical présente (évite le contenu dupliqué).');
-      else add(locked,'URL canonique','warn',3,8,'Pas de canonical — risque de contenu dupliqué.');
-
-      // Open Graph
-      var og=doc.querySelector('meta[property="og:title"]')&&doc.querySelector('meta[property="og:image"]');
-      if(og) add(locked,'Partage réseaux (Open Graph)','ok',8,8,'Open Graph présent (bel aperçu sur Facebook/LinkedIn).');
-      else add(locked,'Partage réseaux (Open Graph)','warn',3,8,'Open Graph incomplet — aperçu pauvre au partage.');
-
-      // Twitter cards
-      if(doc.querySelector('meta[name="twitter:card"]')) add(locked,'Twitter / X Cards','ok',4,4,'Cartes Twitter présentes.');
-      else add(locked,'Twitter / X Cards','warn',1,4,'Pas de Twitter Card — aperçu basique sur X.');
-
-      // JSON-LD + types
-      var lds=doc.querySelectorAll('script[type="application/ld+json"]'); var types=[];
-      lds.forEach(function(s){ try{ var j=JSON.parse(s.textContent); (Array.isArray(j)?j:[j]).forEach(function(o){ if(o&&o['@type']) types.push([].concat(o['@type']).join(',')); if(o&&o['@graph']) o['@graph'].forEach(function(g){ if(g['@type']) types.push([].concat(g['@type']).join(',')); }); }); }catch(e){} });
-      if(lds.length) add(locked,'Données structurées (Schema)','ok',10,10,'JSON-LD présent'+(types.length?' ('+types.slice(0,4).join(', ')+')':'')+' — aide Google et les IA.');
-      else add(locked,'Données structurées (Schema)','warn',2,10,'Aucune donnée structurée — vous passez à côté des résultats enrichis.');
-
-      // Favicon
-      if(doc.querySelector('link[rel*="icon"]')) add(locked,'Favicon','ok',4,4,'Favicon déclaré.');
-      else add(locked,'Favicon','warn',1,4,'Pas de favicon — détail qui fait pro.');
-
-      // Images alt
-      var imgs=doc.querySelectorAll('img'), withAlt=0;
-      imgs.forEach(function(im){ var a=im.getAttribute('alt'); if(a!==null&&a.trim()!=='') withAlt++; });
-      if(imgs.length===0) add(locked,'Textes alternatifs (images)','warn',4,8,'Aucune image détectée.');
-      else { var pc=Math.round(withAlt/imgs.length*100);
-        if(pc>=80) add(locked,'Textes alternatifs (images)','ok',8,8,pc+'% des '+imgs.length+' images ont un attribut alt.');
-        else if(pc>=40) add(locked,'Textes alternatifs (images)','warn',4,8,'Seulement '+pc+'% des images ont un alt (accessibilité + SEO).');
-        else add(locked,'Textes alternatifs (images)','bad',0,8,'Seulement '+pc+'% des images ont un alt.'); }
-
-      // Contenu
-      var bc=doc.body?doc.body.cloneNode(true):null, words=0;
-      if(bc){ bc.querySelectorAll('script,style,noscript,svg').forEach(function(n){n.remove();}); words=(bc.textContent||'').trim().split(/\s+/).filter(Boolean).length; }
-      if(words>=300) add(locked,'Quantité de contenu','ok',8,8,'~'+words+' mots — assez de contenu pour bien se référencer.');
-      else if(words>=120) add(locked,'Quantité de contenu','warn',4,8,'~'+words+' mots — un peu léger.');
-      else add(locked,'Quantité de contenu','bad',0,8,'~'+words+' mots — trop peu de texte pour Google.');
-
-      // Liens internes
-      var host=''; try{host=new URL(finalUrl).host;}catch(e){}
-      var nLinks=doc.querySelectorAll('a[href]').length;
-      if(nLinks>=10) add(locked,'Maillage interne','ok',5,5,nLinks+' liens sur la page — bonne navigation.');
-      else if(nLinks>=4) add(locked,'Maillage interne','warn',3,5,'Seulement '+nLinks+' liens — ajoutez des liens internes.');
-      else add(locked,'Maillage interne','bad',0,5,'Très peu de liens ('+nLinks+') — navigation pauvre.');
-
-      // Réseaux sociaux
+      var isHttps=/^https:/i.test(finalUrl), host=''; try{host=new URL(finalUrl).host;}catch(e){}
+      function q(s){return doc.querySelector(s);} function qa(s){return doc.querySelectorAll(s);}
+      function meta(n){ var m=doc.querySelector('meta[name="'+n+'"]'); return m?(m.getAttribute('content')||''):''; }
+      function ometa(p){ var m=doc.querySelector('meta[property="'+p+'"]'); return m?(m.getAttribute('content')||''):''; }
+      // pré-calculs
+      var title=((q('title')||{}).textContent||'').trim();
+      var desc=(meta('description')||'').trim();
+      var h1=qa('h1'), h2=qa('h2').length, h3=qa('h3').length;
+      var robotsC=meta('robots');
+      var lds=qa('script[type="application/ld+json"]'), types=[];
+      lds.forEach(function(s){ try{ var j=JSON.parse(s.textContent); (Array.isArray(j)?j:[j]).forEach(function(o){ if(!o)return; if(o['@type']) types.push([].concat(o['@type']).join(',')); if(o['@graph']) o['@graph'].forEach(function(g){ if(g&&g['@type']) types.push([].concat(g['@type']).join(',')); }); }); }catch(e){} });
+      var typesStr=types.join(' ');
+      var imgs=qa('img'), withAlt=0, withLazy=0;
+      imgs.forEach(function(im){ var a=im.getAttribute('alt'); if(a!==null&&a.trim()!=='') withAlt++; if((im.getAttribute('loading')||'')==='lazy') withLazy++; });
+      var bc=doc.body?doc.body.cloneNode(true):null, words=0, txtLen=0;
+      if(bc){ bc.querySelectorAll('script,style,noscript,svg').forEach(function(n){n.remove();}); var txt=(bc.textContent||'').replace(/\s+/g,' ').trim(); txtLen=txt.length; words=txt?txt.split(' ').length:0; }
+      var links=qa('a[href]'), intL=0, extL=0, nofo=0;
+      links.forEach(function(a){ var h=a.getAttribute('href')||''; var rel=(a.getAttribute('rel')||''); if(/nofollow/i.test(rel)) nofo++; if(/^https?:\/\//i.test(h)){ try{ if(new URL(h).host===host) intL++; else extL++; }catch(e){} } else if(h.indexOf('#')!==0 && h.indexOf('mailto:')!==0 && h.indexOf('tel:')!==0) intL++; });
+      var cssN=qa('link[rel="stylesheet"]').length, jsN=qa('script[src]').length, hints=qa('link[rel="preload"],link[rel="preconnect"],link[rel="dns-prefetch"]').length;
+      var deprecated=qa('font,center,marquee,blink').length;
+      var mixed=isHttps?(html.match(/(?:src|href)=["']http:\/\//gi)||[]).length:0;
+      var phone=/tel:\+?\d|\b0[1-9](?:[\s.\-]?\d{2}){4}\b/.test(html);
+      var contact=!!q('form')|| /mailto:/.test(html) || /@[a-z0-9.\-]+\.[a-z]{2,}/i.test(html);
       var social=/facebook\.com|instagram\.com|linkedin\.com|twitter\.com|x\.com|tiktok\.com|youtube\.com/i.test(html);
-      if(social) add(locked,'Réseaux sociaux liés','ok',5,5,'Des liens vers vos réseaux sont présents.');
-      else add(locked,'Réseaux sociaux liés','warn',1,5,'Aucun lien vers des réseaux sociaux détecté.');
+      var pageKo=Math.round(html.length/1024);
+      var ratio=txtLen&&html.length?Math.round(txtLen/html.length*100):0;
+      // mots communs titre/H1
+      function wset(s){return (s||'').toLowerCase().replace(/[^a-zàâäéèêëîïôöûüç0-9 ]/gi,' ').split(/\s+/).filter(function(w){return w.length>3;});}
+      var tw=wset(title), h1t=h1.length?wset(h1[0].textContent):[], overlap=tw.filter(function(w){return h1t.indexOf(w)>=0;}).length;
 
-      // hreflang
-      if(doc.querySelector('link[rel="alternate"][hreflang]')) add(locked,'Balises hreflang','ok',3,3,'Hreflang présent (langue/région déclarées).');
-      else add(locked,'Balises hreflang','warn',1,3,'Pas de hreflang (utile si plusieurs langues/régions).');
+      var cats=[], score=0, max=0;
+      function cat(name,emoji,free){ var c={name:name,emoji:emoji,free:free,checks:[],s:0,m:0}; cats.push(c); return c; }
+      function add(c,label,status,pts,ptsMax,detail){ c.checks.push({label:label,status:status,detail:detail}); c.s+=pts; c.m+=ptsMax; score+=pts; max+=ptsMax; }
 
-      var pct=Math.round(score/max*100);
-      return {free:free, locked:locked, pct:pct};
+      // ===== CAT 1 — Référencement (VISIBLE) =====
+      var c1=cat('Référencement on-page','🔎',true);
+      if(/noindex/i.test(robotsC)) add(c1,'Indexable par Google','bad',0,6,'⚠️ La page demande à Google de NE PAS l\'indexer (noindex) — elle est invisible. Priorité absolue.');
+      else add(c1,'Indexable par Google','ok',6,6,'Aucune balise « noindex » : la page peut être référencée.');
+      if(!title) add(c1,'Balise titre (Title)','bad',0,12,'Aucun &lt;title&gt; — le signal n°1 pour Google.');
+      else if(title.length<30||title.length>65) add(c1,'Balise titre (Title)','warn',7,12,title.length+' caractères (idéal 30–60).');
+      else add(c1,'Balise titre (Title)','ok',12,12,'Bonne longueur ('+title.length+' car.).');
+      if(!desc) add(c1,'Meta description','bad',0,12,'Absente — améliore le taux de clic.');
+      else if(desc.length<70||desc.length>165) add(c1,'Meta description','warn',7,12,desc.length+' caractères (idéal 120–160).');
+      else add(c1,'Meta description','ok',12,12,'Bonne longueur ('+desc.length+' car.).');
+      if(h1.length===0) add(c1,'Titre principal (H1)','bad',0,10,'Aucun H1.');
+      else if(h1.length===1) add(c1,'Titre principal (H1)','ok',10,10,'Un seul H1, parfait.');
+      else add(c1,'Titre principal (H1)','warn',5,10,h1.length+' H1 (un seul recommandé).');
+      if(h2>=2) add(c1,'Structure des titres (H2/H3)','ok',6,6,h2+' H2 et '+h3+' H3 — bonne hiérarchie.');
+      else if(h2===1) add(c1,'Structure des titres (H2/H3)','warn',3,6,'1 seul H2 — à structurer davantage.');
+      else add(c1,'Structure des titres (H2/H3)','bad',0,6,'Aucun H2.');
+      if(overlap>=1) add(c1,'Cohérence Titre ↔ H1','ok',5,5,'Le H1 reprend des mots-clés du titre.');
+      else add(c1,'Cohérence Titre ↔ H1','warn',2,5,'Titre et H1 ne partagent pas de mots-clés.');
+      if(q('link[rel="canonical"]')) add(c1,'URL canonique','ok',8,8,'Canonical présent (évite le contenu dupliqué).');
+      else add(c1,'URL canonique','warn',3,8,'Pas de canonical.');
+      if(q('link[rel="alternate"][hreflang]')) add(c1,'Balises hreflang','ok',3,3,'Hreflang présent.');
+      else add(c1,'Balises hreflang','warn',1,3,'Pas de hreflang (utile si multilingue).');
+
+      // ===== CAT 2 — Technique & sécurité =====
+      var c2=cat('Technique & sécurité','🛠️',false);
+      add(c2,'HTTPS (sécurité)',isHttps?'ok':'bad',isHttps?8:0,8,isHttps?'Site sécurisé en HTTPS.':'Pas de HTTPS — pénalisant.');
+      if(!isHttps) add(c2,'Contenu mixte','warn',2,5,'Site en HTTP : passez au HTTPS.');
+      else if(mixed===0) add(c2,'Contenu mixte','ok',5,5,'Aucune ressource non sécurisée (http://).');
+      else add(c2,'Contenu mixte','bad',0,5,mixed+' ressource(s) en http:// sur une page https (cadenas cassé).');
+      add(c2,'Encodage déclaré (charset)', (q('meta[charset]')||/charset/i.test(meta('content-type')))?'ok':'warn', (q('meta[charset]'))?4:1,4,(q('meta[charset]'))?'Charset déclaré.':'Charset non déclaré.');
+      if(pageKo<=200) add(c2,'Poids de la page','ok',6,6,'~'+pageKo+' Ko de HTML — léger.');
+      else if(pageKo<=600) add(c2,'Poids de la page','warn',3,6,'~'+pageKo+' Ko — un peu lourd.');
+      else add(c2,'Poids de la page','bad',0,6,'~'+pageKo+' Ko — page lourde (souvent un site type Wix).');
+      if(cssN<=4) add(c2,'Fichiers CSS','ok',4,4,cssN+' feuille(s) de style.');
+      else add(c2,'Fichiers CSS','warn',2,4,cssN+' fichiers CSS — pensez à regrouper.');
+      if(jsN<=6) add(c2,'Fichiers JavaScript','ok',4,4,jsN+' script(s) externe(s).');
+      else add(c2,'Fichiers JavaScript','warn',2,4,jsN+' scripts — peut ralentir la page.');
+      add(c2,'Optimisations vitesse (preload/preconnect)', hints>0?'ok':'warn', hints>0?4:1,4, hints>0?hints+' indice(s) de préchargement.':'Aucun preload/preconnect.');
+      add(c2,'Balises HTML obsolètes', deprecated===0?'ok':'warn', deprecated===0?3:0,3, deprecated===0?'Aucune balise dépassée.':deprecated+' balise(s) obsolète(s) (font/center…).');
+
+      // ===== CAT 3 — Mobile & PWA =====
+      var c3=cat('Mobile & PWA','📱',false);
+      var vp=meta('viewport');
+      if(/width=device-width/i.test(vp)) add(c3,'Affichage mobile (viewport)','ok',10,10,'Viewport configuré pour le mobile.');
+      else if(vp) add(c3,'Affichage mobile (viewport)','warn',5,10,'Viewport présent mais sans width=device-width.');
+      else add(c3,'Affichage mobile (viewport)','bad',0,10,'Pas de viewport — rend mal sur mobile.');
+      add(c3,'Couleur de thème (theme-color)', meta('theme-color')?'ok':'warn', meta('theme-color')?3:1,3, meta('theme-color')?'theme-color défini.':'Pas de theme-color.');
+      add(c3,'Icône iOS (apple-touch-icon)', q('link[rel="apple-touch-icon"]')?'ok':'warn', q('link[rel="apple-touch-icon"]')?3:1,3, q('link[rel="apple-touch-icon"]')?'apple-touch-icon présent.':'Pas d\'icône iOS.');
+      add(c3,'Manifeste web (PWA)', q('link[rel="manifest"]')?'ok':'warn', q('link[rel="manifest"]')?3:1,3, q('link[rel="manifest"]')?'Web manifest déclaré.':'Pas de manifest.');
+
+      // ===== CAT 4 — Données structurées & partage =====
+      var c4=cat('Données structurées & partage','🧩',false);
+      add(c4,'Données structurées (JSON-LD)', lds.length?'ok':'warn', lds.length?10:2,10, lds.length?lds.length+' bloc(s) JSON-LD'+(types.length?' : '+types.slice(0,4).join(', '):'')+'.':'Aucune donnée structurée.');
+      add(c4,'Fiche établissement (LocalBusiness)', /LocalBusiness|Organization|ProfessionalService|Person/i.test(typesStr)?'ok':'warn', /LocalBusiness|Organization|ProfessionalService|Person/i.test(typesStr)?6:1,6, /LocalBusiness|Organization|ProfessionalService|Person/i.test(typesStr)?'Entité business détectée (bon pour le local).':'Pas de schéma d\'entreprise locale.');
+      add(c4,'Fil d\'Ariane (Breadcrumb)', /BreadcrumbList/i.test(typesStr)?'ok':'warn', /BreadcrumbList/i.test(typesStr)?3:1,3, /BreadcrumbList/i.test(typesStr)?'Breadcrumb structuré présent.':'Pas de fil d\'Ariane structuré.');
+      var ogc=ometa('og:title')&&ometa('og:image')&&ometa('og:description')&&ometa('og:url');
+      var ogp=ometa('og:title')||ometa('og:image');
+      add(c4,'Open Graph (partage social)', ogc?'ok':(ogp?'warn':'bad'), ogc?8:(ogp?4:0),8, ogc?'Open Graph complet (bel aperçu Facebook/LinkedIn).':(ogp?'Open Graph incomplet.':'Pas d\'Open Graph.'));
+      add(c4,'Twitter / X Cards', q('meta[name="twitter:card"]')?'ok':'warn', q('meta[name="twitter:card"]')?4:1,4, q('meta[name="twitter:card"]')?'Twitter Cards présentes.':'Pas de Twitter Card.');
+
+      // ===== CAT 5 — Contenu & images =====
+      var c5=cat('Contenu & images','📝',false);
+      if(words>=300) add(c5,'Quantité de contenu','ok',8,8,'~'+words+' mots — assez pour se référencer.');
+      else if(words>=120) add(c5,'Quantité de contenu','warn',4,8,'~'+words+' mots — un peu léger.');
+      else add(c5,'Quantité de contenu','bad',0,8,'~'+words+' mots — trop peu de texte.');
+      if(ratio>=10) add(c5,'Ratio texte / code','ok',4,4,ratio+'% de texte — bonne densité.');
+      else add(c5,'Ratio texte / code','warn',1,4,ratio+'% de texte (beaucoup de code, peu de contenu).');
+      add(c5,'Nombre d\'images', imgs.length>0?'ok':'warn', imgs.length>0?2:1,2, imgs.length+' image(s) sur la page.');
+      if(imgs.length===0) add(c5,'Textes alternatifs (alt)','warn',4,8,'Aucune image.');
+      else { var pc=Math.round(withAlt/imgs.length*100); add(c5,'Textes alternatifs (alt)', pc>=80?'ok':(pc>=40?'warn':'bad'), pc>=80?8:(pc>=40?4:0),8, pc+'% des '+imgs.length+' images ont un alt.'); }
+      if(imgs.length===0) add(c5,'Chargement différé (lazy-load)','warn',2,4,'Aucune image.');
+      else { var lz=Math.round(withLazy/imgs.length*100); add(c5,'Chargement différé (lazy-load)', lz>=50?'ok':'warn', lz>=50?4:1,4, lz+'% des images en lazy-load (vitesse).'); }
+      add(c5,'Favicon', q('link[rel*="icon"]')?'ok':'warn', q('link[rel*="icon"]')?3:1,3, q('link[rel*="icon"]')?'Favicon déclaré.':'Pas de favicon.');
+
+      // ===== CAT 6 — Local & liens =====
+      var c6=cat('Signaux locaux & maillage','📍',false);
+      add(c6,'Téléphone affiché', phone?'ok':'warn', phone?5:1,5, phone?'Un numéro de téléphone est présent (confiance + local).':'Aucun téléphone détecté.');
+      add(c6,'Moyen de contact', contact?'ok':'warn', contact?5:0,5, contact?'Email ou formulaire de contact présent.':'Aucun moyen de contact évident.');
+      add(c6,'Réseaux sociaux liés', social?'ok':'warn', social?5:1,5, social?'Des liens vers vos réseaux sont présents.':'Aucun lien réseau social.');
+      if(intL>=10) add(c6,'Maillage interne','ok',6,6,intL+' liens internes — bonne navigation.');
+      else if(intL>=4) add(c6,'Maillage interne','warn',3,6,intL+' liens internes — à enrichir.');
+      else add(c6,'Maillage interne','bad',0,6,'Très peu de liens internes ('+intL+').');
+      add(c6,'Liens externes', extL>0?'ok':'warn', extL>0?3:1,3, extL+' lien(s) externe(s).');
+      add(c6,'Liens en nofollow', 'ok',2,2, nofo+' lien(s) en nofollow détecté(s).');
+
+      cats.forEach(function(c){ c.pct=c.m?Math.round(c.s/c.m*100):0; });
+      return {cats:cats, pct:Math.round(score/max*100)};
     }
 
-    function chkHtml(c){
-      var icons={ok:'✓',warn:'!',bad:'✕'};
-      return '<div class="chk '+c.status+'"><span class="dot">'+icons[c.status]+'</span><div><div class="t">'+c.label+'</div><div class="d">'+c.detail+'</div></div></div>';
+    function chkHtml(c){ var ic={ok:'✓',warn:'!',bad:'✕'}; return '<div class="chk '+c.status+'"><span class="dot">'+ic[c.status]+'</span><div><div class="t">'+c.label+'</div><div class="d">'+c.detail+'</div></div></div>'; }
+    function colorOf(p){ return p>=80?'var(--ok)':p>=50?'var(--warn)':'var(--bad)'; }
+    function catHtml(c){
+      var col=colorOf(c.pct);
+      return '<div class="cat-head"><span class="cn"><span class="e">'+c.emoji+'</span>'+c.name+'</span>'
+        +'<span class="right"><span class="bar"><i style="width:'+c.pct+'%;background:'+col+';"></i></span><span class="pc" style="color:'+col+'">'+c.pct+'%</span></span></div>'
+        +'<div class="checks">'+c.checks.map(chkHtml).join('')+'</div>';
     }
 
     function render(data, finalUrl){
-      var pct=data.pct, color = pct>=80?'var(--ok)' : pct>=55?'var(--warn)' : 'var(--bad)';
-      var g=document.getElementById('gauge');
-      g.style.background='conic-gradient('+color+' '+(pct*3.6)+'deg, rgba(255,255,255,.08) 0deg)';
+      var pct=data.pct, color=colorOf(pct);
+      var g=document.getElementById('gauge'); g.style.background='conic-gradient('+color+' '+(pct*3.6)+'deg, rgba(255,255,255,.08) 0deg)';
       var sv=document.getElementById('scoreVal'); sv.innerHTML=pct+'<small>/ 100</small>'; sv.style.color=color;
       document.getElementById('siteName').textContent=finalUrl.replace(/^https?:\/\//,'').replace(/\/$/,'');
       var vt=document.getElementById('verdictTitle'), vp=document.getElementById('verdictText');
       if(pct>=80){vt.textContent='Très bon score 👏';vp.textContent='Votre site est solide. Quelques détails à peaufiner pour viser le sans-faute.';}
-      else if(pct>=55){vt.textContent='Peut mieux faire 💪';vp.textContent='Des bases correctes, mais plusieurs points freinent votre visibilité. Ça se corrige vite.';}
-      else {vt.textContent='Du potentiel inexploité 🚀';vp.textContent='Votre site laisse beaucoup de visibilité sur la table. Bonne nouvelle : tout est rattrapable.';}
-      document.getElementById('checksFree').innerHTML=data.free.map(chkHtml).join('');
-      document.getElementById('checksLocked').innerHTML=data.locked.map(chkHtml).join('');
-      document.getElementById('lockCount').textContent='+'+data.locked.length+' critères détaillés';
+      else if(pct>=55){vt.textContent='Peut mieux faire 💪';vp.textContent='Des bases correctes, mais plusieurs points freinent votre visibilité.';}
+      else {vt.textContent='Du potentiel inexploité 🚀';vp.textContent='Votre site laisse beaucoup de visibilité sur la table. Tout est rattrapable.';}
+      var free=data.cats.filter(function(c){return c.free;}), locked=data.cats.filter(function(c){return !c.free;});
+      document.getElementById('freeZone').innerHTML=free.map(catHtml).join('');
+      document.getElementById('lockedZone').innerHTML=locked.map(catHtml).join('');
+      var nb=locked.reduce(function(a,c){return a+c.checks.length;},0);
+      document.getElementById('lockCount').textContent='+'+nb+' critères';
+      document.getElementById('lockCats').innerHTML=locked.map(function(c){return '<span>'+c.emoji+' '+c.name+'</span>';}).join('');
       document.getElementById('psiBtn').href='https://pagespeed.web.dev/report?url='+encodeURIComponent(finalUrl);
       res.classList.add('show'); res.scrollIntoView({behavior:'smooth',block:'start'});
     }
@@ -344,7 +376,7 @@
         render(data, url);
       }).catch(function(){
         load.classList.remove('show'); btn.disabled=false; btn.textContent='Analyser mon site →';
-        errBox.innerHTML='😕 Impossible de lire ce site automatiquement (souvent un site protégé type Cloudflare, ou hors-ligne). Pas de souci : <a href="contact.html">demandez-moi votre audit manuel gratuit</a>, je l\'analyse à la main et je vous envoie le rapport complet.';
+        errBox.innerHTML='😕 Impossible de lire ce site automatiquement (souvent un site protégé type Cloudflare, ou hors-ligne). Pas de souci : <a href="contact.html">demandez-moi votre audit manuel gratuit</a> — je l\'analyse à la main et je vous envoie le rapport complet.';
         errBox.classList.add('show'); errBox.scrollIntoView({behavior:'smooth',block:'center'});
       });
     });
