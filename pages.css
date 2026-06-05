@@ -56,6 +56,9 @@ details .a{padding:0 18px 15px;color:#c4cbdb;font-size:15px;}
 .btn-ghost{background:rgba(255,255,255,.04);border:1px solid var(--line2);color:var(--txt);box-shadow:none;}
 .relart{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);line-height:2;}
 .relart a{color:var(--cyan);font-weight:600;}
+.communes{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px;}
+.communes a{font-size:13.5px;font-weight:600;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:30px;padding:7px 14px;}
+.communes a:hover{text-decoration:none;border-color:var(--cyan);color:#fff;background:rgba(34,211,238,.08);}
 /* contact */
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
 .field{margin-bottom:15px;}
