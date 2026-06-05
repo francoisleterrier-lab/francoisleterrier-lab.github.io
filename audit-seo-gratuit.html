@@ -226,6 +226,7 @@
     function fetchText(u,validate,light){
       validate=validate||function(t){return !!t;};
       var arr=[];
+      arr.push(once(u,false,validate, light?8000:12000)); /* tentative DIRECTE sans proxy : marche pour le site lui-même (même origine) et tout site à CORS ouvert */
       if(WORKER) arr.push(once(WORKER+encodeURIComponent(u),false,validate, light?9000:13000));
       var mks= light ? [PROXIES[0],PROXIES[1],PROXIES[2]] : PROXIES;
       mks.forEach(function(mk){ arr.push(once(mk(u),false,validate, light?8000:12000)); });
@@ -482,7 +483,7 @@
         done(); render(data, url);
       }).catch(function(){
         done();
-        errBox.innerHTML='😕 Impossible de lire ce site automatiquement (souvent un site protégé type Cloudflare, ou hors-ligne). Pas de souci : <a href="contact.html">demandez-moi votre audit manuel gratuit</a> — je l\'analyse à la main et je vous envoie le rapport complet.';
+        errBox.innerHTML='😕 Lecture impossible pour le moment — soit le site est protégé (type Cloudflare), soit les services de lecture publics sont momentanément saturés. <b>Réessayez dans quelques instants.</b> Ou <a href="contact.html">demandez-moi votre audit manuel gratuit</a> — je l\'analyse à la main et je vous envoie le rapport complet.';
         errBox.classList.add('show'); errBox.scrollIntoView({behavior:'smooth',block:'center'});
       });
     });
