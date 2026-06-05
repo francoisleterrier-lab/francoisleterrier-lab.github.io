@@ -199,11 +199,13 @@
     function normalize(u){ u=(u||'').trim(); if(!u) return ''; if(!/^https?:\/\//i.test(u)) u='https://'+u; return u; }
 
     /* ---------- Récupération robuste : on lance plusieurs proxies EN PARALLÈLE et on garde la 1ʳᵉ réponse valide ---------- */
+    /* FIABILITÉ MAX : déployez un Cloudflare Worker gratuit (voir guide-proxy-audit.md) et collez son URL ci-dessous (format ".../?url="). S'il est défini, il est essayé EN PRIORITÉ — fini la dépendance aux proxies publics. */
+    var WORKER='';
     var PROXIES=[
       function(u){return 'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u);},
-      function(u){return 'https://api.allorigins.win/raw?url='+encodeURIComponent(u);},
       function(u){return 'https://corsproxy.io/?url='+encodeURIComponent(u);},
-      function(u){return 'https://thingproxy.freeboard.io/fetch/'+u;}
+      function(u){return 'https://api.cors.lol/?url='+encodeURIComponent(u);},
+      function(u){return 'https://api.allorigins.win/raw?url='+encodeURIComponent(u);}
     ];
     function JSONPROXY(u){return 'https://api.allorigins.win/get?url='+encodeURIComponent(u);}
 
@@ -223,8 +225,10 @@
     }
     function fetchText(u,validate,light){
       validate=validate||function(t){return !!t;};
-      var mks= light ? [PROXIES[0],PROXIES[1]] : PROXIES;
-      var arr=mks.map(function(mk){ return once(mk(u),false,validate, light?8000:12000); });
+      var arr=[];
+      if(WORKER) arr.push(once(WORKER+encodeURIComponent(u),false,validate, light?9000:13000));
+      var mks= light ? [PROXIES[0],PROXIES[1],PROXIES[2]] : PROXIES;
+      mks.forEach(function(mk){ arr.push(once(mk(u),false,validate, light?8000:12000)); });
       if(!light) arr.push(once(JSONPROXY(u),true,validate,12000));
       return anyOf(arr);
     }
