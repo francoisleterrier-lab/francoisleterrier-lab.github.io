@@ -59,6 +59,8 @@ details .a{padding:0 18px 15px;color:#c4cbdb;font-size:15px;}
 .communes{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px;}
 .communes a{font-size:13.5px;font-weight:600;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:30px;padding:7px 14px;}
 .communes a:hover{text-decoration:none;border-color:var(--cyan);color:#fff;background:rgba(34,211,238,.08);}
+.caselogo{margin:10px 0 18px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#f3efe6;}
+.caselogo img{display:block;width:100%;height:auto;}
 /* contact */
 .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
 .field{margin-bottom:15px;}
