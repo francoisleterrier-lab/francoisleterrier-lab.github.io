@@ -523,10 +523,47 @@
   .diag p{color:#aab2c6;max-width:56ch;margin:14px auto 24px;font-size:16.5px;}
   .diag .free{display:inline-block;background:var(--grad);color:#08111f;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-radius:30px;padding:6px 14px;margin-bottom:8px;}
   @media(max-width:760px){.why-grid{grid-template-columns:1fr;}.diag{padding:30px 22px;}}
+
+  /* ============ ANIMATIONS & INTERACTIONS (ajout) ============ */
+  /* Barre de progression de défilement en haut de page */
+  .scrollprog{position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;pointer-events:none;background:transparent;}
+  .scrollprog i{display:block;height:100%;width:0;background:var(--grad);box-shadow:0 0 12px rgba(34,211,238,.55);}
+  /* Dégradés de texte qui scintillent doucement */
+  .hero h1 span,.about-stats .v span{background-size:220% auto;animation:shimmer 7s linear infinite;}
+  @keyframes shimmer{to{background-position:220% center;}}
+  /* Orbes lumineuses qui dérivent en fond (hero + à propos) */
+  .hero::before{animation:floatA 19s ease-in-out infinite;}
+  .hero-glow2{animation:floatB 23s ease-in-out infinite;}
+  .about::before{animation:floatB 26s ease-in-out infinite;}
+  .about::after{animation:floatA 22s ease-in-out infinite;}
+  @keyframes floatA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(26px,-22px) scale(1.07);}}
+  @keyframes floatB{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-28px,20px) scale(1.05);}}
+  /* La carte visuelle du hero flotte doucement */
+  .hero-card{animation:bob 7s ease-in-out infinite;will-change:transform;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+  /* L'avatar du mini-post fait vivre son dégradé */
+  .mp-top .av{background-size:180% 180%;animation:huemove 6s ease-in-out infinite;}
+  @keyframes huemove{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  /* La carte d'offre mise en avant « respire » (halo) */
+  .card.feature{animation:featpulse 4.5s ease-in-out infinite;}
+  @keyframes featpulse{0%,100%{box-shadow:0 0 0 1px rgba(34,211,238,.12), 0 24px 60px -30px rgba(168,85,247,.6);}50%{box-shadow:0 0 0 1px rgba(34,211,238,.4), 0 26px 72px -26px rgba(168,85,247,.92);}}
+  /* Brillance qui balaie les boutons principaux au survol */
+  .btn-primary{position:relative;overflow:hidden;}
+  .btn-primary::after{content:"";position:absolute;top:0;left:-130%;width:65%;height:100%;pointer-events:none;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .6s ease;}
+  .btn-primary:hover::after{left:150%;}
+  .reveal{will-change:opacity,transform;}
+  /* Accessibilité : on coupe les animations si l'utilisateur préfère moins de mouvement */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+    .reveal{opacity:1!important;transform:none!important;}
+    .scrollprog{display:none!important;}
+  }
 </style>
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="70o1z25QpySuipMTMk7FMg" async></script>
 </head>
 <body>
+  <div class="scrollprog" aria-hidden="true"><i></i></div>
 
 <!-- ============ HEADER ============ -->
 <header class="nav" id="nav">
@@ -1104,11 +1141,35 @@
     document.getElementById('tab-web').style.display = which === 'web' ? 'grid' : 'none';
   }));
 
-  // scroll reveal
+  // scroll reveal (avec cascade : les éléments d'une même grille apparaissent l'un après l'autre)
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => {
+    try {
+      const par = el.parentElement || el;
+      const sibs = Array.prototype.filter.call(par.children, (c) => c.classList && c.classList.contains('reveal'));
+      const idx = sibs.indexOf(el);
+      if (idx > 0) el.style.transitionDelay = (Math.min(idx, 6) * 0.08) + 's';
+    } catch (_) {}
+    io.observe(el);
+  });
+
+  // barre de progression de défilement
+  (function(){
+    const bar = document.querySelector('.scrollprog i');
+    if (!bar) return;
+    let ticking = false;
+    function upd(){
+      const d = document.documentElement;
+      const max = d.scrollHeight - d.clientHeight;
+      const p = max > 0 ? Math.min(100, (d.scrollTop || document.body.scrollTop) / max * 100) : 0;
+      bar.style.width = p + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(upd); } }, {passive:true});
+    upd();
+  })();
 
   // Le formulaire est envoyé nativement vers Web3Forms (POST), qui redirige vers merci.html.
   // (Pensez à renseigner votre clé access_key dans le champ caché du formulaire.)
