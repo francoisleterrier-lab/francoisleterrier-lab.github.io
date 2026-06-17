@@ -196,6 +196,30 @@
     });
   }
 
+  /* ---------- Calendly (prise de RDV) — chargé À LA DEMANDE (RGPD : aucun script/cookie tiers tant que l'utilisateur ne clique pas) ---------- */
+  var CAL_URL = 'https://calendly.com/fl-conceptimmoplus/30min';
+  function openCalendly(url) {
+    url = url || CAL_URL;
+    function go() { if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: url }); }
+    if (window.Calendly) { go(); return; }
+    if (!document.getElementById('fl-cal-css')) {
+      document.head.appendChild(el('link', { id: 'fl-cal-css', rel: 'stylesheet', href: 'https://assets.calendly.com/assets/external/widget.css' }));
+    }
+    var s = document.getElementById('fl-cal-js');
+    if (!s) { s = el('script', { id: 'fl-cal-js', src: 'https://assets.calendly.com/assets/external/widget.js' }); s.addEventListener('load', go); document.head.appendChild(s); }
+    else { s.addEventListener('load', go); }
+  }
+  window.flOpenCalendly = openCalendly;
+  function initCalendly() {
+    var btns = document.querySelectorAll('[data-fl-calendly]');
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCalendly(b.getAttribute('data-fl-calendly') || b.getAttribute('href') || CAL_URL);
+      });
+    });
+  }
+
   /* ---------- Lightbox : aperçu live des modèles ---------- */
   function initLightbox() {
     var cards = document.querySelectorAll('[data-fl-demo]');
@@ -378,6 +402,7 @@
   /* ---------- init ---------- */
   function init() {
     initCopy();
+    initCalendly();
     initLightbox();
     if (isHome && !noAuto) { armHello(); armDiagnostic(); armExit(); }
   }
