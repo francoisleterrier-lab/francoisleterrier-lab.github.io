@@ -69,10 +69,11 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
    normale, zéro régression. Header + logo PERSISTENT et morphent.
    ===================================================================== */
 @view-transition{ navigation:auto; }
-/* éléments PERSISTANTS qui glissent d'une page à l'autre (restent fixes) */
+/* éléments PERSISTANTS qui glissent d'une page à l'autre (restent fixes).
+   NB : on NE nomme PAS le footer — sur une page courte (réalisations) il est
+   visible et "streakerait" vers le bas en allant sur une page plus longue. */
 .nav, .top{ view-transition-name:site-header; }
 .nav .logo-badge, .top .brand img{ view-transition-name:site-logo; }
-footer{ view-transition-name:site-footer; }
 /* tout le RESTE du contenu morphe : l'ancienne page recule (zoom+fondu),
    la nouvelle monte en place -> effet « app » sur toutes les pages */
 @keyframes fl-page-out{ to{ opacity:0; transform:scale(1.012); } }
