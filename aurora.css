@@ -24,6 +24,33 @@ body::before{
 main{background:transparent !important;}
 footer{background:rgba(5,6,12,.55) !important;}
 
+/* =====================================================================
+   FUSION « SANS COUTURE » DES SECTIONS (global, toutes pages).
+   L'aurore (body::before) coule en continu du haut jusqu'au pied : on
+   neutralise les filets 1px et les bandes de fond ENTRE sections.
+   On ne cible QUE des sélecteurs de SECTION — jamais les composants
+   internes (.card/.svc/.why-card/.field/boutons/logo/.faqs/.relart/.links).
+   ===================================================================== */
+
+/* 1) Fonds de section transparents -> l'aurore transparaît partout.
+      Inclut hero/about (qui étaient en var(--bg0) opaque et la masquaient). */
+.hero, .about, .strip, .proc, .zone, .contact{
+  background:transparent !important;
+}
+
+/* 2) Suppression des filets/coutures hairline ENTRE sections
+      (border-width:0 — on ne touche pas aux bordures de composants). */
+.strip, .proc, .zone, .about, .contact{
+  border-top-width:0 !important;
+  border-bottom-width:0 !important;
+}
+.hero{ border-bottom-width:0 !important; }        /* sous-pages/blog : filet hero->main */
+footer, footer.ft{ border-top-width:0 !important; }
+footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05060c inline */
+
+/* 3) Barre de nav collante : séparation CONSERVÉE mais adoucie (UX au scroll). */
+.top{ border-bottom-color:rgba(255,255,255,.05) !important; }
+
 @media (prefers-reduced-motion:reduce){
   body::before{animation:none !important;}
 }
