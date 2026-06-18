@@ -4,6 +4,10 @@
    lentement, derrière le contenu, jusqu'au pied de page.
    a11y : animation coupée si prefers-reduced-motion. CLS 0 (fixed + transform).
    ===================================================================== */
+/* Canvas sombre dès le 1er pixel : évite tout flash blanc entre deux pages
+   (le <html> est blanc par défaut ; pendant une View Transition cross-document
+   ce blanc pouvait apparaître une frame au changement de page). */
+html{ background:#06070e; }
 body::before{
   content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
   background:
