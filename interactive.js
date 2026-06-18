@@ -384,6 +384,71 @@
     });
   }
 
+  /* ---------- 8. Bannière « parcours adapté » via lien (?metier=&ville=) ---------- */
+  var BANNER_M = {
+    boulangerie: 'boulangerie', restaurant: 'restaurant', coiffure: 'salon de coiffure',
+    plombier: 'entreprise de plomberie', electricien: "entreprise d'électricité",
+    'bien-etre': 'activité bien-être', immobilier: 'agence immobilière',
+    commerce: 'commerce', artisan: 'entreprise artisanale'
+  };
+  function initBanner() {
+    var s = window.location.search; if (!s) return;
+    var p = {}, parts = s.substring(1).split('&'), i;
+    for (i = 0; i < parts.length; i++) { var kv = parts[i].split('='); if (kv[0]) { try { p[decodeURIComponent(kv[0])] = decodeURIComponent((kv[1] || '').replace(/\+/g, ' ')); } catch (e) {} } }
+    var mlabel = BANNER_M[(p.metier || '').toLowerCase()];
+    var ville = (p.ville || '').replace(/[<>&"`]/g, '').replace(/\s+/g, ' ').slice(0, 32).replace(/^ +| +$/g, '');
+    if (!mlabel && !ville) return;
+    try { if (window.sessionStorage && sessionStorage.getItem('fl-bn')) return; } catch (e2) {}
+    var msg;
+    if (mlabel && ville) msg = 'Community management & création de site pour votre ' + mlabel + ' à ' + ville + ' — vous êtes au bon endroit.';
+    else if (mlabel) msg = 'Spécial ' + mlabel + ' : community management & création de site, près de chez vous.';
+    else msg = 'Vous êtes à ' + ville + ' ? Votre Community Manager & créateur de sites du secteur.';
+    var bar = el('div', { 'class': 'fl-banner', role: 'region', 'aria-label': 'Message de bienvenue' });
+    var span = el('span'); span.textContent = '👋 ' + msg + ' ';
+    var cta = el('a', { 'class': 'cta', href: '#contact' }, 'Diagnostic gratuit →');
+    var x = el('button', { 'class': 'x', type: 'button', 'aria-label': 'Fermer ce message' }, '&times;');
+    x.addEventListener('click', function () { try { sessionStorage.setItem('fl-bn', '1'); } catch (e3) {} if (bar.parentNode) bar.parentNode.removeChild(bar); });
+    bar.appendChild(span); bar.appendChild(cta); bar.appendChild(x);
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  /* ---------- 9. Estimateur de devis transparent (tarifs RÉELS « à partir de ») ---------- */
+  var EST_SITE = { express: 590, vitrine: 1400, surmesure: 2500 };
+  var EST_SOCIAL = { essentiel: 180, croissance: 350, premium: 520 };
+  function eur(n) { return ('' + n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function initEstim() {
+    var root = document.getElementById('estimateur');
+    if (!root || root.getAttribute('data-est-init')) return;
+    root.setAttribute('data-est-init', '1');
+    var siteBlock = root.querySelector('[data-est-site]'), socialBlock = root.querySelector('[data-est-social]');
+    var out = root.querySelector('#est-out'), status = root.querySelector('#est-status');
+    if (!out) return;
+    function val(sel, d) { var e = root.querySelector(sel); return e ? e.value : d; }
+    function besoin() { var r = root.querySelector('input[name="est-besoin"]:checked'); return r ? r.value : 'les-deux'; }
+    function maint() { var c = root.querySelector('#est-maint'); return !!(c && c.checked); }
+    function line(label, value) { var row = el('div', { 'class': 'est-line' }), a = el('span'), b = el('strong'); a.textContent = label; b.textContent = value; row.appendChild(a); row.appendChild(b); return row; }
+    function render() {
+      var b = besoin(), wantSite = b !== 'reseaux', wantSoc = b !== 'site';
+      if (siteBlock) siteBlock.hidden = !wantSite;
+      if (socialBlock) socialBlock.hidden = !wantSoc;
+      out.innerHTML = '';
+      if (wantSite) { out.appendChild(line('Création du site', 'à partir de ' + eur(EST_SITE[val('#est-site-type', 'vitrine')]) + ' €')); if (maint()) out.appendChild(line('Maintenance du site', '39 €/mois')); }
+      if (wantSoc) { out.appendChild(line('Réseaux sociaux', 'à partir de ' + eur(EST_SOCIAL[val('#est-social-f', 'croissance')]) + ' €/mois')); }
+    }
+    var dbt;
+    function onChange() { render(); if (!status) return; clearTimeout(dbt); dbt = setTimeout(function () { status.textContent = 'Estimation mise à jour.'; }, 600); }
+    Array.prototype.forEach.call(root.querySelectorAll('input,select'), function (e) { e.addEventListener('change', onChange); });
+    render();
+    var send = root.querySelector('[data-est-send]');
+    if (send) send.addEventListener('click', function (e) {
+      e.preventDefault();
+      var b = besoin(), parts = [], bl = b === 'site' ? 'Un site internet' : (b === 'reseaux' ? 'Réseaux sociaux' : 'Les deux');
+      if (b !== 'reseaux') parts.push('site ' + val('#est-site-type', 'vitrine') + ' (à partir de ' + eur(EST_SITE[val('#est-site-type', 'vitrine')]) + ' €)' + (maint() ? ' + maintenance' : ''));
+      if (b !== 'site') parts.push('réseaux ' + val('#est-social-f', 'croissance') + ' (à partir de ' + eur(EST_SOCIAL[val('#est-social-f', 'croissance')]) + ' €/mois)');
+      openDrawer({ besoin: bl, msg: 'Bonjour, voici ma configuration estimée via le simulateur : ' + parts.join(' ; ') + '. J\'aimerais un devis précis.' });
+    });
+  }
+
   /* ---------- init ---------- */
   function init() {
     initCounters();
@@ -393,6 +458,8 @@
     initDrawer();
     initSerp();
     initStudio();
+    initBanner();
+    initEstim();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

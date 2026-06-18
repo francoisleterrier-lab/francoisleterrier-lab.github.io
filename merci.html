@@ -26,6 +26,9 @@
   a.btn:hover{transform:translateY(-2px);}
   .small{margin-top:20px;font-size:13px;color:#8b93a8;}
   .small a{color:#22d3ee;text-decoration:none;}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .btn2{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);color:#e7ecf6;font-family:'Manrope',sans-serif;font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:30px;text-decoration:none;cursor:pointer;transition:border-color .18s,transform .18s;}
+  .btn2:hover{border-color:#22d3ee;transform:translateY(-2px);}
 </style>
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="70o1z25QpySuipMTMk7FMg" async></script>
 </head>
@@ -33,10 +36,34 @@
   <div class="box">
     <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
     <h1>Merci, c'est envoyé&nbsp;!</h1>
-    <p>Votre message est bien arrivé. Je vous réponds en général sous <b>48&nbsp;h</b>. À très vite pour parler de votre projet&nbsp;!</p>
-    <a class="btn" href="/">← Retour à l'accueil</a>
+    <p>Votre message est bien arrivé. Je vous réponds <b>sous 48&nbsp;h ouvrées</b> en moyenne. À très vite pour parler de votre projet&nbsp;!</p>
+    <div class="btns">
+      <a class="btn" href="https://calendly.com/fl-conceptimmoplus/30min" target="_blank" rel="noopener">📅 Réserver un créneau</a>
+      <button type="button" class="btn2" id="icsBtn">🔔 Ajouter un rappel</button>
+      <a class="btn2" href="/">← Accueil</a>
+    </div>
     <p class="small">Une urgence&nbsp;? Appelez le <a href="tel:+33698200208">06 98 20 02 08</a></p>
   </div>
+<script>
+  (function () {
+    var b = document.getElementById('icsBtn');
+    if (!b) return;
+    b.addEventListener('click', function () {
+      function z(n) { return (n < 10 ? '0' : '') + n; }
+      function loc(x) { return x.getFullYear() + z(x.getMonth() + 1) + z(x.getDate()) + 'T' + z(x.getHours()) + z(x.getMinutes()) + '00'; }
+      function utc(x) { return x.getUTCFullYear() + z(x.getUTCMonth() + 1) + z(x.getUTCDate()) + 'T' + z(x.getUTCHours()) + z(x.getUTCMinutes()) + '00Z'; }
+      var d = new Date(); d.setDate(d.getDate() + 2); d.setHours(10, 0, 0, 0);
+      var end = new Date(d.getTime() + 1800000);
+      var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Francois Leterrier//FR', 'BEGIN:VEVENT', 'UID:' + loc(d) + '-fl@francoisleterrier.fr', 'DTSTAMP:' + utc(new Date()), 'DTSTART:' + loc(d), 'DTEND:' + loc(end), 'SUMMARY:Relancer François Leterrier si pas de nouvelles', 'DESCRIPTION:Vous avez contacté François Leterrier (Community Manager & création de sites). Le relancer si besoin. Tél : 06 98 20 02 08', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+      a.download = 'rappel-francois-leterrier.ics';
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 100);
+      b.textContent = '✓ Rappel téléchargé';
+    });
+  })();
+</script>
 <script src="/consent.js" defer></script>
 </body>
 </html>

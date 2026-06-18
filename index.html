@@ -915,6 +915,50 @@
   </div>
 </section>
 
+<!-- ============ ESTIMATEUR DE DEVIS ============ -->
+<section class="section estim" id="estimateur">
+  <div class="wrap">
+    <p class="eyebrow reveal">Estimation transparente</p>
+    <h2 class="reveal">Combien pour mon projet ? Estimez en 10 secondes</h2>
+    <p class="estim-sub reveal">Choisissez votre besoin : je vous donne une fourchette claire, à partir de mes tarifs réels. <strong>Estimation indicative — le devis précis vient après notre échange.</strong></p>
+    <div class="estim-wrap reveal">
+      <form class="estim-form" aria-label="Estimer mon projet">
+        <fieldset>
+          <legend>J'ai besoin de…</legend>
+          <div class="fl-pills" role="radiogroup" aria-label="J'ai besoin de">
+            <label class="fl-pill"><input type="radio" name="est-besoin" value="les-deux" checked><span>Les deux</span></label>
+            <label class="fl-pill"><input type="radio" name="est-besoin" value="site"><span>Un site</span></label>
+            <label class="fl-pill"><input type="radio" name="est-besoin" value="reseaux"><span>Réseaux sociaux</span></label>
+          </div>
+        </fieldset>
+        <div class="fl-field" data-est-site>
+          <label for="est-site-type">Type de site</label>
+          <select id="est-site-type">
+            <option value="express">Site une page (Express)</option>
+            <option value="vitrine" selected>Site vitrine (jusqu'à 5 pages)</option>
+            <option value="surmesure">Sur-mesure (e-commerce, réservation…)</option>
+          </select>
+          <label class="est-check"><input type="checkbox" id="est-maint"> Ajouter la maintenance &amp; les mises à jour</label>
+        </div>
+        <div class="fl-field" data-est-social>
+          <label for="est-social-f">Formule réseaux sociaux</label>
+          <select id="est-social-f">
+            <option value="essentiel">Essentiel — 2 publications/mois</option>
+            <option value="croissance" selected>Croissance — 4 publications/mois</option>
+            <option value="premium">Premium — 4 pubs + vidéo/Reel</option>
+          </select>
+        </div>
+      </form>
+      <div class="estim-result">
+        <div id="est-out"></div>
+        <p class="estim-disclaimer">Tarifs « à partir de » · hébergement &amp; nom de domaine en sus · TVA non applicable (art. 293 B du CGI). <a href="tarifs.html">Voir le détail des tarifs →</a></p>
+        <button type="button" class="btn btn-primary" data-est-send>Envoyer cette config →</button>
+        <p id="est-status" class="sr-only" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ À PROPOS ============ -->
 <section class="section about" id="apropos">
   <div class="wrap about-in">

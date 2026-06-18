@@ -194,3 +194,33 @@
 .ms-foot{text-align:center;font-size:10.5px;color:#9aa2b4;padding:14px 20px 22px;border-top:1px solid #eef0f4;}
 .studio-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px;}
 .studio-note{font-size:11.5px;color:#97a1b8;margin:0;}
+
+/* ---------- Bannière « parcours adapté » (lien ?metier=&ville=) ---------- */
+.fl-banner{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;padding:10px 40px 10px 18px;background:linear-gradient(120deg,rgba(34,211,238,.16),rgba(168,85,247,.16));border-bottom:1px solid rgba(255,255,255,.12);font-family:'Manrope',system-ui,sans-serif;font-size:13.5px;color:#e7ecf6;position:relative;z-index:6;}
+.fl-banner .cta{color:#22d3ee;font-weight:700;text-decoration:none;white-space:nowrap;}
+.fl-banner .cta:hover{text-decoration:underline;}
+.fl-banner .x{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#97a1b8;font-size:20px;line-height:1;cursor:pointer;padding:0 6px;}
+.fl-banner .x:hover{color:#fff;}
+@media (max-width:600px){.fl-banner{font-size:12.5px;}}
+
+/* ---------- Estimateur de devis transparent ---------- */
+.estim-sub{max-width:680px;}
+.estim-sub strong{color:#fff;}
+.estim-wrap{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:28px;align-items:start;}
+@media (max-width:760px){.estim-wrap{grid-template-columns:1fr;}}
+.estim-form{display:flex;flex-direction:column;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px;}
+.estim-form fieldset{border:0;padding:0;margin:0;}
+.estim-form legend{font-size:13px;font-weight:600;color:#cfd6e6;margin-bottom:8px;padding:0;}
+.estim-form label{font-size:13px;font-weight:600;color:#cfd6e6;}
+.estim-form select{width:100%;margin-top:6px;background:#0b0f1c;border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:11px 13px;color:#fff;font-family:'Manrope',system-ui,sans-serif;font-size:14.5px;outline:none;}
+.estim-form select:focus{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.14);}
+.estim-form .fl-field[hidden]{display:none;}
+.est-check{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-weight:500;color:#c4cbdb;cursor:pointer;}
+.est-check input{width:16px;height:16px;accent-color:#22d3ee;}
+.estim-result{background:linear-gradient(160deg,rgba(34,211,238,.08),rgba(168,85,247,.08));border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px;}
+.est-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14.5px;color:#c4cbdb;}
+.est-line:first-child{padding-top:0;}
+.est-line:last-of-type{border-bottom:0;}
+.est-line strong{color:#fff;font-size:16px;white-space:nowrap;font-family:'Bricolage Grotesque','Manrope',sans-serif;}
+.estim-disclaimer{font-size:11.5px;color:#97a1b8;margin:14px 0 18px;line-height:1.55;}
+.estim-disclaimer a{color:#22d3ee;}
