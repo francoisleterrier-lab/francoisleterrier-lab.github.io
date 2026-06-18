@@ -12,7 +12,7 @@ a{color:var(--cyan);text-decoration:none;}
 .back:hover{border-color:var(--cyan);}
 .hero{position:relative;overflow:hidden;padding:46px 0 50px;border-bottom:1px solid var(--line);}
 .hero::before{content:"";position:absolute;top:-40%;right:-10%;width:560px;height:560px;background:radial-gradient(circle,rgba(34,211,238,.25),transparent 60%);filter:blur(12px);}
-.hero::after{content:"";position:absolute;bottom:-55%;left:-12%;width:520px;height:520px;background:radial-gradient(circle,rgba(168,85,247,.22),transparent 62%);filter:blur(14px);}
+.hero::after{display:none;} /* halo bas supprimé : clippé au bord -> couture. Aurore globale continue. */
 .hero .wrap{position:relative;z-index:2;}
 .tagloc{display:inline-block;font-family:'Bricolage Grotesque';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:700;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3);border-radius:30px;padding:7px 14px;margin-bottom:16px;}
 h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(30px,6vw,42px);line-height:1.04;letter-spacing:-.02em;max-width:18ch;color:#fff;}

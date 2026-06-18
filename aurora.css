@@ -51,6 +51,12 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
 /* 3) Barre de nav collante : séparation CONSERVÉE mais adoucie (UX au scroll). */
 .top{ border-bottom-color:rgba(255,255,255,.05) !important; }
 
-@media (prefers-reduced-motion:reduce){
+/* 4) Halos décoratifs de SECTION supprimés : ils étaient positionnés en débord
+      (top/bottom négatifs) puis CLIPPÉS par overflow:hidden au bord de la
+      section -> « marche de lumière » visible entre deux sections.
+      L'aurore globale (fixe, continue) éclaire désormais seule, sans couture.
+      (On ne touche pas aux halos de COMPOSANTS : .contact-info, .diag, cartes…) */
+.hero::before, .hero-glow2,
+.about::before, .about::after{ display:none !important; }
   body::before{animation:none !important;}
 }

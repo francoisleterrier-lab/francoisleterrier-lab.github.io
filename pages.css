@@ -15,7 +15,7 @@ a{color:var(--cyan);text-decoration:none;}a:hover{text-decoration:underline;}
 .burger{display:none;}
 .hero{position:relative;overflow:hidden;padding:44px 0 46px;border-bottom:1px solid var(--line);}
 .hero::before{content:"";position:absolute;top:-42%;right:-10%;width:560px;height:560px;background:radial-gradient(circle,rgba(34,211,238,.24),transparent 60%);filter:blur(12px);}
-.hero::after{content:"";position:absolute;bottom:-55%;left:-12%;width:520px;height:520px;background:radial-gradient(circle,rgba(168,85,247,.2),transparent 62%);filter:blur(14px);}
+.hero::after{display:none;} /* halo bas supprimé : clippé au bord -> couture. Aurore globale continue. */
 .hero .wrap{position:relative;z-index:2;}
 .crumb{font-size:13px;color:var(--muted);margin-bottom:14px;}
 .crumb a{color:var(--muted);}
