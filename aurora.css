@@ -58,5 +58,23 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
       (On ne touche pas aux halos de COMPOSANTS : .contact-info, .diag, cartes…) */
 .hero::before, .hero-glow2,
 .about::before, .about::after{ display:none !important; }
+
+@media (prefers-reduced-motion:reduce){
   body::before{animation:none !important;}
+}
+
+/* =====================================================================
+   TRANSITIONS DE PAGE « type app » (View Transitions API, cross-document).
+   Amélioration progressive : navigateurs non compatibles -> navigation
+   normale, zéro régression. Header + logo PERSISTENT et morphent.
+   ===================================================================== */
+@view-transition{ navigation:auto; }
+.nav, .top{ view-transition-name:site-header; }
+.nav .logo-badge, .top .brand img{ view-transition-name:site-logo; }
+::view-transition-old(root),
+::view-transition-new(root){ animation-duration:.34s; animation-timing-function:cubic-bezier(.4,0,.2,1); }
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){ animation:none !important; }
 }
