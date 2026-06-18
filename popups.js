@@ -70,7 +70,9 @@
     void ov.offsetWidth; // reflow -> transition
     ov.classList.add('open');
     var modal = ov.querySelector('.fl-modal');
-    if (modal) { modal.setAttribute('tabindex', '-1'); modal.focus(); }
+    var af = ov.querySelector('[data-fl-autofocus]');
+    if (af) af.focus();
+    else if (modal) { modal.setAttribute('tabindex', '-1'); modal.focus(); }
     else (focusables(ov)[0] || ov).focus();
     keyHandler = function (e) {
       if (e.key === 'Escape' || e.keyCode === 27) { closeModal(); return; }
@@ -171,6 +173,8 @@
     t.addEventListener('focusout', resume);
   }
   window.flToast = toast;
+  /* Coeur modale exposé pour interactive.js (palette ⌘K, quiz, drawer) — réutilise focus trap, verrou, inert, prefers-reduced-motion */
+  window.FLModal = { open: openModal, close: closeModal, build: buildModal, toast: toast };
 
   /* ---------- copier (tél / email) ---------- */
   function copyText(txt, okMsg) {

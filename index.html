@@ -46,6 +46,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-400-latin-17.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
 <link rel="stylesheet" href="/popups.css">
+<link rel="stylesheet" href="/interactive.css">
 
 <!-- ============ DONNÉES STRUCTURÉES — SEO LOCAL + GEO (graph consolidé) ============ -->
 <!-- Fiche Google Business reliée via sameAs (kgmid /g/11z8h9z1wb). -->
@@ -603,6 +604,7 @@
         <a class="btn btn-ghost" href="#tarifs">Voir les tarifs</a>
         <a class="btn btn-ghost" href="https://calendly.com/fl-conceptimmoplus/30min" data-fl-calendly="https://calendly.com/fl-conceptimmoplus/30min" target="_blank" rel="noopener">📅 Réserver un créneau</a>
       </div>
+      <button class="fl-kbtn" type="button" data-fl-palette aria-label="Recherche rapide sur le site" style="margin-top:16px;">🔎 Naviguer sur le site <kbd>⌘K</kbd></button>
       <div class="hero-trust">
         <span>✓ Premier échange <b>offert</b></span>
         <span>✓ Sans engagement</span>
@@ -872,10 +874,10 @@
       <p>Je gère notamment le site internet et les réseaux sociaux de <b>Concept Immo Plus</b>, agence immobilière du Sud-Toulousain.</p>
       <p style="margin-top:4px;"><a href="a-propos.html" style="color:var(--cyan);font-weight:700;">En savoir plus sur François Leterrier →</a></p>
       <div class="about-stats">
-        <div class="s"><div class="v">2<span>×</span> métiers</div><div class="l">Réseaux sociaux + création web réunis</div></div>
-        <div class="s"><div class="v">100<span>%</span> local</div><div class="l">Toulouse &amp; Sud-Toulousain</div></div>
-        <div class="s"><div class="v">0<span>€</span></div><div class="l">Premier échange toujours offert</div></div>
-        <div class="s"><div class="v">48<span>h</span></div><div class="l">Délai de réponse moyen</div></div>
+        <div class="s"><div class="v"><span data-count="2">2</span><span>×</span> métiers</div><div class="l">Réseaux sociaux + création web réunis</div></div>
+        <div class="s"><div class="v"><span data-count="100">100</span><span>%</span> local</div><div class="l">Toulouse &amp; Sud-Toulousain</div></div>
+        <div class="s"><div class="v"><span data-count="0">0</span><span>€</span></div><div class="l">Premier échange toujours offert</div></div>
+        <div class="s"><div class="v"><span data-count="48">48</span><span>h</span></div><div class="l">Délai de réponse moyen</div></div>
       </div>
     </div>
   </div>
@@ -919,7 +921,27 @@
       <p>Un community manager <b>local</b>, qui connaît votre bassin de clientèle et se déplace près de chez vous — ou travaille à distance, selon ce qui vous arrange.</p>
     </div>
     <div class="reveal">
-      <div class="towns">
+      <div class="fl-zonemap" role="group" aria-label="Carte indicative de la zone d'intervention — cliquez une commune">
+        <div class="grid" aria-hidden="true"></div>
+        <svg class="river" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M55 -2 C50 16, 43 30, 46 46 C49 64, 50 80, 53 102"/></svg>
+        <span class="fl-pin tlse" style="left:57%;top:7%;">Toulouse</span>
+        <a class="fl-pin" style="left:52%;top:20%;" href="community-manager-portet-sur-garonne.html">Portet-sur-Garonne</a>
+        <a class="fl-pin" style="left:29%;top:24%;" href="community-manager-fonsorbes.html">Fonsorbes</a>
+        <a class="fl-pin" style="left:41%;top:31%;" href="community-manager-seysses.html">Seysses</a>
+        <a class="fl-pin" style="left:16%;top:37%;" href="community-manager-saint-lys.html">Saint-Lys</a>
+        <a class="fl-pin" style="left:11%;top:53%;" href="community-manager-rieumes.html">Rieumes</a>
+        <a class="fl-pin" style="left:53%;top:33%;" href="community-manager-eaunes.html">Eaunes</a>
+        <a class="fl-pin" style="left:40%;top:42%;" href="community-manager-muret.html">Muret</a>
+        <a class="fl-pin base" style="left:48%;top:52%;" href="community-manager-lavernose-lacasse.html">Lavernose-Lacasse</a>
+        <a class="fl-pin" style="left:38%;top:62%;" href="community-manager-le-fauga.html">Le Fauga</a>
+        <a class="fl-pin" style="left:57%;top:61%;" href="community-manager-longages.html">Longages</a>
+        <a class="fl-pin" style="left:76%;top:55%;" href="community-manager-auterive.html">Auterive</a>
+        <a class="fl-pin" style="left:48%;top:71%;" href="community-manager-noe.html">Noé</a>
+        <a class="fl-pin" style="left:40%;top:79%;" href="community-manager-capens.html">Capens</a>
+        <a class="fl-pin" style="left:53%;top:85%;" href="community-manager-carbonne.html">Carbonne</a>
+        <a class="fl-pin" style="left:68%;top:87%;" href="community-manager-lezat-sur-leze.html">Lézat-sur-Lèze</a>
+      </div>
+      <div class="towns fl-zone-mob">
         <a class="town" href="community-manager-lavernose-lacasse.html">Lavernose-Lacasse</a>
         <a class="town" href="community-manager-muret.html">Muret</a>
         <a class="town" href="community-manager-carbonne.html">Carbonne</a>
@@ -986,6 +1008,10 @@
       <h2>Recevez votre diagnostic en ligne <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">gratuit</span>.</h2>
       <p>Je passe au crible votre présence actuelle — <b>réseaux sociaux + Google</b> — et je vous renvoie <b>3 actions concrètes</b> pour gagner en visibilité. Que vous travailliez avec moi ou non.</p>
       <a class="btn btn-primary" href="#contact">Demander mon diagnostic gratuit →</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;">
+        <button class="btn btn-ghost" type="button" data-fl-quiz>🧭 Trouver mon service en 30 s</button>
+        <button class="btn btn-ghost" type="button" data-fl-drawer>⚡ Devis express</button>
+      </div>
       <p style="margin:16px auto 0;font-size:14px;color:#aab2c6;">Ou testez-vous gratuitement&nbsp;: <a href="audit-seo-gratuit.html" style="color:var(--cyan);font-weight:700;">audit SEO de votre site →</a> &nbsp;·&nbsp; <a href="audit-reseaux-sociaux.html" style="color:var(--cyan);font-weight:700;">audit de vos réseaux sociaux →</a></p>
     </div>
   </div>
@@ -1181,5 +1207,6 @@
 </script>
 <script src="/consent.js" defer></script>
 <script src="/popups.js" defer></script>
+<script src="/interactive.js" defer></script>
 </body>
 </html>
