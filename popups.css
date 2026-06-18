@@ -71,6 +71,13 @@
 .fl-copy{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#97a1b8;cursor:pointer;font-size:13px;margin-left:6px;vertical-align:middle;}
 .fl-copy:hover{border-color:#22d3ee;color:#22d3ee;}
 
+/* ---- Placeholder du calendrier Calendly inline (chargé au clic) ---- */
+.fl-cal-ph{font-family:'Manrope',system-ui,sans-serif;background:rgba(14,19,34,.6);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:38px 26px;text-align:center;}
+.fl-cal-ph-ic{font-size:38px;line-height:1;margin-bottom:10px;}
+.fl-cal-ph h3{font-family:'Bricolage Grotesque','Manrope',sans-serif;font-weight:800;color:#fff;font-size:20px;margin:0 0 8px;}
+.fl-cal-ph p{color:#97a1b8;font-size:14px;line-height:1.6;max-width:48ch;margin:0 auto 18px;}
+.fl-cal-ph .fl-btn{display:inline-flex;}
+
 @media (max-width:768px){
   .fl-frame-wrap iframe{height:56vh;}
 }

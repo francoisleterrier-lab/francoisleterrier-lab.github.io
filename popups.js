@@ -198,16 +198,19 @@
 
   /* ---------- Calendly (prise de RDV) — chargé À LA DEMANDE (RGPD : aucun script/cookie tiers tant que l'utilisateur ne clique pas) ---------- */
   var CAL_URL = 'https://calendly.com/fl-conceptimmoplus/30min';
-  function openCalendly(url) {
-    url = url || CAL_URL;
-    function go() { if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: url }); }
-    if (window.Calendly) { go(); return; }
+  function loadCalendlyAssets(cb) {
+    if (window.Calendly) { cb(); return; }
     if (!document.getElementById('fl-cal-css')) {
       document.head.appendChild(el('link', { id: 'fl-cal-css', rel: 'stylesheet', href: 'https://assets.calendly.com/assets/external/widget.css' }));
     }
+    function ready() { if (window.Calendly) cb(); }
     var s = document.getElementById('fl-cal-js');
-    if (!s) { s = el('script', { id: 'fl-cal-js', src: 'https://assets.calendly.com/assets/external/widget.js' }); s.addEventListener('load', go); document.head.appendChild(s); }
-    else { s.addEventListener('load', go); }
+    if (!s) { s = el('script', { id: 'fl-cal-js', src: 'https://assets.calendly.com/assets/external/widget.js' }); s.addEventListener('load', ready); document.head.appendChild(s); }
+    else { s.addEventListener('load', ready); ready(); }
+  }
+  function openCalendly(url) {
+    url = url || CAL_URL;
+    loadCalendlyAssets(function () { if (window.Calendly && window.Calendly.initPopupWidget) window.Calendly.initPopupWidget({ url: url }); });
   }
   window.flOpenCalendly = openCalendly;
   function initCalendly() {
@@ -216,6 +219,29 @@
       b.addEventListener('click', function (e) {
         e.preventDefault();
         openCalendly(b.getAttribute('data-fl-calendly') || b.getAttribute('href') || CAL_URL);
+      });
+    });
+  }
+  /* Calendrier Calendly INLINE, chargé à la demande (RGPD : aucun script/cookie tiers avant le clic) */
+  function initCalendlyInline() {
+    var holders = document.querySelectorAll('[data-fl-cal-inline]');
+    Array.prototype.forEach.call(holders, function (h) {
+      var url = h.getAttribute('data-fl-cal-inline') || CAL_URL;
+      var ph = el('div', { 'class': 'fl-cal-ph' });
+      ph.appendChild(el('div', { 'class': 'fl-cal-ph-ic', 'aria-hidden': 'true' }, '📅'));
+      ph.appendChild(el('h3', null, 'Réservez votre créneau de 30 min'));
+      ph.appendChild(el('p', null, 'Choisissez l\'horaire qui vous arrange. Le calendrier s\'affiche à votre demande — aucun cookie Calendly n\'est chargé avant votre clic.'));
+      var btn = el('button', { 'class': 'fl-btn fl-btn-primary', type: 'button' }, 'Afficher les créneaux disponibles');
+      ph.appendChild(btn);
+      h.appendChild(ph);
+      btn.addEventListener('click', function () {
+        btn.disabled = true; btn.textContent = 'Chargement du calendrier…';
+        loadCalendlyAssets(function () {
+          h.innerHTML = '';
+          var w = el('div', { 'class': 'calendly-inline-widget', style: 'min-width:320px;height:700px;' });
+          h.appendChild(w);
+          if (window.Calendly && window.Calendly.initInlineWidget) window.Calendly.initInlineWidget({ url: url, parentElement: w });
+        });
       });
     });
   }
@@ -403,6 +429,7 @@
   function init() {
     initCopy();
     initCalendly();
+    initCalendlyInline();
     initLightbox();
     if (isHome && !noAuto) { armHello(); armDiagnostic(); armExit(); }
   }
