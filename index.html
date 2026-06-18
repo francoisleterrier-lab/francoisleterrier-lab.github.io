@@ -684,6 +684,63 @@
   </div>
 </section>
 
+<!-- ============ STUDIO LIVE (mini-site en direct) ============ -->
+<section class="section studio" id="studio-live">
+  <div class="wrap">
+    <p class="eyebrow reveal">Démo en direct · votre site en 10 secondes</p>
+    <h2 class="reveal">Regardez votre site se construire — maintenant</h2>
+    <p class="studio-sub reveal">Tapez le nom de votre commerce, choisissez votre activité et une couleur : le site se recompose en direct. <strong>Maquette de démonstration générée dans votre navigateur — votre vrai site sera unique et fait sur-mesure.</strong></p>
+    <div class="studio-wrap reveal">
+      <form class="studio-form" autocomplete="off" aria-label="Personnaliser la maquette">
+        <div class="fl-field"><label for="st-nom">Nom du commerce</label><input id="st-nom" type="text" maxlength="34" value="Boulangerie Martin"></div>
+        <div class="fl-field"><label for="st-metier">Activité</label>
+          <select id="st-metier">
+            <option value="boulangerie" selected>Boulangerie / pâtisserie</option>
+            <option value="restaurant">Restaurant / bar</option>
+            <option value="coiffure">Coiffure / esthétique</option>
+            <option value="plombier">Artisan du bâtiment</option>
+            <option value="bien-etre">Bien-être / thérapies</option>
+            <option value="commerce">Commerce de proximité</option>
+            <option value="artisan">Autre artisan</option>
+            <option value="autre">Autre activité</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>Couleur de la marque</legend>
+          <div class="studio-swatches" role="radiogroup" aria-label="Couleur de la marque">
+            <label class="studio-swatch"><input type="radio" name="st-accent" value="#4f7dff" checked><span style="background:#4f7dff" title="Bleu"></span></label>
+            <label class="studio-swatch"><input type="radio" name="st-accent" value="#e0405e"><span style="background:#e0405e" title="Rouge"></span></label>
+            <label class="studio-swatch"><input type="radio" name="st-accent" value="#16a34a"><span style="background:#16a34a" title="Vert"></span></label>
+            <label class="studio-swatch"><input type="radio" name="st-accent" value="#a855f7"><span style="background:#a855f7" title="Violet"></span></label>
+            <label class="studio-swatch"><input type="radio" name="st-accent" value="#f59e0b"><span style="background:#f59e0b" title="Ambre"></span></label>
+          </div>
+        </fieldset>
+      </form>
+      <div class="studio-browser" aria-label="Aperçu du mini-site">
+        <div class="sb-bar"><span class="sb-dot r" aria-hidden="true"></span><span class="sb-dot y" aria-hidden="true"></span><span class="sb-dot g" aria-hidden="true"></span><span class="sb-url">boulangerie-martin.fr</span><span class="sb-tag">Maquette</span></div>
+        <div class="sb-viewport">
+          <div class="ms" style="--ms-accent:#4f7dff" aria-hidden="true">
+            <div class="ms-nav"><span class="ms-logo">Boulangerie Martin</span><span class="ms-navlinks" aria-hidden="true"><span>Accueil</span><span>Services</span><span>Contact</span></span></div>
+            <div class="ms-hero">
+              <p class="ms-h1">Boulangerie Martin</p>
+              <p class="ms-tag">Pains, viennoiseries et pâtisseries maison.</p>
+              <span class="ms-cta">Commander en ligne</span>
+            </div>
+            <div class="ms-chips"><span class="ms-chip">Nos pains</span><span class="ms-chip">Commander</span><span class="ms-chip">Horaires</span></div>
+            <p class="ms-info">📍 Votre ville · ☎ Votre numéro · <b>Vos horaires</b></p>
+            <p class="ms-foot">Maquette de démonstration — créée par François Leterrier</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="studio-actions reveal">
+      <button type="button" class="btn btn-primary" data-studio-send>Je veux un site comme ça →</button>
+      <p class="studio-note">En cliquant, vous m'envoyez vos choix : je reviens vers vous pour en faire un vrai site, unique, responsive et optimisé pour Google.</p>
+    </div>
+    <p id="st-status" class="sr-only" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
 <!-- ============ MÉTHODE / PROCESS ============ -->
 <section class="section proc" id="methode">
   <div class="wrap">
