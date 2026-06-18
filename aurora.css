@@ -68,24 +68,11 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
 }
 
 /* =====================================================================
-   TRANSITIONS DE PAGE « type app » (View Transitions API, cross-document).
-   Amélioration progressive : navigateurs non compatibles -> navigation
-   normale, zéro régression. Header + logo PERSISTENT et morphent.
+   TRANSITIONS DE PAGE : DÉSACTIVÉES volontairement.
+   La View Transition cross-document provoquait un « flash » au changement
+   de page (modèles / réalisations / audit…), car l'aurore (body::before)
+   repart à zéro à chaque nouveau document et ce saut était capturé par la
+   transition. Navigation normale = instantanée, zéro flash. L'aurore et
+   toutes les animations INTERNES aux pages restent actives.
+   (Pour réactiver : remettre @view-transition{navigation:auto} + les règles.)
    ===================================================================== */
-@view-transition{ navigation:auto; }
-/* éléments PERSISTANTS qui glissent d'une page à l'autre (restent fixes).
-   NB : on NE nomme PAS le footer — sur une page courte (réalisations) il est
-   visible et "streakerait" vers le bas en allant sur une page plus longue. */
-.nav, .top{ view-transition-name:site-header; }
-.nav .logo-badge, .top .brand img{ view-transition-name:site-logo; }
-/* tout le RESTE du contenu morphe : l'ancienne page recule (zoom+fondu),
-   la nouvelle monte en place -> effet « app » sur toutes les pages */
-@keyframes fl-page-out{ to{ opacity:0; transform:scale(1.012); } }
-@keyframes fl-page-in{ from{ opacity:0; transform:scale(.99) translateY(14px); } }
-::view-transition-old(root){ animation:fl-page-out .26s ease both; }
-::view-transition-new(root){ animation:fl-page-in .42s cubic-bezier(.16,.84,.44,1) both; }
-@media (prefers-reduced-motion:reduce){
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*){ animation:none !important; }
-}
