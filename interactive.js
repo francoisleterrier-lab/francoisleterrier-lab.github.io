@@ -340,50 +340,6 @@
     });
   }
 
-  /* ---------- 7. Studio Live : mini-site qui se construit en direct ---------- */
-  var STUDIO_M = {
-    restaurant: { tag: 'Cuisine maison, produits frais du marché.', chips: ['Notre carte', 'Réserver', 'Avis'], cta: 'Réserver une table' },
-    boulangerie: { tag: 'Pains, viennoiseries et pâtisseries maison.', chips: ['Nos pains', 'Commander', 'Horaires'], cta: 'Commander en ligne' },
-    coiffure: { tag: 'Coupe, couleur et soins, sur rendez-vous.', chips: ['Prestations', 'Prendre RDV', 'Galerie'], cta: 'Prendre rendez-vous' },
-    plombier: { tag: 'Dépannage, installation et chauffage.', chips: ['Services', 'Devis gratuit', 'Ma zone'], cta: 'Demander un devis' },
-    'bien-etre': { tag: 'Un moment pour vous, en toute sérénité.', chips: ['Prestations', 'Réserver', 'À propos'], cta: 'Réserver une séance' },
-    commerce: { tag: 'Votre boutique de proximité.', chips: ['Produits', 'Nouveautés', 'Nous trouver'], cta: 'Voir la boutique' },
-    artisan: { tag: 'Le savoir-faire, tout près de chez vous.', chips: ['Réalisations', 'Devis', 'Contact'], cta: 'Demander un devis' },
-    autre: { tag: 'Votre activité, en ligne et facile à trouver.', chips: ['Services', 'À propos', 'Contact'], cta: 'Nous contacter' }
-  };
-  function initStudio() {
-    var root = document.getElementById('studio-live');
-    if (!root || root.getAttribute('data-st-init')) return;
-    root.setAttribute('data-st-init', '1');
-    var nom = root.querySelector('#st-nom'), metier = root.querySelector('#st-metier'),
-        ms = root.querySelector('.ms'), url = root.querySelector('.sb-url'), status = root.querySelector('#st-status');
-    if (!nom || !metier) return;
-    function accent() { var r = root.querySelector('input[name="st-accent"]:checked'); return r ? r.value : '#4f7dff'; }
-    function lum(hex) { hex = (hex || '').replace('#', ''); if (hex.length < 6) return 1; var r = parseInt(hex.substr(0, 2), 16) / 255, g = parseInt(hex.substr(2, 2), 16) / 255, b = parseInt(hex.substr(4, 2), 16) / 255; return 0.2126 * r + 0.7152 * g + 0.0722 * b; }
-    function set(sel, val) { var e = root.querySelector(sel); if (e) e.textContent = val; }
-    function render() {
-      var n = nom.value.trim() || 'Votre commerce', m = STUDIO_M[metier.value] || STUDIO_M.autre;
-      set('.ms-logo', n); set('.ms-h1', n); set('.ms-tag', m.tag); set('.ms-cta', m.cta);
-      var chips = root.querySelectorAll('.ms-chip');
-      for (var i = 0; i < chips.length; i++) chips[i].textContent = m.chips[i] || '';
-      var ac = accent(); if (ms) { ms.style.setProperty('--ms-accent', ac); ms.style.setProperty('--ms-cta-fg', lum(ac) > 0.6 ? '#0f1729' : '#fff'); }
-      if (url) url.textContent = (serpSlug(nom.value.trim()) || 'votre-commerce') + '.fr';
-    }
-    var dbt;
-    function onInput() { render(); if (!status) return; clearTimeout(dbt); dbt = setTimeout(function () { status.textContent = 'Maquette mise à jour pour ' + (nom.value.trim() || 'votre commerce') + '.'; }, 700); }
-    nom.addEventListener('input', onInput);
-    metier.addEventListener('change', onInput);
-    Array.prototype.forEach.call(root.querySelectorAll('input[name="st-accent"]'), function (r) { r.addEventListener('change', render); });
-    render();
-    var send = root.querySelector('[data-studio-send]');
-    if (send) send.addEventListener('click', function (e) {
-      e.preventDefault();
-      var n = nom.value.trim() || 'mon commerce';
-      var lbl = (metier.options[metier.selectedIndex] || {}).text || '';
-      openDrawer({ besoin: 'Un site internet', msg: 'Bonjour, j\'ai testé le Studio Live pour « ' + n + ' » (' + lbl + '). J\'aimerais une maquette de site sur-mesure.' });
-    });
-  }
-
   /* ---------- 8. Bannière « parcours adapté » via lien (?metier=&ville=) ---------- */
   var BANNER_M = {
     boulangerie: 'boulangerie', restaurant: 'restaurant', coiffure: 'salon de coiffure',
@@ -457,7 +413,6 @@
     initQuiz();
     initDrawer();
     initSerp();
-    initStudio();
     initBanner();
     initEstim();
   }

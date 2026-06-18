@@ -684,60 +684,69 @@
   </div>
 </section>
 
-<!-- ============ STUDIO LIVE (mini-site en direct) ============ -->
-<section class="section studio" id="studio-live">
+<!-- ============ SIMULATEUR SERP / GOOGLE BUSINESS ============ -->
+<section class="section serp-sim" id="apercu-google">
   <div class="wrap">
-    <p class="eyebrow reveal">Démo en direct · votre site en 10 secondes</p>
-    <h2 class="reveal">Regardez votre site se construire — maintenant</h2>
-    <p class="studio-sub reveal">Tapez le nom de votre commerce, choisissez votre activité et une couleur : le site se recompose en direct. <strong>Maquette de démonstration générée dans votre navigateur — votre vrai site sera unique et fait sur-mesure.</strong></p>
-    <div class="studio-wrap reveal">
-      <form class="studio-form" autocomplete="off" aria-label="Personnaliser la maquette">
-        <div class="fl-field"><label for="st-nom">Nom du commerce</label><input id="st-nom" type="text" maxlength="34" value="Boulangerie Martin"></div>
-        <div class="fl-field"><label for="st-metier">Activité</label>
-          <select id="st-metier">
+    <p class="eyebrow reveal">Démo en direct</p>
+    <h2 class="reveal">Votre commerce dans Google — tout de suite</h2>
+    <p class="serp-sub reveal">Renseignez vos infos : je vous montre à quoi pourrait ressembler votre présence en ligne — résultat Google, fiche Google Business et carte de partage Facebook. <strong>Simulation à partir de vos infos : ce n'est pas une vraie position dans Google.</strong></p>
+    <div class="serp-wrap reveal">
+      <form class="serp-form" autocomplete="off" aria-label="Vos informations">
+        <div class="fl-field"><label for="serp-nom">Nom du commerce</label><input id="serp-nom" type="text" maxlength="42" value="Boulangerie Martin"></div>
+        <div class="fl-field"><label for="serp-ville">Ville</label><input id="serp-ville" type="text" maxlength="30" value="Muret"></div>
+        <div class="fl-field"><label for="serp-metier">Activité</label>
+          <select id="serp-metier">
             <option value="boulangerie" selected>Boulangerie / pâtisserie</option>
             <option value="restaurant">Restaurant / bar</option>
             <option value="coiffure">Coiffure / esthétique</option>
-            <option value="plombier">Artisan du bâtiment</option>
+            <option value="plombier">Plomberie / chauffage</option>
+            <option value="electricien">Électricité</option>
             <option value="bien-etre">Bien-être / thérapies</option>
+            <option value="immobilier">Immobilier</option>
             <option value="commerce">Commerce de proximité</option>
-            <option value="artisan">Autre artisan</option>
             <option value="autre">Autre activité</option>
           </select>
         </div>
-        <fieldset>
-          <legend>Couleur de la marque</legend>
-          <div class="studio-swatches" role="radiogroup" aria-label="Couleur de la marque">
-            <label class="studio-swatch"><input type="radio" name="st-accent" value="#4f7dff" checked><span style="background:#4f7dff" title="Bleu"></span></label>
-            <label class="studio-swatch"><input type="radio" name="st-accent" value="#e0405e"><span style="background:#e0405e" title="Rouge"></span></label>
-            <label class="studio-swatch"><input type="radio" name="st-accent" value="#16a34a"><span style="background:#16a34a" title="Vert"></span></label>
-            <label class="studio-swatch"><input type="radio" name="st-accent" value="#a855f7"><span style="background:#a855f7" title="Violet"></span></label>
-            <label class="studio-swatch"><input type="radio" name="st-accent" value="#f59e0b"><span style="background:#f59e0b" title="Ambre"></span></label>
-          </div>
-        </fieldset>
+        <p class="serp-note">✏️ Modifiez avec vos infos — l'aperçu se met à jour en direct.</p>
       </form>
-      <div class="studio-browser" aria-label="Aperçu du mini-site">
-        <div class="sb-bar"><span class="sb-dot r" aria-hidden="true"></span><span class="sb-dot y" aria-hidden="true"></span><span class="sb-dot g" aria-hidden="true"></span><span class="sb-url">boulangerie-martin.fr</span><span class="sb-tag">Maquette</span></div>
-        <div class="sb-viewport">
-          <div class="ms" style="--ms-accent:#4f7dff" aria-hidden="true">
-            <div class="ms-nav"><span class="ms-logo">Boulangerie Martin</span><span class="ms-navlinks" aria-hidden="true"><span>Accueil</span><span>Services</span><span>Contact</span></span></div>
-            <div class="ms-hero">
-              <p class="ms-h1">Boulangerie Martin</p>
-              <p class="ms-tag">Pains, viennoiseries et pâtisseries maison.</p>
-              <span class="ms-cta">Commander en ligne</span>
-            </div>
-            <div class="ms-chips"><span class="ms-chip">Nos pains</span><span class="ms-chip">Commander</span><span class="ms-chip">Horaires</span></div>
-            <p class="ms-info">📍 Votre ville · ☎ Votre numéro · <b>Vos horaires</b></p>
-            <p class="ms-foot">Maquette de démonstration — créée par François Leterrier</p>
+      <div class="serp-stage">
+        <div class="serp-tabs" role="tablist" aria-label="Type d'aperçu">
+          <button type="button" class="serp-tab" role="tab" id="tab-g" aria-controls="pane-g" aria-selected="true" tabindex="0">Résultat Google</button>
+          <button type="button" class="serp-tab" role="tab" id="tab-m" aria-controls="pane-m" aria-selected="false" tabindex="-1">Fiche Google Business</button>
+          <button type="button" class="serp-tab" role="tab" id="tab-o" aria-controls="pane-o" aria-selected="false" tabindex="-1">Partage Facebook</button>
+        </div>
+        <div role="tabpanel" id="pane-g" class="serp-pane" aria-labelledby="tab-g">
+          <div class="g-card">
+            <div class="g-top"><span class="g-fav" aria-hidden="true"></span><span class="g-site"><span class="g-nm">boulangerie-martin.fr</span><br><span class="g-ur">https://www.boulangerie-martin.fr › accueil</span></span></div>
+            <p class="g-title">Boulangerie Martin — Boulangerie artisanale à Muret</p>
+            <p class="g-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités, nos horaires et où nous trouver. Le bon pain, tout près de chez vous.</p>
           </div>
         </div>
+        <div role="tabpanel" id="pane-m" class="serp-pane" aria-labelledby="tab-m" hidden>
+          <div class="m-card">
+            <div class="m-cover" aria-hidden="true"></div>
+            <div class="m-body">
+              <p class="m-name">Boulangerie Martin</p>
+              <p class="m-meta">Boulangerie-pâtisserie · Muret</p>
+              <p class="m-stars"><span class="st" aria-hidden="true">★★★★★</span> Pas encore d'avis — soyez le premier</p>
+              <div class="m-actions"><a class="m-btn" href="#apercu-google" aria-label="Itinéraire (bouton de démonstration)">Itinéraire</a><a class="m-btn" href="#apercu-google" aria-label="Appeler (bouton de démonstration)">Appeler</a><a class="m-btn" href="#apercu-google" aria-label="Site web (bouton de démonstration)">Site web</a></div>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel" id="pane-o" class="serp-pane" aria-labelledby="tab-o" hidden>
+          <div class="o-card">
+            <div class="o-cover"><span class="o-logo">Boulangerie Martin</span></div>
+            <div class="o-body"><span class="o-dom">www.boulangerie-martin.fr</span><p class="o-title">Boulangerie Martin — Boulangerie artisanale à Muret</p><p class="o-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités et nos horaires.</p></div>
+          </div>
+        </div>
+        <p class="serp-disclaimer">Aperçu illustratif généré dans votre navigateur — le domaine, le titre et la description sont des <strong>exemples</strong> (votre vrai contenu sera fait sur mesure). Les boutons sont une démo, et les étoiles sont vides car une nouvelle fiche n'a pas encore d'avis.</p>
+        <p id="serp-status" class="sr-only" role="status" aria-live="polite"></p>
       </div>
     </div>
-    <div class="studio-actions reveal">
-      <button type="button" class="btn btn-primary" data-studio-send>Je veux un site comme ça →</button>
-      <p class="studio-note">En cliquant, vous m'envoyez vos choix : je reviens vers vous pour en faire un vrai site, unique, responsive et optimisé pour Google.</p>
+    <div class="serp-actions reveal">
+      <button type="button" class="btn btn-ghost" data-serp-copy>📋 Copier mon title + meta description</button>
+      <a class="btn btn-primary" href="#diagnostic">Je veux ça pour de vrai →</a>
     </div>
-    <p id="st-status" class="sr-only" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -1097,72 +1106,6 @@
         <summary>Pouvez-vous améliorer mon référencement sur Google&nbsp;? <span class="pm"></span></summary>
         <div class="answer">Oui. Chaque site vitrine inclut le <b>référencement local (SEO)</b> : optimisation des pages, des balises et de la vitesse, plus la mise en place ou l'optimisation de votre <b>fiche Google Business Profile</b> pour apparaître sur Google Maps dans le Sud-Toulousain. C'est le levier n°1 pour être trouvé par vos clients de proximité.</div>
       </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SIMULATEUR SERP / GOOGLE BUSINESS ============ -->
-<section class="section serp-sim" id="apercu-google">
-  <div class="wrap">
-    <p class="eyebrow reveal">Démo en direct</p>
-    <h2 class="reveal">Votre commerce dans Google — tout de suite</h2>
-    <p class="serp-sub reveal">Renseignez vos infos : je vous montre à quoi pourrait ressembler votre présence en ligne — résultat Google, fiche Google Business et carte de partage Facebook. <strong>Simulation à partir de vos infos : ce n'est pas une vraie position dans Google.</strong></p>
-    <div class="serp-wrap reveal">
-      <form class="serp-form" autocomplete="off" aria-label="Vos informations">
-        <div class="fl-field"><label for="serp-nom">Nom du commerce</label><input id="serp-nom" type="text" maxlength="42" value="Boulangerie Martin"></div>
-        <div class="fl-field"><label for="serp-ville">Ville</label><input id="serp-ville" type="text" maxlength="30" value="Muret"></div>
-        <div class="fl-field"><label for="serp-metier">Activité</label>
-          <select id="serp-metier">
-            <option value="boulangerie" selected>Boulangerie / pâtisserie</option>
-            <option value="restaurant">Restaurant / bar</option>
-            <option value="coiffure">Coiffure / esthétique</option>
-            <option value="plombier">Plomberie / chauffage</option>
-            <option value="electricien">Électricité</option>
-            <option value="bien-etre">Bien-être / thérapies</option>
-            <option value="immobilier">Immobilier</option>
-            <option value="commerce">Commerce de proximité</option>
-            <option value="autre">Autre activité</option>
-          </select>
-        </div>
-        <p class="serp-note">✏️ Modifiez avec vos infos — l'aperçu se met à jour en direct.</p>
-      </form>
-      <div class="serp-stage">
-        <div class="serp-tabs" role="tablist" aria-label="Type d'aperçu">
-          <button type="button" class="serp-tab" role="tab" id="tab-g" aria-controls="pane-g" aria-selected="true" tabindex="0">Résultat Google</button>
-          <button type="button" class="serp-tab" role="tab" id="tab-m" aria-controls="pane-m" aria-selected="false" tabindex="-1">Fiche Google Business</button>
-          <button type="button" class="serp-tab" role="tab" id="tab-o" aria-controls="pane-o" aria-selected="false" tabindex="-1">Partage Facebook</button>
-        </div>
-        <div role="tabpanel" id="pane-g" class="serp-pane" aria-labelledby="tab-g">
-          <div class="g-card">
-            <div class="g-top"><span class="g-fav" aria-hidden="true"></span><span class="g-site"><span class="g-nm">boulangerie-martin.fr</span><br><span class="g-ur">https://www.boulangerie-martin.fr › accueil</span></span></div>
-            <p class="g-title">Boulangerie Martin — Boulangerie artisanale à Muret</p>
-            <p class="g-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités, nos horaires et où nous trouver. Le bon pain, tout près de chez vous.</p>
-          </div>
-        </div>
-        <div role="tabpanel" id="pane-m" class="serp-pane" aria-labelledby="tab-m" hidden>
-          <div class="m-card">
-            <div class="m-cover" aria-hidden="true"></div>
-            <div class="m-body">
-              <p class="m-name">Boulangerie Martin</p>
-              <p class="m-meta">Boulangerie-pâtisserie · Muret</p>
-              <p class="m-stars"><span class="st" aria-hidden="true">★★★★★</span> Pas encore d'avis — soyez le premier</p>
-              <div class="m-actions"><a class="m-btn" href="#apercu-google" aria-label="Itinéraire (bouton de démonstration)">Itinéraire</a><a class="m-btn" href="#apercu-google" aria-label="Appeler (bouton de démonstration)">Appeler</a><a class="m-btn" href="#apercu-google" aria-label="Site web (bouton de démonstration)">Site web</a></div>
-            </div>
-          </div>
-        </div>
-        <div role="tabpanel" id="pane-o" class="serp-pane" aria-labelledby="tab-o" hidden>
-          <div class="o-card">
-            <div class="o-cover"><span class="o-logo">Boulangerie Martin</span></div>
-            <div class="o-body"><span class="o-dom">www.boulangerie-martin.fr</span><p class="o-title">Boulangerie Martin — Boulangerie artisanale à Muret</p><p class="o-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités et nos horaires.</p></div>
-          </div>
-        </div>
-        <p class="serp-disclaimer">Aperçu illustratif généré dans votre navigateur — le domaine, le titre et la description sont des <strong>exemples</strong> (votre vrai contenu sera fait sur mesure). Les boutons sont une démo, et les étoiles sont vides car une nouvelle fiche n'a pas encore d'avis.</p>
-        <p id="serp-status" class="sr-only" role="status" aria-live="polite"></p>
-      </div>
-    </div>
-    <div class="serp-actions reveal">
-      <button type="button" class="btn btn-ghost" data-serp-copy>📋 Copier mon title + meta description</button>
-      <a class="btn btn-primary" href="#diagnostic">Je veux ça pour de vrai →</a>
     </div>
   </div>
 </section>
