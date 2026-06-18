@@ -8,7 +8,9 @@
 @media (hover:hover) and (pointer:fine){
   .fl-tilt{transition:transform .15s ease;will-change:transform;}
 }
-@media (prefers-reduced-motion:reduce){ .fl-tilt{transform:none !important;} }
+
+/* ---------- Compteurs (largeur réservée -> pas de reflow/CLS) ---------- */
+.about-stats .v [data-count]{display:inline-block;text-align:center;font-variant-numeric:tabular-nums;}
 
 /* ---------- Bouton + raccourci palette ⌘K ---------- */
 .fl-kbtn{display:inline-flex;align-items:center;gap:7px;font-family:'Manrope',system-ui,sans-serif;font-size:12.5px;font-weight:600;
@@ -26,24 +28,26 @@
 .fl-pal-in{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.1);}
 .fl-pal-in svg{width:18px;height:18px;color:#97a1b8;flex:none;}
 .fl-pal-in input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:inherit;font-size:16px;min-width:0;}
-.fl-pal-in input::placeholder{color:#69728a;}
+.fl-pal-in input::placeholder{color:#8b93a8;}
 .fl-pal-in .esc{font-size:11px;color:#97a1b8;border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:2px 7px;flex:none;}
 .fl-pal-list{max-height:52vh;overflow:auto;padding:6px;}
-.fl-pal-group{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#69728a;padding:11px 12px 4px;font-weight:700;}
+.fl-pal-group{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#97a1b8;padding:11px 12px 4px;font-weight:700;}
 .fl-pal-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:#e7ecf6;text-decoration:none;cursor:pointer;font-size:14.5px;}
 .fl-pal-item .ico{width:22px;text-align:center;flex:none;opacity:.85;}
 .fl-pal-item .lbl{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.fl-pal-item small{color:#69728a;font-size:12px;flex:none;}
+.fl-pal-item small{color:#8b93a8;font-size:12px;flex:none;}
 .fl-pal-item.sel,.fl-pal-item:hover{background:linear-gradient(120deg,rgba(34,211,238,.16),rgba(168,85,247,.16));}
-.fl-pal-empty{padding:26px;text-align:center;color:#69728a;font-size:14px;}
+.fl-pal-empty{padding:26px;text-align:center;color:#97a1b8;font-size:14px;}
 
 /* ---------- Quiz « quel service ? » (centré, via FLModal) ---------- */
-.fl-quiz-prog{font-size:11px;color:#69728a;margin:0 0 12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
+.fl-quiz-prog{font-size:11px;color:#97a1b8;margin:0 0 12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
 .fl-quiz-q{font-family:'Bricolage Grotesque','Manrope',sans-serif;font-weight:800;font-size:19px;color:#fff;margin:0 0 16px;line-height:1.25;}
+.fl-quiz-q:focus{outline:none;}
 .fl-quiz-opts{display:flex;flex-direction:column;gap:10px;}
 .fl-quiz-opt{text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 16px;color:#e7ecf6;font-family:inherit;font-size:14.5px;cursor:pointer;transition:border-color .15s,background .15s,transform .15s;}
 .fl-quiz-opt:hover{border-color:#22d3ee;background:rgba(34,211,238,.08);transform:translateX(2px);}
 .fl-quiz-res h4{font-family:'Bricolage Grotesque';font-weight:800;color:#fff;font-size:21px;margin:0 0 8px;}
+.fl-quiz-res h4:focus{outline:none;}
 .fl-quiz-res .reco{background:linear-gradient(120deg,rgba(34,211,238,.12),rgba(168,85,247,.12));border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:16px 18px;margin:0 0 18px;color:#c4cbdb;font-size:14.5px;line-height:1.6;}
 .fl-quiz-res .reco b{color:#fff;}
 
@@ -55,6 +59,8 @@
 .fl-ov.open .fl-drawer{transform:none;}
 .fl-drawer h3{font-family:'Bricolage Grotesque';font-weight:800;color:#fff;font-size:22px;margin:0 0 6px;padding-right:40px;}
 .fl-drawer .sub{color:#97a1b8;font-size:14px;margin:0 0 20px;}
+.fl-drawer fieldset{border:0;padding:0;margin:0 0 14px;}
+.fl-drawer legend{padding:0;font-size:13px;font-weight:600;color:#cfd6e6;margin-bottom:8px;}
 .fl-field{margin-bottom:14px;}
 .fl-field label{display:block;font-size:13px;font-weight:600;color:#cfd6e6;margin-bottom:6px;}
 .fl-field input,.fl-field textarea{width:100%;background:#0b0f1c;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;color:#fff;font-family:inherit;font-size:14.5px;outline:none;}
@@ -66,25 +72,37 @@
 .fl-pill span{display:inline-block;border:1px solid rgba(255,255,255,.18);border-radius:30px;padding:8px 15px;font-size:13px;color:#cfd6e6;transition:.15s;}
 .fl-pill input:checked + span{background:linear-gradient(120deg,#22d3ee,#a855f7);color:#08111f;border-color:transparent;font-weight:700;}
 .fl-pill input:focus-visible + span{outline:2px solid #22d3ee;outline-offset:2px;}
-.fl-drawer-ok{text-align:center;padding:24px 0;}
-.fl-drawer-ok .big{font-size:42px;line-height:1;margin-bottom:10px;}
+.fl-drawer-note{font-size:11.5px;color:#97a1b8;margin:12px 0 0;text-align:center;}
+.fl-drawer-note a{color:#22d3ee;}
 
-/* ---------- Carte interactive de la zone ---------- */
-.fl-zonemap{position:relative;width:100%;aspect-ratio:1 / .8;
-  background:radial-gradient(circle at 62% 18%,rgba(34,211,238,.07),transparent 55%),radial-gradient(circle at 28% 82%,rgba(168,85,247,.07),transparent 55%),#0b0f1c;
+/* ---------- Carte interactive de la zone (pastilles + libellé au survol/focus) ---------- */
+.fl-zonemap{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:1 / 1;
+  background:radial-gradient(circle at 60% 18%,rgba(34,211,238,.07),transparent 55%),radial-gradient(circle at 28% 82%,rgba(168,85,247,.07),transparent 55%),#0b0f1c;
   border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;}
 .fl-zonemap .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;pointer-events:none;}
 .fl-zonemap svg.river{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-.fl-pin{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:6px;font-family:'Manrope',system-ui,sans-serif;
-  font-size:12px;font-weight:600;color:#e7ecf6;text-decoration:none;white-space:nowrap;padding:4px 10px 4px 7px;border-radius:30px;
-  background:rgba(14,19,34,.88);border:1px solid rgba(255,255,255,.14);transition:transform .15s,border-color .15s,box-shadow .15s;z-index:2;}
-.fl-pin::before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(120deg,#22d3ee,#a855f7);flex:none;}
-.fl-pin:hover,.fl-pin:focus-visible{border-color:#22d3ee;transform:translate(-50%,-50%) scale(1.09);box-shadow:0 0 18px -4px rgba(34,211,238,.65);z-index:4;outline:none;}
-.fl-pin.base{background:linear-gradient(120deg,rgba(34,211,238,.22),rgba(168,85,247,.22));border-color:rgba(34,211,238,.55);font-weight:800;z-index:3;}
-.fl-pin.tlse{background:none;border:none;color:#8b93a8;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:11px;pointer-events:none;}
-.fl-pin.tlse::before{display:none;}
+.fl-pin{position:absolute;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;
+  background:linear-gradient(120deg,#22d3ee,#a855f7);border:2px solid rgba(11,15,28,.85);cursor:pointer;z-index:2;
+  transition:transform .15s,box-shadow .15s;}
+.fl-pin .lab{position:absolute;bottom:150%;left:50%;transform:translateX(-50%);white-space:nowrap;
+  background:rgba(14,19,34,.97);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:4px 9px;
+  font-family:'Manrope',system-ui,sans-serif;font-size:12px;font-weight:600;color:#e7ecf6;opacity:0;pointer-events:none;transition:opacity .15s;}
+.fl-pin:hover,.fl-pin:focus-visible{transform:translate(-50%,-50%) scale(1.45);box-shadow:0 0 16px -2px rgba(34,211,238,.85);z-index:6;outline:none;}
+.fl-pin:hover .lab,.fl-pin:focus-visible .lab{opacity:1;}
+.fl-pin.base{width:19px;height:19px;box-shadow:0 0 0 4px rgba(34,211,238,.18);z-index:3;}
+.fl-pin.base .lab{opacity:1;}
+.fl-pin.tlse{width:auto;height:auto;background:none;border:none;color:#8b93a8;font-family:'Manrope',system-ui,sans-serif;
+  font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:11px;pointer-events:none;}
 .towns.fl-zone-mob{display:none;}
 @media (max-width:760px){
   .fl-zonemap{display:none;}
   .towns.fl-zone-mob{display:flex;}
+}
+
+/* ---------- Accessibilité : couper les animations si demandé ---------- */
+@media (prefers-reduced-motion:reduce){
+  .fl-tilt{transform:none !important;}
+  .fl-palette,.fl-drawer{transition:none !important;transform:none !important;}
+  .fl-quiz-opt:hover{transform:none !important;}
+  .fl-pin{transition:none !important;}
 }

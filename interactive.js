@@ -34,7 +34,13 @@
   function initCounters() {
     var nodes = document.querySelectorAll('[data-count]');
     if (!nodes.length) return;
-    if (!('IntersectionObserver' in window)) { Array.prototype.forEach.call(nodes, function (n) { n.textContent = n.getAttribute('data-count'); }); return; }
+    // réserver la largeur finale -> aucun reflow/CLS pendant l'animation
+    Array.prototype.forEach.call(nodes, function (n) {
+      n.textContent = n.getAttribute('data-count');
+      var w = n.getBoundingClientRect().width;
+      if (w) n.style.minWidth = Math.ceil(w) + 'px';
+    });
+    if (RM || !('IntersectionObserver' in window)) return; // valeurs réelles déjà affichées
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { animateCount(e.target); io.unobserve(e.target); } });
     }, { threshold: 0.6 });
@@ -94,7 +100,7 @@
     var box = el('div', { 'class': 'fl-palette' });
     var top = el('div', { 'class': 'fl-pal-in' });
     top.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
-    var input = el('input', { type: 'text', placeholder: 'Rechercher une page ou une action…', 'aria-label': 'Rechercher', 'data-fl-autofocus': '1', autocomplete: 'off', role: 'combobox', 'aria-expanded': 'true', 'aria-controls': 'fl-pal-list' });
+    var input = el('input', { type: 'text', placeholder: 'Rechercher une page ou une action…', 'aria-label': 'Rechercher', 'data-fl-autofocus': '1', autocomplete: 'off', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'true', 'aria-controls': 'fl-pal-list' });
     top.appendChild(input);
     top.appendChild(el('span', { 'class': 'esc', 'aria-hidden': 'true' }, 'Échap'));
     box.appendChild(top);
@@ -104,16 +110,16 @@
     ov.addEventListener('click', function (e) { if (e.target === ov) window.FLModal.close(); });
 
     function nodes() { return list.querySelectorAll('.fl-pal-item'); }
-    function setSel(i) { sel = i; var ns = nodes(); for (var k = 0; k < ns.length; k++) ns[k].classList.toggle('sel', k === i); var c = ns[sel]; if (c) { input.setAttribute('aria-activedescendant', c.id); c.scrollIntoView({ block: 'nearest' }); } }
+    function setSel(i) { sel = i; var ns = nodes(); for (var k = 0; k < ns.length; k++) { ns[k].classList.toggle('sel', k === i); ns[k].setAttribute('aria-selected', k === i ? 'true' : 'false'); } var c = ns[sel]; if (c) { input.setAttribute('aria-activedescendant', c.id); c.scrollIntoView({ block: 'nearest' }); } }
     function render() {
       var q = input.value.trim().toLowerCase();
       filtered = q ? PAGES.filter(function (p) { return (p.l + ' ' + p.g).toLowerCase().indexOf(q) >= 0; }) : PAGES.slice();
       list.innerHTML = '';
-      if (!filtered.length) { list.appendChild(el('div', { 'class': 'fl-pal-empty' }, 'Aucun résultat. Essayez « audit », « tarifs », « Muret »…')); return; }
+      if (!filtered.length) { input.removeAttribute('aria-activedescendant'); list.appendChild(el('div', { 'class': 'fl-pal-empty' }, 'Aucun résultat. Essayez « audit », « tarifs », « Muret »…')); return; }
       var lastG = null, idx = 0;
       filtered.forEach(function (p) {
         if (p.g !== lastG) { list.appendChild(el('div', { 'class': 'fl-pal-group' }, p.g)); lastG = p.g; }
-        var a = el('a', { 'class': 'fl-pal-item' + (idx === 0 ? ' sel' : ''), href: p.u, role: 'option', id: 'flpi' + idx });
+        var a = el('a', { 'class': 'fl-pal-item' + (idx === 0 ? ' sel' : ''), href: p.u, role: 'option', 'aria-selected': idx === 0 ? 'true' : 'false', id: 'fl-pal-opt-' + idx });
         a.innerHTML = '<span class="ico" aria-hidden="true">' + p.i + '</span><span class="lbl">' + p.l + '</span><small aria-hidden="true">↵</small>';
         (function (ix) { a.addEventListener('mousemove', function () { if (sel !== ix) setSel(ix); }); a.addEventListener('click', function (e) { e.preventDefault(); navTo(a.getAttribute('href')); }); })(idx);
         list.appendChild(a); idx++;
@@ -161,40 +167,51 @@
     both: { h: 'Réseaux sociaux + site internet', p: 'La présence complète, gérée par <b>un seul interlocuteur</b> : un site qui vous appartient et des réseaux animés. C\'est exactement ma double casquette.', c: [{ l: 'En discuter (échange offert) →', u: 'contact.html', p: true }, { l: 'Voir les tarifs', u: 'tarifs.html' }] },
     unsure: { h: 'Commençons par un diagnostic gratuit', p: 'Je passe au crible votre présence actuelle et je vous renvoie <b>3 actions concrètes</b>, sans engagement. On y verra clair ensemble.', c: [{ l: 'Demander mon diagnostic →', u: 'contact.html', p: true }, { l: 'Tester mon SEO', u: 'audit-seo-gratuit.html' }] }
   };
+  var STAGE = {
+    start: ' Et comme vous démarrez, on pose des bases propres dès le départ.',
+    grow: ' Objectif prioritaire : vous rendre nettement plus visible dans le secteur.',
+    scale: ' On vise à vous faire passer un cap, sans gaspiller votre temps.'
+  };
   function openQuiz() {
     if (!window.FLModal || window.__flLock) return;
-    var step = 0, primary = null;
+    var step = 0, primary = null, secondary = null, opened = false;
     var node = el('div', {});
     function paint() {
       node.innerHTML = '';
       if (step < QUIZ.length) {
         node.appendChild(el('div', { 'class': 'fl-quiz-prog' }, 'Question ' + (step + 1) + ' / ' + QUIZ.length));
-        node.appendChild(el('div', { 'class': 'fl-quiz-q' }, QUIZ[step].q));
+        var h = el('div', { 'class': 'fl-quiz-q', tabindex: '-1' }); h.textContent = QUIZ[step].q;
+        if (!opened) h.setAttribute('data-fl-autofocus', '1');
+        node.appendChild(h);
         var opts = el('div', { 'class': 'fl-quiz-opts' });
         QUIZ[step].a.forEach(function (o) {
           var b = el('button', { 'class': 'fl-quiz-opt', type: 'button' }, o.t);
           b.addEventListener('click', function () {
             if (step === 0) { primary = o.k; step = (o.k === 'unsure') ? 99 : 1; }
-            else { step = 99; }
+            else { secondary = o.k; step = 99; }
             paint();
           });
           opts.appendChild(b);
         });
         node.appendChild(opts);
+        if (opened) h.focus();
       } else {
         var r = RECO[primary] || RECO.unsure;
         var res = el('div', { 'class': 'fl-quiz-res' });
-        res.appendChild(el('h4', null, 'Ma recommandation 👉'));
-        res.appendChild(el('div', { 'class': 'reco' }, '<b>' + r.h + '</b><br>' + r.p));
+        var h4 = el('h4', { tabindex: '-1' }, 'Ma recommandation 👉');
+        res.appendChild(h4);
+        var txt = r.p + (secondary && STAGE[secondary] ? STAGE[secondary] : '');
+        res.appendChild(el('div', { 'class': 'reco' }, '<b>' + r.h + '</b><br>' + txt));
         var act = el('div', { 'class': 'fl-actions' });
         r.c.forEach(function (cc) { act.appendChild(el('a', { 'class': 'fl-btn ' + (cc.p ? 'fl-btn-primary' : 'fl-btn-ghost'), href: cc.u }, cc.l)); });
         res.appendChild(act);
         node.appendChild(res);
+        if (opened) h4.focus();
       }
-      var f = node.querySelector('button, a'); if (f && document.body.contains(node)) f.focus();
     }
     paint();
     window.FLModal.open(window.FLModal.build({ title: 'Trouvons le bon service en 30 secondes', node: node }));
+    opened = true;
   }
   function initQuiz() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-fl-quiz]'), function (b) {
@@ -219,16 +236,16 @@
       '<input type="hidden" name="from_name" value="Site François Leterrier">' +
       '<input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html">' +
       '<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">' +
-      '<div class="fl-field"><label>Je veux…</label><div class="fl-pills">' +
+      '<fieldset><legend>Je veux…</legend><div class="fl-pills" role="radiogroup" aria-label="Je veux…">' +
       '<label class="fl-pill"><input type="radio" name="besoin" value="Réseaux sociaux" checked><span>Réseaux sociaux</span></label>' +
       '<label class="fl-pill"><input type="radio" name="besoin" value="Un site internet"><span>Un site</span></label>' +
       '<label class="fl-pill"><input type="radio" name="besoin" value="Les deux"><span>Les deux</span></label>' +
-      '</div></div>' +
+      '</div></fieldset>' +
       '<div class="fl-field"><label for="fldr-name">Votre prénom *</label><input id="fldr-name" name="name" type="text" required data-fl-autofocus="1"></div>' +
       '<div class="fl-field"><label for="fldr-contact">Téléphone ou e-mail *</label><input id="fldr-contact" name="contact" type="text" required placeholder="06… ou vous@exemple.fr"></div>' +
       '<div class="fl-field"><label for="fldr-msg">En deux mots (facultatif)</label><textarea id="fldr-msg" name="message" placeholder="Votre activité, votre besoin…"></textarea></div>' +
       '<button class="fl-btn fl-btn-primary" type="submit" style="width:100%;">Envoyer ma demande →</button>' +
-      '<p style="font-size:11.5px;color:#69728a;margin:12px 0 0;text-align:center;">En envoyant, vous acceptez la <a href="confidentialite.html" style="color:#22d3ee;">politique de confidentialité</a>.</p>';
+      '<p class="fl-drawer-note">En envoyant, vous acceptez la <a href="confidentialite.html">politique de confidentialité</a>.</p>';
     d.appendChild(form);
     ov.appendChild(d);
     ov.addEventListener('click', function (e) { if (e.target === ov) window.FLModal.close(); });
