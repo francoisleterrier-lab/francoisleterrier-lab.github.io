@@ -69,10 +69,16 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
    normale, zéro régression. Header + logo PERSISTENT et morphent.
    ===================================================================== */
 @view-transition{ navigation:auto; }
+/* éléments PERSISTANTS qui glissent d'une page à l'autre (restent fixes) */
 .nav, .top{ view-transition-name:site-header; }
 .nav .logo-badge, .top .brand img{ view-transition-name:site-logo; }
-::view-transition-old(root),
-::view-transition-new(root){ animation-duration:.34s; animation-timing-function:cubic-bezier(.4,0,.2,1); }
+footer{ view-transition-name:site-footer; }
+/* tout le RESTE du contenu morphe : l'ancienne page recule (zoom+fondu),
+   la nouvelle monte en place -> effet « app » sur toutes les pages */
+@keyframes fl-page-out{ to{ opacity:0; transform:scale(1.012); } }
+@keyframes fl-page-in{ from{ opacity:0; transform:scale(.99) translateY(14px); } }
+::view-transition-old(root){ animation:fl-page-out .26s ease both; }
+::view-transition-new(root){ animation:fl-page-in .42s cubic-bezier(.16,.84,.44,1) both; }
 @media (prefers-reduced-motion:reduce){
   ::view-transition-group(*),
   ::view-transition-old(*),
