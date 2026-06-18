@@ -7,11 +7,11 @@
 body::before{
   content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(38% 38% at 22% 26%, rgba(34,211,238,.15), transparent 70%),
-    radial-gradient(40% 40% at 80% 24%, rgba(168,85,247,.14), transparent 70%),
-    radial-gradient(46% 46% at 62% 82%, rgba(79,125,255,.12), transparent 70%),
-    radial-gradient(34% 34% at 12% 78%, rgba(217,70,239,.12), transparent 70%);
-  filter:blur(38px);
+    radial-gradient(44% 46% at 16% 18%, rgba(34,211,238,.30), transparent 70%),
+    radial-gradient(46% 46% at 85% 18%, rgba(168,85,247,.28), transparent 70%),
+    radial-gradient(50% 50% at 66% 84%, rgba(79,125,255,.24), transparent 72%),
+    radial-gradient(42% 44% at 10% 82%, rgba(217,70,239,.24), transparent 70%);
+  filter:blur(34px);
   animation:fl-aurora 30s ease-in-out infinite alternate;
 }
 @keyframes fl-aurora{
