@@ -257,6 +257,85 @@
     });
   }
 
+  /* ---------- 6. Simulateur SERP / Google Business / partage ---------- */
+  var SERP_M = {
+    boulangerie: { cat: 'Boulangerie-pâtisserie', t: "{n} — Boulangerie artisanale à {v}", d: "Pains, viennoiseries et pâtisseries maison à {v}. Découvrez {n} : nos spécialités, nos horaires et où nous trouver. Le bon pain, tout près de chez vous." },
+    restaurant: { cat: 'Restaurant', t: "{n} — Restaurant à {v} | Réservez", d: "Cuisine fait-maison à {v}. {n} vous accueille midi et soir : carte, menus et réservation. Réservez votre table en quelques clics." },
+    coiffure: { cat: 'Salon de coiffure', t: "{n} — Coiffeur à {v} | Prendre RDV", d: "Salon de coiffure à {v}. Coupe, couleur, soins : prenez rendez-vous en ligne chez {n}. Une équipe à l'écoute, tout près de chez vous." },
+    plombier: { cat: 'Plombier-chauffagiste', t: "{n} — Plombier à {v} | Devis gratuit", d: "Dépannage, installation et chauffage à {v} et alentours. {n} intervient vite et proprement. Devis gratuit, appelez dès aujourd'hui." },
+    electricien: { cat: 'Électricien', t: "{n} — Électricien à {v} | Devis gratuit", d: "Installation, dépannage et mise aux normes à {v}. {n}, artisan électricien de confiance. Devis gratuit et intervention rapide." },
+    'bien-etre': { cat: 'Bien-être & thérapies', t: "{n} — Bien-être à {v} | Sur rendez-vous", d: "Séances de bien-être à {v}. {n} vous accompagne en toute bienveillance. Découvrez les prestations et réservez votre créneau en ligne." },
+    immobilier: { cat: 'Agence immobilière', t: "{n} — Agence immobilière à {v}", d: "Achat, vente et location à {v} et dans le secteur. {n} vous accompagne à chaque étape de votre projet. Estimation offerte." },
+    commerce: { cat: 'Commerce de proximité', t: "{n} — Votre commerce à {v}", d: "{n}, votre commerce de proximité à {v}. Découvrez nos produits, nos horaires et nos actualités. On vous attend tout près de chez vous." },
+    autre: { cat: 'Entreprise locale', t: "{n} — {v} et alentours", d: "{n}, à {v} et dans le Sud-Toulousain. Découvrez nos services, nos horaires et comment nous contacter. Un savoir-faire local à votre service." }
+  };
+  function serpSlug(s) {
+    s = (s || '').toLowerCase()
+      .replace(/[àâäáã]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[îï]/g, 'i')
+      .replace(/[ôöó]/g, 'o').replace(/[ûüù]/g, 'u').replace(/ç/g, 'c').replace(/œ/g, 'oe');
+    return s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  function initSerp() {
+    var root = document.getElementById('apercu-google');
+    if (!root || root.getAttribute('data-serp-init')) return;
+    root.setAttribute('data-serp-init', '1');
+    var nom = root.querySelector('#serp-nom'), ville = root.querySelector('#serp-ville'),
+        metier = root.querySelector('#serp-metier'), status = root.querySelector('#serp-status');
+    var paneG = root.querySelector('#pane-g'), paneM = root.querySelector('#pane-m'), paneO = root.querySelector('#pane-o');
+    function fill(tpl, n, v) { return tpl.split('{n}').join(n).split('{v}').join(v); }
+    function cur() {
+      var n = nom.value.trim() || 'Votre commerce', v = ville.value.trim() || 'votre ville';
+      var m = SERP_M[metier.value] || SERP_M.autre, sl = serpSlug(nom.value.trim()) || 'mon-commerce';
+      return { n: n, v: v, cat: m.cat, title: fill(m.t, n, v), desc: fill(m.d, n, v), dom: sl + '.fr' };
+    }
+    function setTxt(pane, sel, val) { var e = pane.querySelector(sel); if (e) e.textContent = val; }
+    function render() {
+      var c = cur();
+      setTxt(paneG, '.g-nm', c.dom); setTxt(paneG, '.g-ur', 'https://www.' + c.dom + ' › accueil');
+      setTxt(paneG, '.g-title', c.title); setTxt(paneG, '.g-desc', c.desc);
+      setTxt(paneM, '.m-name', c.n); setTxt(paneM, '.m-meta', c.cat + ' · ' + c.v);
+      setTxt(paneO, '.o-logo', c.n); setTxt(paneO, '.o-dom', 'www.' + c.dom);
+      setTxt(paneO, '.o-title', c.title); setTxt(paneO, '.o-desc', c.desc);
+    }
+    var dbt;
+    function onInput() { render(); if (!status) return; clearTimeout(dbt); dbt = setTimeout(function () { var c = cur(); status.textContent = 'Aperçu mis à jour : ' + c.n + ' à ' + c.v + '.'; }, 700); }
+    nom.addEventListener('input', onInput); ville.addEventListener('input', onInput); metier.addEventListener('change', onInput);
+    render();
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('.serp-tab'));
+    var panes = { 'pane-g': paneG, 'pane-m': paneM, 'pane-o': paneO };
+    function select(tab) {
+      tabs.forEach(function (t2) {
+        var on = t2 === tab; t2.setAttribute('aria-selected', on ? 'true' : 'false'); t2.tabIndex = on ? 0 : -1;
+        var p = panes[t2.getAttribute('aria-controls')]; if (p) p.hidden = !on;
+      });
+    }
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab); });
+      tab.addEventListener('keydown', function (e) {
+        var idx; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') idx = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') idx = (i - 1 + tabs.length) % tabs.length; else return;
+        e.preventDefault(); tabs[idx].focus(); select(tabs[idx]);
+      });
+    });
+    var copyBtn = root.querySelector('[data-serp-copy]');
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      var c = cur(), txt = 'Title : ' + c.title + '\nMeta description : ' + c.desc, orig = copyBtn.textContent;
+      function done() {
+        copyBtn.textContent = '✓ Copié !';
+        setTimeout(function () { copyBtn.textContent = orig; }, 1600);
+        if (window.FLModal && window.FLModal.toast) window.FLModal.toast('Title + description copiés ✓');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done);
+      else { try { var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); } catch (e) {} done(); }
+    });
+    Array.prototype.forEach.call(root.querySelectorAll('.m-btn'), function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (window.FLModal && window.FLModal.toast) window.FLModal.toast('Aperçu de démonstration — votre vraie fiche Google activera ce bouton.');
+      });
+    });
+  }
+
   /* ---------- init ---------- */
   function init() {
     initCounters();
@@ -264,6 +343,7 @@
     initPalette();
     initQuiz();
     initDrawer();
+    initSerp();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

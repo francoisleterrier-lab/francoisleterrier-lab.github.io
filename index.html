@@ -1000,6 +1000,72 @@
   </div>
 </section>
 
+<!-- ============ SIMULATEUR SERP / GOOGLE BUSINESS ============ -->
+<section class="section serp-sim" id="apercu-google">
+  <div class="wrap">
+    <p class="eyebrow reveal">Démo en direct</p>
+    <h2 class="reveal">Votre commerce dans Google — tout de suite</h2>
+    <p class="serp-sub reveal">Renseignez vos infos : je vous montre à quoi pourrait ressembler votre présence en ligne — résultat Google, fiche Google Business et carte de partage Facebook. <strong>Simulation à partir de vos infos : ce n'est pas une vraie position dans Google.</strong></p>
+    <div class="serp-wrap reveal">
+      <form class="serp-form" autocomplete="off" aria-label="Vos informations">
+        <div class="fl-field"><label for="serp-nom">Nom du commerce</label><input id="serp-nom" type="text" maxlength="42" value="Boulangerie Martin"></div>
+        <div class="fl-field"><label for="serp-ville">Ville</label><input id="serp-ville" type="text" maxlength="30" value="Muret"></div>
+        <div class="fl-field"><label for="serp-metier">Activité</label>
+          <select id="serp-metier">
+            <option value="boulangerie" selected>Boulangerie / pâtisserie</option>
+            <option value="restaurant">Restaurant / bar</option>
+            <option value="coiffure">Coiffure / esthétique</option>
+            <option value="plombier">Plomberie / chauffage</option>
+            <option value="electricien">Électricité</option>
+            <option value="bien-etre">Bien-être / thérapies</option>
+            <option value="immobilier">Immobilier</option>
+            <option value="commerce">Commerce de proximité</option>
+            <option value="autre">Autre activité</option>
+          </select>
+        </div>
+        <p class="serp-note">✏️ Modifiez avec vos infos — l'aperçu se met à jour en direct.</p>
+      </form>
+      <div class="serp-stage">
+        <div class="serp-tabs" role="tablist" aria-label="Type d'aperçu">
+          <button type="button" class="serp-tab" role="tab" id="tab-g" aria-controls="pane-g" aria-selected="true" tabindex="0">Résultat Google</button>
+          <button type="button" class="serp-tab" role="tab" id="tab-m" aria-controls="pane-m" aria-selected="false" tabindex="-1">Fiche Google Business</button>
+          <button type="button" class="serp-tab" role="tab" id="tab-o" aria-controls="pane-o" aria-selected="false" tabindex="-1">Partage Facebook</button>
+        </div>
+        <div role="tabpanel" id="pane-g" class="serp-pane" aria-labelledby="tab-g">
+          <div class="g-card">
+            <div class="g-top"><span class="g-fav" aria-hidden="true"></span><span class="g-site"><span class="g-nm">boulangerie-martin.fr</span><br><span class="g-ur">https://www.boulangerie-martin.fr › accueil</span></span></div>
+            <p class="g-title">Boulangerie Martin — Boulangerie artisanale à Muret</p>
+            <p class="g-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités, nos horaires et où nous trouver. Le bon pain, tout près de chez vous.</p>
+          </div>
+        </div>
+        <div role="tabpanel" id="pane-m" class="serp-pane" aria-labelledby="tab-m" hidden>
+          <div class="m-card">
+            <div class="m-cover" aria-hidden="true"></div>
+            <div class="m-body">
+              <p class="m-name">Boulangerie Martin</p>
+              <p class="m-meta">Boulangerie-pâtisserie · Muret</p>
+              <p class="m-stars"><span class="st" aria-hidden="true">★★★★★</span> Pas encore d'avis — soyez le premier</p>
+              <div class="m-actions"><a class="m-btn" href="#apercu-google" aria-label="Itinéraire (bouton de démonstration)">Itinéraire</a><a class="m-btn" href="#apercu-google" aria-label="Appeler (bouton de démonstration)">Appeler</a><a class="m-btn" href="#apercu-google" aria-label="Site web (bouton de démonstration)">Site web</a></div>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel" id="pane-o" class="serp-pane" aria-labelledby="tab-o" hidden>
+          <div class="o-card">
+            <div class="o-cover"><span class="o-logo">Boulangerie Martin</span></div>
+            <div class="o-body"><span class="o-dom">www.boulangerie-martin.fr</span><p class="o-title">Boulangerie Martin — Boulangerie artisanale à Muret</p><p class="o-desc">Pains, viennoiseries et pâtisseries maison à Muret. Découvrez Boulangerie Martin : nos spécialités et nos horaires.</p></div>
+          </div>
+        </div>
+        <p class="serp-disclaimer">Aperçu illustratif généré dans votre navigateur — le domaine, le titre et la description sont des <strong>exemples</strong> (votre vrai contenu sera fait sur mesure). Les boutons sont une démo, et les étoiles sont vides car une nouvelle fiche n'a pas encore d'avis.</p>
+        <p id="serp-status" class="sr-only" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="serp-actions reveal">
+      <button type="button" class="btn btn-ghost" data-serp-copy>📋 Copier mon title + meta description</button>
+      <a class="btn btn-primary" href="#diagnostic">Je veux ça pour de vrai →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ DIAGNOSTIC GRATUIT (lead magnet) ============ -->
 <section class="section" id="diagnostic">
   <div class="wrap">
