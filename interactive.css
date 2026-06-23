@@ -93,10 +93,8 @@
 .fl-pin.base .lab{opacity:1;}
 .fl-pin.tlse{width:auto;height:auto;background:none;border:none;color:#8b93a8;font-family:'Manrope',system-ui,sans-serif;
   font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:11px;pointer-events:none;}
-.towns.fl-zone-mob{display:none;}
 @media (max-width:760px){
   .fl-zonemap{display:none;}
-  .towns.fl-zone-mob{display:flex;}
 }
 
 /* ---------- Accessibilité : couper les animations si demandé ---------- */

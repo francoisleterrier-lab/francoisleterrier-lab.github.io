@@ -1,8 +1,10 @@
-/* Consentement cookies + chargement conditionnel de Google Analytics 4 (RGPD/CNIL).
-   GA ne se charge QUE si l'utilisateur clique sur « Accepter ». Choix mémorisé en localStorage. */
+/* Consentement cookies + chargement conditionnel des outils de mesure d'audience (RGPD/CNIL).
+   Google Analytics 4 ET Ahrefs Analytics ne se chargent QUE si l'utilisateur clique sur « Accepter ».
+   Choix mémorisé en localStorage. Aucun tracker tiers n'est chargé avant le consentement. */
 (function () {
   var KEY = 'cip-consent';
   var GA_ID = 'G-WTRP1WD9VV';
+  var AHREFS_KEY = '70o1z25QpySuipMTMk7FMg';
 
   function loadGA() {
     if (window.__cipGaLoaded) return;
@@ -18,9 +20,21 @@
     gtag('config', GA_ID, { anonymize_ip: true });
   }
 
+  function loadAhrefs() {
+    if (window.__cipAhrefsLoaded) return;
+    window.__cipAhrefsLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://analytics.ahrefs.com/analytics.js';
+    s.setAttribute('data-key', AHREFS_KEY);
+    document.head.appendChild(s);
+  }
+
+  function loadAnalytics() { loadGA(); loadAhrefs(); }
+
   var choice = null;
   try { choice = localStorage.getItem(KEY); } catch (e) {}
-  if (choice === 'granted') { loadGA(); return; }
+  if (choice === 'granted') { loadAnalytics(); return; }
   if (choice === 'denied') { return; }
 
   // Première visite : on affiche le bandeau.
@@ -42,7 +56,7 @@
   bar.setAttribute('role', 'dialog');
   bar.setAttribute('aria-label', 'Consentement aux cookies');
   bar.innerHTML = '<div class="cip-c-in">'
-    + '<p>🍪 Ce site utilise des cookies de mesure d’audience (Google Analytics) pour comprendre sa fréquentation. Vous pouvez accepter ou refuser — le site fonctionne dans les deux cas. <a href="/confidentialite.html">En savoir plus</a>.</p>'
+    + '<p>🍪 Ce site utilise des outils de mesure d’audience (Google Analytics &amp; Ahrefs) pour comprendre sa fréquentation. Rien n’est chargé sans votre accord — le site fonctionne dans les deux cas. <a href="/confidentialite.html">En savoir plus</a>.</p>'
     + '<div class="cip-c-btns">'
     + '<button type="button" class="cip-c-no">Refuser</button>'
     + '<button type="button" class="cip-c-yes">Accepter</button>'
@@ -51,7 +65,7 @@
   function done(v) {
     try { localStorage.setItem(KEY, v); } catch (e) {}
     if (bar.parentNode) bar.parentNode.removeChild(bar);
-    if (v === 'granted') loadGA();
+    if (v === 'granted') loadAnalytics();
   }
 
   function mount() {
