@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virginie & François — 26 & 27 mai 2028</title>
+<meta name="description" content="Virginie et François se marient les 26 et 27 mai 2028 près de Toulouse. Découvrez notre histoire, le programme, et confirmez votre présence.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --encre:#22382C; --encre2:#2E4A3A; --sauge:#7E9678; --aloe:#ADC2A4;
+  --fond:#F5F4EC; --fond2:#ECEEE0; --or:#B08D4F; --orc:#CBB183; --blanc:#FDFDF9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;color:var(--encre);background:var(--fond);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--aloe);color:var(--encre)}
+.eyebrow{font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--or);font-weight:400;margin-bottom:1.1rem}
+h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2rem,4.5vw,3rem);line-height:1.15;margin-bottom:1.4rem}
+h2 em{font-style:italic;font-weight:400}
+section{padding:6.5rem 1.5rem}
+.wrap{max-width:1040px;margin:0 auto}
+.center{text-align:center}
+
+/* navigation */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.6rem;
+  background:linear-gradient(rgba(245,244,236,.92),rgba(245,244,236,.72) 70%,transparent);backdrop-filter:blur(6px)}
+nav .logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:.08em;color:var(--encre);text-decoration:none}
+nav .logo span{color:var(--or)}
+nav ul{display:flex;gap:1.6rem;list-style:none}
+nav ul a{text-decoration:none;color:var(--encre);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;position:relative}
+nav ul a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--or);transition:width .3s ease}
+nav ul a:hover::after,nav ul a:focus-visible::after{width:100%}
+@media(max-width:760px){nav ul{display:none}}
+
+/* héro */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:7rem 1.5rem 5rem;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;width:46vmin;height:46vmin;border-radius:50%;background:radial-gradient(circle,rgba(173,194,164,.35),transparent 70%);z-index:0;filter:blur(10px)}
+.hero::before{top:-10vmin;left:-12vmin}.hero::after{bottom:-14vmin;right:-12vmin}
+.hero>*{position:relative;z-index:1}
+.medaillon{width:min(300px,62vw);aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid var(--orc);background:#0b0b0b;cursor:pointer;margin-bottom:1.1rem;box-shadow:0 30px 70px -30px rgba(34,56,44,.55),0 0 0 10px rgba(203,177,131,.15);transition:transform .4s ease,box-shadow .4s ease}
+.medaillon:hover{transform:scale(1.02);box-shadow:0 34px 80px -30px rgba(34,56,44,.6),0 0 0 12px rgba(203,177,131,.22)}
+.medaillon video{width:100%;height:100%;object-fit:cover;display:block}
+.mono-hero{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.9rem;color:var(--encre);margin-bottom:1rem}
+.mono-hero em{color:var(--or)}
+.annonce{font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--sauge);margin-bottom:1.2rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(3rem,9vw,5.6rem);line-height:1.05}
+.hero h1 .et{display:block;font-style:italic;font-weight:400;color:var(--or);font-size:.42em;margin:.35rem 0}
+.hero .date{margin-top:1.8rem;font-size:clamp(.95rem,2vw,1.15rem);letter-spacing:.3em;text-transform:uppercase}
+.lieu-teaser{margin-top:.7rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--encre2)}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--sauge);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.scroll-cue::after{content:"";width:1px;height:38px;background:linear-gradient(var(--sauge),transparent);animation:cue 2.2s ease infinite}
+@keyframes cue{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.55);opacity:.4}}
+
+/* arbre SVG de secours */
+.rosette{display:none;margin-bottom:1.4rem;color:var(--encre)}
+.rosette.actif{display:block}
+.rosette .trait{fill:none;stroke:currentColor;stroke-linecap:round;animation:draw .9s ease forwards}
+.rosette text{font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;fill:currentColor;opacity:0;animation:fadein 1.2s ease 2.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{to{opacity:1}}
+
+/* compte à rebours */
+.countdown{background:var(--fond2);padding:3.6rem 1.5rem}
+.cd-grid{display:flex;justify-content:center;gap:clamp(1.4rem,5vw,3.6rem);flex-wrap:wrap}
+.cd-cell{text-align:center;min-width:78px}
+.cd-num{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2.6rem,6vw,4rem);line-height:1;font-variant-numeric:tabular-nums}
+.cd-lbl{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--sauge);margin-top:.45rem}
+
+/* notre histoire */
+.nous .wrap{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:clamp(2.5rem,6vw,5rem);align-items:center}
+@media(max-width:860px){.nous .wrap{grid-template-columns:1fr}}
+.arche{border-radius:999px 999px 14px 14px;overflow:hidden;border:1px solid var(--aloe);padding:12px;background:var(--blanc);box-shadow:0 24px 60px -30px rgba(34,56,44,.35)}
+.arche img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 30%;border-radius:999px 999px 8px 8px}
+.polaroids{display:flex;gap:1.2rem;margin-top:1.6rem;justify-content:center}
+.pola{background:var(--blanc);border:1px solid rgba(126,150,120,.3);padding:8px 8px 12px;border-radius:6px;box-shadow:0 14px 34px -18px rgba(34,56,44,.4);width:48%;transition:transform .35s ease}
+.pola:first-child{transform:rotate(-2.5deg)}
+.pola:last-child{transform:rotate(2deg)}
+.pola:hover{transform:rotate(0) scale(1.04);z-index:2}
+.pola img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:3px}
+.pola figcaption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;text-align:center;margin-top:.5rem;color:var(--encre2)}
+.nous p{margin-bottom:1rem;max-width:52ch}
+.il-manque{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.45rem;color:var(--encre);margin-top:1.3rem}
+.signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--or);margin-top:1.2rem}
+
+/* programme */
+.programme{background:var(--fond2)}
+.jours{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,4vw,3rem);margin-top:3rem;text-align:left}
+@media(max-width:820px){.jours{grid-template-columns:1fr}}
+.jour{background:var(--blanc);border:1px solid rgba(126,150,120,.35);border-radius:16px;padding:2.4rem 2.2rem}
+.jour .quand{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:var(--or)}
+.jour h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.9rem;margin:.5rem 0 1.6rem}
+.jour ol{list-style:none}
+.jour li{display:grid;grid-template-columns:64px 1fr;gap:1.1rem;padding:.85rem 0;border-top:1px dashed rgba(126,150,120,.4)}
+.jour li:first-child{border-top:none}
+.jour .h{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--encre2);font-variant-numeric:tabular-nums}
+.jour .t strong{font-weight:500;display:block}
+.jour .t span{font-size:.92rem;color:var(--encre2)}
+.jour-mystere{display:flex;flex-direction:column}
+.j2-secret{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.6rem;border:1px dashed rgba(176,141,79,.5);border-radius:12px;padding:2rem 1.5rem}
+.j2-secret .q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:3rem;color:var(--or);line-height:1}
+.j2-sub{font-size:.9rem;color:var(--encre2)}
+
+/* lieu mystère */
+.mystere{background:radial-gradient(60vmin 60vmin at 12% 8%,rgba(176,141,79,.16),transparent 70%),radial-gradient(50vmin 50vmin at 88% 92%,rgba(173,194,164,.14),transparent 70%),var(--encre);color:var(--fond)}
+.mystere .eyebrow{color:var(--orc)}
+.mystere h2{color:var(--blanc)}
+.mystere p{color:rgba(245,244,236,.82)}
+.carte-secrete{max-width:560px;margin:2.6rem auto 0;padding:2.6rem 2.2rem;border:1px solid rgba(203,177,131,.45);border-radius:16px;background:rgba(253,253,249,.05);backdrop-filter:blur(4px);cursor:pointer;transition:transform .35s,border-color .35s}
+.carte-secrete:hover,.carte-secrete:focus-visible{transform:translateY(-4px);border-color:var(--orc)}
+.carte-secrete .q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:3.4rem;color:var(--orc);line-height:1}
+.carte-secrete .flou{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.24em;filter:blur(7px);user-select:none;margin:.8rem 0 .4rem;color:var(--aloe)}
+.carte-secrete .indice{font-size:.9rem;color:rgba(245,244,236,.75)}
+.carte-secrete .reponse{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .5s .1s;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--orc)}
+.carte-secrete.ouverte .reponse{max-height:120px;opacity:1;margin-top:1rem}
+
+/* infos */
+.infos .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.6rem;margin-top:3rem;text-align:left}
+.infos .carte{background:var(--blanc);border:1px solid rgba(126,150,120,.3);border-radius:16px;padding:2rem 1.8rem}
+.infos .carte h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.45rem;margin-bottom:.6rem}
+.infos .carte p{font-size:.95rem;color:var(--encre2)}
+
+/* rsvp */
+.rsvp{background:var(--fond2)}
+.rsvp form{max-width:640px;margin:2.6rem auto 0;background:var(--blanc);border:1px solid rgba(126,150,120,.35);border-radius:18px;padding:2.6rem clamp(1.4rem,4vw,2.6rem);text-align:left}
+.rsvp label{display:block;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sauge);margin:1.4rem 0 .45rem}
+.rsvp label:first-of-type{margin-top:0}
+.rsvp input,.rsvp select,.rsvp textarea{width:100%;padding:.8rem 1rem;border:1px solid rgba(126,150,120,.45);border-radius:10px;background:var(--fond);font:inherit;color:var(--encre)}
+.rsvp input:focus,.rsvp select:focus,.rsvp textarea:focus{outline:2px solid var(--or);outline-offset:1px;border-color:var(--or)}
+.rsvp .duo{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:560px){.rsvp .duo{grid-template-columns:1fr}}
+.rsvp button{margin-top:2rem;width:100%;padding:1rem;border:none;border-radius:999px;background:var(--encre);color:var(--blanc);font:inherit;font-weight:400;letter-spacing:.28em;text-transform:uppercase;font-size:.8rem;cursor:pointer;transition:background .3s ease,transform .2s ease}
+.rsvp button:hover,.rsvp button:focus-visible{background:var(--encre2);transform:translateY(-2px)}
+.deadline{margin-top:1.2rem;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--or)}
+
+/* footer */
+footer{background:var(--encre);color:rgba(245,244,236,.8);text-align:center;padding:3.4rem 1.5rem}
+footer .mono{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2rem;color:var(--orc);margin-bottom:.6rem}
+footer p{font-size:.85rem;letter-spacing:.12em}
+
+/* reveals */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vu{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rosette .trait{stroke-dashoffset:0!important}.rosette text{opacity:1}
+  .reveal{opacity:1;transform:none}html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#accueil">V <span>&</span> F</a>
+  <ul>
+    <li><a href="#nous">Notre histoire</a></li>
+    <li><a href="#programme">Programme</a></li>
+    <li><a href="#lieu">Le lieu</a></li>
+    <li><a href="#infos">Infos</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
+
+<!-- ======== HÉRO ======== -->
+<header class="hero" id="accueil">
+  <div class="medaillon" id="medaillon" role="button" tabindex="0" aria-label="Arbre de vie animé — cliquer pour rejouer">
+    <video id="arbre" src="assets/arbre-de-vie.mp4" autoplay muted playsinline preload="auto"></video>
+  </div>
+  <svg class="rosette" id="rosette" viewBox="0 0 200 232" width="260" aria-hidden="true"></svg>
+  <div class="mono-hero">V <em>&amp;</em> F</div>
+  <p class="annonce">Nous nous marions</p>
+  <h1>Virginie <span class="et">&amp;</span> François</h1>
+  <p class="date">26 · 27 mai 2028</p>
+  <p class="lieu-teaser">Quelque part au cœur du Sud-Toulousain…</p>
+  <a class="scroll-cue" href="#compte">Découvrir</a>
+</header>
+
+<!-- ======== COMPTE À REBOURS ======== -->
+<div class="countdown" id="compte">
+  <div class="cd-grid" id="cd" aria-label="Compte à rebours avant le mariage">
+    <div class="cd-cell"><div class="cd-num" id="cd-j">—</div><div class="cd-lbl">Jours</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cd-h">—</div><div class="cd-lbl">Heures</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cd-m">—</div><div class="cd-lbl">Minutes</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cd-s">—</div><div class="cd-lbl">Secondes</div></div>
+  </div>
+</div>
+
+<!-- ======== NOTRE HISTOIRE ======== -->
+<section class="nous" id="nous">
+  <div class="wrap reveal">
+    <div>
+      <div class="arche">
+        <img src="assets/couple.jpg" alt="Virginie et François, souriants, devant un mur de verdure">
+      </div>
+      <div class="polaroids">
+        <figure class="pola">
+          <img src="assets/eden.jpg" alt="Eden, souriante dans sa robe blanche et bleue">
+          <figcaption>Eden, notre plus bel ange</figcaption>
+        </figure>
+        <figure class="pola">
+          <img src="assets/temoins.jpg" alt="Alan et Mélane, souriants au soleil, en noir et blanc">
+          <figcaption>Alan &amp; Mélane, nos témoins</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">Notre histoire</p>
+      <h2>Il y a des histoires qui <em>prennent leur temps</em></h2>
+      <p>La nôtre a commencé il y a plus de vingt ans. À chaque regard qui se croisait, le charme opérait — déjà. Mais la vie, parfois, choisit d'autres chemins, et nous nous sommes perdus de vue.</p>
+      <p>En 2022, elle nous a remis l'un en face de l'autre. Et cette fois, nous ne nous sommes plus jamais quittés.</p>
+      <p>De cet amour retrouvé est né le plus bel ange du monde : notre fille, <strong>Eden</strong>. Deux ans et demi après sa naissance, une seule évidence s'imposait — graver cet amour, pour toujours.</p>
+      <p>C'est au mariage de sa belle-sœur et de son beau-frère — devenus aujourd'hui nos témoins — que François a posé un genou à terre. Virginie a dit oui.</p>
+      <p class="il-manque">Il ne manque plus que vous.</p>
+      <p class="signature">Virginie, François &amp; Eden</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PROGRAMME ======== -->
+<section class="programme" id="programme">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Le programme</p>
+    <h2>Le pont de <em>l'Ascension</em> 2028</h2>
+    <p>Deux journées pensées pour profiter — et garder des forces.</p>
+    <div class="jours">
+      <article class="jour">
+        <p class="quand">Jour 1 — Vendredi 26 mai</p>
+        <h3>Le grand jour</h3>
+        <ol>
+          <li><span class="h">🔒</span><span class="t"><strong>Mairie</strong><span>Horaire &amp; lieu dévoilés plus tard…</span></span></li>
+          <li><span class="h">16 h 00</span><span class="t"><strong>Cérémonie laïque</strong><span>Sous les arbres, au cœur du parc</span></span></li>
+          <li><span class="h">17 h 30</span><span class="t"><strong>Vin d'honneur</strong><span>Avec une surprise musicale &amp; scénique ✨</span></span></li>
+          <li><span class="h">20 h 00</span><span class="t"><strong>Repas</strong><span>À table, en famille et entre amis</span></span></li>
+          <li><span class="h">22 h 30</span><span class="t"><strong>Dancefloor</strong><span>On vous attend au centre de la piste</span></span></li>
+          <li><span class="h">3 h 00</span><span class="t"><strong>Coupure</strong><span>Dernier morceau — demain, ça repart !</span></span></li>
+        </ol>
+      </article>
+      <article class="jour jour-mystere">
+        <p class="quand">Jour 2 — Samedi 27 mai</p>
+        <h3>La journée lâchage</h3>
+        <div class="j2-secret">
+          <div class="q">?</div>
+          <p>La programmation de cette deuxième journée reste <em>top secrète</em>.</p>
+          <p class="j2-sub">Une seule certitude : on ne rentre pas se coucher. Programme dévoilé plus tard…</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======== LIEU MYSTÈRE ======== -->
+<section class="mystere" id="lieu">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Le lieu</p>
+    <h2>Chut… c'est encore <em>un secret</em></h2>
+    <p>Nous avons trouvé un écrin de verdure confidentiel, à quelques minutes de Toulouse.<br>Son nom et son adresse vous seront dévoilés quelques semaines avant le grand jour.</p>
+    <div class="carte-secrete" id="secret" role="button" tabindex="0" aria-expanded="false" aria-label="Un indice sur le lieu — cliquer pour un teaser">
+      <div class="q">?</div>
+      <div class="flou" aria-hidden="true">Le ··· des ······</div>
+      <p class="indice">Un domaine caché dans la campagne du Sud-Toulousain — cliquez, si vous osez.</p>
+      <div class="reponse">Patience… 🌿 Un indice se glissera ici au fil des saisons. Revenez nous voir !</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== INFOS PRATIQUES ======== -->
+<section class="infos" id="infos">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Infos pratiques</p>
+    <h2>Tout ce qu'il faut <em>savoir</em></h2>
+    <div class="cartes">
+      <div class="carte">
+        <h3>👗 Dress code</h3>
+        <p>Élégance champêtre : tons naturels, lin, sauge, ivoire ou doré. Le blanc reste réservé à la mariée — et prévoyez des chaussures qui aiment l'herbe.</p>
+      </div>
+      <div class="carte">
+        <h3>🏡 Hébergement</h3>
+        <p>De nombreuses possibilités autour de Muret et du sud de Toulouse. Une liste de suggestions arrivera avec la révélation du lieu.</p>
+      </div>
+      <div class="carte">
+        <h3>🗓️ Deux jours de fête</h3>
+        <p>Le vendredi et le samedi du pont de l'Ascension : un long week-end idéal pour venir de loin — et tenir la journée lâchage du samedi.</p>
+      </div>
+      <div class="carte">
+        <h3>💛 Votre présence</h3>
+        <p>C'est le plus beau des cadeaux. Pour celles et ceux qui souhaitent nous gâter davantage, une urne accueillera vos attentions le jour J.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== RSVP ======== -->
+<section class="rsvp" id="rsvp">
+  <div class="wrap center reveal">
+    <p class="eyebrow">RSVP</p>
+    <h2>Dites-nous <em>oui</em></h2>
+    <p>Confirmez votre présence en quelques secondes — nous avons hâte.</p>
+    <form id="form-rsvp">
+      <label for="nom">Votre nom &amp; prénom</label>
+      <input id="nom" name="nom" type="text" required autocomplete="name" placeholder="Ex. : Camille Dupont">
+      <div class="duo">
+        <div>
+          <label for="adultes">Adultes</label>
+          <select id="adultes" name="adultes"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+        </div>
+        <div>
+          <label for="enfants">Enfants</label>
+          <select id="enfants" name="enfants"><option>0</option><option>1</option><option>2</option><option>3</option><option>4+</option></select>
+        </div>
+      </div>
+      <label for="presence">Je serai présent·e</label>
+      <select id="presence" name="presence">
+        <option>Les deux jours 🌿</option>
+        <option>Vendredi 26 mai uniquement</option>
+        <option>Samedi 27 mai uniquement</option>
+        <option>Hélas, je ne pourrai pas venir</option>
+      </select>
+      <label for="regime">Allergies ou régimes particuliers</label>
+      <input id="regime" name="regime" type="text" placeholder="Végétarien, sans gluten…">
+      <label for="mot">Un petit mot pour nous ?</label>
+      <textarea id="mot" name="mot" rows="3" placeholder="On prend aussi les idées de chansons pour le dancefloor 🎶"></textarea>
+      <button type="submit">Envoyer ma réponse</button>
+      <p class="deadline">Réponse souhaitée avant le 1<sup>er</sup> mars 2028</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="mono">V &amp; F</div>
+  <p>26 &amp; 27 mai 2028 — Sud-Toulousain</p>
+</footer>
+
+<script>
+/* ----- vidéo arbre de vie : lecture, rejouer au clic, secours SVG ----- */
+const video = document.getElementById('arbre');
+const medaillon = document.getElementById('medaillon');
+const rosette = document.getElementById('rosette');
+
+const ARBRE_PATHS = [
+  ["M100 142 C99 122 100 104 100 78",5.5,.2],
+  ["M100 104 C84 96 68 86 50 70",3,.8],["M100 104 C116 96 132 86 150 70",3,.85],
+  ["M100 90 C88 76 78 60 70 42",2.6,.95],["M100 90 C112 76 122 60 130 42",2.6,1],
+  ["M100 80 C100 64 98 46 96 26",2.6,1.05],
+  ["M76 92 C62 88 46 88 32 92",1.8,1.3],["M124 92 C138 88 154 88 168 92",1.8,1.35],
+  ["M64 78 C52 70 42 62 34 50",1.6,1.45],["M136 78 C148 70 158 62 166 50",1.6,1.5],
+  ["M50 70 C44 62 42 52 40 42",1.4,1.6],["M150 70 C156 62 158 52 160 42",1.4,1.65],
+  ["M78 62 C70 50 64 40 62 28",1.5,1.7],["M122 62 C130 50 136 40 138 28",1.5,1.75],
+  ["M98 50 C90 40 84 32 78 22",1.4,1.8],["M98 50 C106 40 112 32 118 22",1.4,1.85],
+  ["M56 84 C48 82 40 82 30 84",1.1,2],["M144 84 C152 82 160 82 170 84",1.1,2.05],
+  ["M70 42 C67 36 66 30 66 24",1.1,2.1],["M130 42 C133 36 134 30 134 24",1.1,2.15],
+  ["M96 26 C95 22 94 19 92 16",1.1,2.2],
+  ["M84 74 C78 68 74 62 72 54",1.2,1.9],["M116 74 C122 68 126 62 128 54",1.2,1.95],
+  ["M60 56 C54 50 50 44 48 36",1.2,2.25],["M140 56 C146 50 150 44 152 36",1.2,2.3],
+  ["M88 36 C86 30 85 26 84 20",1,2.35],["M112 36 C114 30 115 26 116 20",1,2.4],
+  ["M100 142 C88 150 74 154 58 154",2.6,.7],["M100 142 C112 150 126 154 142 154",2.6,.75],
+  ["M100 142 C100 154 100 164 100 178",2.4,.8],
+  ["M100 142 C96 154 90 164 80 172",2.2,.85],["M100 142 C104 154 110 164 120 172",2.2,.9],
+  ["M74 150 C64 156 52 158 40 156",1.4,1.2],["M126 150 C136 156 148 158 160 156",1.4,1.25],
+  ["M90 162 C82 168 72 173 64 176",1.3,1.35],["M110 162 C118 168 128 173 136 176",1.3,1.4],
+  ["M100 178 C96 181 92 183 88 185",1.2,1.45],
+  ["M58 154 C52 158 48 160 44 162",1.2,1.5],["M142 154 C148 158 152 160 156 162",1.2,1.55]
+];
+function dessinerSecours(){
+  const NS='http://www.w3.org/2000/svg';
+  const c=document.createElementNS(NS,'circle');
+  c.setAttribute('cx',100);c.setAttribute('cy',100);c.setAttribute('r',88);
+  c.setAttribute('class','trait');
+  c.style.cssText='stroke-width:2.4;stroke-dasharray:560;stroke-dashoffset:560;animation-duration:1.8s';
+  rosette.appendChild(c);
+  ARBRE_PATHS.forEach(([d,w,t])=>{
+    const p=document.createElementNS(NS,'path');
+    p.setAttribute('d',d);p.setAttribute('class','trait');
+    p.style.cssText=`stroke-width:${w};stroke-dasharray:260;stroke-dashoffset:260;animation-delay:${t}s`;
+    rosette.appendChild(p);
+  });
+  const tx=document.createElementNS(NS,'text');
+  tx.setAttribute('x',100);tx.setAttribute('y',224);tx.setAttribute('text-anchor','middle');
+  tx.textContent='V & F';
+  rosette.appendChild(tx);
+}
+function basculerSecours(){
+  medaillon.style.display='none';
+  document.querySelector('.mono-hero').style.display='none';
+  rosette.classList.add('actif');
+  if(!rosette.hasChildNodes()) dessinerSecours();
+}
+video.addEventListener('error', basculerSecours);
+const lecture = video.play();
+if(lecture && lecture.catch) lecture.catch(basculerSecours);
+setTimeout(()=>{ if(video.readyState<2||(video.paused&&video.currentTime===0)) basculerSecours(); },2500);
+function rejouer(){ video.currentTime=0; video.play(); }
+medaillon.addEventListener('click', rejouer);
+medaillon.addEventListener('keydown', e=>{ if(e.key==='Enter') rejouer(); });
+
+/* ----- compte à rebours ----- */
+const cible = new Date('2028-05-26T14:00:00+02:00').getTime();
+const pad = n => String(n).padStart(2,'0');
+function tic(){
+  const d = cible - Date.now();
+  if(d <= 0){
+    document.getElementById('cd').innerHTML = '<div class="cd-num" style="font-style:italic">C\'est le grand jour ! 🌿</div>';
+    return;
+  }
+  document.getElementById('cd-j').textContent = Math.floor(d/864e5);
+  document.getElementById('cd-h').textContent = pad(Math.floor(d/36e5)%24);
+  document.getElementById('cd-m').textContent = pad(Math.floor(d/6e4)%60);
+  document.getElementById('cd-s').textContent = pad(Math.floor(d/1e3)%60);
+  setTimeout(tic, 1000);
+}
+tic();
+
+/* ----- carte secrète ----- */
+const secret = document.getElementById('secret');
+function toggleSecret(){
+  const o = secret.classList.toggle('ouverte');
+  secret.setAttribute('aria-expanded', o);
+}
+secret.addEventListener('click', toggleSecret);
+secret.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleSecret(); } });
+
+/* ----- apparition au scroll ----- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vu'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ----- RSVP : e-mail prérempli -----
+   ⚠️ Remplacez EMAIL_RSVP par votre adresse.
+   Étape suivante possible : collecte automatique des réponses
+   (Supabase / Formspree) + espace sécurisé invités — demandez le brief. */
+const EMAIL_RSVP = 'votre-adresse@exemple.fr';
+document.getElementById('form-rsvp').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const sujet = encodeURIComponent(`RSVP Mariage — ${f.get('nom')}`);
+  const corps = encodeURIComponent(
+`Nom : ${f.get('nom')}
+Adultes : ${f.get('adultes')}  |  Enfants : ${f.get('enfants')}
+Présence : ${f.get('presence')}
+Régimes / allergies : ${f.get('regime') || '—'}
+Message : ${f.get('mot') || '—'}`
+  );
+  window.location.href = `mailto:${EMAIL_RSVP}?subject=${sujet}&body=${corps}`;
+});
+</script>
+</body>
+</html>
