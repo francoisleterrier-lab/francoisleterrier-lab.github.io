@@ -14,10 +14,12 @@
 ## Services
 1. Gestion des réseaux sociaux (Facebook, Instagram, Google Business Profile) : création de visuels et de textes, programmation, modération, bilans de performance.
 2. Création de sites internet : landing page, site vitrine jusqu'à 5 pages, sur-mesure (e-commerce / réservation), avec référencement local (SEO) inclus.
+3. Faire-part digital : mini-site d'invitation événementiel privé (mariage, baptême, anniversaire, PACS) avec compte à rebours, RSVP en ligne (présence, enfants, allergies) consultable en temps réel, programme, infos pratiques, hébergements, itinéraire, dress code, galerie photos, livre d'or, installable sur téléphone (PWA), adresse web privée non indexée.
 
 ## Tarifs (à partir de, TVA non applicable art. 293 B du CGI)
 - Réseaux sociaux : Essentiel dès 180 €/mois (2 publications), Croissance dès 350 €/mois (4 publications, le plus choisi), Premium dès 520 €/mois (4 publications + 1 vidéo/Reel).
 - Sites internet : Site Express dès 590 €, Site Vitrine dès 1 400 €, Sur-Mesure dès 2 500 €.
+- Faire-part digital : Essentiel dès 290 € (infos pratiques, RSVP, galerie), Signature dès 490 € (design sur-mesure complet, suivi des réponses, domaine 1 an inclus — la plus choisie), Prestige dès 790 € (appli installable PWA, pages par invité, quiz et animations).
 - Options : publication supplémentaire 40 €, montage vidéo 80 €, maintenance dès 39 €/mois, etc.
 - Sans engagement (formules réseaux), premier échange offert.
 
@@ -34,6 +36,7 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Accueil : https://francoisleterrier.fr/
 - Community manager (réseaux sociaux) : https://francoisleterrier.fr/community-manager.html
 - Création de site internet : https://francoisleterrier.fr/creation-site-internet.html
+- Faire-part digital (invitation événementielle) : https://francoisleterrier.fr/faire-part-digital.html
 - Tarifs : https://francoisleterrier.fr/tarifs.html
 - Contact : https://francoisleterrier.fr/contact.html
 - À propos (page entité) : https://francoisleterrier.fr/a-propos.html

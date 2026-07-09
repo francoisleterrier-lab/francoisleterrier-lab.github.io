@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Camille &amp; Jules — Faire-part digital de mariage (modèle de site)</title>
+<meta name="description" content="Modèle de faire-part de mariage digital (couple fictif) : compte à rebours, programme, infos pratiques et RSVP en ligne, réalisé par François Leterrier.">
+<meta name="theme-color" content="#22382C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fir:#22382C;--fir2:#1B2E24;--firdark:#16241C;
+    --sage:#8FA98F;--sagel:#B7C7B4;
+    --cream:#FAF7F1;--ivory:#F3EEE3;
+    --gold:#C6A768;--gold2:#A98B4F;--goldl:#D9BE8C;
+    --ink:#2C3A31;--muted:#6C7A6E;--line:#E4DECF;--line2:#CFC7B2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',system-ui,sans-serif;font-weight:400;font-size:16px;color:var(--ink);background:var(--cream);line-height:1.75;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.15;}
+  a{color:var(--fir);text-decoration:none;}
+  img,svg{max-width:100%;}
+
+  /* ruban démo */
+  .demo{text-align:center;font-size:12.5px;padding:9px 14px;color:#5F6D61;background:var(--ivory);border-bottom:1px solid var(--line);}
+  .demo a{color:var(--fir);font-weight:700;}
+
+  /* nav discrète collante */
+  .nav{position:sticky;top:0;z-index:60;display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap;padding:12px 16px;background:rgba(250,247,241,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+  .nav .cj{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;color:var(--gold2);letter-spacing:.06em;}
+  .nav a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--fir);}
+  .nav a:hover{color:var(--gold2);}
+  .nav a.rs{border:1px solid var(--gold);color:var(--gold2);padding:4px 14px;border-radius:30px;}
+  .nav a.rs:hover{background:var(--fir);border-color:var(--fir);color:var(--cream);}
+
+  /* couverture — carte encadrée */
+  .cover{background:var(--fir);background-image:radial-gradient(circle at 50% -10%,rgba(143,169,143,.16),transparent 62%);padding:26px 18px;min-height:88vh;min-height:94svh;display:flex;}
+  .frame{position:relative;width:100%;max-width:780px;margin:auto;border:1px solid rgba(198,167,104,.55);padding:8px;}
+  .frame-in{border:1px solid rgba(198,167,104,.25);padding:76px 26px 62px;text-align:center;}
+  .cover .sprig{position:absolute;width:78px;height:78px;color:var(--gold);opacity:.5;pointer-events:none;}
+  .sprig.tl{top:16px;left:16px;transform:scaleY(-1);}
+  .sprig.br{bottom:16px;right:16px;transform:scaleX(-1);}
+  .mono{width:88px;height:88px;border-radius:50%;border:1px solid rgba(198,167,104,.7);position:relative;display:flex;align-items:center;justify-content:center;margin:0 auto 30px;font-family:'Cormorant Garamond',Georgia,serif;font-size:27px;letter-spacing:.14em;color:var(--goldl);}
+  .mono::before{content:"";position:absolute;inset:4px;border:1px solid rgba(198,167,104,.3);border-radius:50%;}
+  .mono .amp{font-style:italic;color:var(--gold);padding:0 2px;}
+  .ey{font-size:11px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);}
+  .cover .ey{color:var(--goldl);}
+  .cover h1{font-size:clamp(44px,11vw,86px);font-weight:500;font-style:italic;color:var(--cream);margin:16px 0 4px;}
+  .cover h1 .amp{color:var(--gold);font-size:.72em;padding:0 .06em;}
+  .cover .date{margin-top:28px;font-size:14px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);}
+  .cover .lieu{margin-top:10px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:21px;color:var(--sagel);}
+  .down{display:inline-flex;flex-direction:column;align-items:center;gap:7px;margin-top:46px;color:var(--goldl);font-size:11px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;}
+  .down:hover{color:var(--cream);}
+  .down .chev{display:block;line-height:0;}
+
+  /* ornement divider */
+  .orn{width:190px;height:26px;color:var(--gold);display:block;margin:22px auto 0;}
+  .orn line{stroke:currentColor;stroke-width:1;opacity:.4;}
+  .orn .lf{fill:currentColor;opacity:.85;}
+  .orn circle{fill:currentColor;}
+
+  /* sections */
+  .sec{max-width:860px;margin:0 auto;padding:82px 24px;}
+  .center{text-align:center;}
+  h2{font-size:clamp(30px,5vw,44px);color:var(--fir);margin-top:12px;}
+  .sub{max-width:52ch;margin:18px auto 0;color:var(--muted);font-size:16.5px;}
+
+  /* compte à rebours */
+  .cd{display:flex;justify-content:center;align-items:stretch;gap:clamp(16px,5vw,44px);margin-top:44px;}
+  .cdb{min-width:86px;}
+  .cdb .n{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(46px,9vw,64px);color:var(--fir);line-height:1;}
+  .cdb .l{margin-top:8px;font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold2);}
+  .cd .sep{width:1px;background:var(--line2);}
+  .cd-past{display:none;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:clamp(24px,4.5vw,32px);color:var(--fir);margin-top:40px;}
+  .cd-note{margin-top:34px;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+
+  /* notre histoire */
+  .story{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .chaps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:52px;text-align:center;}
+  .chap .yr{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:34px;color:var(--gold2);}
+  .chap h3{font-size:22px;color:var(--fir);margin:8px 0 8px;}
+  .chap p{font-size:15px;color:var(--muted);}
+  .chap .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin:14px auto 0;}
+
+  /* programme */
+  .prog{background:var(--fir);background-image:radial-gradient(circle at 85% 8%,rgba(143,169,143,.12),transparent 55%);color:var(--cream);}
+  .prog .ey{color:var(--goldl);}
+  .prog h2{color:var(--cream);}
+  .plan{max-width:620px;margin:20px auto 0;text-align:left;}
+  .pday{margin-top:44px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:24px;color:var(--goldl);text-align:center;}
+  .pev{display:grid;grid-template-columns:104px 1fr;gap:20px;padding:24px 4px;border-bottom:1px solid rgba(245,240,230,.14);align-items:baseline;}
+  .pev:last-child{border-bottom:0;}
+  .pev .t{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:26px;color:var(--gold);white-space:nowrap;}
+  .pev h3{font-size:21px;color:var(--cream);font-weight:600;}
+  .pev p{font-size:14.5px;color:rgba(245,240,230,.72);margin-top:3px;}
+
+  /* infos pratiques */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:52px;text-align:left;}
+  .cardi{background:#fff;border:1px solid var(--line);border-top:2px solid var(--gold);padding:30px 26px;}
+  .cardi .ic{width:26px;height:26px;color:var(--gold2);display:block;}
+  .cardi h3{font-size:22px;color:var(--fir);margin:14px 0 6px;}
+  .cardi p{font-size:14.5px;color:var(--muted);}
+
+  /* RSVP — carton-réponse */
+  .rsvp{background:var(--fir2);padding:88px 18px;}
+  .rcard{max-width:620px;margin:0 auto;background:var(--cream);border:1px solid rgba(198,167,104,.45);padding:12px;}
+  .rcard-in{border:1px solid rgba(169,139,79,.28);padding:44px 30px;text-align:center;}
+  .rcard-in .sub{font-size:15px;}
+  .rform{margin-top:34px;text-align:left;}
+  .fld{margin-bottom:18px;}
+  .fld label{display:block;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+  .fld input[type=text],.fld select,.fld textarea{width:100%;border:1px solid var(--line2);background:#fff;padding:12px 14px;font-family:'Jost',system-ui,sans-serif;font-size:15px;color:var(--ink);border-radius:2px;}
+  .fld input[type=text]:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--fir);box-shadow:0 0 0 3px rgba(34,56,44,.12);}
+  .fld textarea{resize:vertical;min-height:86px;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .seg{position:relative;display:flex;gap:10px;flex-wrap:wrap;}
+  .seg input{position:absolute;opacity:0;pointer-events:none;}
+  .seg label{flex:1;min-width:140px;text-align:center;border:1px solid var(--line2);background:#fff;padding:11px 14px;border-radius:2px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s;margin-bottom:0;letter-spacing:0;text-transform:none;font-weight:400;display:block;}
+  .seg input:checked+label{background:var(--fir);border-color:var(--fir);color:var(--cream);}
+  .seg input:focus+label{outline:2px solid var(--gold);outline-offset:2px;}
+  .send{width:100%;margin-top:6px;background:var(--fir);color:var(--cream);border:1px solid var(--fir);padding:15px 18px;font-family:'Jost',system-ui,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .25s;}
+  .send:hover{background:#2E4A3A;}
+  .demo-note{display:none;margin-top:18px;padding:16px 18px;background:rgba(143,169,143,.16);border:1px solid var(--sage);border-radius:2px;font-size:14px;color:var(--ink);text-align:left;}
+  .demo-note b{color:var(--fir);}
+
+  /* footer */
+  .ff{background:var(--firdark);color:rgba(245,240,230,.65);text-align:center;padding:52px 24px 60px;font-size:13.5px;}
+  .ff .made{border:1px solid rgba(198,167,104,.35);border-radius:2px;padding:18px 20px;max-width:640px;margin:0 auto 20px;color:rgba(245,240,230,.8);}
+  .ff .made b{color:var(--goldl);}
+  .ff .made a{color:var(--cream);text-decoration:underline;}
+  .ff a{color:rgba(245,240,230,.65);text-decoration:underline;}
+  .ff .names{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:19px;color:var(--sagel);margin-bottom:8px;}
+
+  /* animations douces */
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  .a1{animation:rise .9s ease .1s both;}
+  .a2{animation:rise .9s ease .3s both;}
+  .a3{animation:rise .9s ease .5s both;}
+  .a4{animation:rise .9s ease .7s both;}
+  .a5{animation:rise .9s ease .9s both;}
+  .a6{animation:rise .9s ease 1.15s both;}
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+  .down .chev{animation:floaty 2.8s ease-in-out infinite;}
+  .js .reveal{opacity:0;transform:translateY(18px);transition:opacity .85s ease,transform .85s ease;}
+  .js .reveal.vis{opacity:1;transform:none;}
+
+  @media(max-width:700px){
+    .nav{gap:14px;padding:10px 12px;}
+    .nav a{font-size:11px;letter-spacing:.14em;}
+    .frame-in{padding:58px 18px 48px;}
+    .cover .sprig{width:58px;height:58px;}
+    .sec{padding:64px 20px;}
+    .chaps{grid-template-columns:1fr;gap:40px;}
+    .cards{grid-template-columns:1fr;}
+    .pev{grid-template-columns:78px 1fr;gap:14px;}
+    .pev .t{font-size:22px;}
+    .rcard-in{padding:36px 20px;}
+    .two{grid-template-columns:1fr;}
+    .cdb{min-width:72px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation:none !important;transition:none !important;}
+    .js .reveal{opacity:1;transform:none;}
+  }
+</style>
+<script>document.documentElement.className+=' js';</script>
+</head>
+<body>
+  <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/faire-part-digital.html" target="_blank" rel="noopener">un faire-part comme celui-ci →</a></div>
+
+  <nav class="nav" aria-label="Navigation du faire-part">
+    <span class="cj" aria-hidden="true">C<em class="amp">&amp;</em>J</span>
+    <a href="#jour">Le jour J</a>
+    <a href="#histoire">Notre histoire</a>
+    <a href="#programme">Programme</a>
+    <a href="#infos">Infos</a>
+    <a class="rs" href="#rsvp">Répondre</a>
+  </nav>
+
+  <header class="cover">
+    <div class="frame">
+      <svg class="sprig tl" viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+        <path d="M8 88C30 66 54 42 88 10" fill="none" stroke="currentColor" stroke-width="1.1"/>
+        <g fill="currentColor">
+          <ellipse cx="20" cy="74" rx="7" ry="3.4" transform="rotate(-80 20 74)"/>
+          <ellipse cx="30" cy="64" rx="7" ry="3.4" transform="rotate(-12 30 64)"/>
+          <ellipse cx="42" cy="52" rx="7" ry="3.4" transform="rotate(-80 42 52)"/>
+          <ellipse cx="52" cy="42" rx="7" ry="3.4" transform="rotate(-12 52 42)"/>
+          <ellipse cx="64" cy="30" rx="7" ry="3.4" transform="rotate(-80 64 30)"/>
+          <ellipse cx="74" cy="20" rx="7" ry="3.4" transform="rotate(-12 74 20)"/>
+          <ellipse cx="86" cy="10" rx="6" ry="3" transform="rotate(-45 86 10)"/>
+        </g>
+      </svg>
+      <svg class="sprig br" viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+        <path d="M8 88C30 66 54 42 88 10" fill="none" stroke="currentColor" stroke-width="1.1"/>
+        <g fill="currentColor">
+          <ellipse cx="20" cy="74" rx="7" ry="3.4" transform="rotate(-80 20 74)"/>
+          <ellipse cx="30" cy="64" rx="7" ry="3.4" transform="rotate(-12 30 64)"/>
+          <ellipse cx="42" cy="52" rx="7" ry="3.4" transform="rotate(-80 42 52)"/>
+          <ellipse cx="52" cy="42" rx="7" ry="3.4" transform="rotate(-12 52 42)"/>
+          <ellipse cx="64" cy="30" rx="7" ry="3.4" transform="rotate(-80 64 30)"/>
+          <ellipse cx="74" cy="20" rx="7" ry="3.4" transform="rotate(-12 74 20)"/>
+          <ellipse cx="86" cy="10" rx="6" ry="3" transform="rotate(-45 86 10)"/>
+        </g>
+      </svg>
+      <div class="frame-in">
+        <div class="mono a1" aria-hidden="true">C<span class="amp">&amp;</span>J</div>
+        <p class="ey a2">Nous nous marions</p>
+        <h1 class="a3">Camille <span class="amp">&amp;</span> Jules</h1>
+        <svg class="orn a4" viewBox="0 0 220 26" aria-hidden="true" focusable="false">
+          <line x1="10" y1="13" x2="76" y2="13"/>
+          <line x1="144" y1="13" x2="210" y2="13"/>
+          <path class="lf" d="M110 13c-7-8-16-9-23-6 5 7 14 9 23 6z"/>
+          <path class="lf" d="M110 13c7-8 16-9 23-6-5 7-14 9-23 6z"/>
+          <circle cx="110" cy="13" r="1.8"/>
+        </svg>
+        <p class="date a5">Samedi 12 juin 2027</p>
+        <p class="lieu a5">Domaine des Trois Chênes — Sud-Toulousain</p>
+        <a class="down a6" href="#jour"><span>Découvrir</span><span class="chev"><svg width="18" height="10" viewBox="0 0 24 14" aria-hidden="true" focusable="false"><path d="M2 2l10 10L22 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec center" id="jour">
+    <p class="ey reveal">Le grand jour</p>
+    <h2 class="reveal">Chaque jour nous rapproche</h2>
+    <svg class="orn reveal" viewBox="0 0 220 26" aria-hidden="true" focusable="false">
+      <line x1="10" y1="13" x2="76" y2="13"/>
+      <line x1="144" y1="13" x2="210" y2="13"/>
+      <path class="lf" d="M110 13c-7-8-16-9-23-6 5 7 14 9 23 6z"/>
+      <path class="lf" d="M110 13c7-8 16-9 23-6-5 7-14 9-23 6z"/>
+      <circle cx="110" cy="13" r="1.8"/>
+    </svg>
+    <div class="cd reveal" id="cd-nums">
+      <div class="cdb"><div class="n" id="cd-d">—</div><div class="l">Jours</div></div>
+      <div class="sep" aria-hidden="true"></div>
+      <div class="cdb"><div class="n" id="cd-h">—</div><div class="l">Heures</div></div>
+      <div class="sep" aria-hidden="true"></div>
+      <div class="cdb"><div class="n" id="cd-m">—</div><div class="l">Minutes</div></div>
+    </div>
+    <p class="cd-past" id="cd-past">C'était le plus beau jour. Merci du fond du cœur d'en avoir fait partie.</p>
+    <p class="cd-note reveal">Samedi 12 juin 2027 · 15 h · Domaine des Trois Chênes</p>
+  </section>
+
+  <section class="story" id="histoire">
+    <div class="sec center">
+      <p class="ey reveal">Notre histoire</p>
+      <h2 class="reveal">Trois chapitres, et le plus beau reste à écrire</h2>
+      <div class="chaps">
+        <div class="chap reveal">
+          <div class="yr">2019</div>
+          <h3>La rencontre</h3>
+          <p>Un mariage d'amis près de Toulouse, une table commune, et une conversation qui ne s'est jamais vraiment arrêtée.</p>
+          <div class="dot" aria-hidden="true"></div>
+        </div>
+        <div class="chap reveal">
+          <div class="yr">2023</div>
+          <h3>Le nid</h3>
+          <p>Nos deux prénoms sur une boîte aux lettres du Sud-Toulousain, un jardin à apprivoiser, et l'envie de faire grandir tout ça.</p>
+          <div class="dot" aria-hidden="true"></div>
+        </div>
+        <div class="chap reveal">
+          <div class="yr">2026</div>
+          <h3>La demande</h3>
+          <p>Un genou à terre sous trois grands chênes, un oui sans la moindre hésitation. Le lieu de la fête était tout trouvé.</p>
+          <div class="dot" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="prog" id="programme">
+    <div class="sec center">
+      <p class="ey reveal">Le programme</p>
+      <h2 class="reveal">Une journée, deux lendemains</h2>
+      <div class="plan">
+        <div class="pday reveal">Samedi 12 juin</div>
+        <div class="pev reveal"><div class="t">15 h</div><div><h3>La cérémonie</h3><p>Dans le parc, sous les trois chênes. Pensez à arriver un peu en avance pour trouver votre place.</p></div></div>
+        <div class="pev reveal"><div class="t">17 h</div><div><h3>Le cocktail</h3><p>Bulles, jus du verger et douceurs sur la grande terrasse, au soleil du soir.</p></div></div>
+        <div class="pev reveal"><div class="t">20 h</div><div><h3>Le dîner</h3><p>Dans l'orangerie, suivi d'une soirée dansante jusqu'au bout de la nuit.</p></div></div>
+        <div class="pday reveal">Dimanche 13 juin</div>
+        <div class="pev reveal"><div class="t">11 h 30</div><div><h3>Le brunch</h3><p>Des retrouvailles au jardin pour prolonger le week-end en douceur, en toute simplicité.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec center" id="infos">
+    <p class="ey reveal">Infos pratiques</p>
+    <h2 class="reveal">Tout ce qu'il faut savoir</h2>
+    <div class="cards">
+      <div class="cardi reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        <h3>Dress code — élégant champêtre</h3>
+        <p>Tons naturels, lin et matières souples bienvenus. La cérémonie a lieu dans l'herbe : les talons aiguilles risquent de ne pas apprécier.</p>
+      </div>
+      <div class="cardi reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
+        <h3>Dormir à proximité</h3>
+        <p>Gîtes, chambres d'hôtes et hôtels à moins de quinze minutes du domaine. Écrivez-nous si vous cherchez une idée, on vous aiguille avec plaisir.</p>
+      </div>
+      <div class="cardi reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h3>Accès &amp; parking</h3>
+        <p>Le domaine se trouve à une trentaine de minutes au sud de Toulouse. Parking gratuit sur place, à deux pas de la cérémonie.</p>
+      </div>
+      <div class="cardi reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8.5 14s1.3 1.8 3.5 1.8 3.5-1.8 3.5-1.8"/><line x1="9" y1="9.5" x2="9.01" y2="9.5"/><line x1="15" y1="9.5" x2="15.01" y2="9.5"/></svg>
+        <h3>Enfants bienvenus</h3>
+        <p>Les petits invités sont attendus : coin jeux à l'ombre l'après-midi et baby-sitter pendant la soirée. Indiquez-les simplement dans votre réponse.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp" id="rsvp">
+    <div class="rcard reveal">
+      <div class="rcard-in">
+        <p class="ey">RSVP</p>
+        <h2>Serez-vous des nôtres ?</h2>
+        <p class="sub">Merci de nous répondre avant le 1<sup>er</sup> mai 2027 — deux minutes suffisent.</p>
+        <form class="rform" id="rsvp-form" action="#" novalidate>
+          <div class="fld">
+            <label for="r-nom">Votre prénom et nom</label>
+            <input type="text" id="r-nom" name="nom" autocomplete="name" placeholder="Ex. Marie Dupont">
+          </div>
+          <div class="fld">
+            <label id="r-pres-l" for="r-oui">Votre réponse</label>
+            <div class="seg" role="radiogroup" aria-labelledby="r-pres-l">
+              <input type="radio" name="presence" id="r-oui" value="oui" checked>
+              <label for="r-oui">Avec joie, nous venons !</label>
+              <input type="radio" name="presence" id="r-non" value="non">
+              <label for="r-non">À regret, non</label>
+            </div>
+          </div>
+          <div class="two">
+            <div class="fld">
+              <label for="r-adultes">Adultes</label>
+              <select id="r-adultes" name="adultes">
+                <option value="1">1 adulte</option>
+                <option value="2">2 adultes</option>
+                <option value="3">3 adultes</option>
+                <option value="4">4 adultes</option>
+                <option value="5">5 adultes</option>
+              </select>
+            </div>
+            <div class="fld">
+              <label for="r-enfants">Enfants</label>
+              <select id="r-enfants" name="enfants">
+                <option value="0">Aucun enfant</option>
+                <option value="1">1 enfant</option>
+                <option value="2">2 enfants</option>
+                <option value="3">3 enfants</option>
+                <option value="4">4 enfants</option>
+              </select>
+            </div>
+          </div>
+          <div class="fld">
+            <label for="r-allergies">Allergies ou régimes particuliers</label>
+            <input type="text" id="r-allergies" name="allergies" placeholder="Ex. sans gluten, allergie aux noix…">
+          </div>
+          <div class="fld">
+            <label for="r-message">Un petit mot (facultatif)</label>
+            <textarea id="r-message" name="message" rows="3" placeholder="On a hâte de vous lire…"></textarea>
+          </div>
+          <button type="submit" class="send">Envoyer ma réponse</button>
+          <div class="demo-note" id="rsvp-note" role="status" aria-live="polite">
+            <b>Ceci est une démonstration</b> — ce formulaire n'envoie rien. Dans votre faire-part, les réponses de vos invités (présence, adultes, enfants, allergies) sont enregistrées et consultables en temps réel.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ff">
+    <div class="made">Site-modèle de démonstration (couple et mariage fictifs), conçu par <b>François Leterrier</b> — faire-part digital &amp; création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un faire-part comme ça →</a></div>
+    <div class="names">Camille &amp; Jules · 12 juin 2027</div>
+    Créé par François Leterrier — <a href="https://francoisleterrier.fr/faire-part-digital.html" target="_blank" rel="noopener">francoisleterrier.fr/faire-part-digital.html</a>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* --- Compte à rebours (ES5) --- */
+  var target = new Date(2027, 5, 12, 15, 0, 0);
+  var elD = document.getElementById('cd-d');
+  var elH = document.getElementById('cd-h');
+  var elM = document.getElementById('cd-m');
+  var nums = document.getElementById('cd-nums');
+  var past = document.getElementById('cd-past');
+  var timer = null;
+
+  function two(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function tick() {
+    var diff = target.getTime() - (new Date()).getTime();
+    if (diff <= 0) {
+      if (nums) { nums.style.display = 'none'; }
+      if (past) { past.style.display = 'block'; }
+      if (timer !== null) { clearInterval(timer); timer = null; }
+      return;
+    }
+    var mins = Math.floor(diff / 60000);
+    var d = Math.floor(mins / 1440);
+    var h = Math.floor((mins % 1440) / 60);
+    var m = mins % 60;
+    if (elD) { elD.textContent = '' + d; }
+    if (elH) { elH.textContent = two(h); }
+    if (elM) { elM.textContent = two(m); }
+  }
+
+  if (elD && elH && elM) {
+    tick();
+    timer = setInterval(tick, 15000);
+  }
+
+  /* --- RSVP de démonstration : n'envoie rien --- */
+  var form = document.getElementById('rsvp-form');
+  var note = document.getElementById('rsvp-note');
+  if (form && note) {
+    form.onsubmit = function (e) {
+      if (e && e.preventDefault) { e.preventDefault(); }
+      note.style.display = 'block';
+      try {
+        note.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {
+        if (note.scrollIntoView) { note.scrollIntoView(false); }
+      }
+      return false;
+    };
+  }
+
+  /* --- Apparitions douces au défilement --- */
+  var els = document.querySelectorAll('.reveal');
+  var i;
+  function show(el) {
+    if ((' ' + el.className + ' ').indexOf(' vis ') === -1) {
+      el.className += ' vis';
+    }
+  }
+  if (!('IntersectionObserver' in window)) {
+    for (i = 0; i < els.length; i++) { show(els[i]); }
+    return;
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    var j;
+    for (j = 0; j < entries.length; j++) {
+      if (entries[j].isIntersecting) {
+        show(entries[j].target);
+        obs.unobserve(entries[j].target);
+      }
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  for (i = 0; i < els.length; i++) { obs.observe(els[i]); }
+})();
+</script>
+</body>
+</html>

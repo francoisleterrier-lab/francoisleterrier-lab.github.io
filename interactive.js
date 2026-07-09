@@ -67,6 +67,7 @@
   var PAGES = [
     { g: 'Services', i: '🧩', l: 'Réseaux sociaux', u: 'community-manager.html' },
     { g: 'Services', i: '🌐', l: 'Création de site internet', u: 'creation-site-internet.html' },
+    { g: 'Services', i: '💌', l: 'Faire-part digital', u: 'faire-part-digital.html' },
     { g: 'Services', i: '🎨', l: 'Modèles de sites', u: 'modeles/' },
     { g: 'Services', i: '🏆', l: 'Réalisations', u: 'realisations.html' },
     { g: 'Services', i: '💶', l: 'Tarifs', u: 'tarifs.html' },
