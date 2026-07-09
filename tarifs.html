@@ -47,8 +47,8 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": "https://francoisleterrier.fr/#service",
-  "name": "François Leterrier — Community Manager & création de sites internet",
+  "@id": "https://francoisleterrier.fr/#business",
+  "name": "François Leterrier — Community Manager & Création de site internet",
   "url": "https://francoisleterrier.fr/",
   "priceRange": "€€",
   "areaServed": { "@type": "AdministrativeArea", "name": "Sud-Toulousain (Haute-Garonne)" },
@@ -63,7 +63,7 @@
       { "@type": "Offer", "name": "Site internet — Vitrine (jusqu'à 5 pages)", "description": "Design sur-mesure, référencement local et formation", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "1400", "priceCurrency": "EUR" } },
       { "@type": "Offer", "name": "Site internet — Sur-Mesure", "description": "E-commerce, réservation, fonctions avancées et intégrations", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "2500", "priceCurrency": "EUR" } },
       { "@type": "Offer", "name": "Faire-part digital — Essentiel", "description": "Mini-site d'invitation privé (mariage, baptême, anniversaire, PACS) : site élégant à vos couleurs, infos pratiques, RSVP en ligne, galerie photo, partage par lien ou QR code", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "290", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Faire-part digital — Signature", "description": "Design sur-mesure complet, animations, compte à rebours, histoire du couple, RSVP avec suivi des réponses, nom de domaine 1 an inclus", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
+      { "@type": "Offer", "name": "Faire-part digital — Signature", "description": "Design sur-mesure complet, animations, compte à rebours, histoire du couple, RSVP avec tableau de suivi détaillé (statistiques, export des réponses), nom de domaine 1 an inclus", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
       { "@type": "Offer", "name": "Faire-part digital — Prestige", "description": "L'expérience complète : appli installable sur téléphone (PWA), image personnalisée interactive au thème du couple, pages personnalisées par invité, ambiance sonore, quiz et animations pour les invités", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "790", "priceCurrency": "EUR" } }
     ]
   }
@@ -73,7 +73,7 @@
 <body>
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
-    <nav class="navlinks">
+    <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
       <a href="modeles/">Modèles</a>
@@ -81,6 +81,7 @@
       <a href="a-propos.html">À propos</a>
       <a class="cta" href="contact.html">Échange offert</a>
     </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -95,7 +96,7 @@
     <table>
       <tr><th>Formule</th><th>Inclus</th><th>Tarif</th></tr>
       <tr><td><strong>Essentiel</strong></td><td>2 publications/mois · Facebook + Instagram + Google Business · visuels &amp; rédaction · bilan trimestriel</td><td class="price-em">dès 180 €/mois</td></tr>
-      <tr><td><strong>Croissance</strong><br><small>le plus choisi</small></td><td>4 publications/mois · modération &amp; réponses · bilan mensuel détaillé</td><td class="price-em">dès 350 €/mois</td></tr>
+      <tr><td><strong>Croissance</strong><br><small>formule phare</small></td><td>4 publications/mois · modération &amp; réponses · bilan mensuel détaillé</td><td class="price-em">dès 350 €/mois</td></tr>
       <tr><td><strong>Premium</strong></td><td>4 publications + 1 vidéo/Reel monté · 1 story/semaine · recommandations</td><td class="price-em">dès 520 €/mois</td></tr>
     </table>
 
@@ -112,7 +113,7 @@
     <table>
       <tr><th>Formule</th><th>Inclus</th><th>Tarif</th></tr>
       <tr><td><strong>Essentiel</strong></td><td>Site élégant à vos couleurs · infos pratiques · RSVP en ligne · galerie photo · partage par lien ou QR code</td><td class="price-em">dès 290 €</td></tr>
-      <tr><td><strong>Signature</strong><br><small>la plus choisie</small></td><td>Design sur-mesure complet · animations · compte à rebours · histoire du couple · RSVP avec suivi des réponses · nom de domaine 1 an inclus</td><td class="price-em">dès 490 €</td></tr>
+      <tr><td><strong>Signature</strong><br><small>formule phare</small></td><td>Design sur-mesure complet · animations · compte à rebours · histoire du couple · RSVP avec tableau de suivi détaillé (statistiques &amp; export) · nom de domaine 1 an inclus</td><td class="price-em">dès 490 €</td></tr>
       <tr><td><strong>Prestige</strong></td><td>L'expérience complète : appli installable sur téléphone (PWA) · image personnalisée interactive au thème du couple · pages personnalisées par invité · ambiance sonore · quiz &amp; animations pour les invités</td><td class="price-em">dès 790 €</td></tr>
     </table>
 
@@ -161,6 +162,7 @@
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
 <script src="/consent.js" defer></script>
 </body>
 </html>

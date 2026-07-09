@@ -101,9 +101,9 @@
       "founder": { "@id": "https://francoisleterrier.fr/#francois" },
       "knowsAbout": ["Community management","Réseaux sociaux","Facebook","Instagram","Google Business Profile","Création de site internet","Référencement local","SEO local Toulouse"],
       "makesOffer": [
-        { "@type": "Offer", "name": "Gestion des réseaux sociaux", "priceCurrency": "EUR", "price": "180", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "180", "priceCurrency": "EUR", "unitText": "MONTH" } },
-        { "@type": "Offer", "name": "Création de site internet", "priceCurrency": "EUR", "price": "590" },
-        { "@type": "Offer", "name": "Faire-part digital (mini-site d'invitation)", "priceCurrency": "EUR", "price": "290" }
+        { "@type": "Offer", "name": "Gestion des réseaux sociaux", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "180", "priceCurrency": "EUR", "unitText": "MONTH" } },
+        { "@type": "Offer", "name": "Création de site internet", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "590", "priceCurrency": "EUR" } },
+        { "@type": "Offer", "name": "Faire-part digital (mini-site d'invitation)", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "290", "priceCurrency": "EUR" } }
       ],
       "contactPoint": { "@type": "ContactPoint", "telephone": "+33698200208", "contactType": "customer service", "areaServed": "FR", "availableLanguage": "French" },
       "sameAs": ["https://www.facebook.com/francoisleterrierweb","https://www.instagram.com/francoisleterrierweb","https://www.linkedin.com/in/francois-leterrier-a0552b413","https://www.google.com/search?kgmid=/g/11z8h9z1wb"]
@@ -177,7 +177,7 @@
       "@type": "FAQPage",
       "@id": "https://francoisleterrier.fr/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "Quel est le tarif d'un community manager dans le Sud-Toulousain ?", "acceptedAnswer": { "@type": "Answer", "text": "La gestion de vos réseaux sociaux démarre à 180 € / mois pour la formule Essentiel (2 publications par mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois est la plus choisie. Toutes les formules sont sans engagement." } },
+        { "@type": "Question", "name": "Quel est le tarif d'un community manager dans le Sud-Toulousain ?", "acceptedAnswer": { "@type": "Answer", "text": "La gestion de vos réseaux sociaux démarre à 180 € / mois pour la formule Essentiel (2 publications par mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois est la formule phare. Toutes les formules sont sans engagement." } },
         { "@type": "Question", "name": "Combien coûte la création d'un site internet ?", "acceptedAnswer": { "@type": "Answer", "text": "Un site une page démarre à 590 €, un site vitrine complet (jusqu'à 5 pages, design sur-mesure et référencement local) à 1 400 €. Les projets e-commerce ou sur-mesure sont établis sur devis." } },
         { "@type": "Question", "name": "Faut-il s'engager sur la durée ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Les formules réseaux sociaux sont sans engagement, facturées au mois et résiliables avec un préavis de 30 jours. Vous validez chaque contenu avant publication." } },
         { "@type": "Question", "name": "Dans quelle zone intervenez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "À Lavernose-Lacasse (31410), à Toulouse et dans tout le Sud-Toulousain : Muret, Carbonne, Rieumes, Eaunes, Seysses, Fonsorbes, Le Fauga, Noé et alentours, sur place ou à distance." } },
@@ -616,7 +616,7 @@
       <a class="lnk" href="blog/">Blog</a>
       <span class="nav-cta"><a class="btn btn-primary" href="#contact">Échange offert</a></span>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -712,6 +712,7 @@
         </ul>
         <a href="creation-site-internet.html" style="display:inline-block;margin-top:14px;color:var(--accent);font-weight:700;font-size:14px;">En savoir plus sur la création de site →</a>
         <p style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;"><strong style="color:var(--accent);">Nouveau — dès 290 €</strong> : le faire-part digital, un mini-site d'invitation privé (mariage, baptême, anniversaire) avec RSVP en ligne suivi en temps réel. <a href="faire-part-digital.html" style="color:var(--accent);font-weight:700;">Découvrir →</a></p>
+        <p style="margin-top:10px;font-size:13.5px;">🎁 <strong>Jusqu'au 13 août</strong> : <a href="concours.html" style="color:var(--accent);font-weight:700;">jeu-concours — gagnez votre site vitrine (règlement) →</a></p>
       </article>
     </div>
   </div>
@@ -840,14 +841,14 @@
     </div>
 
     <div style="text-align:center;">
-      <div class="pricing-tabs reveal" role="tablist">
-        <button class="active" data-tab="social" role="tab">Réseaux sociaux</button>
-        <button data-tab="web" role="tab">Création de site</button>
+      <div class="pricing-tabs reveal" role="tablist" aria-label="Choix du service">
+        <button class="active" data-tab="social" role="tab" id="ptab-social" aria-selected="true" aria-controls="tab-social">Réseaux sociaux</button>
+        <button data-tab="web" role="tab" id="ptab-web" aria-selected="false" aria-controls="tab-web" tabindex="-1">Création de site</button>
       </div>
     </div>
 
     <!-- SOCIAL -->
-    <div class="tiers reveal" id="tab-social">
+    <div class="tiers reveal" id="tab-social" role="tabpanel" aria-labelledby="ptab-social">
       <div class="card">
         <div class="name">Essentiel</div>
         <div class="tag">Exister et rester présent, simplement.</div>
@@ -863,7 +864,7 @@
       </div>
 
       <div class="card feature">
-        <span class="pop">Le plus choisi</span>
+        <span class="pop">Formule phare</span>
         <div class="name">Croissance</div>
         <div class="tag">Le bon rythme pour être vu et engager.</div>
         <div class="price"><span class="pre">dès</span><span class="num">350&nbsp;€</span><span class="per">/ mois</span></div>
@@ -893,7 +894,7 @@
     </div>
 
     <!-- WEB -->
-    <div class="tiers reveal" id="tab-web" style="display:none;">
+    <div class="tiers reveal" id="tab-web" role="tabpanel" aria-labelledby="ptab-web" style="display:none;">
       <div class="card">
         <div class="name">Site Express</div>
         <div class="tag">Une page qui va droit au but.</div>
@@ -1119,7 +1120,7 @@
     <div class="faq reveal">
       <details class="acc" open>
         <summary>Quel est le tarif d'un community manager&nbsp;? <span class="pm"></span></summary>
-        <div class="answer">La gestion de vos réseaux démarre à <b>180 € / mois</b> (formule Essentiel : 2 publications / mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois est la plus choisie. Tout est sans engagement et personnalisable selon vos besoins.</div>
+        <div class="answer">La gestion de vos réseaux démarre à <b>180 € / mois</b> (formule Essentiel : 2 publications / mois sur Facebook, Instagram et Google Business). La formule Croissance à 350 € / mois est la formule phare. Tout est sans engagement et personnalisable selon vos besoins.</div>
       </details>
       <details class="acc">
         <summary>Combien coûte la création d'un site internet&nbsp;? <span class="pm"></span></summary>
@@ -1234,6 +1235,7 @@
           <option>🎁 Mon diagnostic en ligne gratuit</option>
           <option>Gestion de mes réseaux sociaux</option>
           <option>Création d'un site internet</option>
+          <option>Un faire-part digital (mariage, événement)</option>
           <option>Les deux</option>
           <option>Je ne sais pas encore, j'aimerais en parler</option>
         </select>
@@ -1271,7 +1273,9 @@
         <a href="a-propos.html">À propos</a>
         <a href="contact.html">Contact</a>
         <a href="blog/">Blog</a>
-        <a href="community-manager-muret.html">Communes du secteur</a>
+        <a href="secteur-sud-toulousain.html">Communes du secteur</a>
+        <a href="faire-part-digital.html">Faire-part digital</a>
+        <a href="concours.html">🎁 Jeu-concours</a>
       </div>
       <div class="ft-col">
         <h4>Contact</h4>
@@ -1312,6 +1316,7 @@
   burger.addEventListener('click', () => {
     burger.classList.toggle('open');
     navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', navLinks.classList.contains('open') ? 'true' : 'false');
   });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     burger.classList.remove('open'); navLinks.classList.remove('open');
@@ -1319,13 +1324,23 @@
 
   // pricing tabs
   const tabs = document.querySelectorAll('.pricing-tabs button');
-  tabs.forEach(t => t.addEventListener('click', () => {
-    tabs.forEach(x => x.classList.remove('active'));
+  tabs.forEach(t => {
+    t.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const o = tabs[(Array.prototype.indexOf.call(tabs, t) + 1) % tabs.length];
+        o.focus(); o.click();
+      }
+    });
+    t.addEventListener('click', () => {
+    tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); x.tabIndex = -1; });
     t.classList.add('active');
+    t.setAttribute('aria-selected','true'); t.tabIndex = 0;
     const which = t.dataset.tab;
     document.getElementById('tab-social').style.display = which === 'social' ? 'grid' : 'none';
     document.getElementById('tab-web').style.display = which === 'web' ? 'grid' : 'none';
-  }));
+    });
+  });
 
   // scroll reveal (avec cascade : les éléments d'une même grille apparaissent l'un après l'autre)
   const io = new IntersectionObserver((entries) => {

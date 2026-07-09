@@ -8,6 +8,8 @@
 <link rel="canonical" href="https://francoisleterrier.fr/concours.html">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#06070e">
+<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://francoisleterrier.fr/concours.html">
 <meta property="og:title" content="Concours — Gagnez votre site internet professionnel (valeur 1 400 €)">
@@ -24,7 +26,7 @@
     --line:rgba(120,160,230,.16);
     --ink:#eaf2ff;
     --muted:#9fb4d8;
-    --dim:#67789b;
+    --dim:#7f90b3;
     --cyan:#22d3ee;
     --blue:#3b82f6;
     --violet:#8b5cf6;
@@ -33,6 +35,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   body{
     background:
       radial-gradient(110% 70% at 50% -10%, #0d1530 0%, transparent 60%),
@@ -227,6 +230,7 @@
     header,.hero .ctas,.steps,.bonus,.lot,.dates,footer,.eyebrow,.ticket{display:none!important}
     .reglement p,.reglement li{color:#222}
     .reglement h3,h1,h2{color:#000;font-family:Georgia,serif}
+    h1 .chrome{background:none;-webkit-background-clip:initial;background-clip:initial;color:#000;-webkit-text-fill-color:#000;filter:none}
     a{color:#000;text-decoration:underline}
     section{border:none;padding:12px 0}
   }

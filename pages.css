@@ -12,7 +12,11 @@ a{color:var(--cyan);text-decoration:none;}a:hover{text-decoration:underline;}
 .navlinks a{font-size:13.5px;font-weight:600;color:var(--muted);padding:7px 11px;border-radius:9px;}
 .navlinks a:hover{color:#fff;background:rgba(255,255,255,.06);text-decoration:none;}
 .navlinks .cta{background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:9px 16px;}
-.burger{display:none;}
+.burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;border:1px solid var(--line2);border-radius:12px;background:rgba(255,255,255,.04);cursor:pointer;align-items:center;justify-content:center;flex:none;}
+.burger span{width:18px;height:2px;background:var(--txt);border-radius:2px;transition:.25s;}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 .hero{position:relative;overflow:hidden;padding:44px 0 46px;border-bottom:1px solid var(--line);}
 .hero::before{content:"";position:absolute;top:-42%;right:-10%;width:560px;height:560px;background:radial-gradient(circle,rgba(34,211,238,.24),transparent 60%);filter:blur(12px);}
 .hero::after{display:none;} /* halo bas supprimé : clippé au bord -> couture. Aurore globale continue. */
@@ -74,5 +78,15 @@ details .a{padding:0 18px 15px;color:#c4cbdb;font-size:15px;}
 .mapwrap iframe{display:block;width:100%;height:240px;border:0;filter:grayscale(.3) brightness(.85);}
 footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;}
 footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
-@media(max-width:920px){.navlinks{display:none;}.top .wrap .navlinks.show{display:flex;}}
+@media(max-width:920px){
+  .burger{display:flex;}
+  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:rgba(6,7,14,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line2);padding:10px 18px 16px;gap:2px;}
+  .navlinks.show{display:flex;}
+  .navlinks a{padding:12px;font-size:15px;}
+  .navlinks .cta{text-align:center;margin-top:6px;}
+}
+/* façade Google Maps chargée au clic (RGPD : aucune requête Google avant le clic) */
+.fl-map-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:240px;padding:22px;text-align:center;background:var(--panel);}
+.fl-map-ph p{font-size:13.5px;color:var(--muted);margin:0;max-width:40ch;}
+.fl-map-ph a{font-size:13px;}
 @media(max-width:760px){.cols{grid-template-columns:1fr;}.cgrid{grid-template-columns:1fr;}}

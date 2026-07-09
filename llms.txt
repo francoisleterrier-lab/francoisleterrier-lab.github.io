@@ -17,9 +17,9 @@
 3. Faire-part digital : mini-site d'invitation événementiel privé (mariage, baptême, anniversaire, PACS) avec compte à rebours, RSVP en ligne (présence, enfants, allergies) consultable en temps réel, programme, infos pratiques, hébergements, itinéraire, dress code, galerie photos, livre d'or, installable sur téléphone (PWA), adresse web privée non indexée.
 
 ## Tarifs (à partir de, TVA non applicable art. 293 B du CGI)
-- Réseaux sociaux : Essentiel dès 180 €/mois (2 publications), Croissance dès 350 €/mois (4 publications, le plus choisi), Premium dès 520 €/mois (4 publications + 1 vidéo/Reel).
+- Réseaux sociaux : Essentiel dès 180 €/mois (2 publications), Croissance dès 350 €/mois (4 publications, formule phare), Premium dès 520 €/mois (4 publications + 1 vidéo/Reel).
 - Sites internet : Site Express dès 590 €, Site Vitrine dès 1 400 €, Sur-Mesure dès 2 500 €.
-- Faire-part digital : Essentiel dès 290 € (infos pratiques, RSVP, galerie), Signature dès 490 € (design sur-mesure complet, suivi des réponses, domaine 1 an inclus — la plus choisie), Prestige dès 790 € (appli installable PWA, pages par invité, quiz et animations).
+- Faire-part digital : Essentiel dès 290 € (infos pratiques, RSVP, galerie), Signature dès 490 € (design sur-mesure complet, tableau de suivi détaillé des réponses (statistiques, export), domaine 1 an inclus — formule phare), Prestige dès 790 € (appli installable PWA, pages par invité, quiz et animations).
 - Options : publication supplémentaire 40 €, montage vidéo 80 €, maintenance dès 39 €/mois, etc.
 - Sans engagement (formules réseaux), premier échange offert.
 

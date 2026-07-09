@@ -38,7 +38,7 @@
     "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "49938528400025" },
     "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" }
   },
-  "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "590", "description": "Création de site internet à partir de 590 €, référencement local inclus." }
+  "offers": { "@type": "Offer", "description": "Création de site internet à partir de 590 €, référencement local inclus.", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "590", "priceCurrency": "EUR" } }
 }
 </script>
 <script type="application/ld+json">
@@ -66,7 +66,7 @@
 <body>
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
-    <nav class="navlinks">
+    <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="modeles/">Modèles</a>
       <a href="realisations.html">Réalisations</a>
@@ -74,6 +74,7 @@
       <a href="a-propos.html">À propos</a>
       <a class="cta" href="contact.html">Échange offert</a>
     </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -167,6 +168,7 @@
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
 <script src="/consent.js" defer></script>
 </body>
 </html>

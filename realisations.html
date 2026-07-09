@@ -87,13 +87,14 @@
 <body>
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
-    <nav class="navlinks">
+    <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
       <a href="modeles/">Modèles</a>
       <a href="realisations.html" aria-current="page">Réalisations</a>
       <a class="cta" href="contact.html">Échange offert</a>
     </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -224,6 +225,7 @@
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
 <script src="/consent.js" defer></script>
 </body>
 </html>

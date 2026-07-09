@@ -55,7 +55,7 @@
 <body>
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
-    <nav class="navlinks">
+    <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
       <a href="modeles/">Modèles</a>
@@ -63,6 +63,7 @@
       <a href="tarifs.html">Tarifs</a>
       <a class="cta" href="contact.html">Échange offert</a>
     </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -86,9 +87,14 @@
           ⭐ <a href="https://share.google/2OdO1wQRwHTY5aaxs" target="_blank" rel="noopener">Fiche Google Business — voir &amp; laisser un avis</a></p>
           <p style="font-size:13px;color:var(--muted);margin:0;">Disponible du lundi au vendredi · Réponse sous 48 h en moyenne.</p>
         </div>
-        <div class="mapwrap">
-          <iframe loading="lazy" title="Zone d'intervention — Lavernose-Lacasse et Sud-Toulousain" src="https://www.google.com/maps?q=Lavernose-Lacasse%2031410&output=embed"></iframe>
+        <div class="mapwrap" id="fl-map">
+          <div class="fl-map-ph">
+            <p>🗺️ Carte Google Maps de la zone (Lavernose-Lacasse &amp; Sud-Toulousain) — chargée à votre demande&nbsp;: aucun cookie Google avant votre clic.</p>
+            <button type="button" class="btn" id="fl-map-btn">Afficher la carte</button>
+            <a href="https://www.google.com/maps?q=Lavernose-Lacasse+31410" target="_blank" rel="noopener">Ouvrir dans Google Maps →</a>
+          </div>
         </div>
+        <script>(function(){var b=document.getElementById("fl-map-btn"),w=document.getElementById("fl-map");if(b&&w){b.addEventListener("click",function(){var i=document.createElement("iframe");i.setAttribute("loading","lazy");i.setAttribute("title","Zone d'intervention — Lavernose-Lacasse et Sud-Toulousain");i.setAttribute("src","https://www.google.com/maps?q=Lavernose-Lacasse%2031410&output=embed");w.innerHTML="";w.appendChild(i);});}})();</script>
       </div>
 
       <div>
@@ -106,6 +112,7 @@
             <select id="besoin" name="besoin">
               <option>Gestion de mes réseaux sociaux</option>
               <option>Création d'un site internet</option>
+              <option>Un faire-part digital (mariage, événement)</option>
               <option>Les deux</option>
               <option>Je ne sais pas encore, j'aimerais en parler</option>
             </select>
@@ -134,6 +141,7 @@
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> · <a href="mailto:francois&#46;leterrier&#46;cmw&#64;gmail&#46;com">francois&#46;leterrier&#46;cmw&#64;gmail&#46;com</a> · <a href="https://share.google/2OdO1wQRwHTY5aaxs" target="_blank" rel="noopener">Fiche Google</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
 <script src="/consent.js" defer></script>
 <script src="/popups.js" defer></script>
 </body>

@@ -46,7 +46,7 @@
     "name": "Formules faire-part digital",
     "itemListElement": [
       { "@type": "Offer", "name": "Faire-part digital — Essentiel", "description": "Site élégant à vos couleurs : infos pratiques, RSVP en ligne, galerie photo, partage par lien ou QR code", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "290", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Faire-part digital — Signature", "description": "Design sur-mesure complet, animations, compte à rebours, histoire du couple, RSVP avec suivi des réponses, nom de domaine 1 an inclus", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
+      { "@type": "Offer", "name": "Faire-part digital — Signature", "description": "Design sur-mesure complet, animations, compte à rebours, histoire du couple, RSVP avec tableau de suivi détaillé (statistiques, export des réponses), nom de domaine 1 an inclus", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
       { "@type": "Offer", "name": "Faire-part digital — Prestige", "description": "L'expérience complète : appli installable sur téléphone (PWA), image personnalisée interactive au thème du couple, pages personnalisées par invité, ambiance sonore, quiz et animations pour les invités", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "790", "priceCurrency": "EUR" } }
     ]
   }
@@ -92,12 +92,13 @@
   .fp-price .fp-num{font-size:32px;font-weight:800;letter-spacing:-.03em;color:#fff;white-space:nowrap;}
   .fp-feature .fp-num{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
   @media(max-width:760px){.fp-tiers{grid-template-columns:1fr;}.fp-tagline{min-height:0;}}
+.fp-cta{display:inline-block;margin-top:14px;font-weight:700;font-size:14.5px;}
 </style>
 </head>
 <body>
   <header class="top"><div class="wrap">
     <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
-    <nav class="navlinks">
+    <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
       <a href="modeles/">Modèles</a>
@@ -105,6 +106,7 @@
       <a href="tarifs.html">Tarifs</a>
       <a class="cta" href="contact.html">Échange offert</a>
     </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -166,20 +168,22 @@
           <li>Galerie photo</li>
           <li>Partage par lien ou QR code</li>
         </ul>
+        <a class="fp-cta" href="contact.html">Demander un devis →</a>
       </div>
       <div class="card fp-plan fp-feature">
-        <span class="fp-pop">La plus choisie</span>
+        <span class="fp-pop">Formule phare</span>
         <div class="fp-name">Signature</div>
-        <p class="fp-tagline">Le sur-mesure complet, avec suivi des réponses.</p>
+        <p class="fp-tagline">Le sur-mesure complet, avec tableau de suivi détaillé.</p>
         <div class="fp-price"><span class="fp-pre">dès</span><span class="fp-num">490&nbsp;€</span></div>
         <ul>
           <li>Design sur-mesure complet</li>
           <li>Animations</li>
           <li>Compte à rebours</li>
           <li>Histoire du couple</li>
-          <li>RSVP avec suivi des réponses</li>
+          <li>RSVP avec tableau de suivi détaillé (statistiques &amp; export)</li>
           <li>Nom de domaine 1 an inclus</li>
         </ul>
+        <a class="fp-cta" href="contact.html">Demander un devis →</a>
       </div>
       <div class="card fp-plan">
         <div class="fp-name">Prestige</div>
@@ -192,8 +196,10 @@
           <li>Ambiance sonore</li>
           <li>Quiz &amp; animations pour les invités</li>
         </ul>
+        <a class="fp-cta" href="contact.html">Demander un devis →</a>
       </div>
     </div>
+    <p>Livre d'or, hébergements, dress code, save-the-date… chaque section peut être ajoutée à la formule de votre choix — le devis détaille tout.</p>
     <p>Chaque projet fait l'objet d'un <strong>devis écrit et détaillé avant tout engagement</strong> : le prix final dépend des sections et fonctionnalités retenues. TVA non applicable, art. 293 B du CGI.</p>
 
     <h2>Aussi pour un baptême, un anniversaire ou un PACS</h2>
@@ -232,6 +238,7 @@
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
 <script src="/consent.js" defer></script>
 </body>
 </html>
