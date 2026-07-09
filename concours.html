@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeu-concours — Gagnez votre site internet professionnel | François Leterrier</title>
+<meta name="description" content="Jeu-concours du 13 juillet au 13 août 2026 : gagnez la création de votre site internet vitrine professionnel (valeur 1 400 €). Réservé aux professionnels, partout en France. Règlement complet.">
+<link rel="canonical" href="https://francoisleterrier.fr/concours.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#06070e">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://francoisleterrier.fr/concours.html">
+<meta property="og:title" content="Concours — Gagnez votre site internet professionnel (valeur 1 400 €)">
+<meta property="og:description" content="Du 13 juillet au 13 août 2026. Réservé aux professionnels, partout en France. Like + abonnement + identification pour participer.">
+<meta property="og:image" content="https://francoisleterrier.fr/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Chakra+Petch:wght@400;500;600&family=Saira:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#06070e;
+    --panel:#0b0e1a;
+    --line:rgba(120,160,230,.16);
+    --ink:#eaf2ff;
+    --muted:#9fb4d8;
+    --dim:#67789b;
+    --cyan:#22d3ee;
+    --blue:#3b82f6;
+    --violet:#8b5cf6;
+    --magenta:#e635c7;
+    --chrome:linear-gradient(115deg,#a9fff5 0%,#22d3ee 18%,#3b82f6 42%,#8b5cf6 66%,#e635c7 88%,#ff9ae6 100%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(110% 70% at 50% -10%, #0d1530 0%, transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Saira',sans-serif;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Header ---------- */
+  header{
+    border-bottom:1px solid var(--line);
+    background:rgba(6,7,14,.82);backdrop-filter:blur(8px);
+    position:sticky;top:0;z-index:20;
+  }
+  .head{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;align-items:baseline;gap:12px;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .fl{
+    font-family:'Michroma',sans-serif;font-size:22px;
+    background:var(--chrome);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+  .brand small{font-family:'Chakra Petch',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .back{font-family:'Chakra Petch',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .back:hover{color:var(--ink);text-decoration:none}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 0 44px;text-align:center;position:relative;overflow:hidden}
+  .eyebrow{
+    display:inline-block;font-family:'Chakra Petch',monospace;font-size:12.5px;
+    letter-spacing:.32em;text-transform:uppercase;color:var(--cyan);
+    border:1px solid rgba(34,211,238,.35);border-radius:999px;
+    padding:8px 18px;margin-bottom:26px;background:rgba(34,211,238,.06);
+  }
+  h1{
+    font-family:'Michroma',sans-serif;font-weight:400;
+    font-size:clamp(26px,4.6vw,44px);line-height:1.28;letter-spacing:.01em;
+    max-width:19ch;margin:0 auto 18px;
+  }
+  h1 .chrome{
+    background:var(--chrome);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 0 24px rgba(96,165,250,.35));
+  }
+  .sub{color:var(--muted);max-width:56ch;margin:0 auto 30px;font-size:17px}
+
+  /* Ticket (signature) */
+  .ticket{
+    display:inline-flex;align-items:center;gap:0;margin:6px auto 30px;
+    filter:drop-shadow(0 8px 30px rgba(230,53,199,.18));
+  }
+  .ticket .stub,.ticket .body{
+    border:1px solid var(--line);background:linear-gradient(180deg,#0e1224,#0a0d1a);
+    padding:14px 22px;
+  }
+  .ticket .body{
+    border-right:1px dashed rgba(150,190,240,.4);border-radius:14px 0 0 14px;
+    font-family:'Chakra Petch',monospace;letter-spacing:.2em;font-size:12.5px;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .ticket .stub{
+    border-left:none;border-radius:0 14px 14px 0;
+    font-family:'Michroma',sans-serif;font-size:clamp(18px,3vw,24px);
+    background:linear-gradient(180deg,#101430,#0b0e20);
+  }
+  .ticket .stub span{
+    background:var(--chrome);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+  .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+  .btn{
+    font-family:'Chakra Petch',monospace;font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+    padding:14px 26px;border-radius:10px;display:inline-block;
+    border:1px solid rgba(140,200,255,.45);color:var(--ink);
+    background:linear-gradient(115deg,rgba(34,211,238,.16),rgba(230,53,199,.16));
+    transition:box-shadow .2s,border-color .2s;
+  }
+  .btn:hover{border-color:var(--cyan);box-shadow:0 0 26px rgba(34,211,238,.28);text-decoration:none}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+  .btn.ghost:hover{color:var(--ink);border-color:rgba(140,200,255,.45)}
+  .ribbon{
+    font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--dim);
+  }
+  .ribbon b{color:var(--muted);font-weight:500}
+
+  /* ---------- Sections ---------- */
+  section{padding:54px 0;border-top:1px solid var(--line)}
+  .kicker{
+    font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--cyan);margin-bottom:10px;
+  }
+  h2{
+    font-family:'Michroma',sans-serif;font-weight:400;font-size:clamp(19px,2.6vw,26px);
+    line-height:1.35;margin-bottom:26px;
+  }
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .step{
+    border:1px solid var(--line);border-radius:14px;padding:22px;
+    background:linear-gradient(180deg,#0c1020,#090c16);
+  }
+  .step .n{
+    font-family:'Chakra Petch',monospace;font-size:13px;letter-spacing:.2em;color:var(--magenta);
+    display:block;margin-bottom:10px;
+  }
+  .step h3{font-family:'Saira',sans-serif;font-weight:600;font-size:17px;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:15px}
+  .bonus{
+    margin-top:16px;border:1px dashed rgba(230,53,199,.45);border-radius:12px;
+    padding:14px 18px;color:var(--muted);font-size:15px;background:rgba(230,53,199,.05);
+  }
+  .bonus b{color:var(--ink);font-weight:500}
+
+  /* Lot */
+  .lot{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+  .card{
+    border:1px solid var(--line);border-radius:14px;padding:24px;
+    background:linear-gradient(180deg,#0c1020,#090c16);
+  }
+  .card h3{
+    font-family:'Chakra Petch',monospace;font-weight:500;font-size:13px;
+    letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px;
+  }
+  .card.in h3{color:var(--cyan)}
+  .card.out h3{color:var(--dim)}
+  .card ul{list-style:none}
+  .card li{padding:7px 0;color:var(--muted);font-size:15.5px;border-bottom:1px solid rgba(120,160,230,.08)}
+  .card li:last-child{border-bottom:none}
+  .card.in li::before{content:"✓ ";color:var(--cyan)}
+  .card.out li::before{content:"– ";color:var(--dim)}
+
+  /* Dates */
+  .dates{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .date{
+    border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-align:center;
+    background:linear-gradient(180deg,#0c1020,#090c16);
+  }
+  .date .d{
+    font-family:'Michroma',sans-serif;font-size:18px;margin-bottom:6px;
+    background:var(--chrome);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+  .date .l{font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+  /* Règlement */
+  .reglement{max-width:76ch}
+  .reglement h3{
+    font-family:'Saira',sans-serif;font-weight:600;font-size:17.5px;
+    margin:34px 0 10px;color:var(--ink);
+  }
+  .reglement h3:first-of-type{margin-top:0}
+  .reglement p, .reglement li{color:var(--muted);font-size:15.5px;margin-bottom:12px}
+  .reglement ul, .reglement ol{padding-left:22px;margin-bottom:12px}
+  .reglement li{margin-bottom:6px}
+  .reglement b, .reglement strong{color:var(--ink);font-weight:500}
+  .meta-note{
+    margin-top:26px;border-left:3px solid var(--magenta);padding:12px 18px;
+    background:rgba(230,53,199,.05);color:var(--muted);font-size:14.5px;border-radius:0 10px 10px 0;
+  }
+  .signed{margin-top:30px;color:var(--dim);font-size:14px;font-style:italic}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:34px 0 44px;color:var(--dim);font-size:14px}
+  .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--muted)}
+
+  @media (max-width:760px){
+    .steps,.lot,.dates{grid-template-columns:1fr}
+    .hero{padding:46px 0 36px}
+    .ticket{transform:scale(.94)}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .hero::before{
+      content:"";position:absolute;inset:-40% -20%;pointer-events:none;
+      background:radial-gradient(50% 40% at 50% 30%, rgba(59,130,246,.10), transparent 70%);
+      animation:breathe 9s ease-in-out infinite alternate;
+    }
+    @keyframes breathe{from{opacity:.5}to{opacity:1}}
+  }
+  @media print{
+    body{background:#fff;color:#111}
+    header,.hero .ctas,.steps,.bonus,.lot,.dates,footer,.eyebrow,.ticket{display:none!important}
+    .reglement p,.reglement li{color:#222}
+    .reglement h3,h1,h2{color:#000;font-family:Georgia,serif}
+    a{color:#000;text-decoration:underline}
+    section{border:none;padding:12px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head">
+    <a class="brand" href="https://francoisleterrier.fr/index.html">
+      <span class="fl">FL</span>
+      <small>François Leterrier · Community Manager · Web</small>
+    </a>
+    <a class="back" href="https://francoisleterrier.fr/index.html">← Accueil</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Jeu-concours · 13 juillet → 13 août 2026</span>
+      <h1>Gagnez la création de <span class="chrome">votre site internet</span> professionnel.</h1>
+      <p class="sub">Un site vitrine sur-mesure — jusqu'à 5 pages, design à votre image, référencement local inclus — offert à un professionnel, partout en France. Projet réalisé à distance.</p>
+
+      <div class="ticket" aria-label="Valeur du lot : 1 400 euros">
+        <span class="body">Ticket de tirage · lot unique</span>
+        <span class="stub"><span>VALEUR 1 400 €</span></span>
+      </div>
+
+      <div class="ctas">
+        <a class="btn" href="https://www.facebook.com/francoisleterrierweb" target="_blank" rel="noopener">Participer sur Facebook</a>
+        <a class="btn" href="https://www.instagram.com/francoisleterrierweb" target="_blank" rel="noopener">Participer sur Instagram</a>
+        <a class="btn ghost" href="#reglement">Lire le règlement</a>
+      </div>
+      <p class="ribbon"><b>Réservé aux professionnels</b> · partout en France · gratuit &amp; sans obligation d'achat</p>
+    </div>
+  </div>
+
+  <!-- COMMENT PARTICIPER -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">Comment participer</p>
+      <h2>Trois gestes, sur Facebook ou Instagram.</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="n">Étape 01</span>
+          <h3>Aimez la publication</h3>
+          <p>Likez la publication officielle du concours sur la page.</p>
+        </div>
+        <div class="step">
+          <span class="n">Étape 02</span>
+          <h3>Abonnez-vous</h3>
+          <p>Suivez la page « François Leterrier Web » (Facebook et/ou Instagram).</p>
+        </div>
+        <div class="step">
+          <span class="n">Étape 03</span>
+          <h3>Identifiez un pro</h3>
+          <p>Taguez en commentaire une entreprise ou un professionnel — votre propre activité compte aussi.</p>
+        </div>
+      </div>
+      <p class="bonus">🔄 <b>Bonus facultatif :</b> partagez la publication en story pour une chance supplémentaire. Le partage n'est jamais une condition de participation. Jusqu'à 5 identifications par personne.</p>
+    </div>
+  </section>
+
+  <!-- LE LOT -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">Le lot</p>
+      <h2>Un site vitrine professionnel, clé en main.</h2>
+      <div class="lot">
+        <div class="card in">
+          <h3>Inclus dans le lot</h3>
+          <ul>
+            <li>Site vitrine sur-mesure jusqu'à 5 pages, à vos couleurs</li>
+            <li>Référencement local (SEO : pages, balises, vitesse)</li>
+            <li>Formulaires de contact &amp; liens vers vos réseaux</li>
+            <li>Formation rapide à la prise en main</li>
+            <li>Mise en ligne du site</li>
+            <li>Réalisation 100 % à distance, partout en France</li>
+          </ul>
+        </div>
+        <div class="card out">
+          <h3>Non inclus</h3>
+          <ul>
+            <li>Nom de domaine &amp; hébergement</li>
+            <li>Maintenance</li>
+            <li>Pages supplémentaires</li>
+            <li>Prestations photo / vidéo</li>
+            <li>Déplacements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATES CLÉS -->
+  <section>
+    <div class="wrap">
+      <p class="kicker">Dates clés</p>
+      <h2>Un mois pour tenter votre chance.</h2>
+      <div class="dates">
+        <div class="date"><div class="d">13 juillet 2026</div><div class="l">Ouverture · 9h00</div></div>
+        <div class="date"><div class="d">13 août 2026</div><div class="l">Clôture · 23h59</div></div>
+        <div class="date"><div class="d">14 août 2026</div><div class="l">Tirage au sort</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÈGLEMENT -->
+  <section id="reglement">
+    <div class="wrap">
+      <p class="kicker">Règlement complet</p>
+      <h2>Règlement du jeu-concours « Gagnez votre site internet professionnel »</h2>
+
+      <div class="reglement">
+
+        <h3>Article 1 — Organisateur</h3>
+        <p>Le présent jeu-concours (ci-après « le Jeu ») est organisé par <b>François Leterrier</b>, entrepreneur individuel, immatriculé sous le numéro SIREN <b>499&nbsp;385&nbsp;284</b>, dont le siège est situé à Lavernose-Lacasse (31410), joignable à l'adresse <a href="mailto:francois.leterrier.cmw@gmail.com">francois.leterrier.cmw@gmail.com</a> (ci-après « l'Organisateur »).</p>
+
+        <h3>Article 2 — Durée du Jeu</h3>
+        <p>Le Jeu se déroule du <b>lundi 13 juillet 2026 à 9h00</b> au <b>jeudi 13 août 2026 à 23h59</b> (heure de Paris), sur les pages Facebook «&nbsp;François Leterrier Web&nbsp;» (<a href="https://www.facebook.com/francoisleterrierweb" target="_blank" rel="noopener">facebook.com/francoisleterrierweb</a>) et Instagram «&nbsp;@francoisleterrierweb&nbsp;» (<a href="https://www.instagram.com/francoisleterrierweb" target="_blank" rel="noopener">instagram.com/francoisleterrierweb</a>). L'Organisateur se réserve le droit de prolonger, écourter, modifier ou annuler le Jeu en cas de force majeure ou d'événement indépendant de sa volonté, sans que sa responsabilité puisse être engagée.</p>
+
+        <h3>Article 3 — Conditions de participation</h3>
+        <p>Le Jeu est ouvert exclusivement aux <b>personnes physiques majeures exerçant une activité professionnelle</b> (artisans, commerçants, professions libérales, indépendants, auto-entrepreneurs, dirigeants de TPE/PME) <b>immatriculée en France métropolitaine ou d'outre-mer</b>, disposant d'un numéro SIREN/SIRET valide et actif au jour de la participation.</p>
+        <p>Une preuve d'activité (avis de situation SIRENE, extrait Kbis ou document équivalent de moins de 3 mois) sera demandée au gagnant avant la remise du lot. À défaut de fourniture de ce justificatif dans un délai de 14 jours, le gain sera remis en jeu.</p>
+        <p>Les participations d'une même personne se cumulent dans les limites prévues à l'article 4. Toutefois, <b>une même entreprise (numéro SIREN) ne peut remporter qu'une seule dotation</b>, quel que soit le nombre de personnes physiques ou de comptes ayant participé pour son compte.</p>
+        <p>Sont exclus du Jeu : l'Organisateur, les membres de sa famille directe, ainsi que toute personne ayant collaboré à l'organisation du Jeu.</p>
+        <p>La participation est <b>gratuite et sans obligation d'achat</b>. Toute participation incomplète, frauduleuse ou non conforme au présent règlement sera écartée.</p>
+
+        <h3>Article 4 — Modalités de participation</h3>
+        <p>Pour participer, le participant doit, pendant la durée du Jeu, sur Facebook et/ou Instagram :</p>
+        <ol>
+          <li><b>Aimer</b> la publication officielle du Jeu ;</li>
+          <li><b>S'abonner</b> à la page Facebook «&nbsp;François Leterrier Web&nbsp;» et/ou au compte Instagram «&nbsp;@francoisleterrierweb&nbsp;» ;</li>
+          <li><b>Identifier en commentaire</b> de la publication une entreprise ou un professionnel (le participant peut identifier sa propre activité).</li>
+        </ol>
+        <p>Chaque identification distincte et pertinente vaut une (1) participation, dans la limite de <b>cinq (5) participations par personne</b>. Les identifications de comptes fictifs, inactifs ou sans lien avec une activité professionnelle ne seront pas comptabilisées.</p>
+        <p>Le <b>partage de la publication en story</b> est facultatif et confère une (1) chance supplémentaire au tirage. Il ne constitue en aucun cas une condition de participation.</p>
+        <p>La participation peut s'effectuer sur Facebook, sur Instagram, ou sur les deux plateformes (les participations se cumulent alors dans les limites précitées).</p>
+
+        <h3>Article 5 — Dotation</h3>
+        <p>Le lot mis en jeu consiste en la <b>création d'un site internet vitrine professionnel</b>, comprenant :</p>
+        <ul>
+          <li>La conception et la réalisation d'un site jusqu'à <b>5 pages</b>, au design sur-mesure aux couleurs de l'activité du gagnant ;</li>
+          <li>Le <b>référencement local</b> (optimisation SEO des pages, balises et vitesse) ;</li>
+          <li>La mise en place ou l'optimisation des formulaires de contact et liens vers les réseaux sociaux ;</li>
+          <li>Une <b>formation rapide à la prise en main</b> du site ;</li>
+          <li>La mise en ligne du site.</li>
+        </ul>
+        <p><b>Valeur commerciale du lot : 1&nbsp;400&nbsp;€ TTC</b> (TVA non applicable, art. 293&nbsp;B du CGI).</p>
+        <p>Ne sont pas inclus dans le lot : le nom de domaine, l'hébergement, la maintenance, la rédaction de pages supplémentaires, les prestations photo/vidéo, ainsi que toute prestation non expressément mentionnée ci-dessus. Ces éléments restent à la charge du gagnant s'il souhaite y souscrire.</p>
+        <p>La prestation est réalisée <b>intégralement à distance</b> (visioconférence, téléphone, email), quel que soit le lieu d'implantation du gagnant en France. Aucun déplacement n'est inclus.</p>
+        <p>Le lot est <b>nominatif, non cessible, non modifiable et non échangeable</b> contre sa valeur en espèces ou contre toute autre prestation. Il devra être mis en œuvre (premier rendez-vous de cadrage effectué) dans un délai de <b>6 mois</b> à compter de l'annonce du gagnant, soit au plus tard le <b>14 février 2027</b> ; passé ce délai, le lot sera considéré comme abandonné sans compensation.</p>
+
+        <h3>Article 6 — Désignation du gagnant</h3>
+        <p>Le gagnant sera désigné par <b>tirage au sort</b> parmi l'ensemble des participations valides, le <b>vendredi 14 août 2026</b>. Le tirage sera effectué par l'Organisateur (le cas échéant au moyen d'un outil de tirage aléatoire).</p>
+        <p>Le gagnant sera contacté par <b>message privé</b> sur la plateforme utilisée pour participer, dans un délai de 7 jours suivant le tirage. Il disposera de <b>14 jours</b> pour se manifester et fournir les justificatifs demandés (article 3). À défaut de réponse ou en cas d'inéligibilité, un nouveau tirage sera effectué dans les mêmes conditions.</p>
+        <p>Le prénom, le nom de l'entreprise et, le cas échéant, la ville du gagnant pourront être annoncés publiquement sur les pages de l'Organisateur, sous réserve de son accord préalable.</p>
+
+        <h3>Article 7 — Données personnelles</h3>
+        <p>Les données personnelles collectées dans le cadre du Jeu (identité, coordonnées, justificatifs professionnels) sont traitées par l'Organisateur aux seules fins de gestion du Jeu, de désignation du gagnant et de remise du lot. Elles sont conservées pendant la durée du Jeu et supprimées au plus tard 3 mois après sa clôture, sauf obligation légale contraire ou relation commerciale ultérieure avec le gagnant.</p>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, chaque participant dispose d'un droit d'accès, de rectification, d'opposition et de suppression de ses données, qu'il peut exercer en écrivant à : <a href="mailto:francois.leterrier.cmw@gmail.com">francois.leterrier.cmw@gmail.com</a>. Pour plus d'informations : <a href="https://francoisleterrier.fr/confidentialite.html">politique de confidentialité</a>.</p>
+
+        <h3>Article 8 — Responsabilité et réseaux sociaux</h3>
+        <p>Ce Jeu n'est <b>ni organisé, ni géré, ni parrainé par Meta</b> (Facebook, Instagram). Les informations communiquées par les participants sont destinées à l'Organisateur et non à Meta. Meta ne pourra être tenu responsable de tout litige lié au Jeu.</p>
+        <p>L'Organisateur ne saurait être tenu responsable en cas de dysfonctionnement des plateformes, de suppression de la publication par les réseaux sociaux, de problème de connexion des participants ou de tout événement empêchant le bon déroulement du Jeu.</p>
+
+        <h3>Article 9 — Acceptation et litiges</h3>
+        <p>La participation au Jeu implique l'<b>acceptation pleine et entière du présent règlement</b>. Toute contestation relative au Jeu devra être adressée par écrit à l'Organisateur dans un délai de 30 jours suivant la clôture, soit au plus tard le <b>12 septembre 2026</b>. Le présent règlement est soumis au <b>droit français</b>. À défaut de résolution amiable, tout litige sera porté devant les tribunaux compétents.</p>
+        <p>Le règlement complet est consultable à tout moment à l'adresse : <b>https://francoisleterrier.fr/concours.html</b></p>
+
+        <div class="meta-note">Ce jeu n'est ni organisé, ni parrainé par Meta (Facebook / Instagram). Participation gratuite, sans obligation d'achat, réservée aux professionnels en activité immatriculés en France.</div>
+
+        <p class="signed">Fait à Lavernose-Lacasse, le 13 juillet 2026.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 François Leterrier — Community Manager &amp; création de sites · Lavernose-Lacasse 31410</div>
+    <div>
+      <a href="https://francoisleterrier.fr/index.html">Accueil</a> ·
+      <a href="https://francoisleterrier.fr/mentions-legales.html">Mentions légales</a> ·
+      <a href="https://francoisleterrier.fr/confidentialite.html">Confidentialité</a> ·
+      <a href="mailto:francois.leterrier.cmw@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/consent.js" defer></script>
+</body>
+</html>
