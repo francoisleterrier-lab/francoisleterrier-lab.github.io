@@ -93,6 +93,20 @@
   .fp-feature .fp-num{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
   @media(max-width:760px){.fp-tiers{grid-template-columns:1fr;}.fp-tagline{min-height:0;}}
 .fp-cta{display:inline-block;margin-top:14px;font-weight:700;font-size:14.5px;}
+  .fpv{margin:22px 0 8px;padding:22px;border:1px solid var(--line2);border-radius:16px;background:linear-gradient(120deg,rgba(34,211,238,.05),rgba(168,85,247,.06));}
+  .fpv-lead{font-size:14.5px;color:var(--muted);margin:0 0 16px;}
+  .fpv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .fpv-cat{display:block;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--txt);transition:border-color .15s,transform .15s;}
+  .fpv-cat:hover{border-color:var(--cyan);transform:translateY(-2px);text-decoration:none;}
+  .fpv-cat b{display:block;font-family:'Bricolage Grotesque';font-size:13.5px;color:#fff;margin-bottom:3px;}
+  .fpv-cat span{font-size:12.5px;color:var(--muted);}
+  .fpv-cat .fpv-go{color:var(--cyan);font-weight:700;white-space:nowrap;}
+  .fpv-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .fpv-links a{font-size:13px;font-weight:600;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:30px;padding:7px 14px;}
+  .fpv-links a:hover{border-color:var(--cyan);color:#fff;text-decoration:none;}
+  .fpv-links a.fpv-demo{background:var(--grad);color:#08111f;border-color:transparent;font-weight:700;}
+  @media(max-width:860px){.fpv-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.fpv-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -139,6 +153,27 @@
       <div class="card"><h3>Installable sur téléphone</h3><p>Le site peut s'installer comme une application (PWA) : votre faire-part sur l'écran d'accueil de vos invités.</p></div>
     </div>
     <p>Les sections et fonctionnalités incluses dépendent de la formule choisie (voir ci-dessous) : on compose ensemble le site qui correspond à votre événement.</p>
+
+    <h2>Découvrez le faire-part vivant, catégorie par catégorie</h2>
+    <div class="fpv">
+      <p class="fpv-lead">Le meilleur moyen de comprendre, c'est de voir&nbsp;: j'ai mis en ligne <strong>Faire-part Vivant</strong>, un vrai site de démonstration (exemple «&nbsp;Émilie &amp; Julien&nbsp;»). Cliquez sur une catégorie pour la découvrir en détail, en direct.</p>
+      <div class="fpv-grid">
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#invitation"><b>L'invitation dans leur poche</b><span>Un mini-site à vos prénoms, installable comme une app. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#rsvp"><b>Les réponses, sans les relances</b><span>RSVP en ligne et tableau de bord en temps réel. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#jour-j"><b>Le jour J, bien guidé</b><span>Lieu, itinéraire, programme, plan de table. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#souvenirs"><b>Les souvenirs partagés</b><span>Album photo &amp; vidéo, livre d'or filmé, diaporama. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#logistique"><b>Covoiturage &amp; hébergements</b><span>Toute la logistique invités réunie au même endroit. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#cadeaux"><b>Cagnotte &amp; liste de cadeaux</b><span>Intégrées avec élégance à votre faire-part. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#coulisses"><b>Vous gardez la main</b><span>Un espace simple pour tout piloter, sans coder. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#confiance"><b>Privé &amp; sécurisé</b><span>Intime, rapide et toujours à jour. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+      </div>
+      <div class="fpv-links">
+        <a href="/faire-part-vivant/#lumiere">✨ L'arbre de vie qui s'illumine</a>
+        <a href="/faire-part-vivant/#formules">Les formules</a>
+        <a href="/faire-part-vivant/#faq">Questions fréquentes</a>
+        <a class="fpv-demo" href="/faire-part-vivant/">Voir la démo en vrai (Émilie &amp; Julien)&nbsp;→</a>
+      </div>
+    </div>
 
     <h2>Un lien privé, pensé pour être partagé</h2>
     <p>L'adresse de votre site n'est <strong>pas référencée sur les moteurs de recherche</strong> : on ne tombe pas dessus par hasard via Google. Seules les personnes à qui vous transmettez le lien y accèdent.</p>
@@ -224,14 +259,15 @@
       <h3>Un mariage, un baptême, un événement à annoncer ?</h3>
       <p>Premier échange offert pour parler de votre événement, de votre thème et de votre budget. Devis écrit, sans engagement.</p>
       <a class="btn" href="contact.html">Demander un devis →</a>
-      <a class="btn btn-ghost" href="modeles/faire-part.html">Voir un exemple de faire-part</a>
+      <a class="btn btn-ghost" href="/faire-part-vivant/">Voir le faire-part vivant en démo →</a>
     </div>
 
     <div class="relart">
       Voir aussi :
+      <a href="/faire-part-vivant/">Le faire-part vivant (démo)</a> ·
+      <a href="modeles/faire-part.html">Autre exemple</a> ·
       <a href="tarifs.html">Tarifs</a> ·
       <a href="creation-site-internet.html">Création de site internet</a> ·
-      <a href="modeles/">Modèles de sites</a> ·
       <a href="blog/faire-part-mariage-digital.html">Faire-part digital : quel prix en 2026 ?</a>
     </div>
   </div></main>
