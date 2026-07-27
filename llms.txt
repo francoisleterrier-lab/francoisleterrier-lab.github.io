@@ -38,6 +38,7 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Accueil : https://francoisleterrier.fr/
 - Community manager (réseaux sociaux) : https://francoisleterrier.fr/community-manager.html
 - Création de site internet : https://francoisleterrier.fr/creation-site-internet.html
+- Application web & mobile (PWA) : https://francoisleterrier.fr/createur-application-mobile.html
 - Référencement SEO : https://francoisleterrier.fr/referencement-seo.html
 - Faire-part digital (invitation événementielle) : https://francoisleterrier.fr/faire-part-digital.html
 - Tarifs : https://francoisleterrier.fr/tarifs.html
