@@ -86,7 +86,7 @@
 </head>
 <body>
   <header class="top"><div class="wrap">
-    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
     <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
@@ -135,6 +135,15 @@
       .cip-stats .s .v{font-family:'Bricolage Grotesque';font-weight:800;font-size:27px;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
       .cip-stats .s .l{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.35;}
       @media(max-width:620px){.cip-stats{grid-template-columns:1fr 1fr;}}
+      .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 6px;}
+      .testi{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;}
+      .testi blockquote{margin:0;font-size:15.5px;color:#dbe1ee;line-height:1.6;}
+      .testi blockquote::before{content:"“";color:var(--cyan);font-family:Georgia,serif;font-size:30px;line-height:0;vertical-align:-12px;margin-right:2px;}
+      .testi figcaption{margin-top:14px;font-size:13.5px;color:var(--muted);}
+      .testi figcaption strong{color:#fff;}
+      .testi-cta{margin:14px 0 6px;background:linear-gradient(120deg,rgba(34,211,238,.07),rgba(168,85,247,.08));border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
+      .testi-cta p{color:#dbe1ee;font-size:15px;margin:0 0 12px;}
+      @media(max-width:620px){.testi-grid{grid-template-columns:1fr;}}
     </style>
     <h3 style="font-family:'Bricolage Grotesque';font-weight:800;color:#fff;font-size:19px;margin:28px 0 4px;">Les résultats aujourd'hui</h3>
     <p style="font-size:14px;color:var(--muted);margin:0 0 4px;">Performance actuelle des comptes que je gère pour l'agence — chiffres réels relevés en juin 2026&nbsp;:</p>
@@ -171,6 +180,25 @@
       </div>
     </div>
     <p>Voir le site en ligne : <a class="inl" href="https://www.domainedessix.fr" target="_blank" rel="noopener">domainedessix.fr →</a></p>
+
+    <h2>Témoignages</h2>
+    <p><strong>Je n'affiche que de vrais avis, jamais de témoignage inventé.</strong> Mes premiers retours clients prendront place ici — et si nous avons travaillé ensemble, votre avis y sera le bienvenu.</p>
+    <div class="testi-cta">
+      <p>Vous êtes client·e&nbsp;? Votre avis aide d'autres pros du Sud-Toulousain à me faire confiance — et ne prend qu'une minute.</p>
+      <a class="btn" href="https://share.google/2OdO1wQRwHTY5aaxs" target="_blank" rel="noopener">Laisser un avis Google →</a>
+    </div>
+    <!-- GABARIT témoignage — dupliquer ce bloc pour chaque VRAI avis (ne rien inventer) :
+    <div class="testi-grid">
+      <figure class="testi">
+        <blockquote>Texte exact de l'avis du client.</blockquote>
+        <figcaption><strong>Prénom N.</strong> · Activité · Ville (31)</figcaption>
+      </figure>
+      <figure class="testi">
+        <blockquote>Un deuxième avis…</blockquote>
+        <figcaption><strong>Prénom N.</strong> · Activité · Ville (31)</figcaption>
+      </figure>
+    </div>
+    -->
 
     <h2>Modèles de sites par métier</h2>
     <p>Pour vous projeter, j'ai conçu des <strong>modèles de sites de démonstration</strong> — chacun avec une <strong>architecture différente</strong> (pas un template recopié), de vraies photos et un design abouti. Ils montrent le niveau de finition que je peux vous livrer.</p>
