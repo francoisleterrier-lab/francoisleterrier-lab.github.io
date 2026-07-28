@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Studio Lumière — Coiffeur & coloriste (modèle de site)</title>
+<meta name="description" content="Modèle de site premium pour salon de coiffure / coloriste, réalisé par François Leterrier — créateur de sites, partout en France.">
+<meta name="theme-color" content="#0a0709">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0a0709;--ink2:#151013;--ink3:#1e1319;--paper:#f0e6ec;--rose:#e8b3a0;--rose2:#d99a86;--muted:#a89aa0;--line:rgba(232,179,160,.18);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .reveal{opacity:1!important;transform:none!important} *{animation:none!important}}
+  body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--paper);background:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.01em;}
+  a{color:var(--rose);text-decoration:none;}
+  .demo{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(10,7,9,.72);backdrop-filter:blur(6px);color:var(--paper);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em;}
+  .demo a{color:var(--rose);font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:11px;}
+  .bar{position:fixed;top:32px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 46px;transition:background .3s,padding .3s;}
+  .bar.solid{background:rgba(10,7,9,.94);backdrop-filter:blur(10px);padding:14px 46px;}
+  .bar .logo{font-family:'Cormorant Garamond';font-weight:700;font-size:25px;color:var(--paper);letter-spacing:.04em;}
+  .bar .logo em{color:var(--rose);font-style:italic;}
+  .bar .rdv{border:1px solid var(--rose);color:var(--rose);padding:10px 22px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s;}
+  .bar .rdv:hover{background:var(--rose);color:var(--ink);}
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
+  .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--rose);opacity:.5;transition:opacity .2s,transform .2s;}
+  .dots a:hover{opacity:1;transform:scale(1.4);background:var(--rose);}
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:radial-gradient(60% 55% at 50% 30%,rgba(232,179,160,.16),transparent 62%),radial-gradient(50% 50% at 80% 80%,rgba(217,154,134,.12),transparent 60%),linear-gradient(180deg,var(--ink2),var(--ink));}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--ink) 94%);pointer-events:none;}
+  .hero .in{position:relative;z-index:2;max-width:940px;}
+  .hero .pre{font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--rose);margin-bottom:24px;}
+  .hero h1{font-size:clamp(46px,9vw,116px);line-height:.96;font-weight:600;}
+  .hero h1 em{display:block;font-style:italic;color:var(--rose);font-weight:500;}
+  .hero p{margin:26px auto 0;max-width:44ch;font-size:18px;color:#e6d6dc;font-weight:300;}
+  .hero .cta{margin-top:38px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  .lk{font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:15px 30px;transition:.25s;cursor:pointer;}
+  .lk-fill{background:var(--rose);color:var(--ink);}.lk-fill:hover{background:var(--paper);}
+  .lk-out{border:1px solid rgba(240,230,236,.35);color:var(--paper);}.lk-out:hover{border-color:var(--rose);color:var(--rose);}
+  .scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;color:var(--rose);font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;animation:fl 2s ease-in-out infinite;}
+  @keyframes fl{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  .wrapc{max-width:1180px;margin:0 auto;padding:0 46px;}
+  /* offre phare : 3 cartes */
+  .offre{padding:118px 0;}
+  .offre .h{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .offre .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);}
+  .offre h2{font-size:clamp(34px,5vw,56px);margin-top:12px;}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .c3{background:var(--ink2);border:1px solid var(--line);padding:0 0 28px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s;}
+  .c3:hover{transform:translateY(-6px);border-color:var(--rose);}
+  .c3 .im{height:200px;display:flex;align-items:flex-end;padding:16px;font-family:'Cormorant Garamond';font-size:20px;color:#fff;}
+  .im-a{background:linear-gradient(150deg,#2a1a22,#3a2028),radial-gradient(circle at 70% 20%,rgba(232,179,160,.3),transparent 55%);}
+  .im-b{background:linear-gradient(150deg,#241722,#301a2a),radial-gradient(circle at 30% 30%,rgba(217,154,134,.32),transparent 55%);}
+  .im-c{background:linear-gradient(150deg,#20161c,#2a1c24),radial-gradient(circle at 60% 70%,rgba(240,230,236,.18),transparent 55%);}
+  .c3 h3{font-size:27px;margin:22px 28px 6px;}
+  .c3 .pr{margin:0 28px 10px;color:var(--rose);font-family:'Cormorant Garamond';font-size:22px;}
+  .c3 p{margin:0 28px;color:#cbb9c0;font-size:14.5px;}
+  /* prestations détail */
+  .presta{background:var(--ink2);padding:118px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .presta .h{text-align:center;max-width:640px;margin:0 auto 50px;}
+  .presta h2{font-size:clamp(34px,5vw,54px);}
+  .presta .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);}
+  .ard{max-width:820px;margin:0 auto;padding:0 46px;}
+  .row{display:flex;align-items:baseline;gap:14px;padding:20px 0;border-bottom:1px solid var(--line);}
+  .row .n{font-family:'Cormorant Garamond';font-size:24px;color:var(--paper);white-space:nowrap;}
+  .row .dt{flex:1;border-bottom:1px dotted rgba(232,179,160,.4);transform:translateY(-5px);}
+  .row .pr{font-family:'Cormorant Garamond';font-size:24px;color:var(--rose);}
+  .row .ds{flex-basis:100%;font-size:13.5px;color:var(--muted);margin-top:-3px;}
+  /* galerie */
+  .gal{padding:118px 0;}
+  .gal .h{text-align:center;margin-bottom:48px;}
+  .gal h2{font-size:clamp(32px,5vw,50px);}
+  .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
+  .strip::-webkit-scrollbar{height:6px;}.strip::-webkit-scrollbar-thumb{background:var(--rose2);border-radius:6px;}
+  .ph{flex:none;width:290px;height:400px;scroll-snap-align:center;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:23px;color:#fff;position:relative;overflow:hidden;}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(10,7,9,.7));}
+  .ph span{position:relative;z-index:2;}
+  .g1{background:linear-gradient(160deg,#2c1c24,#3a2230),radial-gradient(circle at 60% 25%,rgba(232,179,160,.4),transparent 55%);}
+  .g2{background:linear-gradient(160deg,#241621,#321c2c),radial-gradient(circle at 30% 30%,rgba(217,154,134,.4),transparent 55%);}
+  .g3{background:linear-gradient(160deg,#1f151b,#2a1a24),radial-gradient(circle at 70% 60%,rgba(240,230,236,.22),transparent 55%);}
+  .g4{background:linear-gradient(160deg,#2a1b23,#38202e),radial-gradient(circle at 40% 70%,rgba(232,179,160,.34),transparent 55%);}
+  .g5{background:linear-gradient(160deg,#221520,#2e1a28),radial-gradient(circle at 55% 30%,rgba(217,154,134,.36),transparent 55%);}
+  /* à propos */
+  .apropos{padding:118px 0;}
+  .apropos .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;}
+  .portrait{aspect-ratio:4/5;background:linear-gradient(160deg,#2a1b23,#160f14),radial-gradient(circle at 50% 30%,rgba(232,179,160,.3),transparent 60%);display:flex;align-items:center;justify-content:center;font-size:64px;color:rgba(240,230,236,.5);border:1px solid var(--line);}
+  .apropos h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px;}
+  .apropos p{color:#cbb9c0;margin-bottom:16px;max-width:52ch;}
+  .apropos .sign{font-family:'Cormorant Garamond';font-style:italic;font-size:26px;color:var(--rose);margin-top:8px;}
+  /* avis */
+  .avis{background:var(--ink2);padding:110px 0;border-top:1px solid var(--line);}
+  .avis .h{text-align:center;margin-bottom:48px;}
+  .avis h2{font-size:clamp(30px,4.4vw,48px);}
+  .avis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .av{border:1px solid var(--line);padding:28px;background:var(--ink3);}
+  .av .st{color:var(--rose);letter-spacing:2px;font-size:15px;}
+  .av blockquote{font-family:'Cormorant Garamond';font-size:20px;line-height:1.5;color:var(--paper);margin:12px 0 14px;}
+  .av cite{font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+  /* rdv */
+  .rdv-sec{background:linear-gradient(135deg,#2a1a22,#3a2230);padding:118px 24px;text-align:center;}
+  .rdv-sec .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);}
+  .rdv-sec h2{font-size:clamp(36px,6vw,66px);margin:14px 0;}
+  .rdv-sec .hours{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:32px 0 20px;}
+  .rdv-sec .hours b{display:block;font-family:'Cormorant Garamond';font-size:22px;color:var(--rose);}
+  .rdv-sec .hours span{font-size:13px;letter-spacing:.06em;color:#e6d4da;}
+  .rdv-sec .addr{color:#e6d4da;font-size:14px;margin-bottom:30px;letter-spacing:.03em;}
+  .float{position:fixed;bottom:22px;right:22px;z-index:55;background:var(--rose);color:var(--ink);padding:14px 22px;border-radius:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);}
+  .ff{background:#070406;text-align:center;padding:50px 24px;color:var(--muted);font-size:13px;}
+  .ff .made{border:1px solid var(--line);padding:18px;max-width:640px;margin:0 auto 18px;color:#cbb9c0;}
+  .ff .made b{color:var(--rose);}.ff .made a{color:var(--paper);text-decoration:underline;}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:860px){.bar{padding:18px 22px;}.dots{display:none;}.cards3,.avis .g{grid-template-columns:1fr;}.apropos .grid{grid-template-columns:1fr;gap:30px;}.wrapc{padding:0 22px;}.float{display:none;}}
+</style>
+</head>
+<body>
+  <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
+
+  <div class="bar" id="bar">
+    <div class="logo">Studio <em>Lumière</em></div>
+    <a class="rdv" href="#rdv">Prendre RDV</a>
+  </div>
+
+  <nav class="dots" aria-label="Navigation">
+    <a href="#hero" title="Accueil"></a>
+    <a href="#offre" title="Prestations"></a>
+    <a href="#presta" title="Tarifs"></a>
+    <a href="#galerie" title="Galerie"></a>
+    <a href="#apropos" title="Le salon"></a>
+    <a href="#rdv" title="Rendez-vous"></a>
+  </nav>
+
+  <header class="hero" id="hero"><div class="in">
+    <div class="pre">Coiffeur · Coloriste · Sud-Toulousain</div>
+    <h1>La coupe qui vous <em>révèle.</em></h1>
+    <p>Un salon feutré, une écoute vraie, des gestes précis. On sublime votre style, sans jamais le trahir.</p>
+    <div class="cta">
+      <a class="lk lk-fill" href="#rdv">Prendre rendez-vous</a>
+      <a class="lk lk-out" href="#offre">Voir les prestations</a>
+    </div>
+  </div>
+  <div class="scrollcue">défiler ↓</div>
+  </header>
+
+  <section class="offre" id="offre"><div class="wrapc">
+    <div class="h reveal"><div class="pre">Nos signatures</div><h2>Trois gestes, une allure</h2></div>
+    <div class="cards3">
+      <div class="c3 reveal"><div class="im im-a"><span>Coupe & coiffage</span></div><h3>Coupe & brushing</h3><div class="pr">dès 32 €</div><p>Diagnostic, coupe sur-mesure, brushing lumière. Le geste qui change tout, femmes et hommes.</p></div>
+      <div class="c3 reveal"><div class="im im-b"><span>Couleur</span></div><h3>Coloration & balayage</h3><div class="pr">dès 58 €</div><p>Couleur végétale, balayage soleil, ombré. On travaille la lumière, pas juste la teinte.</p></div>
+      <div class="c3 reveal"><div class="im im-c"><span>Soin</span></div><h3>Rituel soin profond</h3><div class="pr">dès 24 €</div><p>Diagnostic du cheveu, masque sur-mesure, brillance miroir. Le cheveu réparé, durablement.</p></div>
+    </div>
+  </div></section>
+
+  <section class="presta" id="presta">
+    <div class="h reveal"><div class="pre">La carte du salon</div><h2>Prestations & tarifs</h2></div>
+    <div class="ard">
+      <div class="row reveal"><span class="n">Coupe femme + brushing</span><span class="dt"></span><span class="pr">42</span><span class="ds">Diagnostic, shampoing soin, coupe et coiffage</span></div>
+      <div class="row reveal"><span class="n">Coupe homme</span><span class="dt"></span><span class="pr">28</span><span class="ds">Coupe ciseaux ou dégradé, contours soignés</span></div>
+      <div class="row reveal"><span class="n">Balayage & patine</span><span class="dt"></span><span class="pr">95</span><span class="ds">Technique lumière, soin repigmentant, brushing</span></div>
+      <div class="row reveal"><span class="n">Coloration racines</span><span class="dt"></span><span class="pr">58</span><span class="ds">Couleur couvrante ou ton sur ton, au choix</span></div>
+      <div class="row reveal"><span class="n">Chignon & coiffure d'événement</span><span class="dt"></span><span class="pr">65</span><span class="ds">Mariage, cérémonie — essai possible en amont</span></div>
+    </div>
+  </section>
+
+  <section class="gal" id="galerie">
+    <div class="h reveal"><h2>L'univers du salon</h2></div>
+    <div class="strip">
+      <div class="ph g1"><span>Le salon</span></div>
+      <div class="ph g2"><span>Les couleurs</span></div>
+      <div class="ph g3"><span>Les coupes</span></div>
+      <div class="ph g4"><span>Les chignons</span></div>
+      <div class="ph g5"><span>L'ambiance</span></div>
+    </div>
+  </section>
+
+  <section class="apropos" id="apropos"><div class="wrapc">
+    <div class="grid">
+      <div class="portrait reveal" role="img" aria-label="Portrait de la coiffeuse (emplacement photo)">✦</div>
+      <div class="reveal">
+        <h2>Le geste juste, depuis 12 ans</h2>
+        <p>Passionnée par la couleur et la lumière, j'ai ouvert Studio Lumière pour un salon à taille humaine — où l'on prend le temps de vous écouter avant de toucher aux ciseaux.</p>
+        <p>Formée aux techniques de balayage les plus douces, j'utilise des produits respectueux du cheveu et du cuir chevelu. Chaque rendez-vous est un moment pour vous.</p>
+        <div class="sign">— Camille, fondatrice</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="avis"><div class="wrapc">
+    <div class="h reveal"><h2>Elles en parlent mieux que nous</h2></div>
+    <div class="g">
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Le meilleur balayage que j'aie jamais eu. Camille écoute vraiment et le résultat est naturel. »</blockquote><cite>— Julie M.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Un salon apaisant, un vrai savoir-faire. Je ne confie mes cheveux à personne d'autre. »</blockquote><cite>— Sarah L.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Accueil adorable, coupe impeccable et des conseils qui tiennent la route. À recommander. »</blockquote><cite>— Emma D.</cite></div>
+    </div>
+  </div></section>
+
+  <section class="rdv-sec" id="rdv">
+    <div class="pre">Rendez-vous</div>
+    <h2>On s'occupe de vous ?</h2>
+    <div class="hours">
+      <div><b>Mar – Ven</b><span>9h – 19h</span></div>
+      <div><b>Samedi</b><span>9h – 18h</span></div>
+      <div><b>Dim – Lun</b><span>Fermé</span></div>
+    </div>
+    <div class="addr">12 rue des Lilas · Sud-Toulousain · sur rendez-vous</div>
+    <a class="lk lk-fill" href="tel:+33500000000">📞 Prendre RDV — 05 00 00 00 00</a>
+  </section>
+
+  <a class="float" href="#rdv">Prendre RDV</a>
+
+  <footer class="ff">
+    <div class="made">Site-modèle de démonstration (salon fictif), conçu par <b>François Leterrier</b> — créateur de sites internet, partout en France. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Studio Lumière · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
+  </footer>
+
+  <script>
+    var bar=document.getElementById('bar');
+    addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);},{passive:true});
+    (function(){
+      var els=[].slice.call(document.querySelectorAll('.reveal'));
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+      els.forEach(function(e){io.observe(e);});
+    })();
+  </script>
+</body>
+</html>
