@@ -629,9 +629,18 @@
     .reveal{opacity:1!important;transform:none!important;}
     .scrollprog{display:none!important;}
   }
+  /* ===== fl-ui : fond animé (shader WebGL iridescent, façon /simulateur) ===== */
+  canvas.fl-gl{position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;display:block;}
+  .fl-scrim{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(125% 95% at 50% 22%,rgba(6,4,16,.26),rgba(6,4,16,.86));}
+  /* desktop : le shader remplace les halos aurore ; mobile : on garde l'aurore (perf/batterie) */
+  @media (min-width:761px){ body::before{display:none!important;} }
+  @media (max-width:760px){ canvas.fl-gl,.fl-scrim{display:none!important;} }
 </style>
 </head>
 <body>
+  <canvas class="fl-gl" data-fl-shader aria-hidden="true"></canvas>
+  <div class="fl-scrim" aria-hidden="true"></div>
   <div class="scrollprog" aria-hidden="true"><i></i></div>
 
 <!-- ============ HEADER ============ -->
@@ -1417,5 +1426,6 @@
 <script src="/consent.js" defer></script>
 <script src="/popups.js" defer></script>
 <script src="/interactive.js" defer></script>
+<script src="/fl-ui/fl-ui.js" defer></script>
 </body>
 </html>
