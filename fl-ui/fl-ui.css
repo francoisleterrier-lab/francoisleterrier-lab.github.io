@@ -1,0 +1,115 @@
+/* =====================================================================
+   FL-UI — Kit de design partagé FL-System
+   À charger sur TOUTES les pages : <link rel="stylesheet" href="/fl-ui/fl-ui.css">
+   Univers sombre + dégradé cyan→violet→magenta, HUD/tech, chrome.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  /* couleurs */
+  --fl-bg:#060410;
+  --fl-ink:#f2ecf4;
+  --fl-muted:#b9b3c6;
+  --fl-cyan:#28c8dd;
+  --fl-violet:#7c3aed;
+  --fl-magenta:#e05bc8;
+  --fl-gold:#f4b545;
+  --fl-line:rgba(143,230,240,.16);
+  /* dégradé signature */
+  --fl-grad:linear-gradient(90deg,var(--fl-cyan),var(--fl-violet),var(--fl-magenta));
+  /* typo */
+  --fl-serif:'Fraunces',Georgia,serif;
+  --fl-sans:'Montserrat',system-ui,sans-serif;
+  /* forme */
+  --fl-radius:20px;
+  --fl-radius-sm:14px;
+  --fl-shadow:0 22px 56px rgba(0,0,0,.5);
+  --fl-ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+.fl-root{background:var(--fl-bg);color:var(--fl-ink);font-family:var(--fl-sans);position:relative}
+/* fond GLOBAL (léger, sur toutes les pages) */
+.fl-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+   radial-gradient(50% 40% at 18% 16%,rgba(40,200,221,.16),transparent 60%),
+   radial-gradient(50% 45% at 82% 26%,rgba(214,51,180,.15),transparent 60%),
+   radial-gradient(60% 55% at 50% 108%,rgba(124,58,237,.20),transparent 66%),
+   var(--fl-bg);}
+.fl-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(rgba(120,180,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(120,180,255,.13) 1px,transparent 1px);
+  background-size:46px 46px;-webkit-mask:radial-gradient(circle at 50% 30%,#000,transparent 80%);mask:radial-gradient(circle at 50% 30%,#000,transparent 80%)}
+/* fond HERO (pages fortes uniquement) : le canvas WebGL se place ici */
+.fl-gl{position:fixed;inset:0;z-index:0;width:100vw;height:100vh;display:block}
+.fl-scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 30%,rgba(6,4,16,.30),rgba(6,4,16,.82))}
+.fl-content{position:relative;z-index:5}
+
+/* ---------- HUD corners ---------- */
+.fl-hud{position:fixed;z-index:3;width:54px;height:54px;border:2px solid rgba(143,230,240,.4);pointer-events:none}
+.fl-hud.tl{top:24px;left:24px;border-right:0;border-bottom:0}
+.fl-hud.tr{top:24px;right:24px;border-left:0;border-bottom:0}
+.fl-hud.bl{bottom:24px;left:24px;border-right:0;border-top:0}
+.fl-hud.br{bottom:24px;right:24px;border-left:0;border-top:0}
+
+/* ---------- curseur custom ---------- */
+.fl-cursor-dot,.fl-cursor-ring{position:fixed;z-index:90;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);left:0;top:0;opacity:0}
+.fl-cursor-dot{width:8px;height:8px;background:#eafcff;box-shadow:0 0 12px #45e0ff}
+.fl-cursor-ring{width:38px;height:38px;border:1.5px solid rgba(143,230,240,.7);transition:width .2s,height .2s,background .2s,border-color .2s}
+.fl-cursor-ring.fl-big{width:64px;height:64px;background:rgba(124,58,237,.12);border-color:rgba(214,120,232,.9)}
+.fl-cursor-on{cursor:none}
+.fl-cursor-on .fl-cursor-dot,.fl-cursor-on .fl-cursor-ring{opacity:1}
+
+/* ---------- typo ---------- */
+.fl-eyebrow{font-size:13px;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:#8fe6f0;display:inline-flex;gap:14px;align-items:center}
+.fl-eyebrow::before,.fl-eyebrow::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,#8fe6f0)}
+.fl-eyebrow::after{background:linear-gradient(90deg,#8fe6f0,transparent)}
+.fl-h1{font-family:var(--fl-serif);font-weight:500;font-size:clamp(38px,6vw,80px);line-height:1.05;letter-spacing:-1px}
+.fl-h2{font-family:var(--fl-serif);font-weight:500;font-size:clamp(30px,4.6vw,54px);line-height:1.1}
+.fl-h3{font-family:var(--fl-sans);font-weight:800;font-size:clamp(22px,3vw,34px);letter-spacing:-.5px}
+.fl-lead{color:var(--fl-muted);font-size:18px;line-height:1.5}
+.fl-grad-text{background:var(--fl-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fl-gold-text{background:linear-gradient(90deg,#ffd38a,#f2a63c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fl-decode{font-weight:700;letter-spacing:8px}
+.fl-decode .c{color:var(--fl-magenta)}
+
+/* ---------- boutons ---------- */
+.fl-btn{position:relative;display:inline-block;padding:18px 40px;border:0;border-radius:60px;font:inherit;font-weight:700;font-size:18px;
+  color:#06121a;background:var(--fl-grad);text-decoration:none;overflow:hidden;box-shadow:0 12px 40px rgba(124,58,237,.4);will-change:transform}
+.fl-btn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:fl-shine 3.4s ease-in-out infinite}
+@keyframes fl-shine{0%,60%{left:-120%}100%{left:175%}}
+.fl-btn.ghost{background:transparent;color:var(--fl-ink);box-shadow:none;border:1.5px solid var(--fl-line)}
+.fl-btn.ghost::after{display:none}
+
+/* ---------- cartes (+ tilt/gloss) ---------- */
+.fl-card{position:relative;background:linear-gradient(160deg,rgba(22,18,36,.86),rgba(9,7,16,.9));border:1px solid var(--fl-line);
+  border-radius:var(--fl-radius);padding:24px;box-shadow:var(--fl-shadow);backdrop-filter:blur(6px);transform-style:preserve-3d;transition:transform .1s var(--fl-ease)}
+.fl-card__gloss{position:absolute;inset:0;border-radius:var(--fl-radius);pointer-events:none;
+  background:radial-gradient(240px circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),transparent 60%)}
+
+/* ---------- champs ---------- */
+.fl-input{background:rgba(255,255,255,.05);border:1.5px solid rgba(143,230,240,.35);border-radius:var(--fl-radius-sm);
+  padding:15px 18px;color:#fff;font:inherit;font-size:18px;outline:none;transition:.2s}
+.fl-input:focus{border-color:var(--fl-cyan);box-shadow:0 0 30px rgba(40,200,221,.25)}
+
+/* ---------- pill / badge ---------- */
+.fl-pill{position:relative;display:inline-flex;align-items:center;padding:12px 26px;border-radius:60px;font-weight:600}
+.fl-pill::before{content:"";position:absolute;inset:0;border-radius:60px;padding:1.5px;background:var(--fl-grad);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+
+/* ---------- stat ---------- */
+.fl-stat .n{font-weight:800;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-2px}
+.fl-stat .l{color:var(--fl-muted);letter-spacing:2px;text-transform:uppercase;font-size:13px;margin-top:8px}
+
+/* ---------- apparition au scroll ---------- */
+.fl-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--fl-ease),transform .8s var(--fl-ease)}
+.fl-reveal.fl-in{opacity:1;transform:none}
+
+/* ---------- garde-fous ---------- */
+@media (pointer:coarse){.fl-cursor-dot,.fl-cursor-ring{display:none!important}.fl-cursor-on{cursor:auto}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .fl-reveal{opacity:1;transform:none}
+  .fl-btn::after{display:none}
+}
