@@ -673,50 +673,38 @@
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="top">
+<!-- ============ HERO (immersif, façon /simulateur) ============ -->
+<section class="hero hero--splash" id="top">
   <div class="hero-glow2"></div>
-  <div class="wrap hero-in">
-    <div>
-      <span class="tagpill"><span class="dotlive"></span> Disponible · Sud-Toulousain &amp; partout en France</span>
-      <div class="kicker grad-txt">Créer · Fédérer · Engager</div>
-      <h1>Votre présence en ligne, <span>du premier post au site web.</span></h1>
-      <p class="lead">Je gère vos réseaux sociaux et je construis votre site internet pour donner à votre activité une image <b>pro et régulière</b>. Basé dans le Sud-Toulousain, je travaille à distance <b>partout en France</b> — pendant que vous restez concentré sur votre métier.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#diagnostic">
-          Demander mon diagnostic gratuit
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a class="btn btn-ghost" href="simulateur.html">▶ Testez votre visibilité en direct</a>
-        <a class="btn btn-ghost" href="#contact">Discutons de votre projet</a>
-        <a class="btn btn-ghost" href="#tarifs">Voir les tarifs</a>
-        <a class="btn btn-ghost" href="https://calendly.com/fl-conceptimmoplus/30min" data-fl-calendly="https://calendly.com/fl-conceptimmoplus/30min" target="_blank" rel="noopener">📅 Réserver un créneau</a>
-      </div>
-      <button class="fl-kbtn" type="button" data-fl-palette aria-label="Recherche rapide sur le site" style="margin-top:16px;">🔎 Naviguer sur le site <kbd>⌘K</kbd></button>
-      <div class="hero-trust">
-        <span>✓ Premier échange <b>offert</b></span>
-        <span>✓ Sans engagement</span>
-        <span>✓ Contenu validé avant publication</span>
-      </div>
-    </div>
-
-    <aside class="hero-card" aria-hidden="true">
-      <div class="mini-post">
-        <div class="mp-top">
-          <div class="av"></div>
-          <div class="nm">Votre activité<small>Publication · à l'instant</small></div>
-        </div>
-        <div class="mp-img"><span>Du contenu qui vous ressemble</span></div>
-        <div class="mp-act"><span class="heart">♥ J'aime</span><span>💬 Commenter</span><span>↗ Partager</span></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat"><div class="v">3</div><div class="l">réseaux gérés</div></div>
-        <div class="stat"><div class="v">2–4</div><div class="l">posts / mois</div></div>
-        <div class="stat"><div class="v">100%</div><div class="l">local</div></div>
-      </div>
-      <div style="text-align:center;font-size:9.5px;color:#69728a;margin-top:12px;letter-spacing:.12em;text-transform:uppercase;">Aperçu d'illustration</div>
-    </aside>
+  <span class="hs-hud tl" aria-hidden="true"></span><span class="hs-hud tr" aria-hidden="true"></span>
+  <span class="hs-hud bl" aria-hidden="true"></span><span class="hs-hud br" aria-hidden="true"></span>
+  <div class="hero-splash">
+    <div class="hs-logo" data-fl-magnetic="14"><img src="logo.png" width="104" height="104" alt="François Leterrier — Community Manager & création de site, Sud-Toulousain & partout en France"></div>
+    <p class="hs-eyebrow">Community manager &amp; création de site</p>
+    <h1>Votre présence en ligne,<br><span>réinventée.</span></h1>
+    <p class="fl-decode hs-decode" data-text="CRÉER · FÉDÉRER · ENGAGER">CRÉER · FÉDÉRER · ENGAGER</p>
   </div>
+  <a class="hs-scroll" href="#apercu-google" aria-label="Faire défiler vers le simulateur de visibilité">↓ faites défiler · bougez la souris</a>
+  <style>
+    .hero--splash{padding:0;min-height:clamp(560px,92svh,920px);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .hero-splash{position:relative;z-index:2;width:100%;max-width:900px;margin:0 auto;padding:96px 26px 46px;text-align:center;display:flex;flex-direction:column;align-items:center;}
+    .hs-logo{width:104px;height:104px;border-radius:50%;overflow:hidden;margin:0 auto 22px;box-shadow:0 0 40px rgba(124,58,237,.4),0 0 20px rgba(15,181,201,.3);animation:hs-float 5s ease-in-out infinite;}
+    .hs-logo img{width:100%;height:100%;object-fit:cover;display:block;}
+    @keyframes hs-float{50%{transform:translateY(-10px);}}
+    .hs-eyebrow{font-family:'Montserrat';font-weight:700;letter-spacing:.32em;text-transform:uppercase;font-size:clamp(11px,1.5vw,14px);color:#8fe6f0;margin:0 0 4px;}
+    .hero--splash h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(40px,6.6vw,86px);line-height:1.03;letter-spacing:-.01em;margin:6px 0;color:#fff;}
+    .hs-decode{margin-top:18px;font-family:'Montserrat';font-weight:700;letter-spacing:.4em;font-size:clamp(12px,2vw,19px);color:#cfe9ff;}
+    .hs-hud{position:absolute;z-index:3;width:46px;height:46px;border:2px solid rgba(143,230,240,.32);pointer-events:none;}
+    .hs-hud.tl{top:86px;left:20px;border-right:0;border-bottom:0;}
+    .hs-hud.tr{top:86px;right:20px;border-left:0;border-bottom:0;}
+    .hs-hud.bl{bottom:22px;left:20px;border-right:0;border-top:0;}
+    .hs-hud.br{bottom:22px;right:20px;border-left:0;border-top:0;}
+    .hs-scroll{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;color:#9a93a8;font-size:13px;letter-spacing:.1em;text-decoration:none;animation:hs-bob 2s ease-in-out infinite;}
+    .hs-scroll:hover{color:#cfe9ff;text-decoration:none;}
+    @keyframes hs-bob{50%{transform:translateX(-50%) translateY(8px);}}
+    @media (max-width:760px){ .hs-hud{width:34px;height:34px;} .hs-hud.tl,.hs-hud.tr{top:78px;} }
+    @media (prefers-reduced-motion:reduce){ .hs-logo,.hs-scroll{animation:none;} }
+  </style>
 </section>
 
 <!-- ============ SIMULATEUR SERP / GOOGLE BUSINESS ============ -->
