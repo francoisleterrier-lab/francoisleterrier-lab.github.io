@@ -40,3 +40,10 @@ main p,main li{font-size:15.5px;color:#c4cbdb;}
 footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;}
 footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
 @media(max-width:680px){.cards{grid-template-columns:1fr;}.top .wrap{padding:12px 24px;}}
+.cfaq{margin:34px 0 4px;}
+.cfaq details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:10px;}
+.cfaq summary{cursor:pointer;padding:14px 16px;font-family:'Bricolage Grotesque';font-weight:700;color:#fff;font-size:15px;list-style:none;}
+.cfaq summary::-webkit-details-marker{display:none;}
+.cfaq summary::after{content:"+";float:right;color:var(--cyan);font-weight:700;}
+.cfaq details[open] summary::after{content:"–";}
+.cfaq .a{padding:0 16px 14px;color:#c4cbdb;font-size:14.5px;}
