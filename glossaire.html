@@ -6,7 +6,7 @@
 <title>Glossaire web & référencement local (sans jargon) — François Leterrier</title>
 <meta name="description" content="SEO, fiche Google, NAP, responsive, nom de domaine, hébergement… Tous les mots du web local expliqués simplement, sans jargon, pour les artisans et commerçants du Sud-Toulousain.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#06070e">
+<meta name="theme-color" content="#060410">
 <link rel="canonical" href="https://francoisleterrier.fr/glossaire.html">
 <link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
@@ -17,8 +17,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://francoisleterrier.fr/glossaire.html">
 <meta property="og:locale" content="fr_FR">
-<link rel="preload" as="font" type="font/woff2" href="/fonts/bricolagegrotesque-800-latin-11.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-400-latin-17.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
 <link rel="stylesheet" href="/aurora.css">
 <script type="application/ld+json">
@@ -56,38 +56,41 @@
 }
 </script>
 <style>
-  :root{--bg0:#06070e;--bg1:#0a0d18;--panel:#0e1322;--txt:#e7ecf6;--muted:#97a1b8;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--cyan:#22d3ee;--grad:linear-gradient(120deg,#22d3ee,#4f7dff 38%,#a855f7 70%,#d946ef 100%);}
+  :root{--bg0:#060410;--bg1:#0b0718;--panel:#16122a;--txt:#f2ecf4;--muted:#b9b3c6;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);--cyan:#28c8dd;--grad:linear-gradient(120deg,#28c8dd,#6d54ec 38%,#7c3aed 70%,#e05bc8 100%);}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Manrope',sans-serif;color:var(--txt);background:var(--bg0);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  body{font-family:'Montserrat',sans-serif;color:var(--txt);background:var(--bg0);line-height:1.7;-webkit-font-smoothing:antialiased;}
   a{color:var(--cyan);text-decoration:none;}
   .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
   .top{position:sticky;top:0;z-index:10;background:rgba(6,7,14,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
   .top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:64px;gap:12px;}
-  .brand{display:flex;align-items:center;gap:11px;font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;color:#fff;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Montserrat';font-weight:800;font-size:16px;color:#fff;}
   .brand img{width:40px;height:40px;border-radius:8px;}
-  .brand small{display:block;font-family:'Manrope';font-weight:600;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-top:2px;}
+  .brand small{display:block;font-family:'Montserrat';font-weight:600;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-top:2px;}
   .back{font-size:13.5px;font-weight:600;border:1px solid var(--line2);border-radius:30px;padding:8px 15px;color:var(--txt);white-space:nowrap;}
   .back:hover{border-color:var(--cyan);}
   .hero{position:relative;overflow:hidden;padding:46px 0 40px;border-bottom:1px solid var(--line);}
   .hero .wrap{position:relative;z-index:2;}
-  .eyebrow{font-family:'Bricolage Grotesque';font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
-  h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(26px,5vw,38px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 0;color:#fff;}
+  .eyebrow{font-family:'Montserrat';font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);}
+  h1{font-family:'Montserrat';font-weight:800;font-size:clamp(26px,5vw,38px);line-height:1.06;letter-spacing:-.02em;margin:10px 0 0;color:#fff;}
   h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .sub{font-size:16.5px;color:#dbe1ee;margin-top:13px;max-width:640px;}
   main{background:var(--bg1);}
   main .wrap{padding:34px 24px 56px;}
   dl{margin:0;}
   .term{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;background:var(--panel);}
-  .term dt{font-family:'Bricolage Grotesque';font-weight:800;font-size:17px;color:#fff;margin-bottom:6px;}
+  .term dt{font-family:'Montserrat';font-weight:800;font-size:17px;color:#fff;margin-bottom:6px;}
   .term dd{margin:0;font-size:15px;color:#c4cbdb;}
   .term dd a{font-weight:600;}
-  .more{margin-top:24px;background:linear-gradient(160deg,rgba(34,211,238,.07),rgba(168,85,247,.07));border:1px solid var(--line2);border-radius:16px;padding:22px 24px;}
-  .more h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;color:#fff;margin:0 0 8px;}
+  .more{margin-top:24px;background:linear-gradient(160deg,rgba(40,200,221,.07),rgba(124,58,237,.07));border:1px solid var(--line2);border-radius:16px;padding:22px 24px;}
+  .more h2{font-family:'Montserrat';font-weight:800;font-size:18px;color:#fff;margin:0 0 8px;}
   .more p{font-size:14.5px;color:#c4cbdb;margin:0 0 14px;}
   .cta{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#08111f;font-weight:700;border-radius:30px;padding:12px 22px;font-size:14.5px;}
   .cta:hover{transform:translateY(-2px);transition:transform .18s;}
   footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;}
   footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
+
+/* fl-ui : titre display serif */
+h1{font-family:'Fraunces',Georgia,serif!important;font-weight:500!important;letter-spacing:-.01em;}
 </style>
 </head>
 <body>

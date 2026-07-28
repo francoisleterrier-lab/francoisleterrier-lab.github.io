@@ -7,7 +7,7 @@
 <title>Simulateur de visibilité en ligne — Sud-Toulousain | François Leterrier</title>
 <meta name="description" content="Testez gratuitement votre visibilité locale : tapez votre métier et votre ville et voyez, en direct, votre présence sur Google, votre fiche Google Business, vos réseaux et votre site. Un simulateur signé François Leterrier, Sud-Toulousain.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#06070e">
+<meta name="theme-color" content="#060410">
 <link rel="canonical" href="https://francoisleterrier.fr/simulateur.html">
 <link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
@@ -18,8 +18,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://francoisleterrier.fr/simulateur.html">
 <meta property="og:locale" content="fr_FR">
-<link rel="preload" as="font" type="font/woff2" href="/fonts/bricolagegrotesque-800-latin-11.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-400-latin-17.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
 <link rel="stylesheet" href="/aurora.css">
 <link rel="stylesheet" href="pages.css">
@@ -74,8 +74,8 @@
    a11y : animations coupées si prefers-reduced-motion ; curseur natif au toucher.
    ===================================================================== */
 #flsim{
-  --fs-cyan:#22d3ee; --fs-blue:#4f7dff; --fs-viol:#a855f7; --fs-mag:#d946ef;
-  --fs-grad:linear-gradient(120deg,#22d3ee,#4f7dff 38%,#a855f7 70%,#d946ef 100%);
+  --fs-cyan:#28c8dd; --fs-blue:#6d54ec; --fs-viol:#7c3aed; --fs-mag:#e05bc8;
+  --fs-grad:linear-gradient(120deg,#28c8dd,#6d54ec 38%,#7c3aed 70%,#e05bc8 100%);
   --fs-ink:#f2ecf4; --fs-dim:#c3b7c9; --fs-line:rgba(143,230,240,.18);
   position:relative; isolation:isolate; overflow:hidden;
   background:#050310; color:var(--fs-ink);
@@ -84,7 +84,7 @@
 #flsim:not(.fs-nocursor){cursor:none}
 #flsim :is(a,button,input){font-family:inherit}
 #flsim .fs-mw{max-width:1180px;margin:0 auto;padding:0 30px}
-#flsim .fs-eyebrow{font-family:'Bricolage Grotesque',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#8fe6f0;display:flex;gap:14px;align-items:center;justify-content:center}
+#flsim .fs-eyebrow{font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#8fe6f0;display:flex;gap:14px;align-items:center;justify-content:center}
 #flsim .fs-eyebrow::before,#flsim .fs-eyebrow::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,#8fe6f0)}
 #flsim .fs-eyebrow::after{background:linear-gradient(90deg,#8fe6f0,transparent)}
 #flsim .fs-g{background:var(--fs-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -99,7 +99,7 @@
 /* --- HERO + shader --- */
 #flsim .fs-hero{position:relative;min-height:clamp(560px,86vh,880px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:88px 30px 64px;overflow:hidden}
 #flsim .fs-gl{position:absolute;inset:0;z-index:0;width:100%;height:100%;display:block}
-#flsim .fs-fb{position:absolute;inset:0;z-index:0;display:none;background:radial-gradient(50% 40% at 20% 20%,rgba(34,211,238,.25),transparent 60%),radial-gradient(50% 45% at 82% 30%,rgba(217,70,239,.22),transparent 60%),radial-gradient(60% 55% at 50% 100%,rgba(124,58,237,.30),transparent 65%),#050310;animation:fs-hue 16s linear infinite}
+#flsim .fs-fb{position:absolute;inset:0;z-index:0;display:none;background:radial-gradient(50% 40% at 20% 20%,rgba(40,200,221,.25),transparent 60%),radial-gradient(50% 45% at 82% 30%,rgba(224,91,200,.22),transparent 60%),radial-gradient(60% 55% at 50% 100%,rgba(124,58,237,.30),transparent 65%),#050310;animation:fs-hue 16s linear infinite}
 @keyframes fs-hue{to{filter:hue-rotate(360deg)}}
 #flsim .fs-scrim{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 90% at 50% 30%,rgba(5,3,16,.28),rgba(5,3,16,.85))}
 #flsim .fs-hud{position:absolute;z-index:3;width:48px;height:48px;border:2px solid rgba(143,230,240,.35);pointer-events:none}
@@ -111,20 +111,20 @@
 #flsim .fs-logo{width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 20px;box-shadow:0 0 40px rgba(124,58,237,.4),0 0 20px rgba(15,181,201,.3);animation:fs-float 5s ease-in-out infinite}
 #flsim .fs-logo img{width:100%;height:100%;object-fit:cover;display:block}
 @keyframes fs-float{50%{transform:translateY(-10px)}}
-#flsim .fs-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(38px,6.4vw,82px);line-height:1.03;letter-spacing:-.02em;margin:6px 0;color:#fff}
-#flsim .fs-decode{margin-top:18px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:.42em;font-size:clamp(13px,2vw,19px);color:#cfe9ff}
+#flsim .fs-hero h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(38px,6.4vw,82px);line-height:1.03;letter-spacing:-.02em;margin:6px 0;color:#fff}
+#flsim .fs-decode{margin-top:18px;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.42em;font-size:clamp(13px,2vw,19px);color:#cfe9ff}
 #flsim .fs-decode .fs-c{color:#e05bc8}
 #flsim .fs-scroll{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:5;color:#8a8398;font-size:13px;letter-spacing:.12em;animation:fs-bob 2s ease-in-out infinite}
 @keyframes fs-bob{50%{transform:translateX(-50%) translateY(8px)}}
 
 /* --- GÉNÉRATEUR --- */
 #flsim .fs-gen{position:relative;z-index:5;padding:64px 0 84px;background:linear-gradient(180deg,rgba(5,3,16,.6),rgba(5,3,16,.92))}
-#flsim .fs-gen h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4.4vw,50px);text-align:center;margin:14px 0 8px;color:#fff;letter-spacing:-.01em;max-width:none}
+#flsim .fs-gen h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(28px,4.4vw,50px);text-align:center;margin:14px 0 8px;color:#fff;letter-spacing:-.01em;max-width:none}
 #flsim .fs-lead{text-align:center;color:var(--fs-dim);max-width:640px;margin:0 auto 30px;font-size:18px}
 #flsim .fs-controls{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:flex-end;margin-bottom:22px}
 #flsim .fs-field label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8fe6f0;margin:0 0 8px 4px;font-weight:600}
 #flsim .fs-field input{width:260px;max-width:76vw;background:rgba(255,255,255,.05);border:1.5px solid rgba(143,230,240,.35);border-radius:14px;padding:15px 18px;color:#fff;font:inherit;font-size:18px;outline:none;cursor:inherit;transition:border-color .2s,box-shadow .2s}
-#flsim .fs-field input:focus-visible{border-color:var(--fs-cyan);box-shadow:0 0 0 3px rgba(34,211,238,.3)}
+#flsim .fs-field input:focus-visible{border-color:var(--fs-cyan);box-shadow:0 0 0 3px rgba(40,200,221,.3)}
 #flsim .fs-toggle{display:flex;justify-content:center;gap:6px;margin:0 auto 14px;background:rgba(255,255,255,.05);border:1px solid rgba(143,230,240,.2);border-radius:40px;padding:5px;width:max-content}
 #flsim .fs-toggle button{border:0;background:transparent;color:#c8c2d4;font:inherit;font-weight:700;padding:10px 24px;border-radius:30px;cursor:inherit;transition:background .25s,color .25s}
 #flsim .fs-toggle button:focus-visible{outline:2px solid var(--fs-cyan);outline-offset:2px}
@@ -152,7 +152,7 @@
 #flsim .fs-gbp .fs-btns span{border:1px solid rgba(143,230,240,.4);color:#cfe9ff;border-radius:30px;padding:7px 14px;font-size:12px;font-weight:600}
 #flsim .fs-gbp .fs-btns .fs-p{background:var(--fs-grad);border:0;color:#06121a}
 #flsim .fs-soc .fs-top{display:flex;align-items:center;gap:12px}
-#flsim .fs-soc .fs-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#e05bc8);flex:none}
+#flsim .fs-soc .fs-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#28c8dd,#e05bc8);flex:none}
 #flsim .fs-soc .fs-top b{display:block;font-size:15px}
 #flsim .fs-soc .fs-top span{font-size:12px;color:#9b93aa}
 #flsim .fs-soc .fs-body{margin:14px 0;font-size:15.5px;line-height:1.5}
@@ -164,19 +164,19 @@
 #flsim .fs-mini .fs-bar i{width:10px;height:10px;border-radius:50%;background:#3a3f4a;display:inline-block}
 #flsim .fs-mini .fs-bar .fs-url{margin-left:8px;font-size:12px;color:#9b93aa;word-break:break-all}
 #flsim .fs-mini .fs-view{border:1px solid rgba(143,230,240,.16);border-radius:0 0 12px 12px;padding:22px 18px;background:linear-gradient(160deg,rgba(30,24,52,.6),rgba(10,8,20,.6));text-align:center}
-#flsim .fs-mini .fs-view h4{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;margin-bottom:6px;color:#fff}
+#flsim .fs-mini .fs-view h4{font-family:'Montserrat',sans-serif;font-size:22px;margin-bottom:6px;color:#fff}
 #flsim .fs-mini .fs-view p{color:var(--fs-dim);font-size:13px;margin-bottom:14px}
 #flsim .fs-mini .fs-view .fs-b{display:inline-block;background:var(--fs-grad);color:#06121a;font-weight:700;font-size:13px;padding:9px 18px;border-radius:30px}
 
 /* --- STATS --- */
 #flsim .fs-stats{position:relative;z-index:5;padding:56px 0;text-align:center;background:rgba(5,3,16,.92)}
 #flsim .fs-statrow{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-top:20px}
-#flsim .fs-stat .fs-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(38px,5.6vw,68px);line-height:1;letter-spacing:-.03em;min-height:1em}
+#flsim .fs-stat .fs-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(38px,5.6vw,68px);line-height:1;letter-spacing:-.03em;min-height:1em}
 #flsim .fs-stat .fs-l{color:var(--fs-dim);letter-spacing:.06em;font-size:13.5px;margin-top:8px;max-width:20ch}
 
 /* --- CTA --- */
 #flsim .fs-cta-sec{position:relative;z-index:5;padding:64px 0 96px;text-align:center;background:rgba(5,3,16,.92)}
-#flsim .fs-cta-sec h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4.2vw,48px);margin-bottom:10px;color:#fff}
+#flsim .fs-cta-sec h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(28px,4.2vw,48px);margin-bottom:10px;color:#fff}
 #flsim .fs-cta-sec p{color:var(--fs-dim);font-size:18px;margin-bottom:28px;max-width:60ch;margin-left:auto;margin-right:auto}
 #flsim .fs-cta{position:relative;display:inline-block;padding:19px 42px;border:0;border-radius:60px;font:inherit;font-weight:800;font-size:20px;color:#06121a;background:var(--fs-grad);cursor:inherit;overflow:hidden;box-shadow:0 12px 44px rgba(124,58,237,.45);text-decoration:none;will-change:transform}
 #flsim .fs-cta:hover{text-decoration:none;color:#06121a}
@@ -185,7 +185,7 @@
 @keyframes fs-shine{0%,60%{left:-120%}100%{left:175%}}
 #flsim .fs-foot{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:44px}
 #flsim .fs-foot img{width:60px;height:60px;border-radius:50%;box-shadow:0 0 24px rgba(124,58,237,.35)}
-#flsim .fs-foot .fs-fn{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;color:#fff}
+#flsim .fs-foot .fs-fn{font-family:'Montserrat',sans-serif;font-weight:700;font-size:20px;color:#fff}
 #flsim .fs-foot .fs-fu{color:#8fe6f0;font-size:14px;letter-spacing:.04em}
 
 /* --- Reveal on scroll (masqué UNIQUEMENT si JS actif : sans JS le contenu reste visible) --- */
