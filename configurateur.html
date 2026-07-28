@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurateur de projet — chiffrez votre site en direct | François Leterrier</title>
+<meta name="description" content="Composez votre projet (site, application, réseaux) et voyez le prix et le délai se calculer en direct, puis recevez un devis détaillé sans engagement. Partout en France, basé dans le Sud-Toulousain.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#060410">
+<link rel="canonical" href="https://francoisleterrier.fr/configurateur.html">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="François Leterrier · Community Manager">
+<meta property="og:title" content="Configurateur de projet — chiffrez votre site en direct">
+<meta property="og:description" content="Choisissez, cochez, ajustez : votre estimation et votre délai se calculent en temps réel. Devis détaillé sans engagement.">
+<meta property="og:image" content="https://francoisleterrier.fr/og-image.png">
+<meta property="og:url" content="https://francoisleterrier.fr/configurateur.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Configurateur de projet — chiffrez votre site en direct">
+<meta name="twitter:description" content="Composez votre projet et voyez le prix en direct — puis recevez un devis détaillé.">
+<meta name="twitter:image" content="https://francoisleterrier.fr/og-image.png">
+
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
+<link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
+<link rel="stylesheet" href="/aurora.css">
+<link rel="stylesheet" href="pages.css">
+<link rel="preconnect" href="https://api.web3forms.com">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Configurateur de projet", "item": "https://francoisleterrier.fr/configurateur.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Configurateur de projet — François Leterrier",
+  "url": "https://francoisleterrier.fr/configurateur.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "description": "Outil interactif pour estimer en direct le prix et le délai d'un site internet, d'une application web (PWA) ou d'une prestation de gestion des réseaux sociaux.",
+  "provider": { "@type": "ProfessionalService", "name": "François Leterrier — Community Manager & Création de site internet", "url": "https://francoisleterrier.fr/" }
+}
+</script>
+
+<style>
+  html{scroll-behavior:smooth}
+  .cfg-container{max-width:1120px;margin:0 auto;padding:44px 24px 60px}
+  .cfg-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}
+  @media(max-width:900px){.cfg-layout{grid-template-columns:1fr}}
+  .cfg-step{margin-bottom:26px}
+  .cfg-step .lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:flex;align-items:center;gap:10px;font-weight:700}
+  .cfg-step .lbl .num{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#08111f;background:var(--grad);font-size:13px;flex:none}
+  .types{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px}
+  .type{cursor:pointer;text-align:left;padding:16px;border-radius:14px;position:relative;background:var(--panel);border:1.5px solid var(--line2);transition:.2s}
+  .type:hover{border-color:var(--cyan)}
+  .type.sel{border-color:transparent;background:rgba(124,58,237,.14)}
+  .type.sel::before{content:"";position:absolute;inset:0;border-radius:14px;padding:1.5px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .type .ico{font-size:22px}
+  .type b{display:block;margin:7px 0 2px;font-size:15px;color:#fff}
+  .type span{font-size:12px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{cursor:pointer;padding:10px 15px;border-radius:30px;background:var(--panel);border:1.5px solid var(--line2);font-size:13.5px;font-weight:600;color:#d7d0e0;transition:.2s;user-select:none}
+  .chip:hover{border-color:var(--cyan)}
+  .chip.on{background:var(--grad);color:#08111f;border-color:transparent}
+  .chip small{opacity:.85;font-weight:500}
+  .stepper{display:inline-flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line2);border-radius:40px;padding:7px 9px}
+  .stepper button{width:32px;height:32px;border-radius:50%;border:0;background:rgba(143,230,240,.15);color:#cfe9ff;font-size:19px;font-weight:700;cursor:pointer;line-height:1}
+  .stepper b{min-width:84px;text-align:center;font-size:14.5px;color:#fff}
+  .sum{position:sticky;top:80px;background:var(--panel);border:1px solid var(--line2);border-radius:18px;padding:24px}
+  .sum h3{font-family:'Montserrat';font-weight:700;font-size:18px;margin:0 0 2px;color:#fff}
+  .sum .st{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .sum .line{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .sum .line span:first-child{color:#cdc6d6}
+  .sum .line span:last-child{color:#fff;font-weight:600;text-align:right}
+  .sum .price{margin:18px 0 2px;text-align:center}
+  .sum .price .from{font-size:12px;color:var(--muted);letter-spacing:.1em}
+  .sum .price .big{font-weight:800;font-size:46px;letter-spacing:-1px;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sum .mo{text-align:center;color:var(--cyan);font-size:13.5px;font-weight:600}
+  .sum .delay{text-align:center;color:var(--muted);font-size:13px;margin:8px 0 16px}
+  .sum .btn{width:100%;justify-content:center;font-size:15px}
+  .sum .disc{margin-top:12px;font-size:11px;color:#8b93a8;text-align:center;line-height:1.5}
+  .devis-wrap{max-width:620px;margin:48px auto 0}
+  .devis-wrap h2{text-align:center}
+  .devis-wrap .intro{text-align:center;color:#aab2c6;font-size:15px;margin:0 auto 22px;max-width:46ch}
+  .recap{background:var(--bg0);border:1px dashed var(--line2);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:13.5px;color:#c4cbdb;line-height:1.7}
+  .recap b{color:#fff}
+  .frow2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.frow2{grid-template-columns:1fr}}
+  .form-note{font-size:12px;color:#8b93a8;text-align:center;margin-top:12px}
+  .btn-submit{width:100%;justify-content:center;margin-top:4px;border:0;cursor:pointer;font-family:'Montserrat'}
+</style>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
+    <nav class="navlinks" id="flnav">
+      <a href="community-manager.html">Réseaux sociaux</a>
+      <a href="creation-site-internet.html">Création de site</a>
+      <a href="realisations.html">Réalisations</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="a-propos.html">À propos</a>
+      <a class="cta" href="contact.html">Échange offert</a>
+    </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
+  </div></header>
+
+  <main>
+    <section class="hero"><div class="wrap">
+      <div class="crumb"><a href="index.html">Accueil</a> › Configurateur de projet</div>
+      <span class="tag">Configurateur · en direct</span>
+      <h1>Composez votre projet, <span>voyez le prix en direct</span></h1>
+      <p class="sub">Choisissez, cochez, ajustez : votre estimation et votre délai se calculent en temps réel. Puis recevez un devis détaillé, sans engagement. Basé dans le Sud-Toulousain, je travaille à distance partout en France.</p>
+    </div></section>
+
+    <div class="cfg-container">
+      <div class="cfg-layout">
+        <div class="choices">
+          <div class="cfg-step">
+            <div class="lbl"><span class="num">1</span> Type de projet</div>
+            <div class="types" id="types">
+              <div class="type" data-t="landing"><div class="ico">⚡</div><b>Landing page</b><span>1 page qui convertit</span></div>
+              <div class="type sel" data-t="vitrine"><div class="ico">🖥️</div><b>Site vitrine</b><span>jusqu'à 5 pages</span></div>
+              <div class="type" data-t="surmesure"><div class="ico">✨</div><b>Sur-mesure</b><span>e-commerce, avancé</span></div>
+              <div class="type" data-t="app"><div class="ico">📱</div><b>Application (PWA)</b><span>installable, RSVP…</span></div>
+            </div>
+          </div>
+
+          <div class="cfg-step" id="pagesStep">
+            <div class="lbl"><span class="num">2</span> Nombre de pages</div>
+            <div class="stepper"><button id="pMinus" type="button" aria-label="Retirer une page">−</button><b><span id="pNum">5</span> pages</b><button id="pPlus" type="button" aria-label="Ajouter une page">+</button></div>
+          </div>
+
+          <div class="cfg-step">
+            <div class="lbl"><span class="num">3</span> Options</div>
+            <div class="chips" id="opts">
+              <div class="chip" data-p="300" data-name="Référencement avancé">Référencement avancé <small>+300&nbsp;€</small></div>
+              <div class="chip" data-p="400" data-name="RSVP / réservation">RSVP / réservation <small>+400&nbsp;€</small></div>
+              <div class="chip" data-p="350" data-name="Blog">Blog <small>+350&nbsp;€</small></div>
+              <div class="chip" data-p="500" data-name="Multilingue">Multilingue <small>+500&nbsp;€</small></div>
+              <div class="chip" data-p="450" data-name="Logo / identité">Logo / identité <small>+450&nbsp;€</small></div>
+              <div class="chip" data-p="300" data-name="Prise de photos">Prise de photos <small>+300&nbsp;€</small></div>
+            </div>
+          </div>
+
+          <div class="cfg-step">
+            <div class="lbl"><span class="num">4</span> Gestion des réseaux (mensuel, optionnel)</div>
+            <div class="chips" id="cm">
+              <div class="chip on" data-m="0">Aucune</div>
+              <div class="chip" data-m="180">Essentiel <small>180&nbsp;€/mois</small></div>
+              <div class="chip" data-m="350">Croissance <small>350&nbsp;€/mois</small></div>
+              <div class="chip" data-m="520">Premium <small>520&nbsp;€/mois</small></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="sum" aria-live="polite">
+          <h3>Votre projet</h3><div class="st">Estimation personnalisée</div>
+          <div id="lines"></div>
+          <div class="price"><div class="from">À PARTIR DE</div><div class="big"><span id="total">1 400</span> €</div></div>
+          <div class="mo" id="mo" style="display:none"></div>
+          <div class="delay" id="delay">Délai estimé : 2–3 semaines</div>
+          <a class="btn btn-submit" href="#devis">Recevoir mon devis détaillé →</a>
+          <div class="disc">Estimation indicative, sans engagement. Le devis final est établi après notre échange offert.</div>
+        </aside>
+      </div>
+
+      <div class="devis-wrap" id="devis">
+        <h2>Recevez votre devis détaillé</h2>
+        <p class="intro">Je vous réponds sous 48h en moyenne avec un chiffrage précis, adapté à votre projet. Champs marqués * obligatoires.</p>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="65a34e63-ed73-4214-a9b4-bc144d952cd5">
+          <input type="hidden" name="subject" value="Nouvelle demande — Configurateur de projet">
+          <input type="hidden" name="from_name" value="Configurateur François Leterrier">
+          <input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" id="f_estim" name="Estimation">
+          <input type="hidden" id="f_config" name="Configuration">
+
+          <div class="recap" id="recap"></div>
+
+          <div class="frow2">
+            <div class="field"><label for="name">Nom *</label><input id="name" name="name" type="text" required placeholder="Votre nom"></div>
+            <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" placeholder="06 ..."></div>
+          </div>
+          <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required placeholder="vous@exemple.fr"></div>
+          <div class="field"><label for="message">Une précision sur votre projet&nbsp;?</label><textarea id="message" name="message" placeholder="Activité, échéance, exemples que vous aimez... (facultatif)"></textarea></div>
+          <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
+          <button class="btn btn-submit" type="submit">Recevoir mon devis détaillé →</button>
+          <p class="form-note">Vos données ne sont jamais cédées à des tiers. Votre configuration est jointe automatiquement à la demande.</p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
+  <script>
+  (function(){
+    var TYPE={
+      landing:{name:'Landing page',base:590,delay:'1 semaine'},
+      vitrine:{name:'Site vitrine',base:1400,delay:'2–3 semaines'},
+      surmesure:{name:'Site sur-mesure',base:2500,delay:'4–6 semaines'},
+      app:{name:'Application web (PWA)',base:1900,delay:'3–5 semaines'}
+    };
+    var CMNAME={0:'Aucune',180:'Essentiel',350:'Croissance',520:'Premium'};
+    var state={type:'vitrine',pages:5,opts:{},cm:0};
+    function fmt(n){return n.toLocaleString('fr-FR');}
+    var cur=1400;
+    function animateTo(n){var el=document.getElementById('total');var from=cur,st=null;cur=n;
+      function a(t){st=st||t;var p=Math.min((t-st)/500,1);p=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(from+(n-from)*p));if(p<1)requestAnimationFrame(a);}requestAnimationFrame(a);}
+    function calc(){
+      var T=TYPE[state.type];var total=T.base;
+      var lines=[['Type',T.name]];
+      if(state.type==='vitrine'){lines.push(['Pages',state.pages]); if(state.pages>5)total+=(state.pages-5)*110;}
+      var optNames=[];
+      Object.keys(state.opts).forEach(function(k){var o=state.opts[k];total+=o.p;lines.push([o.name,'+'+o.p+' €']);optNames.push(o.name);});
+      document.getElementById('lines').innerHTML=lines.map(function(l){return '<div class="line"><span>'+l[0]+'</span><span>'+l[1]+'</span></div>';}).join('');
+      animateTo(total);
+      var mo=document.getElementById('mo');
+      if(state.cm>0){mo.style.display='block';mo.textContent='+ '+state.cm+' €/mois · '+CMNAME[state.cm];}else{mo.style.display='none';}
+      document.getElementById('delay').textContent='Délai estimé : '+T.delay;
+      document.getElementById('pagesStep').style.display=(state.type==='vitrine')?'block':'none';
+      // synchronise la demande de devis avec la configuration
+      var cfg='Type : '+T.name;
+      if(state.type==='vitrine')cfg+=' ('+state.pages+' pages)';
+      if(optNames.length)cfg+=' | Options : '+optNames.join(', ');
+      cfg+=' | Réseaux sociaux : '+CMNAME[state.cm]+(state.cm>0?' ('+state.cm+' €/mois)':'');
+      var estim='À partir de '+fmt(total)+' €'+(state.cm>0?' + '+state.cm+' €/mois':'')+' — délai '+T.delay;
+      document.getElementById('f_config').value=cfg;
+      document.getElementById('f_estim').value=estim;
+      document.getElementById('recap').innerHTML='<b>Votre configuration&nbsp;:</b> '+cfg.replace(/ \| /g,' · ')+'<br><b>Estimation&nbsp;:</b> '+estim;
+    }
+    document.querySelectorAll('#types .type').forEach(function(el){el.addEventListener('click',function(){
+      document.querySelectorAll('#types .type').forEach(function(x){x.classList.remove('sel');});el.classList.add('sel');
+      state.type=el.dataset.t;calc();});});
+    document.getElementById('pMinus').addEventListener('click',function(){if(state.pages>1){state.pages--;document.getElementById('pNum').textContent=state.pages;calc();}});
+    document.getElementById('pPlus').addEventListener('click',function(){if(state.pages<15){state.pages++;document.getElementById('pNum').textContent=state.pages;calc();}});
+    document.querySelectorAll('#opts .chip').forEach(function(el){el.addEventListener('click',function(){
+      el.classList.toggle('on');var id=el.dataset.name;
+      if(el.classList.contains('on'))state.opts[id]={p:+el.dataset.p,name:id};else delete state.opts[id];calc();});});
+    document.querySelectorAll('#cm .chip').forEach(function(el){el.addEventListener('click',function(){
+      document.querySelectorAll('#cm .chip').forEach(function(x){x.classList.remove('on');});el.classList.add('on');state.cm=+el.dataset.m;calc();});});
+    calc();
+  })();
+  </script>
+  <script src="/consent.js" defer></script>
+</body>
+</html>
