@@ -1,6 +1,6 @@
 /* =====================================================================
    FL-UI — Interactions partagées FL-System (vanilla, sans dépendance)
-   À charger sur TOUTES les pages : <script src="/fl-ui/fl-ui.js" defer></script>
+   À charger sur TOUTES les pages : balise script src="/fl-ui/fl-ui.js" defer (en fin de body)
    S'auto-initialise. Respecte prefers-reduced-motion et les écrans tactiles.
    Data-attributs à poser dans le HTML :
      [data-fl-magnetic="18"]   → bouton/élément magnétique (force en px)
