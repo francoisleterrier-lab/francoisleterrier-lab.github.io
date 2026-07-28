@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.className+=' fs-js';</script>
+<title>Simulateur de visibilité en ligne — Sud-Toulousain | François Leterrier</title>
+<meta name="description" content="Testez gratuitement votre visibilité locale : tapez votre métier et votre ville et voyez, en direct, votre présence sur Google, votre fiche Google Business, vos réseaux et votre site. Un simulateur signé François Leterrier, Sud-Toulousain.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#06070e">
+<link rel="canonical" href="https://francoisleterrier.fr/simulateur.html">
+<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="Simulateur de visibilité en ligne — testez votre présence locale">
+<meta property="og:description" content="Tapez votre métier et votre ville : voyez en direct votre présence Google, réseaux et site — aujourd'hui vs avec FL-System. Sud-Toulousain.">
+<meta property="og:image" content="https://francoisleterrier.fr/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://francoisleterrier.fr/simulateur.html">
+<meta property="og:locale" content="fr_FR">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/bricolagegrotesque-800-latin-11.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-400-latin-17.woff2" crossorigin>
+<link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
+<link rel="stylesheet" href="/aurora.css">
+<link rel="stylesheet" href="pages.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Simulateur de visibilité locale",
+  "url": "https://francoisleterrier.fr/simulateur.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "description": "Simulateur interactif : tapez votre métier et votre ville pour visualiser votre présence en ligne (Google, fiche Google Business, réseaux sociaux, site) aujourd'hui et avec un accompagnement community management + web.",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "François Leterrier — Community Manager & Création web",
+    "telephone": "+33698200208",
+    "email": "francois.leterrier.cmw@gmail.com",
+    "areaServed": "Sud-Toulousain (Haute-Garonne)",
+    "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Simulateur de visibilité", "item": "https://francoisleterrier.fr/simulateur.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "À quoi sert ce simulateur de visibilité ?", "acceptedAnswer": { "@type": "Answer", "text": "Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne : résultat Google, fiche Google Business, publication sur les réseaux et aperçu de site. Le but est de visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement." } },
+    { "@type": "Question", "name": "Les résultats affichés sont-ils réels ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers (Google, fiche, réseaux, site) ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé." } },
+    { "@type": "Question", "name": "Le diagnostic est-il vraiment gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes, que vous fassiez appel à moi ou non." } },
+    { "@type": "Question", "name": "Sur quelle zone intervenez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "Toulouse et tout le Sud-Toulousain (Muret, Carbonne, Auterive, Rieumes, Cazères, la vallée de la Lèze, le Volvestre…), depuis Lavernose-Lacasse (31410)." } }
+  ]
+}
+</script>
+<style>
+/* =====================================================================
+   SIMULATEUR — « L'expérience visibilité » (bloc encapsulé #flsim)
+   Tout est scoppé sous #flsim et préfixé .fs-* pour NE PAS entrer en
+   collision avec pages.css (.card/.hero/.lead/.tag/.field/.grid/.stat/.top…).
+   Zéro dépendance externe : polices du site (Bricolage Grotesque / Manrope).
+   a11y : animations coupées si prefers-reduced-motion ; curseur natif au toucher.
+   ===================================================================== */
+#flsim{
+  --fs-cyan:#22d3ee; --fs-blue:#4f7dff; --fs-viol:#a855f7; --fs-mag:#d946ef;
+  --fs-grad:linear-gradient(120deg,#22d3ee,#4f7dff 38%,#a855f7 70%,#d946ef 100%);
+  --fs-ink:#f2ecf4; --fs-dim:#c3b7c9; --fs-line:rgba(143,230,240,.18);
+  position:relative; isolation:isolate; overflow:hidden;
+  background:#050310; color:var(--fs-ink);
+}
+#flsim.fs-nocursor{cursor:auto}
+#flsim:not(.fs-nocursor){cursor:none}
+#flsim :is(a,button,input){font-family:inherit}
+#flsim .fs-mw{max-width:1180px;margin:0 auto;padding:0 30px}
+#flsim .fs-eyebrow{font-family:'Bricolage Grotesque',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#8fe6f0;display:flex;gap:14px;align-items:center;justify-content:center}
+#flsim .fs-eyebrow::before,#flsim .fs-eyebrow::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,#8fe6f0)}
+#flsim .fs-eyebrow::after{background:linear-gradient(90deg,#8fe6f0,transparent)}
+#flsim .fs-g{background:var(--fs-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* --- Curseur custom (scoppé, masqué au toucher / reduced-motion) --- */
+#flsim .fs-cdot,#flsim .fs-cring{position:fixed;z-index:80;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);left:-100px;top:-100px;opacity:0;transition:opacity .2s}
+#flsim.fs-curon .fs-cdot,#flsim.fs-curon .fs-cring{opacity:1}
+#flsim .fs-cdot{width:8px;height:8px;background:#eafcff;box-shadow:0 0 12px #45e0ff}
+#flsim .fs-cring{width:38px;height:38px;border:1.5px solid rgba(143,230,240,.7);transition:width .2s,height .2s,background .2s,border-color .2s,opacity .2s}
+#flsim .fs-cring.fs-big{width:64px;height:64px;background:rgba(124,58,237,.12);border-color:rgba(214,120,232,.9)}
+
+/* --- HERO + shader --- */
+#flsim .fs-hero{position:relative;min-height:clamp(560px,86vh,880px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:88px 30px 64px;overflow:hidden}
+#flsim .fs-gl{position:absolute;inset:0;z-index:0;width:100%;height:100%;display:block}
+#flsim .fs-fb{position:absolute;inset:0;z-index:0;display:none;background:radial-gradient(50% 40% at 20% 20%,rgba(34,211,238,.25),transparent 60%),radial-gradient(50% 45% at 82% 30%,rgba(217,70,239,.22),transparent 60%),radial-gradient(60% 55% at 50% 100%,rgba(124,58,237,.30),transparent 65%),#050310;animation:fs-hue 16s linear infinite}
+@keyframes fs-hue{to{filter:hue-rotate(360deg)}}
+#flsim .fs-scrim{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 90% at 50% 30%,rgba(5,3,16,.28),rgba(5,3,16,.85))}
+#flsim .fs-hud{position:absolute;z-index:3;width:48px;height:48px;border:2px solid rgba(143,230,240,.35);pointer-events:none}
+#flsim .fs-hud.tl{top:20px;left:20px;border-right:0;border-bottom:0}
+#flsim .fs-hud.tr{top:20px;right:20px;border-left:0;border-bottom:0}
+#flsim .fs-hud.bl{bottom:20px;left:20px;border-right:0;border-top:0}
+#flsim .fs-hud.br{bottom:20px;right:20px;border-left:0;border-top:0}
+#flsim .fs-hero-in{position:relative;z-index:5;max-width:900px}
+#flsim .fs-logo{width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 20px;box-shadow:0 0 40px rgba(124,58,237,.4),0 0 20px rgba(15,181,201,.3);animation:fs-float 5s ease-in-out infinite}
+#flsim .fs-logo img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes fs-float{50%{transform:translateY(-10px)}}
+#flsim .fs-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(38px,6.4vw,82px);line-height:1.03;letter-spacing:-.02em;margin:6px 0;color:#fff}
+#flsim .fs-decode{margin-top:18px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:.42em;font-size:clamp(13px,2vw,19px);color:#cfe9ff}
+#flsim .fs-decode .fs-c{color:#e05bc8}
+#flsim .fs-scroll{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:5;color:#8a8398;font-size:13px;letter-spacing:.12em;animation:fs-bob 2s ease-in-out infinite}
+@keyframes fs-bob{50%{transform:translateX(-50%) translateY(8px)}}
+
+/* --- GÉNÉRATEUR --- */
+#flsim .fs-gen{position:relative;z-index:5;padding:64px 0 84px;background:linear-gradient(180deg,rgba(5,3,16,.6),rgba(5,3,16,.92))}
+#flsim .fs-gen h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4.4vw,50px);text-align:center;margin:14px 0 8px;color:#fff;letter-spacing:-.01em;max-width:none}
+#flsim .fs-lead{text-align:center;color:var(--fs-dim);max-width:640px;margin:0 auto 30px;font-size:18px}
+#flsim .fs-controls{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:flex-end;margin-bottom:22px}
+#flsim .fs-field label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8fe6f0;margin:0 0 8px 4px;font-weight:600}
+#flsim .fs-field input{width:260px;max-width:76vw;background:rgba(255,255,255,.05);border:1.5px solid rgba(143,230,240,.35);border-radius:14px;padding:15px 18px;color:#fff;font:inherit;font-size:18px;outline:none;cursor:inherit;transition:border-color .2s,box-shadow .2s}
+#flsim .fs-field input:focus-visible{border-color:var(--fs-cyan);box-shadow:0 0 0 3px rgba(34,211,238,.3)}
+#flsim .fs-toggle{display:flex;justify-content:center;gap:6px;margin:0 auto 14px;background:rgba(255,255,255,.05);border:1px solid rgba(143,230,240,.2);border-radius:40px;padding:5px;width:max-content}
+#flsim .fs-toggle button{border:0;background:transparent;color:#c8c2d4;font:inherit;font-weight:700;padding:10px 24px;border-radius:30px;cursor:inherit;transition:background .25s,color .25s}
+#flsim .fs-toggle button:focus-visible{outline:2px solid var(--fs-cyan);outline-offset:2px}
+#flsim .fs-toggle button[aria-pressed="true"]{background:var(--fs-grad);color:#06121a}
+#flsim .fs-toggle button.fs-av[aria-pressed="true"]{background:linear-gradient(90deg,#6b7280,#3a3f4a);color:#fff}
+#flsim .fs-note{text-align:center;color:#8f8a9e;font-size:13px;margin:0 auto 26px;max-width:560px}
+#flsim .fs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+#flsim .fs-card{position:relative;background:linear-gradient(160deg,rgba(22,18,36,.86),rgba(9,7,16,.9));border:1px solid rgba(143,230,240,.16);border-radius:20px;padding:22px;box-shadow:0 22px 56px rgba(0,0,0,.5);backdrop-filter:blur(6px);transform-style:preserve-3d;transition:transform .1s;will-change:transform}
+#flsim .fs-card.fs-avant{filter:grayscale(.85) brightness(.72);border-color:rgba(120,120,130,.2)}
+#flsim .fs-gloss{position:absolute;inset:0;border-radius:20px;pointer-events:none;background:radial-gradient(240px circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),transparent 60%)}
+#flsim .fs-tag{position:relative;z-index:1;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8fe6f0;margin-bottom:14px}
+#flsim .fs-card>div:not(.fs-gloss):not(.fs-tag){position:relative;z-index:1}
+#flsim .fs-pop{animation:fs-pop .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes fs-pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#flsim .fs-serp .fs-u{color:#9fb4ff;font-size:13px;word-break:break-word}
+#flsim .fs-serp .fs-ti{color:#c9d7ff;font-size:19px;margin:3px 0 5px;font-weight:600}
+#flsim .fs-serp .fs-d{color:var(--fs-dim);font-size:14px;line-height:1.45}
+#flsim .fs-serp .fs-st{color:#ffd166;font-size:14px;margin-top:8px}
+#flsim .fs-gbp .fs-name{font-size:20px;font-weight:700}
+#flsim .fs-gbp .fs-cat{color:var(--fs-dim);font-size:14px;margin-top:2px}
+#flsim .fs-gbp .fs-rate{display:flex;align-items:center;gap:8px;margin:10px 0 4px}
+#flsim .fs-gbp .fs-s{color:#ffd166}
+#flsim .fs-gbp .fs-addr{color:var(--fs-dim);font-size:14px}
+#flsim .fs-gbp .fs-btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+#flsim .fs-gbp .fs-btns span{border:1px solid rgba(143,230,240,.4);color:#cfe9ff;border-radius:30px;padding:7px 14px;font-size:12px;font-weight:600}
+#flsim .fs-gbp .fs-btns .fs-p{background:var(--fs-grad);border:0;color:#06121a}
+#flsim .fs-soc .fs-top{display:flex;align-items:center;gap:12px}
+#flsim .fs-soc .fs-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#e05bc8);flex:none}
+#flsim .fs-soc .fs-top b{display:block;font-size:15px}
+#flsim .fs-soc .fs-top span{font-size:12px;color:#9b93aa}
+#flsim .fs-soc .fs-body{margin:14px 0;font-size:15.5px;line-height:1.5}
+#flsim .fs-soc .fs-body .fs-h{color:#57c8ff}
+#flsim .fs-soc .fs-react{display:flex;gap:16px;color:#9b93aa;font-size:13px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
+#flsim .fs-regen{position:relative;z-index:1;margin-top:14px;background:rgba(143,230,240,.1);border:1px solid rgba(143,230,240,.35);color:#cfe9ff;border-radius:30px;padding:8px 16px;font:inherit;font-weight:600;font-size:13px;cursor:inherit}
+#flsim .fs-regen:focus-visible{outline:2px solid var(--fs-cyan);outline-offset:2px}
+#flsim .fs-mini .fs-bar{display:flex;align-items:center;gap:8px;background:#0c0a16;border-radius:10px 10px 0 0;padding:9px 12px;border:1px solid rgba(255,255,255,.08);border-bottom:0}
+#flsim .fs-mini .fs-bar i{width:10px;height:10px;border-radius:50%;background:#3a3f4a;display:inline-block}
+#flsim .fs-mini .fs-bar .fs-url{margin-left:8px;font-size:12px;color:#9b93aa;word-break:break-all}
+#flsim .fs-mini .fs-view{border:1px solid rgba(143,230,240,.16);border-radius:0 0 12px 12px;padding:22px 18px;background:linear-gradient(160deg,rgba(30,24,52,.6),rgba(10,8,20,.6));text-align:center}
+#flsim .fs-mini .fs-view h4{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;margin-bottom:6px;color:#fff}
+#flsim .fs-mini .fs-view p{color:var(--fs-dim);font-size:13px;margin-bottom:14px}
+#flsim .fs-mini .fs-view .fs-b{display:inline-block;background:var(--fs-grad);color:#06121a;font-weight:700;font-size:13px;padding:9px 18px;border-radius:30px}
+
+/* --- STATS --- */
+#flsim .fs-stats{position:relative;z-index:5;padding:56px 0;text-align:center;background:rgba(5,3,16,.92)}
+#flsim .fs-statrow{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;margin-top:20px}
+#flsim .fs-stat .fs-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(38px,5.6vw,68px);line-height:1;letter-spacing:-.03em;min-height:1em}
+#flsim .fs-stat .fs-l{color:var(--fs-dim);letter-spacing:.06em;font-size:13.5px;margin-top:8px;max-width:20ch}
+
+/* --- CTA --- */
+#flsim .fs-cta-sec{position:relative;z-index:5;padding:64px 0 96px;text-align:center;background:rgba(5,3,16,.92)}
+#flsim .fs-cta-sec h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4.2vw,48px);margin-bottom:10px;color:#fff}
+#flsim .fs-cta-sec p{color:var(--fs-dim);font-size:18px;margin-bottom:28px;max-width:60ch;margin-left:auto;margin-right:auto}
+#flsim .fs-cta{position:relative;display:inline-block;padding:19px 42px;border:0;border-radius:60px;font:inherit;font-weight:800;font-size:20px;color:#06121a;background:var(--fs-grad);cursor:inherit;overflow:hidden;box-shadow:0 12px 44px rgba(124,58,237,.45);text-decoration:none;will-change:transform}
+#flsim .fs-cta:hover{text-decoration:none;color:#06121a}
+#flsim .fs-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#flsim .fs-cta::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:fs-shine 3.4s ease-in-out infinite}
+@keyframes fs-shine{0%,60%{left:-120%}100%{left:175%}}
+#flsim .fs-foot{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:44px}
+#flsim .fs-foot img{width:60px;height:60px;border-radius:50%;box-shadow:0 0 24px rgba(124,58,237,.35)}
+#flsim .fs-foot .fs-fn{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;color:#fff}
+#flsim .fs-foot .fs-fu{color:#8fe6f0;font-size:14px;letter-spacing:.04em}
+
+/* --- Reveal on scroll (masqué UNIQUEMENT si JS actif : sans JS le contenu reste visible) --- */
+html.fs-js #flsim .fs-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+html.fs-js #flsim .fs-reveal.fs-in{opacity:1;transform:none}
+
+@media (max-width:520px){
+  #flsim .fs-statrow{gap:30px}
+  #flsim .fs-hud{width:34px;height:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  #flsim *{animation:none!important;transition:none!important}
+  #flsim .fs-reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
+    <nav class="navlinks" id="flnav">
+      <a href="community-manager.html">Réseaux sociaux</a>
+      <a href="creation-site-internet.html">Création de site</a>
+      <a href="realisations.html">Réalisations</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="a-propos.html">À propos</a>
+      <a class="cta" href="contact.html">Échange offert</a>
+    </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
+  </div></header>
+
+  <main>
+    <!-- ============ EXPÉRIENCE VISIBILITÉ (encapsulée) ============ -->
+    <section id="flsim" class="fs-nocursor" aria-label="Simulateur de visibilité en ligne">
+      <div class="fs-cdot" aria-hidden="true"></div><div class="fs-cring" aria-hidden="true"></div>
+
+      <!-- HERO -->
+      <div class="fs-hero">
+        <canvas class="fs-gl" id="fs-gl" aria-hidden="true"></canvas>
+        <div class="fs-fb" id="fs-fb" aria-hidden="true"></div>
+        <div class="fs-scrim" aria-hidden="true"></div>
+        <div class="fs-hud tl" aria-hidden="true"></div><div class="fs-hud tr" aria-hidden="true"></div>
+        <div class="fs-hud bl" aria-hidden="true"></div><div class="fs-hud br" aria-hidden="true"></div>
+        <div class="fs-hero-in">
+          <div class="fs-logo" data-mag="14"><img src="logo.png" width="96" height="96" alt="François Leterrier — Community Manager & création de site, Sud-Toulousain"></div>
+          <p class="fs-eyebrow">Simulateur de visibilité · en direct</p>
+          <h1>Votre visibilité locale,<br><span class="fs-g">réinventée.</span></h1>
+          <p class="fs-decode" data-text="CRÉER · FÉDÉRER · ENGAGER">CRÉER · FÉDÉRER · ENGAGER</p>
+        </div>
+        <div class="fs-scroll" aria-hidden="true">↓ faites défiler · bougez la souris</div>
+      </div>
+
+      <!-- GÉNÉRATEUR -->
+      <div class="fs-gen">
+        <div class="fs-mw">
+          <p class="fs-eyebrow fs-reveal">Démo interactive</p>
+          <h2 class="fs-reveal">Voyez votre visibilité <span class="fs-g">prendre vie</span></h2>
+          <p class="fs-lead fs-reveal">Tapez votre métier et votre ville, puis comparez votre présence <b>aujourd'hui</b> et <b>avec FL-System</b>.</p>
+          <div class="fs-controls fs-reveal">
+            <div class="fs-field"><label for="fs-metier">Votre métier</label><input id="fs-metier" type="text" value="Fleuriste" autocomplete="off" aria-label="Votre métier"></div>
+            <div class="fs-field"><label for="fs-ville">Votre ville</label><input id="fs-ville" type="text" value="Muret" autocomplete="off" aria-label="Votre ville"></div>
+          </div>
+          <div class="fs-toggle fs-reveal" role="group" aria-label="Comparer avant / après">
+            <button type="button" id="fs-tAvant" class="fs-av" aria-pressed="false">Aujourd'hui</button>
+            <button type="button" id="fs-tApres" aria-pressed="true">Avec FL-System</button>
+          </div>
+          <p class="fs-note fs-reveal">Aperçus illustratifs générés en direct pour l'exemple — les résultats réels varient selon votre activité.</p>
+          <div class="fs-grid">
+            <div class="fs-card fs-serp fs-reveal"><div class="fs-gloss"></div><div class="fs-tag">🔎 Sur Google</div><div id="fs-serp"></div></div>
+            <div class="fs-card fs-gbp fs-reveal"><div class="fs-gloss"></div><div class="fs-tag">📍 Fiche Google Business</div><div id="fs-gbp"></div></div>
+            <div class="fs-card fs-soc fs-reveal"><div class="fs-gloss"></div><div class="fs-tag">💬 Sur les réseaux</div><div id="fs-soc"></div><button type="button" class="fs-regen" id="fs-regen">↻ Générer un autre post</button></div>
+            <div class="fs-card fs-mini fs-reveal"><div class="fs-gloss"></div><div class="fs-tag">🖥️ Votre site</div><div id="fs-mini"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS (chiffres honnêtes, liés à l'offre) -->
+      <div class="fs-stats"><div class="fs-mw">
+        <p class="fs-eyebrow fs-reveal">Concrètement, avec moi</p>
+        <div class="fs-statrow">
+          <div class="fs-stat fs-reveal"><div class="fs-n fs-g" data-to="3"></div><div class="fs-l">canaux animés : Facebook, Instagram &amp; Google Business</div></div>
+          <div class="fs-stat fs-reveal"><div class="fs-n fs-g" data-to="180" data-suf=" €"></div><div class="fs-l">à partir de, par mois — sans engagement</div></div>
+          <div class="fs-stat fs-reveal"><div class="fs-n fs-g" data-to="48" data-suf=" h"></div><div class="fs-l">délai de réponse moyen à vos messages</div></div>
+        </div>
+      </div></div>
+
+      <!-- CTA -->
+      <div class="fs-cta-sec"><div class="fs-mw">
+        <h3 class="fs-reveal">Envie que ce soit <span class="fs-g">réel</span> ?</h3>
+        <p class="fs-reveal">On regarde ensemble vos réseaux et votre fiche Google, et je vous renvoie 3 actions concrètes. Gratuit et sans engagement.</p>
+        <a class="fs-cta" id="fs-cta" data-mag="30" href="contact.html">Demander mon diagnostic gratuit →</a>
+        <div class="fs-foot fs-reveal">
+          <img src="logo.png" width="60" height="60" alt="">
+          <div><div class="fs-fn">François Leterrier</div><div class="fs-fu">Community Manager &amp; création de site · Sud-Toulousain</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <!-- ============ CONTENU ÉDITORIAL (indexable, charte du site) ============ -->
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">Accueil</a> › Simulateur de visibilité</div>
+
+      <p class="lead">Ce simulateur est une <strong>démonstration</strong> : il met en image, à partir de votre métier et de votre ville, les quatre endroits où vos futurs clients vous cherchent — <strong>Google, votre fiche Google Business, les réseaux sociaux et votre site</strong>. Passez du mode « Aujourd'hui » au mode « Avec FL-System » pour voir la différence entre une présence à l'abandon et une présence animée régulièrement.</p>
+
+      <h2>Pourquoi tester votre visibilité locale ?</h2>
+      <p>Dans le Sud-Toulousain comme ailleurs, un client qui cherche un artisan ou un commerce tape le métier et la ville sur Google, puis compare en quelques secondes : qui a une fiche à jour, des avis, des photos, un site clair. Si vous êtes absent ou négligé, il choisit celui qui est visible — souvent votre concurrent. Le simulateur rend cet écart concret.</p>
+
+      <div class="cols">
+        <div class="card"><h3>🔎 Sur Google</h3><p>Un résultat clair, un site qui vous appartient et des avis : c'est ce qui décide un prospect à vous contacter plutôt qu'un autre.</p></div>
+        <div class="card"><h3>📍 Fiche Google Business</h3><p>Horaires, photos, posts et avis : votre vitrine sur Maps, gratuite mais souvent laissée à l'abandon.</p></div>
+        <div class="card"><h3>💬 Sur les réseaux</h3><p>Des publications régulières et locales entretiennent le lien et rassurent : une page vivante inspire confiance.</p></div>
+        <div class="card"><h3>🖥️ Votre site</h3><p>Rapide, élégant et pensé pour convertir — le seul espace en ligne qui vous appartient vraiment.</p></div>
+      </div>
+
+      <h2>Ce que je fais concrètement</h2>
+      <ul>
+        <li><strong>Gestion des réseaux sociaux</strong> (Facebook, Instagram, Google Business) — <a href="community-manager.html">en savoir plus</a>.</li>
+        <li><strong>Création de site internet</strong> vitrine, landing ou sur-mesure — <a href="creation-site-internet.html">en savoir plus</a>.</li>
+        <li><strong>Un interlocuteur unique et local</strong>, dans tout le Sud-Toulousain, à tarifs clairs et sans engagement.</li>
+      </ul>
+
+      <div class="faqs">
+        <h2>Questions fréquentes</h2>
+        <details open><summary>À quoi sert ce simulateur de visibilité ?</summary><div class="a">Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne (Google, fiche Google Business, réseaux, site). Le but : visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement.</div></details>
+        <details><summary>Les résultats affichés sont-ils réels ?</summary><div class="a">Non : ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé.</div></details>
+        <details><summary>Le diagnostic est-il vraiment gratuit ?</summary><div class="a">Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes.</div></details>
+        <details><summary>Sur quelle zone intervenez-vous ?</summary><div class="a">Toulouse et tout le Sud-Toulousain (Muret, Carbonne, Auterive, Rieumes, Cazères, la vallée de la Lèze, le Volvestre…), depuis Lavernose-Lacasse (31410).</div></details>
+      </div>
+
+      <div class="ctabox">
+        <h3>On regarde votre visibilité ensemble ?</h3>
+        <p>Premier échange offert, sans engagement, dans tout le Sud-Toulousain.</p>
+        <a class="btn" href="contact.html">Demander mon diagnostic gratuit →</a>
+      </div>
+
+      <div class="relart">
+        Voir aussi :
+        <a href="community-manager.html">Réseaux sociaux</a> ·
+        <a href="creation-site-internet.html">Création de site internet</a> ·
+        <a href="tarifs.html">Tarifs</a> ·
+        <a href="realisations.html">Réalisations</a> ·
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </main>
+
+  <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
+
+  <!-- ============ MOTEUR DE L'EXPÉRIENCE (vanilla, scoppé, sans dépendance) ============ -->
+  <script>
+  (function(){
+    var root=document.getElementById('flsim');
+    if(!root) return;
+    var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var COARSE=matchMedia('(pointer: coarse)').matches;
+    var NARROW=matchMedia('(max-width: 760px)').matches;
+    var $=function(id){return document.getElementById(id);};
+
+    /* ---------- Curseur custom (souris fine uniquement) ---------- */
+    if(!COARSE && !RM){
+      root.classList.remove('fs-nocursor');
+      var dot=root.querySelector('.fs-cdot'),ring=root.querySelector('.fs-cring');
+      var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my,inside=false;
+      root.addEventListener('mouseenter',function(){root.classList.add('fs-curon');inside=true;});
+      root.addEventListener('mouseleave',function(){root.classList.remove('fs-curon');inside=false;});
+      root.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';if(GL)GL.mouse(e.clientX,e.clientY);});
+      (function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+      root.querySelectorAll('input,button,a,[data-mag]').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ring.classList.add('fs-big');});
+        el.addEventListener('mouseleave',function(){ring.classList.remove('fs-big');});
+      });
+      /* aimant */
+      root.querySelectorAll('[data-mag]').forEach(function(el){
+        var s=+el.dataset.mag;
+        el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();el.style.transform='translate('+((e.clientX-(r.left+r.width/2))/r.width*s)+'px,'+((e.clientY-(r.top+r.height/2))/r.height*s)+'px)';});
+        el.addEventListener('mouseleave',function(){el.style.transform='';});
+      });
+      /* tilt + gloss cartes */
+      root.querySelectorAll('.fs-grid .fs-card').forEach(function(card){
+        var gl=card.querySelector('.fs-gloss');
+        card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();var px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;card.style.transform='perspective(900px) rotateY('+((px-.5)*10)+'deg) rotateX('+((.5-py)*10)+'deg)';gl.style.setProperty('--gx',px*100+'%');gl.style.setProperty('--gy',py*100+'%');});
+        card.addEventListener('mouseleave',function(){card.style.transform='';});
+      });
+    }
+
+    /* ---------- Décodage du sous-titre ---------- */
+    var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·#%@';
+    function scr(el){var t=el.dataset.text,f=0,tot=t.length*3;var iv=setInterval(function(){var o='';for(var i=0;i<t.length;i++){o+= i<f/3?t[i]:(t[i]===' '||t[i]==='·'?t[i]:CH[Math.floor(Math.random()*CH.length)]);}el.innerHTML=o.replace(/·/g,'<span class="fs-c">·</span>');f++;if(f>tot){clearInterval(iv);el.innerHTML=t.replace(/·/g,'<span class="fs-c">·</span>');}},26);}
+    var dec=root.querySelector('.fs-decode');
+    if(dec && !RM){scr(dec);dec.addEventListener('mouseenter',function(){scr(dec);});}
+
+    /* ---------- Générateur ---------- */
+    var cap=function(s){return s?s.charAt(0).toUpperCase()+s.slice(1):'';};
+    var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+    var mode='apres',pv=0;
+    var POSTS=[
+      function(m,v){return 'Besoin d\'un <span class="fs-h">#'+m.toLowerCase()+'</span> à '+v+' ? 🌟 On s\'occupe de tout, avec le sourire. Réservez dès aujourd\'hui ! <span class="fs-h">#'+v.toLowerCase()+'</span>';},
+      function(m,v){return '✨ Nouveau à '+v+' : votre '+m.toLowerCase()+' de confiance, à deux pas de chez vous. On vous attend ! <span class="fs-h">#'+v.toLowerCase()+' #SudToulousain</span>';},
+      function(m,v){return '👀 Vous cherchez un '+m.toLowerCase()+' à '+v+' ? Découvrez pourquoi nos clients nous recommandent les yeux fermés. <span class="fs-h">#avisclients</span>';}
+    ];
+    function render(){
+      var mRaw=($('fs-metier').value||'artisan').trim(),vRaw=($('fs-ville').value||'votre ville').trim();
+      var m=esc(mRaw),v=esc(vRaw),M=esc(cap(mRaw)),V=esc(cap(vRaw));
+      var ml=m.toLowerCase(),vl=v.toLowerCase();
+      var c=function(id){return $(id);};
+      root.querySelectorAll('.fs-grid .fs-card').forEach(function(x){x.classList.toggle('fs-avant',mode==='avant');});
+      if(mode==='avant'){
+        c('fs-serp').innerHTML='<div class="fs-u">— introuvable —</div><div class="fs-ti">Aucun résultat en page 1</div><div class="fs-d">Vos clients tombent sur vos concurrents. Vous êtes relégué en page 4+.</div><div class="fs-st" style="color:#8a8398">☆☆☆☆☆ 0 avis</div>';
+        c('fs-gbp').innerHTML='<div class="fs-name">'+M+' '+V+'</div><div class="fs-cat">Fiche non revendiquée</div><div class="fs-rate"><span class="fs-n">—</span><span style="color:#8a8398">☆☆☆☆☆</span></div><div class="fs-addr">Horaires manquants · pas de photo</div><div class="fs-btns"><span>Revendiquer ?</span></div>';
+        c('fs-soc').innerHTML='<div class="fs-top"><div class="fs-av" style="filter:grayscale(1)"></div><div><b>'+M+' '+V+'</b><span>Dernière publication il y a 8 mois</span></div></div><div class="fs-body" style="color:#8a8398">Page à l\'abandon. Aucun nouveau contenu, aucune interaction.</div><div class="fs-react"><span>♥ 2</span><span>💬 0</span><span>↗ 0</span></div>';
+        c('fs-mini').innerHTML='<div class="fs-bar"><i></i><i></i><i></i><span class="fs-url">—</span></div><div class="fs-view"><h4 style="color:#8a8398">Pas de site</h4><p>Vos prospects ne trouvent aucune info fiable sur vous.</p></div>';
+      }else{
+        c('fs-serp').innerHTML='<div class="fs-u">francoisleterrier.fr › '+ml+'-'+vl+'</div><div class="fs-ti">'+M+' à '+V+' — prise de rendez-vous en ligne</div><div class="fs-d">Votre '+ml+' de confiance à '+V+' et alentours. Services, avis clients et contact en un clic.</div><div class="fs-st">★★★★★ 5,0 · 127 avis</div>';
+        c('fs-gbp').innerHTML='<div class="fs-name">'+M+' '+V+'</div><div class="fs-cat">'+M+' · '+V+' et Sud-Toulousain</div><div class="fs-rate"><span class="fs-n">5,0</span><span class="fs-s">★★★★★</span><span style="color:#b9b3c6;font-size:13px">(127)</span></div><div class="fs-addr">Ouvert · Ferme à 19:00 · '+V+'</div><div class="fs-btns"><span class="fs-p">Itinéraire</span><span>Appeler</span><span>Site web</span></div>';
+        c('fs-soc').innerHTML='<div class="fs-top"><div class="fs-av"></div><div><b>'+M+' '+V+'</b><span>Publication · à l\'instant</span></div></div><div class="fs-body">'+POSTS[pv%POSTS.length](m,v)+'</div><div class="fs-react"><span>♥ 128</span><span>💬 14</span><span>↗ 32</span></div>';
+        c('fs-mini').innerHTML='<div class="fs-bar"><i></i><i></i><i></i><span class="fs-url">'+ml+'-'+vl+'.fr</span></div><div class="fs-view"><h4>'+M+' à '+V+'</h4><p>Site rapide, élégant et pensé pour convertir.</p><span class="fs-b">Prendre rendez-vous</span></div>';
+      }
+      ['fs-serp','fs-gbp','fs-soc','fs-mini'].forEach(function(id){var e=c(id);e.classList.remove('fs-pop');void e.offsetWidth;e.classList.add('fs-pop');});
+      updateCta(mRaw,vRaw);
+    }
+    /* CTA -> contact préqualifié (métier + ville) */
+    var cta=$('fs-cta');
+    function updateCta(m,v){
+      if(!cta) return;
+      cta.href='contact.html?metier='+encodeURIComponent(m)+'&ville='+encodeURIComponent(v)+'#contactForm';
+    }
+    $('fs-metier').addEventListener('input',render);
+    $('fs-ville').addEventListener('input',render);
+    $('fs-regen').addEventListener('click',function(){pv++;render();});
+    var tA=$('fs-tAvant'),tP=$('fs-tApres');
+    tA.addEventListener('click',function(){mode='avant';tA.setAttribute('aria-pressed','true');tP.setAttribute('aria-pressed','false');render();});
+    tP.addEventListener('click',function(){mode='apres';tP.setAttribute('aria-pressed','true');tA.setAttribute('aria-pressed','false');render();});
+    render();
+
+    /* ---------- Reveal au scroll (+ filet de sécurité si IO ne se déclenche pas) ---------- */
+    function revealAll(){root.querySelectorAll('.fs-reveal').forEach(function(e){e.classList.add('fs-in');});}
+    if('IntersectionObserver' in window && !RM){
+      var ioFired=false;
+      var io=new IntersectionObserver(function(es){ioFired=true;es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fs-in');io.unobserve(e.target);}});},{threshold:.15});
+      root.querySelectorAll('.fs-reveal').forEach(function(e){io.observe(e);});
+      setTimeout(function(){if(!ioFired)revealAll();},2500);
+    }else{
+      revealAll();
+    }
+
+    /* ---------- Compteurs (+ filet de sécurité) ---------- */
+    var counters=[];
+    root.querySelectorAll('[data-to]').forEach(function(el){
+      var to=+el.dataset.to,dec=+(el.dataset.dec||0),suf=el.dataset.suf||'';
+      var fin=(dec?to.toFixed(dec):Math.round(to).toLocaleString('fr-FR'))+suf;
+      counters.push({el:el,fin:fin});
+      if(RM || !('IntersectionObserver' in window)){el.textContent=fin;return;}
+      var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+        var st=performance.now();
+        (function a(t){var p=Math.min((t-st)/1200,1);p=1-Math.pow(1-p,3);var val=to*p;el.textContent=(dec?val.toFixed(dec):Math.round(val).toLocaleString('fr-FR'))+suf;if(p<1)requestAnimationFrame(a);})(performance.now());
+        cio.unobserve(el);
+      }});},{threshold:.5});
+      cio.observe(el);
+    });
+    setTimeout(function(){counters.forEach(function(c){if(c.el.textContent==='')c.el.textContent=c.fin;});},2600);
+
+    /* ---------- Shader WebGL (hero uniquement, économe) ---------- */
+    var GL=null;
+    (function initShader(){
+      var c=$('fs-gl'),fb=$('fs-fb');
+      var disabled=RM||NARROW||COARSE;
+      var gl=disabled?null:(c.getContext('webgl')||c.getContext('experimental-webgl'));
+      if(!gl){fb.style.display='block';c.style.display='none';GL={mouse:function(){}};return;}
+      var DPR=Math.min(devicePixelRatio||1,1.5),mouse=[.5,.5],tM=[.5,.5],t0=performance.now();
+      var hero=root.querySelector('.fs-hero');
+      function rs(){var w=hero.clientWidth,h=hero.clientHeight;c.width=Math.round(w*DPR);c.height=Math.round(h*DPR);c.style.width=w+'px';c.style.height=h+'px';gl.viewport(0,0,c.width,c.height);}
+      rs();addEventListener('resize',rs);
+      var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+      var fs='precision highp float;uniform vec2 uRes;uniform float uT;uniform vec2 uM;'
+        +'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'
+        +'float n(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}'
+        +'float fbm(vec2 p){float a=.5,v=0.;for(int i=0;i<5;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}'
+        +'void main(){vec2 p=(gl_FragCoord.xy-.5*uRes)/uRes.y;vec2 m=(uM-.5)*1.4;float t=uT*.05;'
+        +'vec2 q=vec2(fbm(p*1.4+t),fbm(p*1.4+vec2(5.2,1.3)));'
+        +'vec2 r=vec2(fbm(p*1.4+2.*q+vec2(1.7,9.2)+.35*m),fbm(p*1.4+2.*q+vec2(8.3,2.8)-.35*m));'
+        +'float f=fbm(p*1.4+3.*r+t);'
+        +'vec3 cyan=vec3(.133,.827,.933),viol=vec3(.659,.333,.969),mag=vec3(.851,.278,.937);'
+        +'vec3 col=mix(cyan,viol,smoothstep(.15,.6,f));col=mix(col,mag,smoothstep(.55,.92,f));col*=.16+.9*f;'
+        +'float vig=smoothstep(1.3,.15,length(p));col*=.28+.85*vig;gl_FragColor=vec4(pow(col,vec3(.92)),1.);}';
+      function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+      var pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+      var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+      var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+      var uRes=gl.getUniformLocation(pr,'uRes'),uT=gl.getUniformLocation(pr,'uT'),uM=gl.getUniformLocation(pr,'uM');
+      var running=false,raf=0;
+      function frame(){var t=(performance.now()-t0)/1000;tM[0]+=(mouse[0]-tM[0])*.05;tM[1]+=(mouse[1]-tM[1])*.05;gl.uniform2f(uRes,c.width,c.height);gl.uniform1f(uT,t);gl.uniform2f(uM,tM[0],tM[1]);gl.drawArrays(gl.TRIANGLES,0,3);raf=requestAnimationFrame(frame);}
+      function start(){if(running||document.hidden)return;running=true;raf=requestAnimationFrame(frame);}
+      function stop(){running=false;if(raf)cancelAnimationFrame(raf);}
+      /* pause quand le hero sort du viewport */
+      var visible=true;
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){es.forEach(function(e){visible=e.isIntersecting;if(visible&&!document.hidden)start();else stop();});},{threshold:0.01}).observe(hero);
+      }else{start();}
+      /* pause quand l'onglet est caché */
+      document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else if(visible)start();});
+      start();
+      GL={mouse:function(x,y){var r=hero.getBoundingClientRect();mouse=[x/innerWidth,1-(y-r.top)/Math.max(r.height,1)];}};
+    })();
+  })();
+  </script>
+  <script src="/consent.js" defer></script>
+</body>
+</html>
