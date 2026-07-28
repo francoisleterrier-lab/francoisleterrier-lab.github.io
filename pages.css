@@ -39,6 +39,9 @@ ul li::before{content:"";position:absolute;left:2px;top:10px;width:7px;height:7p
 strong,b{color:#fff;}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 16px;}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;}
+.shot{margin:6px 0 24px;}
+.shot img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line2);box-shadow:var(--shadow);display:block;}
+.shot figcaption{margin-top:8px;font-size:13px;color:var(--muted);text-align:center;}
 .card h3{margin-top:0;}
 .card p,.card li{font-size:14px;color:var(--muted);}
 table{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:14.5px;}
