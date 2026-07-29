@@ -27,8 +27,8 @@
       bot: "Bon choix 🖥️ Un site vitrine démarre à <b>590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>référencement local inclus</b>. Je peux vous montrer un exemple dans votre secteur, ou chiffrer votre projet en 30&nbsp;secondes.",
       opts: [
         { t: "🔎 Voir un exemple de mon métier", go: "metier" },
-        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
-        { t: "Voir tous les tarifs", href: "tarifs.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
+        { t: "Voir tous les tarifs", href: "/tarifs.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -49,7 +49,7 @@
       bot: "Pas de souci&nbsp;: chaque site est <b>sur-mesure</b>, quel que soit le métier. On part de votre activité, vos couleurs et vos objectifs. Vous pouvez parcourir tous les modèles ou chiffrer directement votre projet.",
       opts: [
         { t: "Voir tous les modèles", href: "/modeles/" },
-        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -57,8 +57,8 @@
     reseaux: {
       bot: "La gestion de vos réseaux (Facebook, Instagram, Google Business) démarre à <b>180&nbsp;€/mois</b>, <b>sans engagement</b>. La formule Croissance (350&nbsp;€/mois) est la plus choisie. Vous validez chaque contenu avant publication.",
       opts: [
-        { t: "Voir les formules", href: "tarifs.html" },
-        { t: "⚙️ Estimer mon projet", href: "configurateur.html" },
+        { t: "Voir les formules", href: "/tarifs.html" },
+        { t: "⚙️ Estimer mon projet", href: "/configurateur.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -66,8 +66,8 @@
     deux: {
       bot: "Excellent — c'est justement le cœur du métier&nbsp;: un <b>site pensé pour être trouvé</b> + des <b>réseaux animés régulièrement</b>, par le même interlocuteur. Le configurateur calcule le tout (site + réseaux) en direct.",
       opts: [
-        { t: "⚙️ Composer mon projet", href: "configurateur.html" },
-        { t: "Voir les tarifs", href: "tarifs.html" },
+        { t: "⚙️ Composer mon projet", href: "/configurateur.html" },
+        { t: "Voir les tarifs", href: "/tarifs.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -75,7 +75,7 @@
     fairepart: {
       bot: "Le <b>faire-part digital</b> (mini-site d'invitation, RSVP, plan…) démarre à <b>290&nbsp;€</b>. Élégant, installable, partageable en un lien — bien plus vivant qu'un carton papier.",
       opts: [
-        { t: "Découvrir le faire-part", href: "faire-part-digital.html" },
+        { t: "Découvrir le faire-part", href: "/faire-part-digital.html" },
         { t: "🔎 Voir un exemple", href: "/modeles/faire-part.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
@@ -96,8 +96,8 @@
     faq_prix: {
       bot: "En transparence&nbsp;: <b>site vitrine dès 590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>réseaux dès 180&nbsp;€/mois</b> sans engagement, <b>faire-part digital dès 290&nbsp;€</b>. Référencement local inclus sur les sites. Le configurateur chiffre votre cas précis.",
       opts: [
-        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
-        { t: "Voir tous les tarifs", href: "tarifs.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
+        { t: "Voir tous les tarifs", href: "/tarifs.html" },
         { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -105,8 +105,8 @@
     faq_seo: {
       bot: "Chaque site est livré <b>optimisé pour Google</b> (structure, vitesse, référencement local, fiche Google Business). L'objectif&nbsp;: être trouvé par vos clients autour de chez vous. Je peux aussi gérer votre visibilité dans la durée.",
       opts: [
-        { t: "En savoir plus", href: "referencement-seo.html" },
-        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
+        { t: "En savoir plus", href: "/referencement-seo.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
         { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -114,7 +114,7 @@
     faq_autonomie: {
       bot: "Oui 🙂 Le site est pensé pour <b>évoluer avec vous</b>, et je reste disponible pour les modifications. On peut aussi prévoir un forfait maintenance si vous préférez être tranquille — on choisit ensemble ce qui vous convient.",
       opts: [
-        { t: "Voir les tarifs", href: "tarifs.html" },
+        { t: "Voir les tarifs", href: "/tarifs.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
@@ -123,7 +123,7 @@
     faq_delais: {
       bot: "Comptez environ <b>1 semaine</b> pour une landing page, <b>2–3 semaines</b> pour un site vitrine, <b>3–5 semaines</b> pour une application. Pour les réseaux, ça démarre dès la validation de la formule.",
       opts: [
-        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
         { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -131,7 +131,7 @@
     faq_engagement: {
       bot: "Non 🙂 Les formules réseaux sont <b>sans engagement</b>, facturées au mois et résiliables (préavis 30&nbsp;jours). Vous gardez le contrôle et validez chaque contenu avant publication.",
       opts: [
-        { t: "Voir les tarifs", href: "tarifs.html" },
+        { t: "Voir les tarifs", href: "/tarifs.html" },
         { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -147,7 +147,7 @@
     contact: {
       bot: "Avec plaisir. Le plus simple&nbsp;: le <b>diagnostic gratuit</b> (sans engagement). Laissez-moi votre demande et je réponds sous 48h en moyenne.",
       opts: [
-        { t: "✍️ Demander mon diagnostic", href: "contact.html" },
+        { t: "✍️ Demander mon diagnostic", href: "/contact.html" },
         { t: "📅 Réserver un créneau", href: "https://calendly.com/fl-conceptimmoplus/30min", ext: true },
         { t: "↩ Retour", go: "start" }
       ]
