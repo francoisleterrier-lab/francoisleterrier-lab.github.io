@@ -30,7 +30,7 @@
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--rose);opacity:.5;transition:opacity .2s,transform .2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--rose);}
   /* hero */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:radial-gradient(60% 55% at 50% 30%,rgba(232,179,160,.16),transparent 62%),radial-gradient(50% 50% at 80% 80%,rgba(217,154,134,.12),transparent 60%),linear-gradient(180deg,var(--ink2),var(--ink));}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(10,7,9,.8),rgba(10,7,9,.92)),radial-gradient(60% 55% at 50% 25%,rgba(232,179,160,.22),transparent 62%),url('img/coiffure-salon.jpg');background-size:cover;background-position:center;}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--ink) 94%);pointer-events:none;}
   .hero .in{position:relative;z-index:2;max-width:940px;}
   .hero .pre{font-size:13px;letter-spacing:.42em;text-transform:uppercase;color:var(--rose);margin-bottom:24px;}
@@ -53,9 +53,9 @@
   .c3{background:var(--ink2);border:1px solid var(--line);padding:0 0 28px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s;}
   .c3:hover{transform:translateY(-6px);border-color:var(--rose);}
   .c3 .im{height:200px;display:flex;align-items:flex-end;padding:16px;font-family:'Cormorant Garamond';font-size:20px;color:#fff;}
-  .im-a{background:linear-gradient(150deg,#2a1a22,#3a2028),radial-gradient(circle at 70% 20%,rgba(232,179,160,.3),transparent 55%);}
-  .im-b{background:linear-gradient(150deg,#241722,#301a2a),radial-gradient(circle at 30% 30%,rgba(217,154,134,.32),transparent 55%);}
-  .im-c{background:linear-gradient(150deg,#20161c,#2a1c24),radial-gradient(circle at 60% 70%,rgba(240,230,236,.18),transparent 55%);}
+  .im-a{background:linear-gradient(180deg,rgba(10,7,9,.05),rgba(10,7,9,.5)),url('img/coiffure-coiffage.jpg');background-size:cover;background-position:center;}
+  .im-b{background:linear-gradient(180deg,rgba(10,7,9,.05),rgba(10,7,9,.5)),url('img/coiffure-couleur.jpg');background-size:cover;background-position:center 30%;}
+  .im-c{background:linear-gradient(180deg,rgba(10,7,9,.05),rgba(10,7,9,.5)),url('img/coiffure-outils.jpg');background-size:cover;background-position:center;}
   .c3 h3{font-size:27px;margin:22px 28px 6px;}
   .c3 .pr{margin:0 28px 10px;color:var(--rose);font-family:'Cormorant Garamond';font-size:22px;}
   .c3 p{margin:0 28px;color:#cbb9c0;font-size:14.5px;}
@@ -79,11 +79,11 @@
   .ph{flex:none;width:290px;height:400px;scroll-snap-align:center;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:23px;color:#fff;position:relative;overflow:hidden;}
   .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(10,7,9,.7));}
   .ph span{position:relative;z-index:2;}
-  .g1{background:linear-gradient(160deg,#2c1c24,#3a2230),radial-gradient(circle at 60% 25%,rgba(232,179,160,.4),transparent 55%);}
-  .g2{background:linear-gradient(160deg,#241621,#321c2c),radial-gradient(circle at 30% 30%,rgba(217,154,134,.4),transparent 55%);}
-  .g3{background:linear-gradient(160deg,#1f151b,#2a1a24),radial-gradient(circle at 70% 60%,rgba(240,230,236,.22),transparent 55%);}
-  .g4{background:linear-gradient(160deg,#2a1b23,#38202e),radial-gradient(circle at 40% 70%,rgba(232,179,160,.34),transparent 55%);}
-  .g5{background:linear-gradient(160deg,#221520,#2e1a28),radial-gradient(circle at 55% 30%,rgba(217,154,134,.36),transparent 55%);}
+  .g1{background:url('img/coiffure-salon.jpg') center/cover;}
+  .g2{background:url('img/coiffure-couleur.jpg') center 30%/cover;}
+  .g3{background:url('img/coiffure-coiffage.jpg') center/cover;}
+  .g4{background:url('img/coiffure-outils.jpg') center/cover;}
+  .g5{background:url('img/coiffure-ambiance.jpg') center/cover;}
   /* à propos */
   .apropos{padding:118px 0;}
   .apropos .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;}
@@ -172,7 +172,7 @@
       <div class="ph g1"><span>Le salon</span></div>
       <div class="ph g2"><span>Les couleurs</span></div>
       <div class="ph g3"><span>Les coupes</span></div>
-      <div class="ph g4"><span>Les chignons</span></div>
+      <div class="ph g4"><span>Les soins</span></div>
       <div class="ph g5"><span>L'ambiance</span></div>
     </div>
   </section>
@@ -214,6 +214,7 @@
 
   <footer class="ff">
     <div class="made">Site-modèle de démonstration (salon fictif), conçu par <b>François Leterrier</b> — créateur de sites internet, partout en France. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    <div style="font-size:11px;color:#6b5f66;margin-top:4px;">Photos d'illustration : Pexels (libres de droit) — sur votre site, ce seront vos vraies photos.</div>
     Studio Lumière · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
   </footer>
 
