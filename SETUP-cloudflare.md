@@ -26,8 +26,9 @@ npx wrangler d1 execute fl_data --file=schema.sql --remote
 ```
 
 ## 2. Compléter `wrangler.toml`
-Remplacer les 4 placeholders par les vraies valeurs :
-`<ACCOUNT_ID>`, `<ZONE_ID>` (Dashboard → domaine → écran API), `<KV_ID>`, `<D1_ID>`.
+- `account_id` et `zone_id` sont **déjà renseignés** (identifiants de config, pas des secrets).
+- Il reste à coller **2 valeurs** obtenues à l'étape 1 : `<KV_ID>` (sortie de
+  `wrangler kv namespace create fl_cache`) et `<D1_ID>` (`database_id` de `wrangler d1 create fl_data`).
 
 ## 3. Poser les secrets (Étape 4 — jamais dans le dépôt)
 ```bash

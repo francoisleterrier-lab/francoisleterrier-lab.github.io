@@ -7,13 +7,13 @@ name = "fl-api"
 main = "src/index.js"
 compatibility_date = "2026-07-01"
 workers_dev = false
-account_id = "<ACCOUNT_ID>"   # Dashboard Cloudflare → domaine → écran API
+account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
 
 # Route sur le MÊME domaine → pas de CORS, pas de sous-domaine.
 # Intercepte /api/* au bord Cloudflare, même tant que le site est encore sur GitHub Pages.
 [[routes]]
 pattern = "francoisleterrier.fr/api/*"
-zone_id = "<ZONE_ID>"         # Dashboard → domaine → écran API
+zone_id = "4d4835e2d6f109af2e108063e77b229c"
 
 # KV — cache des générations/audits + rate-limit anti-abus.
 # Créer : wrangler kv namespace create fl_cache
