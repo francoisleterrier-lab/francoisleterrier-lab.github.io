@@ -24,10 +24,32 @@
       ]
     },
     site: {
-      bot: "Bon choix 🖥️ Un site vitrine démarre à <b>590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>référencement local inclus</b>. On peut chiffrer votre projet précisément en 30&nbsp;secondes.",
+      bot: "Bon choix 🖥️ Un site vitrine démarre à <b>590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>référencement local inclus</b>. Je peux vous montrer un exemple dans votre secteur, ou chiffrer votre projet en 30&nbsp;secondes.",
       opts: [
+        { t: "🔎 Voir un exemple de mon métier", go: "metier" },
         { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
         { t: "Voir tous les tarifs", href: "tarifs.html" },
+        { t: "Être recontacté", go: "contact" },
+        { t: "↩ Retour", go: "start" }
+      ]
+    },
+    metier: {
+      bot: "Super — quel est votre secteur&nbsp;? Je vous montre un <b>exemple concret</b> (un vrai modèle de démonstration).",
+      opts: [
+        { t: "🍷 Restaurant / bar", href: "/modeles/restaurant.html" },
+        { t: "🔧 Artisan / BTP", href: "/modeles/artisan.html" },
+        { t: "🛍️ Commerce / boutique", href: "/modeles/commerce.html" },
+        { t: "🧘 Bien-être / thérapie", href: "/modeles/bien-etre.html" },
+        { t: "💇 Coiffure / beauté", href: "/modeles/coiffure.html" },
+        { t: "Autre métier", go: "metier_autre" },
+        { t: "↩ Retour", go: "site" }
+      ]
+    },
+    metier_autre: {
+      bot: "Pas de souci&nbsp;: chaque site est <b>sur-mesure</b>, quel que soit le métier. On part de votre activité, vos couleurs et vos objectifs. Vous pouvez parcourir tous les modèles ou chiffrer directement votre projet.",
+      opts: [
+        { t: "Voir tous les modèles", href: "/modeles/" },
+        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -54,6 +76,7 @@
       bot: "Le <b>faire-part digital</b> (mini-site d'invitation, RSVP, plan…) démarre à <b>290&nbsp;€</b>. Élégant, installable, partageable en un lien — bien plus vivant qu'un carton papier.",
       opts: [
         { t: "Découvrir le faire-part", href: "faire-part-digital.html" },
+        { t: "🔎 Voir un exemple", href: "/modeles/faire-part.html" },
         { t: "Être recontacté", go: "contact" },
         { t: "↩ Retour", go: "start" }
       ]
@@ -61,9 +84,39 @@
     faq: {
       bot: "Bien sûr — que voulez-vous savoir&nbsp;?",
       opts: [
+        { t: "Combien ça coûte ?", go: "faq_prix" },
         { t: "Quels délais ?", go: "faq_delais" },
+        { t: "Et le référencement ?", go: "faq_seo" },
+        { t: "Puis-je le modifier moi-même ?", go: "faq_autonomie" },
         { t: "Faut-il s'engager ?", go: "faq_engagement" },
         { t: "Quelle zone ?", go: "faq_zone" },
+        { t: "↩ Retour", go: "start" }
+      ]
+    },
+    faq_prix: {
+      bot: "En transparence&nbsp;: <b>site vitrine dès 590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>réseaux dès 180&nbsp;€/mois</b> sans engagement, <b>faire-part digital dès 290&nbsp;€</b>. Référencement local inclus sur les sites. Le configurateur chiffre votre cas précis.",
+      opts: [
+        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
+        { t: "Voir tous les tarifs", href: "tarifs.html" },
+        { t: "Autre question", go: "faq" },
+        { t: "↩ Retour", go: "start" }
+      ]
+    },
+    faq_seo: {
+      bot: "Chaque site est livré <b>optimisé pour Google</b> (structure, vitesse, référencement local, fiche Google Business). L'objectif&nbsp;: être trouvé par vos clients autour de chez vous. Je peux aussi gérer votre visibilité dans la durée.",
+      opts: [
+        { t: "En savoir plus", href: "referencement-seo.html" },
+        { t: "⚙️ Chiffrer mon projet", href: "configurateur.html" },
+        { t: "Autre question", go: "faq" },
+        { t: "↩ Retour", go: "start" }
+      ]
+    },
+    faq_autonomie: {
+      bot: "Oui 🙂 Le site est pensé pour <b>évoluer avec vous</b>, et je reste disponible pour les modifications. On peut aussi prévoir un forfait maintenance si vous préférez être tranquille — on choisit ensemble ce qui vous convient.",
+      opts: [
+        { t: "Voir les tarifs", href: "tarifs.html" },
+        { t: "Être recontacté", go: "contact" },
+        { t: "Autre question", go: "faq" },
         { t: "↩ Retour", go: "start" }
       ]
     },
