@@ -97,7 +97,14 @@
         return '<div class="prio"><div class="pt"><span class="num">' + (i + 1) + '</span><h4>' + esc(p.title) + '</h4></div><div class="why">' + esc(p.why) + '</div><div class="act">🔒 <b>La solution concrète</b> fait partie de votre diagnostic offert.</div></div>';
       }).join("");
       var b = d.benchmark || { site: d.overall, standard: 62, fl: 96 };
-      function bar(label, v, c) { return '<div class="bar"><span>' + esc(label) + '</span><span class="track"><span class="fill" data-w="' + v + '%" style="width:0;background:' + c + ';color:' + c + '"></span></span><b>' + v + "</b></div>"; }
+      function bar(label, v, c) {
+        // Styles du remplissage écrits EN LIGNE (indépendants du CSS de la page) :
+        // même si un audit.html en cache sert un vieux CSS sans display:block, la
+        // barre colorée s'affiche quand même.
+        var trackCss = "display:block;height:12px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden";
+        var fillCss = "display:block;height:100%;width:" + v + "%;border-radius:8px;background:" + c + ";color:" + c;
+        return '<div class="bar"><span>' + esc(label) + '</span><span class="track" style="' + trackCss + '"><span class="fill" data-w="' + v + '%" style="' + fillCss + '"></span></span><b>' + v + "</b></div>";
+      }
       var localTxt = d.localScore >= 3 ? "Bonne présence locale détectée." : d.localScore >= 1 ? "Présence Google locale incomplète — un point clé pour être trouvé près de chez vous." : "Aucune fiche Google / coordonnées claires détectées — vous passez à côté de recherches locales.";
 
       out.innerHTML =
