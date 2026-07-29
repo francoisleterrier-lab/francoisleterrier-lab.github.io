@@ -8,6 +8,17 @@ je ne peux pas les faire à ta place, et je ne dois jamais écrire tes clés dan
 > dans `wrangler.toml`. **API token, clé LLM, clé PageSpeed** = **SECRETS** → uniquement via
 > `wrangler secret put …`. Ne jamais les committer.
 
+## ⚡ Raccourci (recommandé) — tout automatique après le login
+Un seul geste manuel : `wrangler login` (dans TON navigateur). Le script fait le reste
+(crée KV + D1 + R2, remplit `wrangler.toml`, applique le schéma). Il ne touche à aucun secret.
+```bash
+npm install
+npx wrangler login
+bash setup-resources.sh
+```
+Puis pose les secrets + déploie (voir §3–4). Si tu préfères tout faire à la main, suis les
+étapes détaillées ci-dessous.
+
 ## 0. Prérequis (une fois)
 ```bash
 npm install            # installe wrangler (devDependency)
