@@ -13,6 +13,10 @@ compatibility_date = "2026-07-01"
 workers_dev = true
 account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
 
+# Workers AI — LLM intégré (aucune clé externe). Utilisé par /generate.
+[ai]
+binding = "AI"
+
 # KV — cache des générations/audits + rate-limit anti-abus.
 # Créer : wrangler kv namespace create fl_cache
 [[kv_namespaces]]

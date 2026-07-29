@@ -17,6 +17,8 @@
  * ---------------------------------------------------------------------------
  */
 
+import { generatePage } from "./generate.js";
+
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -130,9 +132,31 @@ async function handleStub(name, request) {
   );
 }
 
+function clampStr(x, max) {
+  return typeof x === "string" ? x.trim().slice(0, max) : "";
+}
+
+/** POST /generate — génère une page sur-mesure (Workers AI + repli curaté). */
+async function handleGenerate(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const input = {
+    metier: clampStr(d.metier, 80),
+    nom: clampStr(d.nom, 80),
+    ville: clampStr(d.ville, 80),
+    ton: clampStr(d.ton, 40) || "chaleureux",
+  };
+  if (!input.metier || !input.nom) {
+    return json({ ok: false, error: "Champs requis : metier et nom." }, 422);
+  }
+  const page = await generatePage(env, input);
+  return json({ ok: true, page });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
-  "POST /generate": (req) => handleStub("generate", req),
+  "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req) => handleStub("audit", req),
   "POST /lead": (req) => handleStub("lead", req),
 };
