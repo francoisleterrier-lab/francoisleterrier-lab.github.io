@@ -150,7 +150,7 @@ async function handleGenerate(request, env) {
   if (!input.metier || !input.nom) {
     return json({ ok: false, error: "Champs requis : metier et nom." }, 422);
   }
-  const page = await generatePage(env, input);
+  const page = await generatePage(env, input, { debug: d.debug === true });
   return json({ ok: true, page });
 }
 

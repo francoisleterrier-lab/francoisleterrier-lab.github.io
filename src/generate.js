@@ -298,15 +298,24 @@ function mergeOntoCurated(base, ai) {
   return out;
 }
 
-export async function generatePage(env, input) {
+export async function generatePage(env, input, opts) {
+  opts = opts || {};
   const base = curatedPage(input);
-  if (!env || !env.AI) return base; // pas d'IA (dev local) → curaté
+  if (!env || !env.AI) {
+    if (opts.debug) base._debug = { hasAI: false };
+    return base; // pas d'IA (dev local) → curaté
+  }
+  var raw = null, err = null, ai = null;
   try {
     const res = await env.AI.run(MODEL, { messages: buildMessages(input), max_tokens: 1024 });
-    const text = res && (res.response || res.output_text || res.result || res);
-    const ai = extractJson(typeof text === "string" ? text : JSON.stringify(text));
-    return mergeOntoCurated(base, ai);
-  } catch (_) {
-    return base; // repli propre en cas d'erreur IA
+    raw = res && (res.response != null ? res.response : res.output_text != null ? res.output_text : res.result != null ? res.result : res);
+    ai = extractJson(typeof raw === "string" ? raw : JSON.stringify(raw));
+  } catch (e) {
+    err = (e && e.message) || String(e);
   }
+  const out = mergeOntoCurated(base, ai);
+  if (opts.debug) {
+    out._debug = { hasAI: true, model: MODEL, err: err, parsed: !!ai, rawSample: typeof raw === "string" ? raw.slice(0, 500) : JSON.stringify(raw || null).slice(0, 500) };
+  }
+  return out;
 }
