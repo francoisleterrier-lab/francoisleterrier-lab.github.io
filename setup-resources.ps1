@@ -35,8 +35,8 @@ Write-Host $d1
 $d1Id = ([regex]::Match($d1, 'database_id\s*=\s*"?([0-9a-f-]{36})')).Groups[1].Value
 
 # 3) R2 bucket
-Say "Creation du bucket R2 fl_assets..."
-& npx --yes wrangler r2 bucket create fl_assets 2>&1 | Write-Host
+Say "Creation du bucket R2 fl-assets..."
+& npx --yes wrangler r2 bucket create fl-assets 2>&1 | Write-Host
 
 # 4) Injection des IDs dans wrangler.toml (UTF-8 sans BOM, preserve les accents)
 Say "Ecriture des IDs dans wrangler.toml..."

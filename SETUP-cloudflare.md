@@ -35,7 +35,7 @@ npx wrangler login     # connecte ton compte Cloudflare
 ```bash
 npx wrangler kv namespace create fl_cache     # → note l'id  → <KV_ID>
 npx wrangler d1 create fl_data                # → note database_id → <D1_ID>
-npx wrangler r2 bucket create fl_assets
+npx wrangler r2 bucket create fl-assets
 ```
 Puis appliquer le schéma D1 :
 ```bash

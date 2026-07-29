@@ -29,7 +29,7 @@ database_name = "fl_data"
 database_id = "<D1_ID>"
 
 # R2 — assets générés (images, PDF de devis/audit). Egress gratuit.
-# Créer : wrangler r2 bucket create fl_assets
+# Créer : wrangler r2 bucket create fl-assets
 [[r2_buckets]]
 binding = "ASSETS"
-bucket_name = "fl_assets"
+bucket_name = "fl-assets"

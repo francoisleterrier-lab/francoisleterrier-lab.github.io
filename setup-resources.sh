@@ -39,8 +39,8 @@ D1_OUT="$($WR d1 create fl_data 2>&1)"; echo "$D1_OUT"
 D1_ID="$(printf '%s' "$D1_OUT" | grep -oiE 'database_id[[:space:]]*=[[:space:]]*"?[0-9a-f-]{36}' | grep -oE '[0-9a-f-]{36}' | head -1)"
 
 # 3) R2 bucket ------------------------------------------------------------------
-say "Création du bucket R2 « fl_assets »…"
-$WR r2 bucket create fl_assets 2>&1 || warn "Bucket déjà existant ? (sans gravité)"
+say "Création du bucket R2 « fl-assets »…"
+$WR r2 bucket create fl-assets 2>&1 || warn "Bucket déjà existant ? (sans gravité)"
 
 # 4) Injection dans wrangler.toml ----------------------------------------------
 say "Écriture des IDs dans $TOML…"
