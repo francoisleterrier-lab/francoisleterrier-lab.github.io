@@ -14,7 +14,13 @@ Un seul geste manuel : `wrangler login` (dans TON navigateur). Le script fait le
 ```bash
 npm install
 npx wrangler login
-bash setup-resources.sh
+bash setup-resources.sh                 # macOS / Linux / Git Bash
+```
+**Windows / PowerShell** — même chose avec le script natif :
+```powershell
+npm install
+npx wrangler login
+powershell -ExecutionPolicy Bypass -File .\setup-resources.ps1
 ```
 Puis pose les secrets + déploie (voir §3–4). Si tu préfères tout faire à la main, suis les
 étapes détaillées ci-dessous.
