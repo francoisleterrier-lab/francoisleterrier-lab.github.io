@@ -6,15 +6,12 @@
 name = "main"
 main = "src/index.js"
 compatibility_date = "2026-07-01"
-workers_dev = false
+# API servie via l'URL *.workers.dev pour l'instant (le DNS du domaine est
+# encore chez OVH → Cloudflare pas autoritaire). Quand les nameservers seront
+# basculés sur Cloudflare, on repassera sur un domaine personnalisé
+# api.francoisleterrier.fr (custom_domain).
+workers_dev = true
 account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
-
-# Le site reste sur GitHub Pages (apex, non proxifié). L'API vit sur un
-# sous-domaine dédié, servi par Cloudflare. custom_domain=true fait créer
-# automatiquement l'enregistrement DNS + le certificat au déploiement.
-[[routes]]
-pattern = "api.francoisleterrier.fr"
-custom_domain = true
 
 # KV — cache des générations/audits + rate-limit anti-abus.
 # Créer : wrangler kv namespace create fl_cache
