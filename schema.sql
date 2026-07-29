@@ -16,8 +16,9 @@ CREATE TABLE IF NOT EXISTS leads (
   ville       TEXT,
   budget      TEXT,
   message     TEXT,
-  source      TEXT,           -- ex: assistant, configurateur, audit
-  ip_hash     TEXT            -- IP hachée (jamais l'IP en clair)
+  source      TEXT,           -- ex: assistant, configurateur, audit, generateur
+  ip_hash     TEXT,           -- IP hachée (jamais l'IP en clair)
+  status      TEXT DEFAULT 'nouveau'  -- nouveau | contacte | converti | perdu
 );
 CREATE INDEX IF NOT EXISTS idx_leads_created ON leads (created_at);
 

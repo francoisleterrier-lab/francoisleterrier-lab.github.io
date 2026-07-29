@@ -42,6 +42,8 @@ const RATE_LIMITS = {
   "/audit": { limit: 10, window: 60 },
   "/site": { limit: 20, window: 60 },
   "/lead": { limit: 5, window: 60 },
+  "/admin/leads": { limit: 60, window: 60 },
+  "/admin/lead-status": { limit: 120, window: 60 },
   _default: { limit: 30, window: 60 },
 };
 
@@ -57,7 +59,7 @@ function corsHeaders(request) {
       "Access-Control-Allow-Origin": origin,
       Vary: "Origin",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Admin-Token",
       "Access-Control-Max-Age": "86400",
     };
   }
@@ -192,16 +194,34 @@ async function notifyLead(lead) {
   } catch (_) {}
 }
 
+/** Crée/complète la table leads si besoin (D1 auto-provisionné, sans wrangler). */
+async function ensureSchema(env) {
+  if (!env || !env.DB) return;
+  await env.DB.prepare(
+    "CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL DEFAULT (datetime('now')), nom TEXT, email TEXT, telephone TEXT, metier TEXT, besoin TEXT, ville TEXT, budget TEXT, message TEXT, source TEXT, ip_hash TEXT, status TEXT DEFAULT 'nouveau')"
+  ).run();
+  // Table préexistante sans colonne status → on l'ajoute (ignore si déjà là).
+  try { await env.DB.prepare("ALTER TABLE leads ADD COLUMN status TEXT DEFAULT 'nouveau'").run(); } catch (_) {}
+}
+
 async function storeLead(env, lead) {
   const ts = new Date().toISOString();
   const ipHash = await sha256hex(lead.ip || "");
-  const ville = (lead.site && lead.site.input && lead.site.input.ville) || "";
+  const inp = (lead.site && lead.site.input) || {};
+  const ville = inp.ville || "";
+  const nom = inp.nom || "";
+  const metier = inp.metier || "";
+  const message = JSON.stringify({ url: lead.url, audit: lead.audit, site: lead.site }).slice(0, 90000);
   if (env && env.DB) {
-    try {
-      await env.DB.prepare("INSERT INTO leads (created_at,email,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?)")
-        .bind(ts, lead.email, ville, lead.source || "audit", JSON.stringify({ url: lead.url, audit: lead.audit, site: lead.site }).slice(0, 90000), ipHash).run();
-      return "d1";
-    } catch (_) {}
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        await env.DB.prepare("INSERT INTO leads (created_at,nom,email,metier,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?,?,?)")
+          .bind(ts, nom, lead.email, metier, ville, lead.source || "audit", message, ipHash).run();
+        return "d1";
+      } catch (_) {
+        if (attempt === 0) { try { await ensureSchema(env); } catch (_e) {} continue; } // 1er échec = table absente → on la crée et on retente
+      }
+    }
   }
   if (env && env.CACHE) { try { await env.CACHE.put("lead:" + ts + ":" + (crypto.randomUUID ? crypto.randomUUID() : ""), JSON.stringify({ email: lead.email, url: lead.url, source: lead.source || "audit", site: lead.site || null, ts: ts }), { expirationTtl: 31536000 }); } catch (_) {} }
   return "kv";
@@ -259,6 +279,80 @@ async function handleGetSite(request, env) {
   return json({ ok: true, page: rec.page, edits: rec.edits || {} });
 }
 
+/* -------------------- Back-office privé (leads) -------------------- */
+
+/** Comparaison à temps constant (évite les attaques par timing sur le token). */
+function timingSafeEqual(a, b) {
+  a = String(a || ""); b = String(b || "");
+  if (a.length !== b.length) return false;
+  let r = 0;
+  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return r === 0;
+}
+
+/** Vérifie le token admin (secret env.ADMIN_TOKEN — jamais dans le dépôt). */
+function checkAdmin(request, env) {
+  if (!env || !env.ADMIN_TOKEN) return { ok: false, code: 503, error: "Administration non configurée." };
+  const h = request.headers.get("Authorization") || "";
+  const tok = h.slice(0, 7).toLowerCase() === "bearer " ? h.slice(7).trim() : (request.headers.get("X-Admin-Token") || "").trim();
+  if (!tok || !timingSafeEqual(tok, env.ADMIN_TOKEN)) return { ok: false, code: 401, error: "Accès refusé." };
+  return { ok: true };
+}
+
+/** Transforme une ligne D1 en lead exploitable par le tableau de bord. */
+function parseLeadRow(r) {
+  let meta = {};
+  try { meta = JSON.parse(r.message || "{}"); } catch (_) {}
+  const site = meta.site || null, audit = meta.audit || null;
+  const inp = (site && site.input) || {};
+  return {
+    id: r.id,
+    date: r.created_at,
+    email: r.email || "",
+    source: r.source || "",
+    ville: r.ville || inp.ville || "",
+    status: r.status || "nouveau",
+    metier: r.metier || inp.metier || "",
+    nom: r.nom || inp.nom || "",
+    url: meta.url || "",
+    score: audit && audit.overall != null ? audit.overall : null,
+    shareId: site && site.id ? site.id : null,
+  };
+}
+
+/** GET /admin/leads — liste tous les leads (auth requise). */
+async function handleAdminLeads(request, env) {
+  const auth = checkAdmin(request, env);
+  if (!auth.ok) return json({ ok: false, error: auth.error }, auth.code);
+  try { await ensureSchema(env); } catch (_) {}
+  let rows = [];
+  if (env && env.DB) {
+    try {
+      const res = await env.DB.prepare("SELECT id,created_at,nom,email,metier,ville,source,message,status FROM leads ORDER BY datetime(created_at) DESC LIMIT 1000").all();
+      rows = (res && res.results) || [];
+    } catch (_) {}
+  }
+  return json({ ok: true, leads: rows.map(parseLeadRow) });
+}
+
+/** POST /admin/lead-status — met à jour le statut d'un lead (auth requise). */
+async function handleAdminStatus(request, env) {
+  const auth = checkAdmin(request, env);
+  if (!auth.ok) return json({ ok: false, error: auth.error }, auth.code);
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const id = parseInt(d.id, 10);
+  const status = clampStr(d.status, 20);
+  const ALLOWED = ["nouveau", "contacte", "converti", "perdu"];
+  if (!id || ALLOWED.indexOf(status) < 0) return json({ ok: false, error: "Paramètres invalides." }, 422);
+  try { await ensureSchema(env); } catch (_) {}
+  try {
+    await env.DB.prepare("UPDATE leads SET status=? WHERE id=?").bind(status, id).run();
+  } catch (_) { return json({ ok: false, error: "Mise à jour impossible." }, 500); }
+  return json({ ok: true });
+}
+
 /** POST /lead — capture email (aspirateur à leads) : notifie + stocke l'audit complet. */
 async function handleLead(request, env) {
   const parsed = await readJson(request);
@@ -281,6 +375,8 @@ const ROUTES = {
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
+  "GET /admin/leads": (req, env) => handleAdminLeads(req, env),
+  "POST /admin/lead-status": (req, env) => handleAdminStatus(req, env),
 };
 
 /** Enlève un éventuel préfixe /api pour que /health == /api/health. */

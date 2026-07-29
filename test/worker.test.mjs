@@ -28,15 +28,41 @@ function memKV() {
     },
   };
 }
+// Mini-mock D1 (SQLite) : suffisant pour les requêtes du back-office.
+function memDB() {
+  const rows = [];
+  let seq = 0;
+  const stmt = (sql) => {
+    let args = [];
+    return {
+      bind(...a) { args = a; return this; },
+      async run() {
+        if (/^\s*INSERT INTO leads/i.test(sql)) {
+          rows.push({ id: ++seq, created_at: args[0], nom: args[1], email: args[2], metier: args[3], ville: args[4], source: args[5], message: args[6], ip_hash: args[7], status: "nouveau" });
+        } else if (/UPDATE leads SET status/i.test(sql)) {
+          const r = rows.find((x) => x.id === args[1]); if (r) r.status = args[0];
+        } // CREATE / ALTER → noop
+        return { success: true };
+      },
+      async all() {
+        return { results: rows.slice().sort((a, b) => (a.created_at < b.created_at ? 1 : -1)) };
+      },
+    };
+  };
+  return { prepare: (sql) => stmt(sql), _rows: rows };
+}
+
 const env = { CACHE: memKV(), DB: {}, ASSETS: {} };
+const adminEnv = { CACHE: memKV(), DB: memDB(), ASSETS: {}, ADMIN_TOKEN: "s3cr3t-test-token" };
 const APEX = "https://francoisleterrier.fr";
-const req = (method, path, { body, ct, origin } = {}) =>
+const req = (method, path, { body, ct, origin, token } = {}) =>
   new Request("https://api.francoisleterrier.fr" + path, {
     method,
     headers: {
       "CF-Connecting-IP": "203.0.113.7",
       ...(ct ? { "Content-Type": ct } : {}),
       ...(origin ? { Origin: origin } : {}),
+      ...(token ? { Authorization: "Bearer " + token } : {}),
     },
     body,
   });
@@ -104,6 +130,35 @@ for (let i = 0; i < 65; i++) {
   }
 }
 ok(got429, "rate-limit par IP déclenche un 429");
+
+// 8) back-office privé (leads)
+r = await worker.fetch(req("GET", "/admin/leads"), env); // env sans ADMIN_TOKEN
+ok(r.status === 503, "GET /admin/leads sans secret configuré → 503");
+r = await worker.fetch(req("GET", "/admin/leads"), adminEnv); // configuré, mais sans jeton
+ok(r.status === 401, "GET /admin/leads sans jeton → 401");
+r = await worker.fetch(req("GET", "/admin/leads", { token: "mauvais" }), adminEnv);
+ok(r.status === 401, "GET /admin/leads mauvais jeton → 401");
+
+// seed d'un lead générateur, puis lecture
+await adminEnv.DB.prepare("INSERT INTO leads (created_at,nom,email,metier,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?,?,?)")
+  .bind("2026-07-29T10:00:00Z", "Café X", "a@b.fr", "restaurant", "Muret", "generateur",
+    JSON.stringify({ url: "", audit: null, site: { input: { metier: "restaurant", nom: "Café X", ville: "Muret" }, id: "abc123" } }), "hash").run();
+r = await worker.fetch(req("GET", "/admin/leads", { token: "s3cr3t-test-token" }), adminEnv);
+let jl = await r.json();
+ok(r.status === 200 && jl.ok === true && Array.isArray(jl.leads) && jl.leads.length >= 1, "GET /admin/leads bon jeton → 200 + liste");
+ok(jl.leads[0].source === "generateur" && jl.leads[0].shareId === "abc123" && jl.leads[0].nom === "Café X", "lead générateur correctement parsé");
+
+// maj de statut
+const lid = jl.leads[0].id;
+r = await worker.fetch(req("POST", "/admin/lead-status", { token: "s3cr3t-test-token", body: JSON.stringify({ id: lid, status: "contacte" }), ct: "application/json" }), adminEnv);
+ok(r.status === 200, "POST /admin/lead-status (valide) → 200");
+r = await worker.fetch(req("GET", "/admin/leads", { token: "s3cr3t-test-token" }), adminEnv);
+jl = await r.json();
+ok(jl.leads[0].status === "contacte", "statut mis à jour et relu");
+r = await worker.fetch(req("POST", "/admin/lead-status", { token: "s3cr3t-test-token", body: JSON.stringify({ id: lid, status: "bidon" }), ct: "application/json" }), adminEnv);
+ok(r.status === 422, "POST /admin/lead-status (statut invalide) → 422");
+r = await worker.fetch(req("POST", "/admin/lead-status", { body: JSON.stringify({ id: 1, status: "contacte" }), ct: "application/json" }), adminEnv);
+ok(r.status === 401, "POST /admin/lead-status sans jeton → 401");
 
 console.log(`\n${pass} réussis, ${fail} échoués`);
 process.exit(fail ? 1 : 0);
