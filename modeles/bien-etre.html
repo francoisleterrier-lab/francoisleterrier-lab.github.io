@@ -4,164 +4,216 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
-<title>Espace Sérénité — Sophrologie & relaxation (modèle de site)</title>
-<meta name="description" content="Modèle de site minimaliste et apaisant pour thérapeute / praticien bien-être, réalisé par François Leterrier.">
-<meta name="theme-color" content="#f6f3ed">
+<title>Espace Sérénité — Sophrologie &amp; relaxation (modèle de site)</title>
+<meta name="description" content="Modèle de site apaisant pour thérapeute / praticien bien-être (sophrologie, relaxation), réalisé par François Leterrier — créateur de sites, partout en France.">
+<meta name="theme-color" content="#f2eee4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#f6f3ed;--paper2:#efeae0;--ink:#3a3a32;--sage:#7d9b80;--sage2:#5f7d62;--clay:#c08457;--muted:#8d897e;--line:#e3ddd0;}
+  :root{--paper:#f2eee4;--paper2:#faf8f2;--sand:#e7e0d1;--ink:#3a4a3f;--ink2:#556458;--sage:#7d9b7e;--sage2:#5f8062;--muted:#8a978c;--line:rgba(58,74,63,.14);}
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{font-family:'Mulish',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3,.serif{font-family:'DM Serif Display',Georgia,serif;font-weight:400;letter-spacing:.005em;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .reveal{opacity:1!important;transform:none!important} *{animation:none!important}}
+  body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--ink);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:.005em;}
   a{color:var(--sage2);text-decoration:none;}
-  .demo{text-align:center;font-size:12.5px;padding:9px;color:var(--muted);background:var(--paper2);}
-  .demo a{color:var(--sage2);font-weight:700;}
-  /* minimal centered header */
-  .head{text-align:center;padding:38px 24px 10px;}
-  .head .logo{font-family:'DM Serif Display';font-size:26px;color:var(--sage2);}
-  .head nav{margin-top:14px;display:flex;gap:30px;justify-content:center;flex-wrap:wrap;}
-  .head nav a{font-size:14px;color:var(--ink);font-weight:600;letter-spacing:.02em;}
-  .head nav a:hover{color:var(--sage);}
-  /* hero centered airy */
-  .hero{text-align:center;padding:70px 24px 40px;max-width:760px;margin:0 auto;position:relative;}
-  .hero::before{content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(125,155,128,.22),transparent 70%);z-index:0;}
-  .hero .in{position:relative;z-index:1;}
-  .hero .pre{font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--clay);margin-bottom:22px;}
-  .hero h1{font-size:clamp(40px,7vw,72px);line-height:1.06;color:var(--ink);}
-  .hero h1 em{font-style:italic;color:var(--sage2);}
-  .hero p{margin:24px auto 0;max-width:44ch;font-size:18.5px;color:var(--muted);}
-  .hero .orb{width:230px;height:230px;border-radius:50%;margin:44px auto 0;background:#cdd9ce url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaXRhdGlvbiUyMHdvbWFufGVufDB8fDB8fHww') center/cover;box-shadow:0 30px 60px -24px rgba(95,125,98,.6);border:6px solid #fff;}
-  /* section base */
-  .sec{max-width:720px;margin:0 auto;padding:80px 24px;}
-  .center{text-align:center;}
-  .ey{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--clay);font-weight:700;}
-  h2{font-size:clamp(30px,4.5vw,46px);color:var(--ink);margin-top:10px;line-height:1.15;}
-  .sec .lead{font-size:18px;color:var(--muted);margin-top:16px;}
-  /* vertical timeline */
-  .tl{margin:50px auto 0;max-width:560px;position:relative;padding-left:46px;}
-  .tl::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--sage),var(--clay));}
-  .tl .step{position:relative;padding-bottom:38px;}
-  .tl .step:last-child{padding-bottom:0;}
-  .tl .step::before{content:"";position:absolute;left:-39px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--sage);}
-  .tl .step h3{font-size:23px;color:var(--sage2);margin-bottom:4px;}
-  .tl .step p{font-size:15.5px;color:var(--muted);}
-  /* séances list */
-  .presta{background:var(--paper2);}
-  .plist{max-width:680px;margin:40px auto 0;}
-  .pl{display:flex;align-items:flex-start;gap:20px;padding:26px 0;border-bottom:1px solid var(--line);}
-  .pl .ic{font-size:30px;flex:none;width:40px;text-align:center;}
-  .pl h3{font-family:'DM Serif Display';font-size:24px;color:var(--ink);margin-bottom:4px;}
-  .pl p{font-size:15.5px;color:var(--muted);}
-  /* pull quote */
-  .quote{text-align:center;padding:120px 24px;background:linear-gradient(rgba(246,243,237,.82),rgba(246,243,237,.9)),url('https://images.unsplash.com/photo-1522075782449-e45a34f1ddfb?fm=jpg&q=60&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVkaXRhdGlvbiUyMHdvbWFufGVufDB8fDB8fHww') center/cover;}
-  .quote blockquote,.quote .mark{max-width:840px;margin-left:auto;margin-right:auto;}
-  .quote .mark{font-family:'DM Serif Display';font-size:90px;color:var(--sage);line-height:.4;opacity:.5;}
-  .quote blockquote{font-family:'DM Serif Display';font-style:italic;font-size:clamp(26px,4vw,40px);color:var(--ink);line-height:1.3;}
-  /* tarifs minimal list */
-  .tar{max-width:620px;margin:36px auto 0;}
-  .tr{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 0;border-bottom:1px solid var(--line);}
-  .tr .l h3{font-family:'DM Serif Display';font-size:23px;color:var(--ink);}
-  .tr .l span{font-size:14px;color:var(--muted);}
-  .tr .amt{font-family:'DM Serif Display';font-size:30px;color:var(--sage2);white-space:nowrap;}
-  /* about */
-  .about{background:var(--paper2);text-align:center;}
-  .about .orb{width:160px;height:160px;border-radius:50%;margin:0 auto 26px;background:#cdd9ce url('https://images.unsplash.com/photo-1554244933-d876deb6b2ff?fm=jpg&q=60&w=500&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWVkaXRhdGlvbiUyMHdvbWFufGVufDB8fDB8fHww') center/cover;box-shadow:0 22px 44px -20px rgba(95,125,98,.5);border:5px solid #fff;}
-  .about p{font-size:17.5px;color:var(--muted);max-width:52ch;margin:14px auto 0;}
-  /* rdv */
-  .rdv{text-align:center;padding:100px 24px;}
-  .rdv h2{margin-bottom:8px;}
-  .rdv p{color:var(--muted);font-size:18px;max-width:44ch;margin:0 auto 26px;}
-  .pill{display:inline-block;background:var(--clay);color:#fff;font-weight:700;padding:15px 32px;border-radius:40px;font-size:15px;letter-spacing:.02em;transition:transform .2s,background .2s;}
-  .pill:hover{transform:translateY(-2px);background:#a96e44;}
-  .pill-sage{background:var(--sage);}.pill-sage:hover{background:var(--sage2);}
-  /* floating rdv */
-  .float{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:50;background:var(--sage2);color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:40px;box-shadow:0 14px 34px -10px rgba(95,125,98,.6);}
-  /* footer */
-  .ff{text-align:center;padding:46px 24px 90px;color:var(--muted);font-size:13.5px;background:var(--paper);}
-  .ff .made{border:1px solid var(--line);border-radius:14px;padding:18px;max-width:620px;margin:0 auto 16px;}
-  .ff .made b{color:var(--sage2);}.ff .made a{color:var(--ink);text-decoration:underline;}
-  @media(max-width:640px){.float{display:none;}}
+  .demo{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(242,238,228,.88);backdrop-filter:blur(6px);color:var(--ink2);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
+  .demo a{color:var(--sage2);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:11px;}
+  .bar{position:fixed;top:32px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 46px;transition:background .3s,padding .3s;}
+  .bar.solid{background:rgba(242,238,228,.95);backdrop-filter:blur(10px);padding:13px 46px;box-shadow:0 1px 0 var(--line);}
+  .bar .logo{font-family:'Cormorant Garamond';font-weight:600;font-size:26px;color:var(--ink);letter-spacing:.02em;}
+  .bar .logo em{color:var(--sage2);font-style:italic;}
+  .bar .cta{border:1px solid var(--sage);color:var(--sage2);padding:10px 22px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;transition:.25s;}
+  .bar .cta:hover{background:var(--sage);color:#fff;border-color:var(--sage);}
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
+  .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--sage);opacity:.5;transition:.2s;}
+  .dots a:hover{opacity:1;transform:scale(1.4);background:var(--sage);}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(242,238,228,.28),rgba(242,238,228,.55) 55%,rgba(242,238,228,.9)),url('img/bienetre-hero.jpg');background-size:cover;background-position:center;}
+  .hero .in{position:relative;z-index:2;max-width:880px;}
+  .hero .pre{font-size:12.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--sage2);margin-bottom:22px;font-weight:500;}
+  .hero h1{font-size:clamp(46px,8.5vw,102px);line-height:1;font-weight:500;color:var(--ink);}
+  .hero h1 em{display:block;font-style:italic;color:var(--sage2);}
+  .hero p{margin:24px auto 0;max-width:46ch;font-size:18px;color:var(--ink2);font-weight:300;}
+  .hero .cta-row{margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .lk{font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:15px 30px;transition:.25s;cursor:pointer;}
+  .lk-fill{background:var(--sage);color:#fff;}.lk-fill:hover{background:var(--sage2);}
+  .lk-out{border:1px solid var(--sage);color:var(--sage2);}.lk-out:hover{background:var(--sage);color:#fff;}
+  .scrollcue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;color:var(--sage2);font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;animation:fl 2s ease-in-out infinite;}
+  @keyframes fl{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  .wrapc{max-width:1150px;margin:0 auto;padding:0 46px;}
+  .offre{padding:112px 0;}
+  .offre .h{text-align:center;max-width:640px;margin:0 auto 52px;}
+  .offre .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--sage2);}
+  .offre h2{font-size:clamp(34px,5vw,54px);margin-top:10px;color:var(--ink);}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .c3{background:var(--paper2);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;}
+  .c3:hover{transform:translateY(-6px);box-shadow:0 24px 44px -28px rgba(58,74,63,.4);}
+  .c3 .im{height:220px;background-size:cover;background-position:center;}
+  .c3 .bd{padding:24px 26px 28px;text-align:center;}
+  .c3 h3{font-size:27px;color:var(--ink);margin-bottom:4px;}
+  .c3 .pr{color:var(--sage2);font-family:'Cormorant Garamond';font-size:21px;font-style:italic;margin-bottom:8px;}
+  .c3 p{color:var(--ink2);font-size:14px;}
+  .presta{background:var(--sand);padding:112px 0;}
+  .presta .h{text-align:center;max-width:640px;margin:0 auto 46px;}
+  .presta .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--sage2);}
+  .presta h2{font-size:clamp(34px,5vw,52px);color:var(--ink);}
+  .ard{max-width:760px;margin:0 auto;padding:0 46px;}
+  .row{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-bottom:1px solid rgba(58,74,63,.16);}
+  .row .n{font-family:'Cormorant Garamond';font-size:24px;color:var(--ink);white-space:nowrap;}
+  .row .dt{flex:1;border-bottom:1px dotted rgba(125,155,126,.5);transform:translateY(-5px);}
+  .row .pr{font-family:'Cormorant Garamond';font-size:24px;color:var(--sage2);font-style:italic;white-space:nowrap;}
+  .row .ds{flex-basis:100%;font-size:13.5px;color:var(--muted);margin-top:-3px;}
+  .gal{padding:112px 0;}
+  .gal .h{text-align:center;margin-bottom:44px;}
+  .gal h2{font-size:clamp(32px,5vw,50px);color:var(--ink);}
+  .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
+  .strip::-webkit-scrollbar{height:6px;}.strip::-webkit-scrollbar-thumb{background:var(--sage);border-radius:6px;}
+  .ph{flex:none;width:280px;height:370px;scroll-snap-align:center;display:flex;align-items:flex-end;padding:20px;font-family:'Cormorant Garamond';font-style:italic;font-size:23px;color:#fff;position:relative;overflow:hidden;border-radius:4px;background-size:cover;background-position:center;}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(37,48,41,.6));}
+  .ph span{position:relative;z-index:2;}
+  .apropos{padding:112px 0;}
+  .apropos .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .portrait{aspect-ratio:4/5;background-size:cover;background-position:center;border-radius:4px;border:1px solid var(--line);}
+  .apropos h2{font-size:clamp(32px,4vw,46px);margin-bottom:16px;color:var(--ink);}
+  .apropos p{color:var(--ink2);margin-bottom:15px;max-width:52ch;}
+  .apropos .sign{font-family:'Cormorant Garamond';font-style:italic;font-size:26px;color:var(--sage2);margin-top:6px;}
+  .avis{background:var(--sand);padding:100px 0;}
+  .avis .h{text-align:center;margin-bottom:44px;}
+  .avis h2{font-size:clamp(32px,4.4vw,48px);color:var(--ink);}
+  .avis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .av{background:var(--paper2);border:1px solid var(--line);border-radius:4px;padding:28px;}
+  .av .st{color:var(--sage);letter-spacing:2px;font-size:15px;}
+  .av blockquote{font-family:'Cormorant Garamond';font-size:21px;line-height:1.5;color:var(--ink);margin:12px 0 14px;}
+  .av cite{font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+  .rdv{padding:112px 24px;text-align:center;background:var(--paper2);border-top:1px solid var(--line);}
+  .rdv .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--sage2);}
+  .rdv h2{font-size:clamp(34px,6vw,58px);margin:14px 0;color:var(--ink);}
+  .rdv .info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:30px 0 20px;}
+  .rdv .info b{display:block;font-family:'Cormorant Garamond';font-size:22px;color:var(--sage2);}
+  .rdv .info span{font-size:13px;color:var(--ink2);}
+  .rdv .addr{color:var(--ink2);font-size:14px;margin-bottom:28px;}
+  .float{position:fixed;bottom:22px;right:22px;z-index:55;background:var(--sage);color:#fff;padding:14px 22px;border-radius:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 12px 30px -8px rgba(95,128,98,.5);}
+  .ff{background:var(--ink);text-align:center;padding:48px 24px;color:#c4cfc7;font-size:13px;}
+  .ff .made{border:1px solid rgba(255,255,255,.16);padding:18px;max-width:640px;margin:0 auto 14px;color:#d7e0d9;}
+  .ff .made b{color:var(--sage);}.ff .made a{color:#fff;text-decoration:underline;}
+  .ff .cr{font-size:11px;color:rgba(196,207,199,.6);margin-top:8px;}
+  .ff a.site{color:#a9bcae;text-decoration:underline;}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:860px){.bar{padding:16px 20px;}.dots{display:none;}.cards3,.avis .g{grid-template-columns:1fr;}.apropos .grid{grid-template-columns:1fr;gap:28px;}.wrapc{padding:0 20px;}.float{display:none;}}
 </style>
 </head>
 <body>
   <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
 
-  <header class="head">
-    <div class="logo">Espace Sérénité</div>
-    <nav>
-      <a href="#approche">L'approche</a>
-      <a href="#seances">Les séances</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#rdv">Rendez-vous</a>
-    </nav>
+  <div class="bar" id="bar">
+    <div class="logo">Espace <em>Sérénité</em></div>
+    <a class="cta" href="#rdv">Prendre RDV</a>
+  </div>
+
+  <nav class="dots" aria-label="Navigation">
+    <a href="#hero" title="Accueil"></a>
+    <a href="#offre" title="Approche"></a>
+    <a href="#presta" title="Séances"></a>
+    <a href="#galerie" title="Le lieu"></a>
+    <a href="#apropos" title="La praticienne"></a>
+    <a href="#rdv" title="Rendez-vous"></a>
+  </nav>
+
+  <header class="hero" id="hero"><div class="in">
+    <div class="pre">Sophrologie · Relaxation · Sud-Toulousain</div>
+    <h1>Retrouvez votre <em>équilibre.</em></h1>
+    <p>Un espace calme, une écoute bienveillante, des outils simples pour respirer, lâcher prise et retrouver votre sérénité — à votre rythme.</p>
+    <div class="cta-row">
+      <a class="lk lk-fill" href="#rdv">Prendre rendez-vous</a>
+      <a class="lk lk-out" href="#offre">Découvrir l'approche</a>
+    </div>
+  </div>
+  <div class="scrollcue">défiler ↓</div>
   </header>
 
-  <section class="hero"><div class="in">
-    <div class="pre">Sophrologie · Relaxation</div>
-    <h1>Respirez. <em>Vous êtes au bon endroit.</em></h1>
-    <p>Un espace calme pour souffler, apaiser le stress et retrouver confiance — à votre rythme, sans jugement.</p>
-    <div class="orb" role="img" aria-label="Personne en méditation au lever du soleil"></div>
-  </div></section>
-
-  <section class="sec center" id="approche">
-    <div class="ey">L'approche</div>
-    <h2>Un chemin, pas à pas</h2>
-    <div class="tl" style="text-align:left;">
-      <div class="step"><h3>On fait connaissance</h3><p>Un premier échange pour comprendre ce qui vous amène et définir ensemble un objectif clair et atteignable.</p></div>
-      <div class="step"><h3>On pratique ensemble</h3><p>Des séances de respiration, de relaxation et de visualisation, entièrement adaptées à votre rythme et à vos besoins.</p></div>
-      <div class="step"><h3>Vous repartez outillé·e</h3><p>Des exercices simples à refaire chez vous, pour cultiver votre sérénité jour après jour, en autonomie.</p></div>
-    </div>
-  </section>
-
-  <section class="presta" id="seances"><div class="sec center">
-    <div class="ey">Les séances</div>
-    <h2>Ce que je propose</h2>
-    <div class="plist" style="text-align:left;">
-      <div class="pl"><div class="ic">😌</div><div><h3>Gestion du stress</h3><p>Relâcher les tensions et retrouver le calme face aux situations qui pèsent.</p></div></div>
-      <div class="pl"><div class="ic">🌙</div><div><h3>Sommeil & détente</h3><p>Apaiser le mental, lâcher prise et retrouver des nuits sereines.</p></div></div>
-      <div class="pl"><div class="ic">🌱</div><div><h3>Confiance en soi</h3><p>Se préparer sereinement à un examen, un entretien, un changement de vie.</p></div></div>
+  <section class="offre" id="offre"><div class="wrapc">
+    <div class="h reveal"><div class="pre">Mon accompagnement</div><h2>Prendre soin de vous</h2></div>
+    <div class="cards3">
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-seance.jpg')"></div><div class="bd"><h3>Sophrologie</h3><div class="pr">séance 55 €</div><p>Respiration, détente du corps, visualisation positive. Contre le stress, le sommeil difficile, la préparation d'un examen.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-relax.jpg')"></div><div class="bd"><h3>Relaxation</h3><div class="pr">séance 50 €</div><p>Un vrai moment pour soi, guidé, pour relâcher les tensions et retrouver le calme intérieur.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-nature.jpg')"></div><div class="bd"><h3>Ateliers en groupe</h3><div class="pr">dès 18 €</div><p>Gestion du stress, respiration, pleine conscience — en petit groupe, dans la bienveillance.</p></div></div>
     </div>
   </div></section>
 
-  <section class="quote">
-    <div class="mark">“</div>
-    <blockquote>Prendre soin de soi n'est pas un luxe, c'est le début de tout le reste.</blockquote>
-  </section>
-
-  <section class="sec center" id="tarifs">
-    <div class="ey">Tarifs</div>
-    <h2>Clair et sans surprise</h2>
-    <div class="tar" style="text-align:left;">
-      <div class="tr"><div class="l"><h3>Séance découverte</h3><span>1h · faire connaissance</span></div><div class="amt">45€</div></div>
-      <div class="tr"><div class="l"><h3>Séance individuelle</h3><span>1h · en cabinet ou en visio</span></div><div class="amt">60€</div></div>
-      <div class="tr"><div class="l"><h3>Forfait 5 séances</h3><span>un accompagnement dans la durée</span></div><div class="amt">270€</div></div>
+  <section class="presta" id="presta">
+    <div class="h reveal"><div class="pre">En toute transparence</div><h2>Séances &amp; tarifs</h2></div>
+    <div class="ard">
+      <div class="row reveal"><span class="n">Séance individuelle (1h)</span><span class="dt"></span><span class="pr">55 €</span><span class="ds">Au cabinet ou en visio, selon votre préférence</span></div>
+      <div class="row reveal"><span class="n">Forfait 5 séances</span><span class="dt"></span><span class="pr">250 €</span><span class="ds">Pour un accompagnement en profondeur</span></div>
+      <div class="row reveal"><span class="n">Première rencontre découverte</span><span class="dt"></span><span class="pr">offerte</span><span class="ds">15 min au téléphone, pour faire connaissance</span></div>
+      <div class="row reveal"><span class="n">Atelier collectif</span><span class="dt"></span><span class="pr">dès 18 €</span><span class="ds">Thème du mois, sur inscription</span></div>
+      <div class="row reveal"><span class="n">Séance enfant / ado</span><span class="dt"></span><span class="pr">45 €</span><span class="ds">Confiance, concentration, gestion des émotions</span></div>
     </div>
   </section>
 
-  <section class="about"><div class="sec">
-    <div class="orb" role="img" aria-label="Camille Roux, sophrologue"></div>
-    <div class="ey">Qui suis-je</div>
-    <h2>Camille Roux</h2>
-    <p>Sophrologue certifiée, j'accompagne depuis plusieurs années particuliers et entreprises vers plus d'équilibre. J'ai à cœur d'offrir un espace bienveillant où chacun peut se reconnecter à l'essentiel.</p>
-    <p>Je reçois en cabinet dans le Sud-Toulousain, et propose aussi des séances à distance.</p>
+  <section class="gal" id="galerie">
+    <div class="h reveal"><h2>Un lieu qui apaise</h2></div>
+    <div class="strip">
+      <div class="ph" style="background-image:url('img/bienetre-hero.jpg')"><span>Le cocon</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-relax.jpg')"><span>La détente</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-nature.jpg')"><span>La nature</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-soin.jpg')"><span>Le soin</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-detail.jpg')"><span>Les détails</span></div>
+    </div>
+  </section>
+
+  <section class="apropos" id="apropos"><div class="wrapc">
+    <div class="grid">
+      <div class="portrait reveal" style="background-image:url('img/bienetre-seance.jpg')" role="img" aria-label="Un moment de détente"></div>
+      <div class="reveal">
+        <h2>La praticienne</h2>
+        <p>Je m'appelle Claire. Après quinze ans dans un métier sous pression, j'ai voulu aider les autres à faire ce que j'avais dû réapprendre : respirer, ralentir, s'écouter.</p>
+        <p>Formée à la sophrologie et à la relaxation, je vous accueille dans un cadre doux, sans jugement. Chaque accompagnement est unique — le vôtre commence par une simple conversation.</p>
+        <div class="sign">— Claire, sophrologue</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="avis"><div class="wrapc">
+    <div class="h reveal"><h2>Ils ont retrouvé le calme</h2></div>
+    <div class="g">
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« En quelques séances, mon sommeil s'est transformé. Claire a une écoute rare et des outils qui marchent vraiment. »</blockquote><cite>— Hélène P.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Un lieu apaisant et une praticienne bienveillante. Je repars chaque fois plus légère. Merci. »</blockquote><cite>— Camille R.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« J'étais sceptique. La préparation à mon oral a tout changé — plus de panique, de la confiance. »</blockquote><cite>— Thomas B.</cite></div>
+    </div>
   </div></section>
 
   <section class="rdv" id="rdv">
-    <div class="ey">Rendez-vous</div>
-    <h2>Offrez-vous un moment pour vous</h2>
-    <p>Réservez votre séance découverte. Je vous réponds avec douceur, rapidement.</p>
-    <a class="pill pill-sage" href="tel:+33500000000">📞 Prendre rendez-vous</a>
+    <div class="pre">Rendez-vous</div>
+    <h2>Offrez-vous une pause</h2>
+    <div class="info">
+      <div><b>Lun – Ven</b><span>9h – 19h</span></div>
+      <div><b>Samedi</b><span>9h – 13h</span></div>
+      <div><b>Visio</b><span>sur demande</span></div>
+    </div>
+    <div class="addr">3 chemin des Oliviers · Sud-Toulousain · sur rendez-vous</div>
+    <a class="lk lk-fill" href="tel:+33500000000">📞 Prendre RDV — 05 00 00 00 00</a>
   </section>
 
-  <a class="float" href="#rdv">🌿 Prendre rendez-vous</a>
+  <a class="float" href="#rdv">Prendre RDV</a>
 
   <footer class="ff">
-    <div class="made">Site-modèle de démonstration (praticienne fictive), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
-    Espace Sérénité · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
+    <div class="made">Site-modèle de démonstration (cabinet fictif), conçu par <b>François Leterrier</b> — créateur de sites internet, partout en France. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Espace Sérénité · <a class="site" href="https://francoisleterrier.fr" target="_blank" rel="noopener">francoisleterrier.fr</a>
+    <div class="cr">Photos d'illustration : Pexels (libres de droit) — sur votre site, ce seront vos vraies photos.</div>
   </footer>
+
+  <script>
+    var bar=document.getElementById('bar');
+    addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);},{passive:true});
+    (function(){
+      var els=[].slice.call(document.querySelectorAll('.reveal'));
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+      els.forEach(function(e){io.observe(e);});
+    })();
+  </script>
 </body>
 </html>
