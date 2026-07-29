@@ -38,7 +38,7 @@
   .nav a.rs:hover{background:var(--fir);border-color:var(--fir);color:var(--cream);}
 
   /* couverture — carte encadrée */
-  .cover{background:linear-gradient(rgba(34,56,44,.84),rgba(22,36,28,.92)),url('img/fairepart-couple.jpg');background-size:cover;background-position:center;padding:26px 18px;min-height:88vh;min-height:94svh;display:flex;}
+  .cover{background:linear-gradient(rgba(34,56,44,.84),rgba(22,36,28,.92)),url('img/fairepart-couple.jpg');background:linear-gradient(rgba(34,56,44,.84),rgba(22,36,28,.92)),image-set(url('img/fairepart-couple.webp') type('image/webp'),url('img/fairepart-couple.jpg') type('image/jpeg'));background-size:cover;background-position:center;padding:26px 18px;min-height:88vh;min-height:94svh;display:flex;}
   .frame{position:relative;width:100%;max-width:780px;margin:auto;border:1px solid rgba(198,167,104,.55);padding:8px;}
   .frame-in{border:1px solid rgba(198,167,104,.25);padding:76px 26px 62px;text-align:center;}
   .cover .sprig{position:absolute;width:78px;height:78px;color:var(--gold);opacity:.5;pointer-events:none;}
@@ -251,7 +251,7 @@
     <div class="sec center">
       <p class="ey reveal">Notre histoire</p>
       <h2 class="reveal">Trois chapitres, et le plus beau reste à écrire</h2>
-      <figure class="reveal" style="max-width:330px;margin:24px auto 34px;padding:8px;border:1px solid rgba(198,167,104,.5);"><img src="img/fairepart-histoire.jpg" width="900" height="1000" loading="lazy" alt="Camille et Jules, complices" style="display:block;width:100%;height:auto;"></figure>
+      <figure class="reveal" style="max-width:330px;margin:24px auto 34px;padding:8px;border:1px solid rgba(198,167,104,.5);"><picture><source type="image/webp" srcset="img/fairepart-histoire.webp"><img src="img/fairepart-histoire.jpg" width="900" height="1000" loading="lazy" alt="Camille et Jules, complices" style="display:block;width:100%;height:auto;"></picture></figure>
       <div class="chaps">
         <div class="chap reveal">
           <div class="yr">2019</div>

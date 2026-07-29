@@ -29,7 +29,7 @@
   .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--accent);opacity:.5;transition:.2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--accent);}
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(15,22,32,.78),rgba(15,22,32,.9)),url('img/artisan-hero.jpg');background-size:cover;background-position:center;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(15,22,32,.78),rgba(15,22,32,.9)),url('img/artisan-hero.jpg');background:linear-gradient(180deg,rgba(15,22,32,.78),rgba(15,22,32,.9)),image-set(url('img/artisan-hero.webp') type('image/webp'),url('img/artisan-hero.jpg') type('image/jpeg'));background-size:cover;background-position:center;}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--ink) 94%);pointer-events:none;}
   .hero .in{position:relative;z-index:2;max-width:940px;}
   .hero .pre{font-family:'Oswald';font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-weight:500;}
@@ -138,9 +138,9 @@
   <section class="offre" id="offre"><div class="wrapc">
     <div class="h reveal"><div class="pre">Nos savoir-faire</div><h2>Ce qu'on fait pour vous</h2></div>
     <div class="cards3">
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-plomberie.jpg')"></div><div class="bd"><h3>Plomberie</h3><div class="pr">Devis gratuit</div><p>Fuites, robinetterie, sanitaires, rénovation de salle de bain. Une intervention propre, garantie.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-chauffage.jpg')"></div><div class="bd"><h3>Chauffage</h3><div class="pr">Sur devis</div><p>Chaudière, pompe à chaleur, entretien annuel, mise aux normes. On vous conseille sur les aides.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-depannage.jpg')"></div><div class="bd"><h3>Dépannage rapide</h3><div class="pr">7j/7</div><p>Une fuite, plus d'eau chaude, une urgence ? On se déplace vite dans tout le Sud-Toulousain.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-plomberie.jpg');background-image:image-set(url('img/artisan-plomberie.webp') type('image/webp'),url('img/artisan-plomberie.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Plomberie</h3><div class="pr">Devis gratuit</div><p>Fuites, robinetterie, sanitaires, rénovation de salle de bain. Une intervention propre, garantie.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-chauffage.jpg');background-image:image-set(url('img/artisan-chauffage.webp') type('image/webp'),url('img/artisan-chauffage.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Chauffage</h3><div class="pr">Sur devis</div><p>Chaudière, pompe à chaleur, entretien annuel, mise aux normes. On vous conseille sur les aides.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-depannage.jpg');background-image:image-set(url('img/artisan-depannage.webp') type('image/webp'),url('img/artisan-depannage.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Dépannage rapide</h3><div class="pr">7j/7</div><p>Une fuite, plus d'eau chaude, une urgence ? On se déplace vite dans tout le Sud-Toulousain.</p></div></div>
     </div>
   </div></section>
 
@@ -158,17 +158,17 @@
   <section class="gal" id="galerie">
     <div class="h reveal"><h2>Nos chantiers récents</h2></div>
     <div class="strip">
-      <div class="ph" style="background-image:url('img/artisan-chantier.jpg')"><span>Intervention</span></div>
-      <div class="ph" style="background-image:url('img/artisan-plomberie.jpg')"><span>Plomberie</span></div>
-      <div class="ph" style="background-image:url('img/artisan-depannage.jpg')"><span>Dépannage</span></div>
-      <div class="ph" style="background-image:url('img/artisan-outils.jpg')"><span>Le matériel</span></div>
-      <div class="ph" style="background-image:url('img/artisan-chauffage.jpg')"><span>Chauffage</span></div>
+      <div class="ph" style="background-image:url('img/artisan-chantier.jpg');background-image:image-set(url('img/artisan-chantier.webp') type('image/webp'),url('img/artisan-chantier.jpg') type('image/jpeg'))"><span>Intervention</span></div>
+      <div class="ph" style="background-image:url('img/artisan-plomberie.jpg');background-image:image-set(url('img/artisan-plomberie.webp') type('image/webp'),url('img/artisan-plomberie.jpg') type('image/jpeg'))"><span>Plomberie</span></div>
+      <div class="ph" style="background-image:url('img/artisan-depannage.jpg');background-image:image-set(url('img/artisan-depannage.webp') type('image/webp'),url('img/artisan-depannage.jpg') type('image/jpeg'))"><span>Dépannage</span></div>
+      <div class="ph" style="background-image:url('img/artisan-outils.jpg');background-image:image-set(url('img/artisan-outils.webp') type('image/webp'),url('img/artisan-outils.jpg') type('image/jpeg'))"><span>Le matériel</span></div>
+      <div class="ph" style="background-image:url('img/artisan-chauffage.jpg');background-image:image-set(url('img/artisan-chauffage.webp') type('image/webp'),url('img/artisan-chauffage.jpg') type('image/jpeg'))"><span>Chauffage</span></div>
     </div>
   </section>
 
   <section class="apropos" id="apropos"><div class="wrapc">
     <div class="grid">
-      <div class="portrait reveal" style="background-image:url('img/artisan-hero.jpg')" role="img" aria-label="L'artisan au travail"></div>
+      <div class="portrait reveal" style="background-image:url('img/artisan-hero.jpg');background-image:image-set(url('img/artisan-hero.webp') type('image/webp'),url('img/artisan-hero.jpg') type('image/jpeg'))" role="img" aria-label="L'artisan au travail"></div>
       <div class="reveal">
         <h2>L'artisan derrière l'entreprise</h2>
         <p>Je m'appelle Marc Dubois. J'ai appris le métier sur les chantiers, aux côtés de mon père — d'où le « &amp; Fils ». Aujourd'hui, c'est moi qui viens chez vous, avec la même exigence : du travail soigné et une parole tenue.</p>

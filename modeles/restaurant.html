@@ -32,7 +32,7 @@
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);opacity:.5;transition:opacity .2s,transform .2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--gold);}
   /* hero full screen */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:#140a0c url('img/resto-hero.jpg') center/cover no-repeat;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:#140a0c url('img/resto-hero.jpg') center/cover no-repeat;background:#140a0c image-set(url('img/resto-hero.webp') type('image/webp'),url('img/resto-hero.jpg') type('image/jpeg')) center/cover no-repeat;}
   .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,12,.72),rgba(20,10,12,.9)),radial-gradient(ellipse at 50% 30%,rgba(126,31,45,.42),transparent 60%);}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg) 92%);}
   .hero .in{position:relative;z-index:2;max-width:900px;}
@@ -71,11 +71,11 @@
   .amb .strip::-webkit-scrollbar{height:6px;}.amb .strip::-webkit-scrollbar-thumb{background:var(--wine);border-radius:6px;}
   .amb .ph{flex:none;width:300px;height:420px;scroll-snap-align:center;border-radius:2px;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:24px;color:#fff;position:relative;}
   .ph{background-size:cover;background-position:center;}
-  .p1{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-salle.jpg');}
-  .p2{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-cave.jpg');}
-  .p3{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-planches.jpg');}
-  .p4{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-terrasse.jpg');}
-  .p5{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-soirees.jpg');}
+  .p1{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-salle.jpg');background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),image-set(url('img/resto-salle.webp') type('image/webp'),url('img/resto-salle.jpg') type('image/jpeg'));}
+  .p2{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-cave.jpg');background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),image-set(url('img/resto-cave.webp') type('image/webp'),url('img/resto-cave.jpg') type('image/jpeg'));}
+  .p3{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-planches.jpg');background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),image-set(url('img/resto-planches.webp') type('image/webp'),url('img/resto-planches.jpg') type('image/jpeg'));}
+  .p4{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-terrasse.jpg');background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),image-set(url('img/resto-terrasse.webp') type('image/webp'),url('img/resto-terrasse.jpg') type('image/jpeg'));}
+  .p5{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-soirees.jpg');background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),image-set(url('img/resto-soirees.webp') type('image/webp'),url('img/resto-soirees.jpg') type('image/jpeg'));}
   /* infos + resa */
   .resa-sec{background:linear-gradient(135deg,#52131f,#7e1f2d);padding:120px 24px;text-align:center;}
   .resa-sec .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}

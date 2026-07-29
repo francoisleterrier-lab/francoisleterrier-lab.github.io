@@ -29,7 +29,7 @@
   .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--sage);opacity:.5;transition:.2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--sage);}
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(242,238,228,.28),rgba(242,238,228,.55) 55%,rgba(242,238,228,.9)),url('img/bienetre-hero.jpg');background-size:cover;background-position:center;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(242,238,228,.28),rgba(242,238,228,.55) 55%,rgba(242,238,228,.9)),url('img/bienetre-hero.jpg');background:linear-gradient(180deg,rgba(242,238,228,.28),rgba(242,238,228,.55) 55%,rgba(242,238,228,.9)),image-set(url('img/bienetre-hero.webp') type('image/webp'),url('img/bienetre-hero.jpg') type('image/jpeg'));background-size:cover;background-position:center;}
   .hero .in{position:relative;z-index:2;max-width:880px;}
   .hero .pre{font-size:12.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--sage2);margin-bottom:22px;font-weight:500;}
   .hero h1{font-size:clamp(46px,8.5vw,102px);line-height:1;font-weight:500;color:var(--ink);}
@@ -136,9 +136,9 @@
   <section class="offre" id="offre"><div class="wrapc">
     <div class="h reveal"><div class="pre">Mon accompagnement</div><h2>Prendre soin de vous</h2></div>
     <div class="cards3">
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-seance.jpg')"></div><div class="bd"><h3>Sophrologie</h3><div class="pr">séance 55 €</div><p>Respiration, détente du corps, visualisation positive. Contre le stress, le sommeil difficile, la préparation d'un examen.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-relax.jpg')"></div><div class="bd"><h3>Relaxation</h3><div class="pr">séance 50 €</div><p>Un vrai moment pour soi, guidé, pour relâcher les tensions et retrouver le calme intérieur.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-nature.jpg')"></div><div class="bd"><h3>Ateliers en groupe</h3><div class="pr">dès 18 €</div><p>Gestion du stress, respiration, pleine conscience — en petit groupe, dans la bienveillance.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-seance.jpg');background-image:image-set(url('img/bienetre-seance.webp') type('image/webp'),url('img/bienetre-seance.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Sophrologie</h3><div class="pr">séance 55 €</div><p>Respiration, détente du corps, visualisation positive. Contre le stress, le sommeil difficile, la préparation d'un examen.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-relax.jpg');background-image:image-set(url('img/bienetre-relax.webp') type('image/webp'),url('img/bienetre-relax.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Relaxation</h3><div class="pr">séance 50 €</div><p>Un vrai moment pour soi, guidé, pour relâcher les tensions et retrouver le calme intérieur.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/bienetre-nature.jpg');background-image:image-set(url('img/bienetre-nature.webp') type('image/webp'),url('img/bienetre-nature.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Ateliers en groupe</h3><div class="pr">dès 18 €</div><p>Gestion du stress, respiration, pleine conscience — en petit groupe, dans la bienveillance.</p></div></div>
     </div>
   </div></section>
 
@@ -156,17 +156,17 @@
   <section class="gal" id="galerie">
     <div class="h reveal"><h2>Un lieu qui apaise</h2></div>
     <div class="strip">
-      <div class="ph" style="background-image:url('img/bienetre-hero.jpg')"><span>Le cocon</span></div>
-      <div class="ph" style="background-image:url('img/bienetre-relax.jpg')"><span>La détente</span></div>
-      <div class="ph" style="background-image:url('img/bienetre-nature.jpg')"><span>La nature</span></div>
-      <div class="ph" style="background-image:url('img/bienetre-soin.jpg')"><span>Le soin</span></div>
-      <div class="ph" style="background-image:url('img/bienetre-detail.jpg')"><span>Les détails</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-hero.jpg');background-image:image-set(url('img/bienetre-hero.webp') type('image/webp'),url('img/bienetre-hero.jpg') type('image/jpeg'))"><span>Le cocon</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-relax.jpg');background-image:image-set(url('img/bienetre-relax.webp') type('image/webp'),url('img/bienetre-relax.jpg') type('image/jpeg'))"><span>La détente</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-nature.jpg');background-image:image-set(url('img/bienetre-nature.webp') type('image/webp'),url('img/bienetre-nature.jpg') type('image/jpeg'))"><span>La nature</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-soin.jpg');background-image:image-set(url('img/bienetre-soin.webp') type('image/webp'),url('img/bienetre-soin.jpg') type('image/jpeg'))"><span>Le soin</span></div>
+      <div class="ph" style="background-image:url('img/bienetre-detail.jpg');background-image:image-set(url('img/bienetre-detail.webp') type('image/webp'),url('img/bienetre-detail.jpg') type('image/jpeg'))"><span>Les détails</span></div>
     </div>
   </section>
 
   <section class="apropos" id="apropos"><div class="wrapc">
     <div class="grid">
-      <div class="portrait reveal" style="background-image:url('img/bienetre-seance.jpg')" role="img" aria-label="Un moment de détente"></div>
+      <div class="portrait reveal" style="background-image:url('img/bienetre-seance.jpg');background-image:image-set(url('img/bienetre-seance.webp') type('image/webp'),url('img/bienetre-seance.jpg') type('image/jpeg'))" role="img" aria-label="Un moment de détente"></div>
       <div class="reveal">
         <h2>La praticienne</h2>
         <p>Je m'appelle Claire. Après quinze ans dans un métier sous pression, j'ai voulu aider les autres à faire ce que j'avais dû réapprendre : respirer, ralentir, s'écouter.</p>

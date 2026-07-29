@@ -29,7 +29,7 @@
   .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--accent);opacity:.5;transition:.2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--accent);}
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(251,238,243,.2),rgba(251,238,243,.5) 55%,rgba(251,238,243,.9)),url('img/commerce-hero.jpg');background-size:cover;background-position:center;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(251,238,243,.2),rgba(251,238,243,.5) 55%,rgba(251,238,243,.9)),url('img/commerce-hero.jpg');background:linear-gradient(180deg,rgba(251,238,243,.2),rgba(251,238,243,.5) 55%,rgba(251,238,243,.9)),image-set(url('img/commerce-hero.webp') type('image/webp'),url('img/commerce-hero.jpg') type('image/jpeg'));background-size:cover;background-position:center;}
   .hero .in{position:relative;z-index:2;max-width:900px;}
   .hero .pre{font-size:12.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent2);margin-bottom:22px;font-weight:500;}
   .hero h1{font-size:clamp(48px,9vw,110px);line-height:.98;font-weight:500;color:var(--ink);}
@@ -136,9 +136,9 @@
   <section class="offre" id="offre"><div class="wrapc">
     <div class="h reveal"><div class="pre">La sélection du moment</div><h2>Nos collections</h2></div>
     <div class="cards3">
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-collection.jpg')"></div><div class="bd"><h3>Prêt-à-porter</h3><div class="pr">Nouvelle saison</div><p>Des essentiels bien coupés et des pièces fortes, de la maille aux robes.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-accessoires.jpg')"></div><div class="bd"><h3>Accessoires</h3><div class="pr">Le détail qui change tout</div><p>Sacs, bijoux, ceintures — la touche finale d'un look réussi.</p></div></div>
-      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-mode.jpg')"></div><div class="bd"><h3>Créateurs</h3><div class="pr">Éditions limitées</div><p>Des marques indépendantes qu'on déniche pour vous, en série courte.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-collection.jpg');background-image:image-set(url('img/commerce-collection.webp') type('image/webp'),url('img/commerce-collection.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Prêt-à-porter</h3><div class="pr">Nouvelle saison</div><p>Des essentiels bien coupés et des pièces fortes, de la maille aux robes.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-accessoires.jpg');background-image:image-set(url('img/commerce-accessoires.webp') type('image/webp'),url('img/commerce-accessoires.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Accessoires</h3><div class="pr">Le détail qui change tout</div><p>Sacs, bijoux, ceintures — la touche finale d'un look réussi.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-mode.jpg');background-image:image-set(url('img/commerce-mode.webp') type('image/webp'),url('img/commerce-mode.jpg') type('image/jpeg'))"></div><div class="bd"><h3>Créateurs</h3><div class="pr">Éditions limitées</div><p>Des marques indépendantes qu'on déniche pour vous, en série courte.</p></div></div>
     </div>
   </div></section>
 
@@ -156,17 +156,17 @@
   <section class="gal" id="galerie">
     <div class="h reveal"><h2>Le lookbook</h2></div>
     <div class="strip">
-      <div class="ph" style="background-image:url('img/commerce-hero.jpg')"><span>La boutique</span></div>
-      <div class="ph" style="background-image:url('img/commerce-vitrine.jpg')"><span>La vitrine</span></div>
-      <div class="ph" style="background-image:url('img/commerce-collection.jpg')"><span>Les collections</span></div>
-      <div class="ph" style="background-image:url('img/commerce-detail.jpg')"><span>Les détails</span></div>
-      <div class="ph" style="background-image:url('img/commerce-accessoires.jpg')"><span>Les accessoires</span></div>
+      <div class="ph" style="background-image:url('img/commerce-hero.jpg');background-image:image-set(url('img/commerce-hero.webp') type('image/webp'),url('img/commerce-hero.jpg') type('image/jpeg'))"><span>La boutique</span></div>
+      <div class="ph" style="background-image:url('img/commerce-vitrine.jpg');background-image:image-set(url('img/commerce-vitrine.webp') type('image/webp'),url('img/commerce-vitrine.jpg') type('image/jpeg'))"><span>La vitrine</span></div>
+      <div class="ph" style="background-image:url('img/commerce-collection.jpg');background-image:image-set(url('img/commerce-collection.webp') type('image/webp'),url('img/commerce-collection.jpg') type('image/jpeg'))"><span>Les collections</span></div>
+      <div class="ph" style="background-image:url('img/commerce-detail.jpg');background-image:image-set(url('img/commerce-detail.webp') type('image/webp'),url('img/commerce-detail.jpg') type('image/jpeg'))"><span>Les détails</span></div>
+      <div class="ph" style="background-image:url('img/commerce-accessoires.jpg');background-image:image-set(url('img/commerce-accessoires.webp') type('image/webp'),url('img/commerce-accessoires.jpg') type('image/jpeg'))"><span>Les accessoires</span></div>
     </div>
   </section>
 
   <section class="apropos" id="apropos"><div class="wrapc">
     <div class="grid">
-      <div class="portrait reveal" style="background-image:url('img/commerce-mode.jpg')" role="img" aria-label="L'univers de la boutique"></div>
+      <div class="portrait reveal" style="background-image:url('img/commerce-mode.jpg');background-image:image-set(url('img/commerce-mode.webp') type('image/webp'),url('img/commerce-mode.jpg') type('image/jpeg'))" role="img" aria-label="L'univers de la boutique"></div>
       <div class="reveal">
         <h2>La maison Margaux</h2>
         <p>J'ai ouvert Margaux avec une idée simple : une boutique où l'on se sent bien, où l'on est conseillé sans être poussé à l'achat, et où l'on trouve des pièces qu'on ne voit pas partout.</p>
