@@ -4,207 +4,216 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
-<title>Maison Margaux — Concept store & mode (modèle de site)</title>
-<meta name="description" content="Modèle de site lookbook e-commerce pour boutique / commerce, réalisé par François Leterrier.">
-<meta name="theme-color" content="#faf6f2">
+<title>Maison Margaux — Concept store &amp; mode (modèle de site)</title>
+<meta name="description" content="Modèle de site chic pour boutique / concept store / commerce, réalisé par François Leterrier — créateur de sites, partout en France.">
+<meta name="theme-color" content="#fbeef3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#faf6f2;--ink:#1b1714;--clay:#c45d3a;--rose:#e58f7a;--olive:#8a8460;--muted:#8b8178;--line:#ece3da;}
+  :root{--paper:#fbeef3;--paper2:#fff;--rose:#f3d9e2;--ink:#4a2a38;--ink2:#6b4152;--accent:#d6548f;--accent2:#b83f76;--muted:#9c7f8b;--line:rgba(74,42,56,.14);}
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3,.dsp{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;letter-spacing:-.02em;}
-  a{color:var(--clay);text-decoration:none;}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 26px;}
-  .demo{background:var(--ink);color:#e9e0d8;text-align:center;font-size:12.5px;padding:7px;}
-  .demo a{color:var(--rose);font-weight:700;}
-  .promo{background:var(--clay);color:#fff;text-align:center;font-size:13px;font-weight:600;padding:8px;letter-spacing:.04em;}
-  /* header with cart */
-  header{position:sticky;top:0;z-index:40;background:rgba(250,246,242,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .nav{display:flex;align-items:center;gap:24px;min-height:72px;}
-  .brand{font-family:'Space Grotesk';font-weight:700;font-size:23px;letter-spacing:-.02em;}
-  .brand b{color:var(--clay);}
-  .nav .links{display:flex;gap:24px;margin-left:30px;}
-  .nav .links a{color:var(--ink);font-weight:500;font-size:15px;}
-  .nav .links a:hover{color:var(--clay);}
-  .nav .right{margin-left:auto;display:flex;align-items:center;gap:16px;}
-  .cart{position:relative;font-size:22px;}
-  .cart .cnt{position:absolute;top:-7px;right:-9px;background:var(--clay);color:#fff;font-family:'Space Grotesk';font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
-  .shop{background:var(--ink);color:#fff;font-weight:600;font-size:14px;padding:11px 20px;border-radius:30px;}
-  .shop:hover{background:var(--clay);}
-  /* hero lookbook collage */
-  .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding:50px 26px 60px;}
-  .hero .tx .ey{display:inline-block;font-family:'Space Grotesk';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);background:#fff;border:1px solid var(--line);border-radius:30px;padding:6px 14px;}
-  .hero h1{font-size:clamp(40px,6.5vw,72px);line-height:.98;margin:20px 0 0;}
-  .hero h1 span{color:var(--clay);}
-  .hero p{margin-top:18px;font-size:17.5px;color:var(--muted);max-width:42ch;}
-  .hero .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
-  .b{display:inline-block;font-weight:600;font-size:15px;padding:13px 26px;border-radius:30px;font-family:'Inter';}
-  .b-fill{background:var(--ink);color:#fff;}.b-fill:hover{background:var(--clay);}
-  .b-out{border:1.5px solid var(--ink);color:var(--ink);}.b-out:hover{background:var(--ink);color:#fff;}
-  .collage{position:relative;height:440px;}
-  .collage .c{position:absolute;border-radius:14px;background-size:cover;background-position:center;box-shadow:0 24px 50px -26px rgba(27,23,20,.45);}
-  .collage .c1{width:58%;height:74%;top:0;right:0;background-image:url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?fm=jpg&q=60&w=900&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ym91dGlxdWUlMjBjbG90aGluZyUyMHN0b3JlfGVufDB8fDB8fHww');transform:rotate(2deg);}
-  .collage .c2{width:46%;height:54%;bottom:0;left:0;background-image:url('https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?fm=jpg&q=60&w=700&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww');transform:rotate(-3deg);z-index:2;}
-  .collage .c3{width:32%;height:34%;top:8%;left:6%;background-image:url('https://images.unsplash.com/photo-1521335629791-ce4aec67dd15?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Ym91dGlxdWUlMjBjbG90aGluZyUyMHN0b3JlfGVufDB8fDB8fHww');transform:rotate(-6deg);z-index:1;}
-  /* category scroller */
-  .cats{padding:18px 0 6px;border-bottom:1px solid var(--line);}
-  .cats .row{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;}
-  .cats .row::-webkit-scrollbar{height:5px;}.cats .row::-webkit-scrollbar-thumb{background:var(--rose);border-radius:5px;}
-  .cats .cat{flex:none;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:30px;padding:9px 18px;font-weight:600;font-size:14px;color:var(--ink);transition:border-color .2s,transform .2s;cursor:pointer;}
-  .cats .cat:hover{border-color:var(--clay);transform:translateY(-2px);}
-  /* masonry products */
-  .prodsec{padding:60px 0;}
-  .prodsec .h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap;}
-  .prodsec .h h2{font-size:clamp(28px,4vw,40px);}
-  .prodsec .h a{font-weight:600;font-size:14.5px;}
-  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:16px;grid-auto-flow:dense;}
-  .prod{position:relative;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;cursor:pointer;}
-  .prod.tall{grid-row:span 2;}
-  .prod.wide{grid-column:span 2;}
-  .g1{background:linear-gradient(150deg,#f4d9d0,#e58f7a);}
-  .g2{background:linear-gradient(150deg,#dfe6cf,#8a8460);}
-  .g3{background:linear-gradient(150deg,#fbe9cb,#d9b277);}
-  .g4{background:linear-gradient(150deg,#e9ddff,#a98fd6);}
-  .g5{background:linear-gradient(150deg,#cfe4e6,#7fb0b5);}
-  .g6{background:linear-gradient(150deg,#f4d0d8,#d6738c);}
-  .prod .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(27,23,20,.78));display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:1;}
-  .prod .ov .nm{color:#fff;font-family:'Space Grotesk';font-weight:600;font-size:16px;}
-  .prod .ov .pr{color:#fff;font-size:14px;opacity:.9;}
-  .prod .add{position:absolute;top:12px;right:12px;background:#fff;color:var(--ink);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;transform:scale(0);transition:transform .2s;}
-  .prod:hover .add{transform:scale(1);}
-  /* lookbook banner */
-  .look{background:linear-gradient(120deg,#1b1714,#3a2e26);color:#fff;border-radius:0;}
-  .look .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;padding:70px 26px;}
-  .look h2{font-size:clamp(30px,4.5vw,48px);line-height:1.05;}
-  .look p{margin-top:16px;color:#cfc4ba;font-size:17px;max-width:44ch;}
-  .look .vis{height:280px;border-radius:16px;background:#c45d3a url('https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?fm=jpg&q=60&w=900&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ym91dGlxdWUlMjBjbG90aGluZyUyMHN0b3JlfGVufDB8fDB8fHww') center/cover;}
-  /* services strip */
-  .svc{padding:50px 0;border-bottom:1px solid var(--line);}
-  .svc .row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .svc .s{display:flex;gap:14px;align-items:flex-start;}
-  .svc .s .i{font-size:28px;}
-  .svc .s h3{font-family:'Space Grotesk';font-size:17px;margin-bottom:3px;}
-  .svc .s p{font-size:14px;color:var(--muted);}
-  /* newsletter */
-  .news{padding:80px 26px;text-align:center;}
-  .news h2{font-size:clamp(28px,4vw,42px);}
-  .news p{color:var(--muted);margin:12px auto 24px;max-width:46ch;font-size:17px;}
-  .news form{display:flex;gap:10px;max-width:440px;margin:0 auto;}
-  .news input{flex:1;border:1.5px solid var(--line);border-radius:30px;padding:14px 20px;font-size:15px;font-family:'Inter';}
-  .news input:focus{outline:none;border-color:var(--clay);}
-  .news button{background:var(--ink);color:#fff;border:none;border-radius:30px;padding:14px 26px;font-weight:600;font-size:15px;cursor:pointer;}
-  .news button:hover{background:var(--clay);}
-  /* footer multi-col */
-  footer{background:var(--ink);color:#b9aea4;padding:60px 26px 30px;}
-  .fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;max-width:1200px;margin:0 auto;}
-  footer h4{font-family:'Space Grotesk';color:#fff;font-size:15px;margin-bottom:14px;}
-  footer a{display:block;color:#b9aea4;font-size:14px;padding:4px 0;}
-  footer a:hover{color:var(--rose);}
-  .fbrand{font-family:'Space Grotesk';font-weight:700;font-size:22px;color:#fff;margin-bottom:10px;}
-  .fbrand b{color:var(--clay);}
-  .made{border:1px solid rgba(196,93,58,.4);background:rgba(196,93,58,.1);border-radius:12px;padding:16px;max-width:1200px;margin:40px auto 0;text-align:center;font-size:13.5px;color:#cfc4ba;}
-  .made b{color:var(--rose);}.made a{color:#fff;display:inline;text-decoration:underline;}
-  @media(max-width:900px){.nav .links{display:none;}.hero .wrap,.look .wrap{grid-template-columns:1fr;}.collage{height:340px;}.pgrid{grid-template-columns:repeat(2,1fr);}.svc .row{grid-template-columns:1fr;}.fcols{grid-template-columns:1fr 1fr;}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .reveal{opacity:1!important;transform:none!important} *{animation:none!important}}
+  body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--ink);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.005em;}
+  a{color:var(--accent2);text-decoration:none;}
+  .demo{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(251,238,243,.86);backdrop-filter:blur(6px);color:var(--ink2);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em;border-bottom:1px solid var(--line);}
+  .demo a{color:var(--accent2);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:11px;}
+  .bar{position:fixed;top:32px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 46px;transition:background .3s,padding .3s;}
+  .bar.solid{background:rgba(251,238,243,.95);backdrop-filter:blur(10px);padding:13px 46px;box-shadow:0 1px 0 var(--line);}
+  .bar .logo{font-family:'Cormorant Garamond';font-weight:600;font-size:26px;color:var(--ink);letter-spacing:.02em;}
+  .bar .logo em{color:var(--accent2);font-style:italic;}
+  .bar .cta{border:1px solid var(--accent);color:var(--accent2);padding:10px 22px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;transition:.25s;}
+  .bar .cta:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
+  .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--accent);opacity:.5;transition:.2s;}
+  .dots a:hover{opacity:1;transform:scale(1.4);background:var(--accent);}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(251,238,243,.2),rgba(251,238,243,.5) 55%,rgba(251,238,243,.9)),url('img/commerce-hero.jpg');background-size:cover;background-position:center;}
+  .hero .in{position:relative;z-index:2;max-width:900px;}
+  .hero .pre{font-size:12.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent2);margin-bottom:22px;font-weight:500;}
+  .hero h1{font-size:clamp(48px,9vw,110px);line-height:.98;font-weight:500;color:var(--ink);}
+  .hero h1 em{display:block;font-style:italic;color:var(--accent2);}
+  .hero p{margin:24px auto 0;max-width:44ch;font-size:18px;color:var(--ink2);font-weight:300;}
+  .hero .cta-row{margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .lk{font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:15px 30px;transition:.25s;cursor:pointer;}
+  .lk-fill{background:var(--accent);color:#fff;}.lk-fill:hover{background:var(--accent2);}
+  .lk-out{border:1px solid var(--accent);color:var(--accent2);}.lk-out:hover{background:var(--accent);color:#fff;}
+  .scrollcue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;color:var(--accent2);font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;animation:fl 2s ease-in-out infinite;}
+  @keyframes fl{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  .wrapc{max-width:1180px;margin:0 auto;padding:0 46px;}
+  .offre{padding:110px 0;}
+  .offre .h{text-align:center;max-width:640px;margin:0 auto 52px;}
+  .offre .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent2);}
+  .offre h2{font-size:clamp(34px,5vw,56px);margin-top:10px;color:var(--ink);}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .c3{background:var(--paper2);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;}
+  .c3:hover{transform:translateY(-6px);box-shadow:0 24px 44px -26px rgba(74,42,56,.4);}
+  .c3 .im{height:280px;background-size:cover;background-position:center;}
+  .c3 .bd{padding:22px 26px 28px;text-align:center;}
+  .c3 h3{font-size:26px;color:var(--ink);margin-bottom:4px;}
+  .c3 .pr{color:var(--accent2);font-family:'Cormorant Garamond';font-size:21px;font-style:italic;margin-bottom:8px;}
+  .c3 p{color:var(--ink2);font-size:14px;}
+  .presta{background:var(--rose);padding:110px 0;}
+  .presta .h{text-align:center;max-width:640px;margin:0 auto 46px;}
+  .presta .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent2);}
+  .presta h2{font-size:clamp(34px,5vw,52px);color:var(--ink);}
+  .ard{max-width:760px;margin:0 auto;padding:0 46px;}
+  .row{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-bottom:1px solid rgba(74,42,56,.16);}
+  .row .n{font-family:'Cormorant Garamond';font-size:24px;color:var(--ink);white-space:nowrap;}
+  .row .dt{flex:1;border-bottom:1px dotted rgba(184,63,118,.4);transform:translateY(-5px);}
+  .row .pr{font-family:'Cormorant Garamond';font-size:24px;color:var(--accent2);font-style:italic;white-space:nowrap;}
+  .row .ds{flex-basis:100%;font-size:13.5px;color:var(--muted);margin-top:-3px;}
+  .gal{padding:110px 0;}
+  .gal .h{text-align:center;margin-bottom:44px;}
+  .gal h2{font-size:clamp(32px,5vw,50px);color:var(--ink);}
+  .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
+  .strip::-webkit-scrollbar{height:6px;}.strip::-webkit-scrollbar-thumb{background:var(--accent);border-radius:6px;}
+  .ph{flex:none;width:280px;height:380px;scroll-snap-align:center;display:flex;align-items:flex-end;padding:20px;font-family:'Cormorant Garamond';font-style:italic;font-size:23px;color:#fff;position:relative;overflow:hidden;background-size:cover;background-position:center;}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(74,42,56,.6));}
+  .ph span{position:relative;z-index:2;}
+  .apropos{padding:110px 0;}
+  .apropos .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .portrait{aspect-ratio:4/5;background-size:cover;background-position:center;border:1px solid var(--line);}
+  .apropos h2{font-size:clamp(32px,4vw,46px);margin-bottom:16px;color:var(--ink);}
+  .apropos p{color:var(--ink2);margin-bottom:15px;max-width:52ch;}
+  .apropos .sign{font-family:'Cormorant Garamond';font-style:italic;font-size:26px;color:var(--accent2);margin-top:6px;}
+  .avis{background:var(--rose);padding:100px 0;}
+  .avis .h{text-align:center;margin-bottom:44px;}
+  .avis h2{font-size:clamp(32px,4.4vw,48px);color:var(--ink);}
+  .avis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .av{background:var(--paper2);border:1px solid var(--line);padding:28px;}
+  .av .st{color:var(--accent);letter-spacing:2px;font-size:15px;}
+  .av blockquote{font-family:'Cormorant Garamond';font-size:21px;line-height:1.5;color:var(--ink);margin:12px 0 14px;}
+  .av cite{font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+  .visit{padding:110px 24px;text-align:center;background:var(--paper2);border-top:1px solid var(--line);}
+  .visit .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent2);}
+  .visit h2{font-size:clamp(34px,6vw,60px);margin:14px 0;color:var(--ink);}
+  .visit .info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:30px 0 20px;}
+  .visit .info b{display:block;font-family:'Cormorant Garamond';font-size:22px;color:var(--accent2);}
+  .visit .info span{font-size:13px;color:var(--ink2);}
+  .visit .addr{color:var(--ink2);font-size:14px;margin-bottom:28px;}
+  .float{position:fixed;bottom:22px;right:22px;z-index:55;background:var(--accent);color:#fff;padding:14px 22px;border-radius:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 12px 30px -8px rgba(184,63,118,.5);}
+  .ff{background:var(--ink);text-align:center;padding:48px 24px;color:#d9c3cd;font-size:13px;}
+  .ff .made{border:1px solid rgba(255,255,255,.16);padding:18px;max-width:640px;margin:0 auto 14px;color:#e9d7df;}
+  .ff .made b{color:var(--accent);}.ff .made a{color:#fff;text-decoration:underline;}
+  .ff .cr{font-size:11px;color:#a988989e;color:rgba(217,195,205,.6);margin-top:8px;}
+  .ff a.site{color:#c99bad;text-decoration:underline;}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:860px){.bar{padding:16px 20px;}.dots{display:none;}.cards3,.avis .g{grid-template-columns:1fr;}.apropos .grid{grid-template-columns:1fr;gap:28px;}.wrapc{padding:0 20px;}.float{display:none;}}
 </style>
 </head>
 <body>
   <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
-  <div class="promo">✦ Livraison offerte dès 50€ · Click &amp; Collect en boutique en 2h</div>
 
-  <header><div class="wrap nav">
-    <div class="brand">Maison <b>Margaux</b></div>
-    <div class="links">
-      <a href="#shop">Nouveautés</a>
-      <a href="#shop">Femme</a>
-      <a href="#shop">Accessoires</a>
-      <a href="#look">Lookbook</a>
-    </div>
-    <div class="right">
-      <span class="cart">🛍️<span class="cnt">2</span></span>
-      <a class="shop" href="#shop">Boutique</a>
-    </div>
-  </div></header>
+  <div class="bar" id="bar">
+    <div class="logo">Maison <em>Margaux</em></div>
+    <a class="cta" href="#visiter">Nous trouver</a>
+  </div>
 
-  <section class="hero"><div class="wrap">
-    <div class="tx">
-      <span class="ey">Concept store · Sud-Toulousain</span>
-      <h1>La mode qui vous <span>ressemble.</span></h1>
-      <p>Une sélection pointue, des pièces qu'on ne trouve pas partout, et le conseil d'une équipe qui aime ce qu'elle fait.</p>
-      <div class="cta">
-        <a class="b b-fill" href="#shop">Découvrir la sélection</a>
-        <a class="b b-out" href="#infos">Venir en boutique</a>
-      </div>
-    </div>
-    <div class="collage">
-      <div class="c c1" role="img" aria-label="Intérieur de la boutique"></div>
-      <div class="c c2" role="img" aria-label="Accessoires de mode"></div>
-      <div class="c c3" role="img" aria-label="Portants de vêtements"></div>
-    </div>
-  </div></section>
+  <nav class="dots" aria-label="Navigation">
+    <a href="#hero" title="Accueil"></a>
+    <a href="#offre" title="Collections"></a>
+    <a href="#presta" title="Services"></a>
+    <a href="#galerie" title="Lookbook"></a>
+    <a href="#apropos" title="La maison"></a>
+    <a href="#visiter" title="Nous trouver"></a>
+  </nav>
 
-  <div class="cats"><div class="wrap"><div class="row">
-    <div class="cat">✨ Nouveautés</div>
-    <div class="cat">👗 Robes</div>
-    <div class="cat">🧥 Vestes</div>
-    <div class="cat">👜 Sacs</div>
-    <div class="cat">👟 Chaussures</div>
-    <div class="cat">🧣 Accessoires</div>
-    <div class="cat">🎁 Idées cadeaux</div>
-  </div></div></div>
+  <header class="hero" id="hero"><div class="in">
+    <div class="pre">Concept store &amp; mode · Sud-Toulousain</div>
+    <h1>La mode qui vous <em>ressemble.</em></h1>
+    <p>Des pièces choisies avec soin, des créateurs qu'on aime, et des conseils qui font la différence. Poussez la porte.</p>
+    <div class="cta-row">
+      <a class="lk lk-fill" href="#offre">Voir les collections</a>
+      <a class="lk lk-out" href="#visiter">Nous rendre visite</a>
+    </div>
+  </div>
+  <div class="scrollcue">défiler ↓</div>
+  </header>
 
-  <section class="prodsec" id="shop"><div class="wrap">
-    <div class="h"><h2>Les coups de cœur</h2><a href="#">Tout voir →</a></div>
-    <div class="pgrid">
-      <div class="prod tall" style="background-image:url('https://images.unsplash.com/photo-1506152983158-b4a74a01c721?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFzaGlvbiUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww')"><span class="add">+</span><div class="ov"><span class="nm">Sac en cuir grainé</span><span class="pr">79€ · Click &amp; Collect</span></div></div>
-      <div class="prod" style="background-image:url('https://images.unsplash.com/photo-1569388330292-79cc1ec67270?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmFzaGlvbiUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww')"><span class="add">+</span><div class="ov"><span class="nm">Foulard imprimé</span><span class="pr">29€</span></div></div>
-      <div class="prod" style="background-image:url('https://images.unsplash.com/photo-1559563458-527698bf5295?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb24lMjBhY2Nlc3Nvcmllc3xlbnwwfHwwfHx8MA%3D%3D')"><span class="add">+</span><div class="ov"><span class="nm">Lunettes & bijoux</span><span class="pr">dès 19€</span></div></div>
-      <div class="prod wide" style="background-image:url('https://images.unsplash.com/photo-1718985342149-7178154e0aee?fm=jpg&q=60&w=900&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym91dGlxdWUlMjBjbG90aGluZyUyMHN0b3JlfGVufDB8fDB8fHww')"><span class="add">+</span><div class="ov"><span class="nm">Veste mi-saison oversize</span><span class="pr">95€ · Nouveau</span></div></div>
-      <div class="prod" style="background-image:url('https://images.unsplash.com/photo-1511556820780-d912e42b4980?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhc2hpb24lMjBhY2Nlc3Nvcmllc3xlbnwwfHwwfHx8MA%3D%3D')"><span class="add">+</span><div class="ov"><span class="nm">Accessoires tendance</span><span class="pr">dès 25€</span></div></div>
-      <div class="prod tall" style="background-image:url('https://images.unsplash.com/photo-1595991209266-5ff5a3a2f008?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJvdXRpcXVlJTIwY2xvdGhpbmclMjBzdG9yZXxlbnwwfHwwfHx8MA%3D%3D')"><span class="add">+</span><div class="ov"><span class="nm">Robe de la collection</span><span class="pr">89€</span></div></div>
-      <div class="prod" style="background-image:url('https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFzaGlvbiUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww')"><span class="add">+</span><div class="ov"><span class="nm">Bijoux dorés</span><span class="pr">dès 19€</span></div></div>
-      <div class="prod" style="background-image:url('https://images.unsplash.com/photo-1589363358751-ab05797e5629?fm=jpg&q=60&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFzaGlvbiUyMGFjY2Vzc29yaWVzfGVufDB8fDB8fHww')"><span class="add">+</span><div class="ov"><span class="nm">Petite maroquinerie</span><span class="pr">dès 25€</span></div></div>
+  <section class="offre" id="offre"><div class="wrapc">
+    <div class="h reveal"><div class="pre">La sélection du moment</div><h2>Nos collections</h2></div>
+    <div class="cards3">
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-collection.jpg')"></div><div class="bd"><h3>Prêt-à-porter</h3><div class="pr">Nouvelle saison</div><p>Des essentiels bien coupés et des pièces fortes, de la maille aux robes.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-accessoires.jpg')"></div><div class="bd"><h3>Accessoires</h3><div class="pr">Le détail qui change tout</div><p>Sacs, bijoux, ceintures — la touche finale d'un look réussi.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/commerce-mode.jpg')"></div><div class="bd"><h3>Créateurs</h3><div class="pr">Éditions limitées</div><p>Des marques indépendantes qu'on déniche pour vous, en série courte.</p></div></div>
     </div>
   </div></section>
 
-  <section class="look" id="look"><div class="wrap">
-    <div>
-      <h2>Le lookbook de la saison</h2>
-      <p>Nos pièces préférées du moment, mises en scène. De l'inspiration pour composer vos tenues — et tout est disponible en boutique.</p>
-      <a class="b b-fill" href="#shop" style="margin-top:22px;background:#fff;color:var(--ink);">Voir le lookbook</a>
+  <section class="presta" id="presta">
+    <div class="h reveal"><div class="pre">Bien plus qu'une boutique</div><h2>Nos petits plus</h2></div>
+    <div class="ard">
+      <div class="row reveal"><span class="n">Conseil en style</span><span class="dt"></span><span class="pr">offert</span><span class="ds">On prend le temps, sans pression, autour d'un café</span></div>
+      <div class="row reveal"><span class="n">Click &amp; Collect</span><span class="dt"></span><span class="pr">2h</span><span class="ds">Réservez en ligne, récupérez en boutique le jour même</span></div>
+      <div class="row reveal"><span class="n">Retouches</span><span class="dt"></span><span class="pr">dès 8 €</span><span class="ds">Ourlets et ajustements par notre couturière</span></div>
+      <div class="row reveal"><span class="n">Carte fidélité</span><span class="dt"></span><span class="pr">gratuite</span><span class="ds">-10 % dès le 5ᵉ achat, invitations aux ventes privées</span></div>
+      <div class="row reveal"><span class="n">Paquet cadeau</span><span class="dt"></span><span class="pr">offert</span><span class="ds">Emballage soigné, toute l'année</span></div>
     </div>
-    <div class="vis" role="img" aria-label="Lookbook de la saison"></div>
-  </div></section>
-
-  <section class="svc"><div class="wrap"><div class="row">
-    <div class="s"><span class="i">🛍️</span><div><h3>Click &amp; Collect</h3><p>Réservez en ligne, récupérez en boutique en 2h, sans frais.</p></div></div>
-    <div class="s"><span class="i">💬</span><div><h3>Conseil mode</h3><p>Une équipe à l'écoute pour trouver la pièce qui vous va vraiment.</p></div></div>
-    <div class="s"><span class="i">🎁</span><div><h3>Emballage cadeau</h3><p>Offert toute l'année, pour toutes vos occasions.</p></div></div>
-  </div></div></section>
-
-  <section class="news" id="infos">
-    <h2>Restez dans la boucle</h2>
-    <p>Nouveautés, ventes privées et événements en boutique — sans spam, promis.</p>
-    <form onsubmit="return false;">
-      <input type="email" placeholder="votre@email.fr" aria-label="Votre email">
-      <button type="submit">Je m'inscris</button>
-    </form>
   </section>
 
-  <footer>
-    <div class="fcols">
-      <div>
-        <div class="fbrand">Maison <b>Margaux</b></div>
-        <p style="font-size:14px;color:#b9aea4;">Concept store mode &amp; accessoires<br>12 rue du Commerce · 31410 Sud-Toulousain</p>
-      </div>
-      <div><h4>Boutique</h4><a href="#shop">Nouveautés</a><a href="#shop">Femme</a><a href="#shop">Accessoires</a><a href="#look">Lookbook</a></div>
-      <div><h4>Infos</h4><a href="#">Click &amp; Collect</a><a href="#">Nous trouver</a><a href="#">Horaires</a><a href="#">Contact</a></div>
-      <div><h4>Suivez-nous</h4><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Newsletter</a></div>
+  <section class="gal" id="galerie">
+    <div class="h reveal"><h2>Le lookbook</h2></div>
+    <div class="strip">
+      <div class="ph" style="background-image:url('img/commerce-hero.jpg')"><span>La boutique</span></div>
+      <div class="ph" style="background-image:url('img/commerce-vitrine.jpg')"><span>La vitrine</span></div>
+      <div class="ph" style="background-image:url('img/commerce-collection.jpg')"><span>Les collections</span></div>
+      <div class="ph" style="background-image:url('img/commerce-detail.jpg')"><span>Les détails</span></div>
+      <div class="ph" style="background-image:url('img/commerce-accessoires.jpg')"><span>Les accessoires</span></div>
     </div>
-    <div class="made">Site-modèle de démonstration (boutique fictive), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+  </section>
+
+  <section class="apropos" id="apropos"><div class="wrapc">
+    <div class="grid">
+      <div class="portrait reveal" style="background-image:url('img/commerce-mode.jpg')" role="img" aria-label="L'univers de la boutique"></div>
+      <div class="reveal">
+        <h2>La maison Margaux</h2>
+        <p>J'ai ouvert Margaux avec une idée simple : une boutique où l'on se sent bien, où l'on est conseillé sans être poussé à l'achat, et où l'on trouve des pièces qu'on ne voit pas partout.</p>
+        <p>Ici, on aime la mode qui dure, les belles matières et les créateurs qui ont une histoire. Passez quand vous voulez — même juste pour le plaisir des yeux.</p>
+        <div class="sign">— Margaux, fondatrice</div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="avis"><div class="wrapc">
+    <div class="h reveal"><h2>Elles adorent</h2></div>
+    <div class="g">
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Un accueil adorable et des conseils toujours justes. Je ressors à chaque fois avec la pièce parfaite. »</blockquote><cite>— Sophie L.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Une vraie caverne d'Ali Baba, avec des marques qu'on ne trouve nulle part ailleurs. Ma boutique préférée. »</blockquote><cite>— Amélie D.</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Le Click & Collect est top et les retouches impeccables. Un vrai service de proximité. »</blockquote><cite>— Clara V.</cite></div>
+    </div>
+  </div></section>
+
+  <section class="visit" id="visiter">
+    <div class="pre">Nous trouver</div>
+    <h2>On vous attend en boutique</h2>
+    <div class="info">
+      <div><b>Mar – Sam</b><span>10h – 19h</span></div>
+      <div><b>Dimanche</b><span>10h – 13h</span></div>
+      <div><b>Lundi</b><span>Fermé</span></div>
+    </div>
+    <div class="addr">8 place du Marché · Sud-Toulousain</div>
+    <a class="lk lk-fill" href="tel:+33500000000">📞 Nous appeler — 05 00 00 00 00</a>
+  </section>
+
+  <a class="float" href="#visiter">Nous trouver</a>
+
+  <footer class="ff">
+    <div class="made">Site-modèle de démonstration (boutique fictive), conçu par <b>François Leterrier</b> — créateur de sites internet, partout en France. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Maison Margaux · <a class="site" href="https://francoisleterrier.fr" target="_blank" rel="noopener">francoisleterrier.fr</a>
+    <div class="cr">Photos d'illustration : Pexels (libres de droit) — sur votre site, ce seront vos vraies photos.</div>
   </footer>
+
+  <script>
+    var bar=document.getElementById('bar');
+    addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);},{passive:true});
+    (function(){
+      var els=[].slice.call(document.querySelectorAll('.reveal'));
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+      els.forEach(function(e){io.observe(e);});
+    })();
+  </script>
 </body>
 </html>
