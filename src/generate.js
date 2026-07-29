@@ -4,7 +4,13 @@
  * Aucune clé externe : le modèle est appelé via le binding env.AI.
  */
 
-const MODEL = "@cf/meta/llama-3.1-8b-instruct";
+// Modèles Workers AI essayés dans l'ordre (bascule si déprécié / indisponible).
+const MODELS = [
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "@cf/meta/llama-3.1-70b-instruct",
+  "@cf/mistralai/mistral-small-3.1-24b-instruct",
+];
 
 /** Normalise le métier saisi vers une clé de secteur (direction artistique). */
 export function sectorOf(metier) {
@@ -305,17 +311,22 @@ export async function generatePage(env, input, opts) {
     if (opts.debug) base._debug = { hasAI: false };
     return base; // pas d'IA (dev local) → curaté
   }
-  var raw = null, err = null, ai = null;
-  try {
-    const res = await env.AI.run(MODEL, { messages: buildMessages(input), max_tokens: 1024 });
-    raw = res && (res.response != null ? res.response : res.output_text != null ? res.output_text : res.result != null ? res.result : res);
-    ai = extractJson(typeof raw === "string" ? raw : JSON.stringify(raw));
-  } catch (e) {
-    err = (e && e.message) || String(e);
+  const messages = buildMessages(input);
+  const tries = [];
+  let ai = null, usedModel = null;
+  for (const model of MODELS) {
+    try {
+      const res = await env.AI.run(model, { messages: messages, max_tokens: 1024 });
+      const raw = res && (res.response != null ? res.response : res.output_text != null ? res.output_text : res.result != null ? res.result : res);
+      const parsed = extractJson(typeof raw === "string" ? raw : JSON.stringify(raw));
+      tries.push({ model: model, ok: true, parsed: !!parsed });
+      if (parsed) { ai = parsed; usedModel = model; break; }
+    } catch (e) {
+      tries.push({ model: model, ok: false, err: (e && e.message) || String(e) });
+    }
   }
   const out = mergeOntoCurated(base, ai);
-  if (opts.debug) {
-    out._debug = { hasAI: true, model: MODEL, err: err, parsed: !!ai, rawSample: typeof raw === "string" ? raw.slice(0, 500) : JSON.stringify(raw || null).slice(0, 500) };
-  }
+  if (usedModel) out._model = usedModel;
+  if (opts.debug) out._debug = { hasAI: true, usedModel: usedModel, tries: tries };
   return out;
 }
