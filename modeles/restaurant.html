@@ -32,7 +32,7 @@
   .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);opacity:.5;transition:opacity .2s,transform .2s;}
   .dots a:hover{opacity:1;transform:scale(1.4);background:var(--gold);}
   /* hero full screen */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:#140a0c url('https://images.unsplash.com/photo-1597290282695-edc43d0e7129?fm=jpg&q=60&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D') center/cover no-repeat;}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:#140a0c url('img/resto-hero.jpg') center/cover no-repeat;}
   .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,12,.72),rgba(20,10,12,.9)),radial-gradient(ellipse at 50% 30%,rgba(126,31,45,.42),transparent 60%);}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--bg) 92%);}
   .hero .in{position:relative;z-index:2;max-width:900px;}
@@ -71,11 +71,11 @@
   .amb .strip::-webkit-scrollbar{height:6px;}.amb .strip::-webkit-scrollbar-thumb{background:var(--wine);border-radius:6px;}
   .amb .ph{flex:none;width:300px;height:420px;scroll-snap-align:center;border-radius:2px;display:flex;align-items:flex-end;padding:22px;font-family:'Cormorant Garamond';font-size:24px;color:#fff;position:relative;}
   .ph{background-size:cover;background-position:center;}
-  .p1{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1547595628-c61a29f496f0?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
-  .p2{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
-  .p3{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1678572823447-45fc146df43c?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hhcmN1dGVyaWUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D');}
-  .p4{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1586800687177-069ba4e4f5c4?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2luZSUyMGJhcnxlbnwwfHwwfHx8MA%3D%3D');}
-  .p5{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('https://images.unsplash.com/photo-1616631124348-c63521eb484c?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hhcmN1dGVyaWUlMjBib2FyZHxlbnwwfHwwfHx8MA%3D%3D');}
+  .p1{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-salle.jpg');}
+  .p2{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-cave.jpg');}
+  .p3{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-planches.jpg');}
+  .p4{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-terrasse.jpg');}
+  .p5{background-image:linear-gradient(180deg,rgba(20,10,12,.05),rgba(20,10,12,.82)),url('img/resto-soirees.jpg');}
   /* infos + resa */
   .resa-sec{background:linear-gradient(135deg,#52131f,#7e1f2d);padding:120px 24px;text-align:center;}
   .resa-sec .pre{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);}
@@ -167,6 +167,7 @@
 
   <footer class="ff">
     <div class="made">Site-modèle de démonstration (établissement fictif), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    <div style="font-size:11px;color:#6b5f57;margin-top:6px;">Photos d'illustration : Pexels (libres de droit) — sur votre site, ce seront vos vraies photos.</div>
     Le Comptoir des Cépages · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
   </footer>
 
