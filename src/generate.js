@@ -5,12 +5,26 @@
  */
 
 // Modèles Workers AI essayés dans l'ordre (bascule si déprécié / indisponible).
-const MODELS = [
+export const MODELS = [
   "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
   "@cf/meta/llama-4-scout-17b-16e-instruct",
   "@cf/meta/llama-3.1-70b-instruct",
   "@cf/mistralai/mistral-small-3.1-24b-instruct",
 ];
+
+/** Appel IA générique → JSON parsé (bascule de modèles), null si échec. Réutilisable. */
+export async function aiJSON(env, messages, maxTokens) {
+  if (!env || !env.AI) return null;
+  for (const model of MODELS) {
+    try {
+      const res = await env.AI.run(model, { messages: messages, max_tokens: maxTokens || 1024 });
+      const raw = res && (res.response != null ? res.response : res.output_text != null ? res.output_text : res.result != null ? res.result : res);
+      const j = extractJson(typeof raw === "string" ? raw : JSON.stringify(raw));
+      if (j) return j;
+    } catch (_) {}
+  }
+  return null;
+}
 
 // Requête image par défaut (anglais) selon le secteur — repli si l'IA n'en donne pas.
 const SECTOR_Q = {
@@ -310,7 +324,7 @@ function buildMessages({ metier, nom, ville, ton }) {
   ];
 }
 
-function extractJson(text) {
+export function extractJson(text) {
   if (!text) return null;
   let t = String(text).trim();
   const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);

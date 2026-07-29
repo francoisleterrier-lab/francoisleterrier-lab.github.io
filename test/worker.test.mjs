@@ -63,10 +63,9 @@ ok(r.status === 204 && r.headers.get("Access-Control-Allow-Origin") === APEX, "O
 r = await worker.fetch(req("GET", "/health", { origin: "https://evil.example" }), env);
 ok(r.headers.get("Access-Control-Allow-Origin") === null, "CORS: origine inconnue refusée");
 
-// 3) stub lead JSON valide → 501
-r = await worker.fetch(req("POST", "/lead", { body: JSON.stringify({ email: "x@y.fr" }), ct: "application/json" }), env);
-j = await r.json();
-ok(r.status === 501 && j.stub === true, "POST /lead (JSON) → 501 stub");
+// 3) lead : validation e-mail (pas d'appel réseau) → 422
+r = await worker.fetch(req("POST", "/lead", { body: JSON.stringify({ email: "pas-un-email" }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /lead (e-mail invalide) → 422");
 
 // 4) validations
 r = await worker.fetch(req("POST", "/lead", { body: "x", ct: "text/plain" }), env);

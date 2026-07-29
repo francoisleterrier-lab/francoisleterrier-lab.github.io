@@ -18,6 +18,11 @@
  */
 
 import { generatePage } from "./generate.js";
+import { runAudit, publicView } from "./audit.js";
+
+// Clé publique du formulaire web3forms (déjà utilisée par le site) — sert à
+// notifier François de chaque lead par e-mail, sans nouvelle clé/secret.
+const W3F_KEY = "65a34e63-ed73-4214-a9b4-bc144d952cd5";
 
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
@@ -154,11 +159,78 @@ async function handleGenerate(request, env) {
   return json({ ok: true, page });
 }
 
+/** POST /audit — audit instantané : renvoie la vue PUBLIQUE, stocke le complet. */
+async function handleAudit(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const url = clampStr((parsed.data || {}).url, 300);
+  if (!url) return json({ ok: false, error: "URL requise." }, 422);
+  const full = await runAudit(env, url);
+  if (!full.ok) return json(full); // site injoignable / erreur → renvoyé tel quel
+  const id = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now());
+  if (env.CACHE) { try { await env.CACHE.put("audit:" + id, JSON.stringify(full), { expirationTtl: 2592000 }); } catch (_) {} }
+  return json(publicView(full, id));
+}
+
+async function sha256hex(s) {
+  try {
+    const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s || ""));
+    return Array.from(new Uint8Array(b)).map(function (x) { return x.toString(16).padStart(2, "0"); }).join("").slice(0, 32);
+  } catch (_) { return ""; }
+}
+
+/** Notifie François par e-mail (web3forms) — inclut le plan COMPLET (avec actions). */
+async function notifyLead(lead) {
+  try {
+    const audit = lead.audit || {};
+    const plan = (audit.plan || []).map(function (p, i) { return (i + 1) + ". " + p.title + "\n   Pourquoi : " + p.why + "\n   Action : " + p.action; }).join("\n");
+    const weak = (audit.checks || []).filter(function (c) { return !c.ok; }).map(function (c) { return "✗ " + c.label + (c.detail ? " (" + c.detail + ")" : ""); }).join("\n");
+    const msg = "NOUVEAU LEAD — Audit de site\n\nEmail : " + lead.email + "\nSite : " + (lead.url || "") +
+      "\nScore global : " + (audit.overall != null ? audit.overall + "/100" : "?") +
+      (audit.scores ? "\nPerf mobile : " + audit.scores.perf + "/100 · SEO " + audit.scores.seo + " · A11y " + audit.scores.a11y : "") +
+      "\nSignal local : " + ((audit.local && audit.local.score) || 0) + "/4\n\nPOINTS À CORRIGER :\n" + (weak || "—") +
+      "\n\nPLAN D'ACTION COMPLET :\n" + (plan || "—");
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: W3F_KEY, subject: "🎯 Lead audit — " + (lead.url || ""), from_name: "FL Audit", email: lead.email, message: msg }),
+    });
+  } catch (_) {}
+}
+
+async function storeLead(env, lead) {
+  const ts = new Date().toISOString();
+  const ipHash = await sha256hex(lead.ip || "");
+  if (env && env.DB) {
+    try {
+      await env.DB.prepare("INSERT INTO leads (created_at,email,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?)")
+        .bind(ts, lead.email, "", lead.source || "audit", JSON.stringify({ url: lead.url, audit: lead.audit }).slice(0, 90000), ipHash).run();
+      return "d1";
+    } catch (_) {}
+  }
+  if (env && env.CACHE) { try { await env.CACHE.put("lead:" + ts + ":" + (crypto.randomUUID ? crypto.randomUUID() : ""), JSON.stringify({ email: lead.email, url: lead.url, ts: ts }), { expirationTtl: 31536000 }); } catch (_) {} }
+  return "kv";
+}
+
+/** POST /lead — capture email (aspirateur à leads) : notifie + stocke l'audit complet. */
+async function handleLead(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const email = clampStr(d.email, 120);
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
+  const url = clampStr(d.url, 300), auditId = clampStr(d.auditId, 60), source = clampStr(d.source, 40) || "audit";
+  let audit = null;
+  if (auditId && env.CACHE) { try { audit = await env.CACHE.get("audit:" + auditId, "json"); } catch (_) {} }
+  const lead = { email: email, url: url, source: source, audit: audit, ip: clientIp(request) };
+  await Promise.all([notifyLead(lead), storeLead(env, lead)]);
+  return json({ ok: true });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
-  "POST /audit": (req) => handleStub("audit", req),
-  "POST /lead": (req) => handleStub("lead", req),
+  "POST /audit": (req, env) => handleAudit(req, env),
+  "POST /lead": (req, env) => handleLead(req, env),
 };
 
 /** Enlève un éventuel préfixe /api pour que /health == /api/health. */
