@@ -1,0 +1,35 @@
+# fl-api — Worker socle pour francoisleterrier.fr
+# Les <PLACEHOLDERS> sont à compléter par François (voir SETUP-cloudflare.md).
+# Account ID / Zone ID = identifiants de config (pas des secrets).
+# Les clés API/LLM ne vont JAMAIS ici → `wrangler secret put …`.
+
+name = "fl-api"
+main = "src/index.js"
+compatibility_date = "2026-07-01"
+workers_dev = false
+account_id = "<ACCOUNT_ID>"   # Dashboard Cloudflare → domaine → écran API
+
+# Route sur le MÊME domaine → pas de CORS, pas de sous-domaine.
+# Intercepte /api/* au bord Cloudflare, même tant que le site est encore sur GitHub Pages.
+[[routes]]
+pattern = "francoisleterrier.fr/api/*"
+zone_id = "<ZONE_ID>"         # Dashboard → domaine → écran API
+
+# KV — cache des générations/audits + rate-limit anti-abus.
+# Créer : wrangler kv namespace create fl_cache
+[[kv_namespaces]]
+binding = "CACHE"
+id = "<KV_ID>"
+
+# D1 — base relationnelle (tables leads, maquettes, audits, geo_checks).
+# Créer : wrangler d1 create fl_data   puis   wrangler d1 execute fl_data --file=schema.sql --remote
+[[d1_databases]]
+binding = "DB"
+database_name = "fl_data"
+database_id = "<D1_ID>"
+
+# R2 — assets générés (images, PDF de devis/audit). Egress gratuit.
+# Créer : wrangler r2 bucket create fl_assets
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "fl_assets"

@@ -1,0 +1,11 @@
+# Modèle de secrets pour le DEV LOCAL uniquement.
+# 1) Copier ce fichier en  .dev.vars   (déjà gitignoré — NE JAMAIS committer .dev.vars)
+# 2) Renseigner les valeurs ci-dessous pour `wrangler dev`
+# 3) En PRODUCTION, ne pas utiliser ce fichier : poser chaque clé via
+#      wrangler secret put LLM_API_KEY
+#      wrangler secret put PAGESPEED_API_KEY
+# Le Worker lit ces valeurs via env.LLM_API_KEY / env.PAGESPEED_API_KEY — elles
+# ne partent jamais vers le navigateur.
+
+LLM_API_KEY=
+PAGESPEED_API_KEY=

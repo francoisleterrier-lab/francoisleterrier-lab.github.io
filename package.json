@@ -1,0 +1,15 @@
+{
+  "name": "fl-api",
+  "private": true,
+  "type": "module",
+  "description": "Socle API (Cloudflare Worker) pour francoisleterrier.fr — servi sur le même domaine (/api/*).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "test": "node test/worker.test.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
