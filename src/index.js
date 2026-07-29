@@ -1,40 +1,57 @@
 /**
  * fl-api — Worker « socle » pour francoisleterrier.fr
  * ---------------------------------------------------------------------------
- * Monté sur https://francoisleterrier.fr/api/*  (même domaine → pas de CORS).
+ * Servi sur le sous-domaine  https://api.francoisleterrier.fr/*
+ * (le site reste sur GitHub Pages, intact). CORS ouvert au domaine apex.
  * Bindings (voir wrangler.toml) : CACHE (KV), DB (D1), ASSETS (R2).
- * Secrets (JAMAIS dans le dépôt) : env.LLM_API_KEY, env.PAGESPEED_API_KEY
- *   → posés via `wrangler secret put …`, lus côté serveur uniquement.
+ * Secrets (JAMAIS dans le dépôt) : env.LLM_API_KEY, env.PAGESPEED_API_KEY.
  *
- * Endpoints :
- *   GET  /api/health   → { ok:true, bindings:… }  (test de bout en bout du socle)
- *   POST /api/generate → stub (Chantier 1 — générateur)
- *   POST /api/audit    → stub (Chantier 2 — audit)
- *   POST /api/lead     → stub (Chantier 4 — leads)
+ * Endpoints (le préfixe /api est optionnel — /health == /api/health) :
+ *   GET  /health   → { ok:true, bindings:… }  (test de bout en bout du socle)
+ *   POST /generate → stub (Chantier 1)
+ *   POST /audit    → stub (Chantier 2)
+ *   POST /lead     → stub (Chantier 4)
  *
- * Socle de sécurité déjà en place : rate-limit par IP (KV), validation des
- * entrées (Content-Type + taille + JSON), en-têtes de sécurité, gestion
- * d'erreurs sans fuite de stack.
+ * Sécurité : rate-limit par IP (KV), validation des entrées, en-têtes de
+ * sécurité + CORS, gestion d'erreurs sans fuite de stack.
  * ---------------------------------------------------------------------------
  */
 
 const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "X-Frame-Options": "DENY",
   "Cache-Control": "no-store",
 };
 
-// Quotas par IP et par endpoint : { limit: requêtes, window: secondes }.
+// Origines autorisées à appeler l'API depuis le navigateur.
+const ALLOWED_ORIGINS = new Set([
+  "https://francoisleterrier.fr",
+  "https://www.francoisleterrier.fr",
+]);
+
 const RATE_LIMITS = {
-  "/api/health": { limit: 60, window: 60 },
-  "/api/generate": { limit: 8, window: 60 },
-  "/api/audit": { limit: 10, window: 60 },
-  "/api/lead": { limit: 5, window: 60 },
+  "/health": { limit: 60, window: 60 },
+  "/generate": { limit: 8, window: 60 },
+  "/audit": { limit: 10, window: 60 },
+  "/lead": { limit: 5, window: 60 },
   _default: { limit: 30, window: 60 },
 };
 
-const MAX_BODY_BYTES = 16 * 1024; // garde-fou anti-abus sur les POST
+const MAX_BODY_BYTES = 16 * 1024;
+
+function corsHeaders(request) {
+  const origin = request.headers.get("Origin");
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    return {
+      "Access-Control-Allow-Origin": origin,
+      Vary: "Origin",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Max-Age": "86400",
+    };
+  }
+  return {};
+}
 
 function json(data, status = 200, extra = {}) {
   return new Response(JSON.stringify(data), {
@@ -52,7 +69,6 @@ function clientIp(request) {
   );
 }
 
-/** Rate-limit à fenêtre fixe via KV. Dégradation propre si KV absent (dev local). */
 async function rateLimit(env, ip, routeKey) {
   const cfg = RATE_LIMITS[routeKey] || RATE_LIMITS._default;
   if (!env || !env.CACHE) return { ok: true, remaining: cfg.limit };
@@ -71,12 +87,11 @@ async function rateLimit(env, ip, routeKey) {
   try {
     await env.CACHE.put(key, String(count + 1), { expirationTtl: cfg.window + 5 });
   } catch (_) {
-    /* écriture KV impossible → on laisse passer plutôt que 500 */
+    /* écriture KV impossible → on laisse passer */
   }
   return { ok: true, remaining: cfg.limit - count - 1 };
 }
 
-/** Lit + valide un corps JSON de POST (Content-Type, taille, parse). */
 async function readJson(request) {
   const ct = request.headers.get("Content-Type") || "";
   if (!ct.includes("application/json")) {
@@ -93,7 +108,6 @@ async function readJson(request) {
   }
 }
 
-/** GET /api/health — vérifie que route, déploiement et bindings répondent. */
 function handleHealth(_request, env) {
   return json({
     ok: true,
@@ -107,7 +121,6 @@ function handleHealth(_request, env) {
   });
 }
 
-/** Stubs des chantiers — valident déjà l'entrée ; implémentation à venir. */
 async function handleStub(name, request) {
   const parsed = await readJson(request);
   if (parsed.error) return parsed.error;
@@ -118,47 +131,53 @@ async function handleStub(name, request) {
 }
 
 const ROUTES = {
-  "GET /api/health": (req, env) => handleHealth(req, env),
-  "POST /api/generate": (req) => handleStub("generate", req),
-  "POST /api/audit": (req) => handleStub("audit", req),
-  "POST /api/lead": (req) => handleStub("lead", req),
+  "GET /health": (req, env) => handleHealth(req, env),
+  "POST /generate": (req) => handleStub("generate", req),
+  "POST /audit": (req) => handleStub("audit", req),
+  "POST /lead": (req) => handleStub("lead", req),
 };
+
+/** Enlève un éventuel préfixe /api pour que /health == /api/health. */
+function normalizePath(pathname) {
+  let p = pathname.replace(/\/+$/, "") || "/";
+  if (p === "/api") return "/";
+  if (p.startsWith("/api/")) p = p.slice(4);
+  return p || "/";
+}
 
 export default {
   async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    const path = url.pathname.replace(/\/+$/, "") || "/"; // normalise le slash final
+    const cors = corsHeaders(request);
+    const path = normalizePath(new URL(request.url).pathname);
 
-    if (!path.startsWith("/api/")) {
-      return json({ ok: false, error: "Not found" }, 404);
-    }
-
-    // Préflight OPTIONS — même domaine, pas de CORS, mais on répond proprement.
+    // Préflight CORS.
     if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: { Allow: "GET, POST, OPTIONS", ...SECURITY_HEADERS },
-      });
+      return new Response(null, { status: 204, headers: { ...SECURITY_HEADERS, ...cors } });
     }
+
+    const withCors = (resp) => {
+      for (const [k, v] of Object.entries(cors)) resp.headers.set(k, v);
+      return resp;
+    };
 
     try {
       const ip = clientIp(request);
       const rl = await rateLimit(env, ip, path);
       if (!rl.ok) {
-        return json({ ok: false, error: "Trop de requêtes, réessayez plus tard." }, 429, {
-          "Retry-After": String(rl.retryAfter),
-        });
+        return withCors(
+          json({ ok: false, error: "Trop de requêtes, réessayez plus tard." }, 429, {
+            "Retry-After": String(rl.retryAfter),
+          })
+        );
       }
 
       const handler = ROUTES[`${request.method} ${path}`];
-      if (handler) return await handler(request, env, ctx);
+      if (handler) return withCors(await handler(request, env, ctx));
 
-      // Path connu mais mauvaise méthode → 405 ; sinon 404.
       const knownPath = Object.keys(ROUTES).some((k) => k.endsWith(" " + path));
-      return json({ ok: false, error: knownPath ? "Méthode non autorisée" : "Endpoint inconnu" }, knownPath ? 405 : 404);
+      return withCors(json({ ok: false, error: knownPath ? "Méthode non autorisée" : "Endpoint inconnu" }, knownPath ? 405 : 404));
     } catch (_err) {
-      // Ne jamais fuiter la stack au client.
-      return json({ ok: false, error: "Erreur interne" }, 500);
+      return withCors(json({ ok: false, error: "Erreur interne" }, 500));
     }
   },
 };

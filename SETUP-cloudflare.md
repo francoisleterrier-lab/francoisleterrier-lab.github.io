@@ -63,7 +63,7 @@ npx wrangler deploy            # met la route francoisleterrier.fr/api/* en lign
 ```
 Vérifier en prod :
 ```bash
-curl https://francoisleterrier.fr/api/health      # → {"ok":true, ...}
+curl https://api.francoisleterrier.fr/health      # → {"ok":true, ...}
 ```
 > La route Worker intercepte `/api/*` au bord Cloudflare **même si le site est encore
 > sur GitHub Pages** — tu peux donc valider le socle API avant toute migration d'hébergement.
@@ -79,7 +79,7 @@ curl https://francoisleterrier.fr/api/health      # → {"ok":true, ...}
 
 ## 6. Vérifications (Étape 6)
 - [ ] Site public : mêmes URLs qu'avant (rien d'indexé cassé).
-- [ ] `GET https://francoisleterrier.fr/api/health` → `{ ok:true }`.
+- [ ] `GET https://api.francoisleterrier.fr/health` → `{ ok:true }`.
 - [ ] `health` renvoie `bindings: {kv:true, d1:true, r2:true}` (KV/D1/R2 rattachés).
 - [x] **Aucune clé secrète dans le dépôt** — audit fait, dépôt propre (le seul `access_key`
       présent est l'ID public web3forms du formulaire, pas un secret serveur).
