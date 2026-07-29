@@ -4,184 +4,219 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
-<title>Dubois & Fils — Plomberie · Chauffage · Dépannage (modèle de site)</title>
-<meta name="description" content="Modèle de site landing conversion pour artisan du bâtiment, réalisé par François Leterrier.">
-<meta name="theme-color" content="#0c2236">
+<title>Dubois &amp; Fils — Plomberie · Chauffage · Dépannage (modèle de site)</title>
+<meta name="description" content="Modèle de site pro pour artisan (plombier, chauffagiste, BTP), réalisé par François Leterrier — créateur de sites, partout en France.">
+<meta name="theme-color" content="#0f1620">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#0c2236;--navy2:#13344f;--steel:#eef2f6;--orange:#f15a24;--orange2:#ff7a40;--ink:#15212b;--muted:#5d7184;--line:#dde5ec;}
+  :root{--ink:#0f1620;--ink2:#1b2531;--ink3:#22303d;--paper:#eaf0f6;--accent:#f0a04b;--accent2:#e0872e;--steel:#8ba0b3;--muted:#9fb0c0;--line:rgba(240,160,75,.16);}
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;}
-  h1,h2,h3,.dsp{font-family:'Archivo',system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;text-transform:none;}
-  a{color:var(--orange);text-decoration:none;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
-  .demo{background:#08161f;color:#cfe0ee;text-align:center;font-size:12.5px;padding:7px;}
-  .demo a{color:var(--orange2);font-weight:700;}
-  /* conversion bar */
-  .cbar{position:sticky;top:0;z-index:40;background:var(--navy);color:#fff;border-bottom:3px solid var(--orange);}
-  .cbar .in{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:1180px;margin:0 auto;gap:14px;}
-  .cbar .lg{font-family:'Archivo';font-weight:900;font-size:20px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
-  .cbar .lg .m{background:var(--orange);width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;}
-  .cbar .ph{display:flex;gap:10px;align-items:center;}
-  .cbar .tel{font-family:'Archivo';font-weight:800;font-size:18px;color:#fff;}
-  .cbar .cta{background:var(--orange);color:#fff;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:6px;}
-  .cbar .cta:hover{background:var(--orange2);}
-  /* hero with form */
-  .hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;}
-  .hero::before{content:"";position:absolute;top:0;bottom:0;right:0;width:46%;background:linear-gradient(135deg,rgba(12,34,54,.8),rgba(10,27,43,.45)),url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fm=jpg&q=60&w=1200&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D') center/cover;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);}
-  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding:66px 24px 70px;}
-  .hero .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(241,90,36,.16);border:1px solid rgba(241,90,36,.5);color:var(--orange2);border-radius:5px;padding:7px 14px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px;}
-  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.02;font-weight:900;}
-  .hero h1 span{color:var(--orange2);}
-  .hero .sub{margin-top:18px;font-size:17.5px;color:#bcd0e0;max-width:46ch;}
-  .hero ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;}
-  .hero ul li{padding-left:30px;position:relative;font-size:15.5px;color:#dfe9f1;}
-  .hero ul li::before{content:"✓";position:absolute;left:0;color:var(--orange2);font-family:'Archivo';font-weight:900;}
-  /* quote form card */
-  .qform{background:#fff;border-radius:12px;padding:30px;box-shadow:0 30px 70px -28px rgba(0,0,0,.55);}
-  .qform h3{color:var(--navy);font-size:22px;margin-bottom:4px;}
-  .qform p{color:var(--muted);font-size:13.5px;margin-bottom:18px;}
-  .qform label{display:block;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
-  .qform input,.qform select{width:100%;border:1.5px solid var(--line);border-radius:7px;padding:12px 13px;font-size:14.5px;font-family:'Inter';margin-bottom:13px;color:var(--ink);}
-  .qform input:focus,.qform select:focus{outline:none;border-color:var(--orange);}
-  .qform button{width:100%;background:var(--orange);color:#fff;font-family:'Archivo';font-weight:800;font-size:16px;border:none;border-radius:7px;padding:15px;cursor:pointer;transition:background .2s;}
-  .qform button:hover{background:var(--orange2);}
-  .qform .rea{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;}
-  /* trust band */
-  .trust{background:var(--orange);color:#fff;}
-  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
-  .trust .t{text-align:center;padding:30px 16px;border-right:1px solid rgba(255,255,255,.25);}
-  .trust .t:last-child{border-right:none;}
-  .trust .t b{display:block;font-family:'Archivo';font-weight:900;font-size:34px;line-height:1;}
-  .trust .t span{font-size:13px;letter-spacing:.03em;opacity:.95;}
-  /* zigzag services */
-  .serv{padding:90px 0 30px;}
-  .serv .head{max-width:680px;margin-bottom:20px;}
-  .serv .head .ey{color:var(--orange);font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;}
-  .serv .head h2{font-size:clamp(28px,4vw,42px);color:var(--navy);margin-top:8px;}
-  .zz{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:46px 0;border-bottom:1px solid var(--line);}
-  .zz:nth-child(even) .vis{order:2;}
-  .vis{height:260px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:80px;color:#fff;}
-  .vis{background-size:cover;background-position:center;}
-  .v1{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwYmF0aHJvb218ZW58MHx8MHx8fDA%3D');}
-  .v2{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1542013936693-884638332954?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D');}
-  .v3{background-image:linear-gradient(160deg,rgba(12,34,54,.18),rgba(12,34,54,.05)),url('https://images.unsplash.com/photo-1620653713380-7a34b773fef8?fm=jpg&q=60&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGx1bWJlcnxlbnwwfHwwfHx8MA%3D%3D');}
-  .zz .tx .num{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--orange);letter-spacing:.1em;}
-  .zz .tx h3{font-size:27px;color:var(--navy);margin:6px 0 10px;}
-  .zz .tx p{color:var(--muted);font-size:16px;max-width:48ch;}
-  .zz .tx .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
-  .zz .tx .tags span{background:var(--steel);color:var(--navy);font-size:13px;font-weight:600;border-radius:5px;padding:5px 12px;}
-  /* process timeline */
-  .proc{background:var(--navy);color:#fff;padding:90px 0;}
-  .proc .head{text-align:center;max-width:640px;margin:0 auto 56px;}
-  .proc .head .ey{color:var(--orange2);font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;}
-  .proc .head h2{font-size:clamp(28px,4vw,42px);margin-top:8px;}
-  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;}
-  .timeline::before{content:"";position:absolute;top:26px;left:12%;right:12%;height:2px;background:rgba(241,90,36,.4);}
-  .ts{text-align:center;position:relative;}
-  .ts .c{width:54px;height:54px;border-radius:50%;background:var(--orange);color:#fff;font-family:'Archivo';font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:2;border:4px solid var(--navy);}
-  .ts h4{font-family:'Archivo';font-size:18px;margin-bottom:6px;}
-  .ts p{font-size:14px;color:#bcd0e0;}
-  /* big testimonial */
-  .testi{padding:90px 24px;text-align:center;max-width:880px;margin:0 auto;}
-  .testi .stars{color:#f5a623;font-size:24px;letter-spacing:4px;}
-  .testi blockquote{font-family:'Archivo';font-weight:700;font-size:clamp(24px,3.4vw,34px);color:var(--navy);line-height:1.3;margin:22px 0;letter-spacing:-.01em;}
-  .testi .who{color:var(--muted);font-weight:600;}
-  /* final cta */
-  .fcta{background:linear-gradient(135deg,#f15a24,#ff7a40);color:#fff;text-align:center;padding:80px 24px;}
-  .fcta h2{font-size:clamp(30px,4.4vw,46px);}
-  .fcta p{font-size:18px;opacity:.95;margin:14px auto 26px;max-width:48ch;}
-  .fcta .b{display:inline-flex;gap:10px;background:#fff;color:var(--orange);font-family:'Archivo';font-weight:800;font-size:18px;padding:16px 30px;border-radius:8px;}
-  /* footer */
-  .ff{background:#08161f;color:#90a6b8;text-align:center;padding:40px 24px;font-size:13.5px;}
-  .ff .made{background:rgba(241,90,36,.12);border:1px solid rgba(241,90,36,.4);border-radius:8px;padding:18px;max-width:660px;margin:0 auto 16px;}
-  .ff .made b{color:var(--orange2);}.ff .made a{color:#fff;font-weight:700;text-decoration:underline;}
-  @media(max-width:880px){.hero .wrap{grid-template-columns:1fr;}.hero::before{display:none;}.trust .wrap{grid-template-columns:1fr 1fr;}.trust .t:nth-child(2){border-right:none;}.zz{grid-template-columns:1fr;gap:22px;padding:34px 0;}.zz:nth-child(even) .vis{order:0;}.timeline{grid-template-columns:1fr;gap:30px;}.timeline::before{display:none;}.cbar .tel{display:none;}}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .reveal{opacity:1!important;transform:none!important} *{animation:none!important}}
+  body{font-family:'Inter',system-ui,sans-serif;font-weight:400;color:var(--paper);background:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.disp{font-family:'Oswald',system-ui,sans-serif;font-weight:600;letter-spacing:.01em;text-transform:uppercase;}
+  a{color:var(--accent);text-decoration:none;}
+  .demo{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(15,22,32,.75);backdrop-filter:blur(6px);color:var(--paper);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em;}
+  .demo a{color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;}
+  .bar{position:fixed;top:32px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 46px;transition:background .3s,padding .3s;}
+  .bar.solid{background:rgba(15,22,32,.95);backdrop-filter:blur(10px);padding:13px 46px;}
+  .bar .logo{font-family:'Oswald';font-weight:700;font-size:24px;color:#fff;letter-spacing:.03em;text-transform:uppercase;}
+  .bar .logo em{color:var(--accent);font-style:normal;}
+  .bar .cta{background:var(--accent);color:var(--ink);padding:11px 22px;font-family:'Oswald';font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;transition:.25s;}
+  .bar .cta:hover{background:#fff;}
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:18px;}
+  .dots a{width:9px;height:9px;border-radius:50%;border:1px solid var(--accent);opacity:.5;transition:.2s;}
+  .dots a:hover{opacity:1;transform:scale(1.4);background:var(--accent);}
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 24px 80px;overflow:hidden;background:linear-gradient(180deg,rgba(15,22,32,.78),rgba(15,22,32,.9)),url('img/artisan-hero.jpg');background-size:cover;background-position:center;}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,var(--ink) 94%);pointer-events:none;}
+  .hero .in{position:relative;z-index:2;max-width:940px;}
+  .hero .pre{font-family:'Oswald';font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-weight:500;}
+  .hero h1{font-size:clamp(46px,8.5vw,104px);line-height:.98;font-weight:700;}
+  .hero h1 em{color:var(--accent);font-style:normal;}
+  .hero p{margin:22px auto 0;max-width:46ch;font-size:18px;color:#cfdae4;font-weight:300;font-family:'Inter';}
+  .hero .cta-row{margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .lk{font-family:'Oswald';font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:15px 30px;transition:.25s;font-weight:600;cursor:pointer;}
+  .lk-fill{background:var(--accent);color:var(--ink);}.lk-fill:hover{background:#fff;}
+  .lk-out{border:1px solid rgba(234,240,246,.35);color:var(--paper);}.lk-out:hover{border-color:var(--accent);color:var(--accent);}
+  .scrollcue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;color:var(--accent);font-family:'Oswald';font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.85;animation:fl 2s ease-in-out infinite;}
+  @keyframes fl{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  .wrapc{max-width:1180px;margin:0 auto;padding:0 46px;}
+  .offre{padding:110px 0;}
+  .offre .h{text-align:center;max-width:640px;margin:0 auto 52px;}
+  .offre .pre{font-family:'Oswald';font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);}
+  .offre h2{font-size:clamp(32px,5vw,52px);margin-top:10px;}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .c3{background:var(--ink2);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .3s,border-color .3s;}
+  .c3:hover{transform:translateY(-6px);border-color:var(--accent);}
+  .c3 .im{height:190px;background-size:cover;background-position:center;}
+  .c3 .bd{padding:24px 26px 28px;}
+  .c3 h3{font-size:24px;margin-bottom:6px;color:#fff;}
+  .c3 .pr{color:var(--accent);font-family:'Oswald';font-size:19px;margin-bottom:9px;letter-spacing:.03em;}
+  .c3 p{color:#c3d0dc;font-size:14.5px;}
+  .presta{background:var(--ink2);padding:110px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .presta .h{text-align:center;max-width:640px;margin:0 auto 46px;}
+  .presta .pre{font-family:'Oswald';font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);}
+  .presta h2{font-size:clamp(32px,5vw,50px);}
+  .ard{max-width:820px;margin:0 auto;padding:0 46px;}
+  .row{display:flex;align-items:baseline;gap:14px;padding:19px 0;border-bottom:1px solid var(--line);}
+  .row .n{font-family:'Oswald';font-weight:500;font-size:20px;color:var(--paper);white-space:nowrap;text-transform:uppercase;letter-spacing:.02em;}
+  .row .dt{flex:1;border-bottom:1px dotted rgba(240,160,75,.4);transform:translateY(-5px);}
+  .row .pr{font-family:'Oswald';font-size:20px;color:var(--accent);white-space:nowrap;}
+  .row .ds{flex-basis:100%;font-size:13.5px;color:var(--muted);margin-top:-2px;}
+  .gal{padding:110px 0;}
+  .gal .h{text-align:center;margin-bottom:44px;}
+  .gal h2{font-size:clamp(30px,5vw,48px);}
+  .strip{display:flex;gap:16px;overflow-x:auto;padding:0 46px 14px;scroll-snap-type:x mandatory;}
+  .strip::-webkit-scrollbar{height:6px;}.strip::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:6px;}
+  .ph{flex:none;width:290px;height:380px;scroll-snap-align:center;display:flex;align-items:flex-end;padding:20px;font-family:'Oswald';font-size:20px;text-transform:uppercase;letter-spacing:.04em;color:#fff;position:relative;overflow:hidden;background-size:cover;background-position:center;}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(15,22,32,.78));}
+  .ph span{position:relative;z-index:2;}
+  .apropos{padding:110px 0;}
+  .apropos .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center;}
+  .portrait{aspect-ratio:4/5;background-size:cover;background-position:center;border:1px solid var(--line);}
+  .apropos h2{font-size:clamp(30px,4vw,44px);margin-bottom:16px;}
+  .apropos p{color:#c3d0dc;margin-bottom:15px;max-width:52ch;font-weight:300;}
+  .apropos .sign{font-family:'Oswald';font-size:22px;color:var(--accent);margin-top:6px;text-transform:uppercase;letter-spacing:.04em;}
+  .badges{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;}
+  .badge{border:1px solid var(--line);padding:8px 14px;font-family:'Oswald';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);}
+  .avis{background:var(--ink2);padding:100px 0;border-top:1px solid var(--line);}
+  .avis .h{text-align:center;margin-bottom:44px;}
+  .avis h2{font-size:clamp(30px,4.4vw,46px);}
+  .avis .g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .av{border:1px solid var(--line);padding:26px;background:var(--ink3);}
+  .av .st{color:var(--accent);letter-spacing:2px;font-size:15px;}
+  .av blockquote{font-size:17px;line-height:1.6;color:var(--paper);margin:12px 0 14px;font-weight:300;}
+  .av cite{font-style:normal;font-family:'Oswald';font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
+  .devis{background:linear-gradient(135deg,#1b2531,#22303d);padding:110px 24px;text-align:center;}
+  .devis .pre{font-family:'Oswald';font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);}
+  .devis h2{font-size:clamp(34px,6vw,60px);margin:14px 0;}
+  .devis .info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:30px 0 20px;}
+  .devis .info b{display:block;font-family:'Oswald';font-size:20px;color:var(--accent);text-transform:uppercase;}
+  .devis .info span{font-size:13px;color:#cfdae4;}
+  .devis .zone{color:#cfdae4;font-size:14px;margin-bottom:28px;}
+  .float{position:fixed;bottom:22px;right:22px;z-index:55;background:var(--accent);color:var(--ink);padding:14px 22px;font-family:'Oswald';font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);}
+  .ff{background:#0a0f16;text-align:center;padding:48px 24px;color:var(--muted);font-size:13px;}
+  .ff .made{border:1px solid var(--line);padding:18px;max-width:640px;margin:0 auto 14px;color:#c3d0dc;}
+  .ff .made b{color:var(--accent);}.ff .made a{color:var(--paper);text-decoration:underline;}
+  .ff .cr{font-size:11px;color:#5f6f7d;margin-top:8px;}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(max-width:860px){.bar{padding:16px 20px;}.dots{display:none;}.cards3,.avis .g{grid-template-columns:1fr;}.apropos .grid{grid-template-columns:1fr;gap:28px;}.wrapc{padding:0 20px;}.float{display:none;}}
 </style>
 </head>
 <body>
   <div class="demo">Modèle de démonstration · <a href="https://francoisleterrier.fr/creation-site-internet.html" target="_blank" rel="noopener">un site comme celui-ci →</a></div>
 
-  <div class="cbar"><div class="in">
-    <div class="lg"><span class="m">🔧</span> Dubois &amp; Fils</div>
-    <div class="ph"><span class="tel">📞 05 00 00 00 00</span><a class="cta" href="#devis">Devis gratuit</a></div>
-  </div></div>
+  <div class="bar" id="bar">
+    <div class="logo">Dubois <em>&amp; Fils</em></div>
+    <a class="cta" href="#devis">Devis gratuit</a>
+  </div>
 
-  <section class="hero"><div class="wrap">
-    <div>
-      <span class="badge">🚨 Dépannage 7j/7 · 20 ans d'expérience</span>
-      <h1>Une fuite ? Une panne ?<br><span>On intervient vite.</span></h1>
-      <p class="sub">Plomberie, chauffage et dépannage dans tout le Sud-Toulousain. Travail soigné, devis clair, artisans assurés.</p>
-      <ul>
-        <li>Intervention sous 24–48h</li>
-        <li>Devis gratuit et sans engagement</li>
-        <li>Garantie décennale &amp; artisans certifiés</li>
-      </ul>
-    </div>
-    <form class="qform" id="devis" onsubmit="return false;">
-      <h3>Devis gratuit en 30 s</h3>
-      <p>Décrivez votre besoin, on vous rappelle.</p>
-      <label for="n">Votre nom</label>
-      <input id="n" type="text" placeholder="Nom et prénom">
-      <label for="t">Téléphone</label>
-      <input id="t" type="tel" placeholder="06 00 00 00 00">
-      <label for="b">Votre besoin</label>
-      <select id="b"><option>Dépannage urgent</option><option>Plomberie</option><option>Chauffage / chaudière</option><option>Rénovation salle de bain</option><option>Autre</option></select>
-      <button type="submit">Être rappelé →</button>
-      <div class="rea">⏱️ Réponse sous 2h en journée</div>
-    </form>
-  </div></section>
+  <nav class="dots" aria-label="Navigation">
+    <a href="#hero" title="Accueil"></a>
+    <a href="#offre" title="Services"></a>
+    <a href="#presta" title="Tarifs"></a>
+    <a href="#galerie" title="Réalisations"></a>
+    <a href="#apropos" title="L'artisan"></a>
+    <a href="#devis" title="Devis"></a>
+  </nav>
 
-  <div class="trust"><div class="wrap">
-    <div class="t"><b>20 ans</b><span>d'expérience</span></div>
-    <div class="t"><b>1 500+</b><span>interventions</span></div>
-    <div class="t"><b>4,9/5</b><span>sur 230 avis</span></div>
-    <div class="t"><b>7j/7</b><span>en urgence</span></div>
-  </div></div>
+  <header class="hero" id="hero"><div class="in">
+    <div class="pre">Plomberie · Chauffage · Dépannage — Sud-Toulousain</div>
+    <h1>Un artisan de <em>confiance.</em></h1>
+    <p>Un travail propre, des délais tenus, un devis clair avant de commencer. Depuis 20 ans, on répare, on installe, on vous dépanne — vite et bien.</p>
+    <div class="cta-row">
+      <a class="lk lk-fill" href="#devis">Demander un devis</a>
+      <a class="lk lk-out" href="#offre">Nos services</a>
+    </div>
+  </div>
+  <div class="scrollcue">défiler ↓</div>
+  </header>
 
-  <section class="serv"><div class="wrap">
-    <div class="head"><div class="ey">Nos métiers</div><h2>Un savoir-faire complet</h2></div>
-    <div class="zz">
-      <div class="vis v1" role="img" aria-label="Salle de bain rénovée"></div>
-      <div class="tx"><div class="num">01 — PLOMBERIE</div><h3>Plomberie & sanitaire</h3><p>Recherche de fuite, débouchage, robinetterie, installation de WC et douches à l'italienne. Du dépannage au neuf.</p><div class="tags"><span>Fuite</span><span>Débouchage</span><span>Salle de bain</span></div></div>
-    </div>
-    <div class="zz">
-      <div class="vis v2" role="img" aria-label="Intervention chauffage"></div>
-      <div class="tx"><div class="num">02 — CHAUFFAGE</div><h3>Chauffage & chaudières</h3><p>Pose et entretien de chaudières, pompes à chaleur et radiateurs. Contrats d'entretien annuels et conseils économies d'énergie.</p><div class="tags"><span>Chaudière</span><span>Pompe à chaleur</span><span>Entretien</span></div></div>
-    </div>
-    <div class="zz">
-      <div class="vis v3" role="img" aria-label="Dépannage en urgence"></div>
-      <div class="tx"><div class="num">03 — URGENCE</div><h3>Dépannage 7j/7</h3><p>Fuite, panne de chauffe-eau, canalisation bouchée : on se déplace en urgence, week-ends et jours fériés compris.</p><div class="tags"><span>7j/7</span><span>Rapide</span><span>Toutes urgences</span></div></div>
+  <section class="offre" id="offre"><div class="wrapc">
+    <div class="h reveal"><div class="pre">Nos savoir-faire</div><h2>Ce qu'on fait pour vous</h2></div>
+    <div class="cards3">
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-plomberie.jpg')"></div><div class="bd"><h3>Plomberie</h3><div class="pr">Devis gratuit</div><p>Fuites, robinetterie, sanitaires, rénovation de salle de bain. Une intervention propre, garantie.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-chauffage.jpg')"></div><div class="bd"><h3>Chauffage</h3><div class="pr">Sur devis</div><p>Chaudière, pompe à chaleur, entretien annuel, mise aux normes. On vous conseille sur les aides.</p></div></div>
+      <div class="c3 reveal"><div class="im" style="background-image:url('img/artisan-depannage.jpg')"></div><div class="bd"><h3>Dépannage rapide</h3><div class="pr">7j/7</div><p>Une fuite, plus d'eau chaude, une urgence ? On se déplace vite dans tout le Sud-Toulousain.</p></div></div>
     </div>
   </div></section>
 
-  <section class="proc"><div class="wrap">
-    <div class="head"><div class="ey">Comment ça marche</div><h2>Simple, du premier appel à la facture</h2></div>
-    <div class="timeline">
-      <div class="ts"><div class="c">1</div><h4>Vous appelez</h4><p>Vous décrivez votre besoin, on évalue l'urgence.</p></div>
-      <div class="ts"><div class="c">2</div><h4>Devis gratuit</h4><p>Un devis clair et détaillé, validé avant tout.</p></div>
-      <div class="ts"><div class="c">3</div><h4>Intervention</h4><p>On intervient proprement, dans les délais convenus.</p></div>
-      <div class="ts"><div class="c">4</div><h4>Garantie</h4><p>Travail garanti, conseils d'entretien offerts.</p></div>
+  <section class="presta" id="presta">
+    <div class="h reveal"><div class="pre">Tarifs indicatifs</div><h2>Des prix clairs, annoncés d'avance</h2></div>
+    <div class="ard">
+      <div class="row reveal"><span class="n">Déplacement + diagnostic</span><span class="dt"></span><span class="pr">45 €</span><span class="ds">Déduit du devis si travaux réalisés</span></div>
+      <div class="row reveal"><span class="n">Recherche &amp; réparation de fuite</span><span class="dt"></span><span class="pr">dès 90 €</span><span class="ds">Diagnostic précis, réparation durable</span></div>
+      <div class="row reveal"><span class="n">Remplacement de chauffe-eau</span><span class="dt"></span><span class="pr">dès 350 €</span><span class="ds">Fourniture + pose, évacuation de l'ancien</span></div>
+      <div class="row reveal"><span class="n">Entretien annuel chaudière</span><span class="dt"></span><span class="pr">dès 110 €</span><span class="ds">Attestation d'entretien fournie</span></div>
+      <div class="row reveal"><span class="n">Rénovation de salle de bain</span><span class="dt"></span><span class="pr">sur devis</span><span class="ds">Étude complète, coordination des corps de métier</span></div>
     </div>
-  </div></section>
-
-  <section class="testi">
-    <div class="stars">★★★★★</div>
-    <blockquote>« Intervention un dimanche pour une fuite, en moins de 2h. Travail nickel et tarif honnête. Des artisans comme on en cherche tous. »</blockquote>
-    <div class="who">— Sandrine M., Muret · client depuis 2021</div>
   </section>
 
-  <section class="fcta">
-    <h2>Un problème de plomberie ou de chauffage ?</h2>
-    <p>Devis gratuit sous 24h. Appelez maintenant ou demandez à être rappelé.</p>
-    <a class="b" href="tel:+33500000000">📞 05 00 00 00 00</a>
+  <section class="gal" id="galerie">
+    <div class="h reveal"><h2>Nos chantiers récents</h2></div>
+    <div class="strip">
+      <div class="ph" style="background-image:url('img/artisan-chantier.jpg')"><span>Intervention</span></div>
+      <div class="ph" style="background-image:url('img/artisan-plomberie.jpg')"><span>Plomberie</span></div>
+      <div class="ph" style="background-image:url('img/artisan-depannage.jpg')"><span>Dépannage</span></div>
+      <div class="ph" style="background-image:url('img/artisan-outils.jpg')"><span>Le matériel</span></div>
+      <div class="ph" style="background-image:url('img/artisan-chauffage.jpg')"><span>Chauffage</span></div>
+    </div>
   </section>
+
+  <section class="apropos" id="apropos"><div class="wrapc">
+    <div class="grid">
+      <div class="portrait reveal" style="background-image:url('img/artisan-hero.jpg')" role="img" aria-label="L'artisan au travail"></div>
+      <div class="reveal">
+        <h2>L'artisan derrière l'entreprise</h2>
+        <p>Je m'appelle Marc Dubois. J'ai appris le métier sur les chantiers, aux côtés de mon père — d'où le « &amp; Fils ». Aujourd'hui, c'est moi qui viens chez vous, avec la même exigence : du travail soigné et une parole tenue.</p>
+        <p>Pas de mauvaise surprise sur la facture : le devis est gratuit, détaillé, et je m'y tiens. C'est comme ça qu'on garde ses clients 20 ans.</p>
+        <div class="sign">— Marc Dubois, artisan</div>
+        <div class="badges"><span class="badge">Devis gratuit</span><span class="badge">Travail garanti</span><span class="badge">Assurance décennale</span><span class="badge">Sud-Toulousain</span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="avis"><div class="wrapc">
+    <div class="h reveal"><h2>Ce que disent nos clients</h2></div>
+    <div class="g">
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Intervention rapide pour une fuite un dimanche. Efficace, propre, et le prix annoncé était le bon. Je recommande. »</blockquote><cite>— Philippe R., Muret</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Remplacement de la chaudière nickel. Marc a pris le temps d'expliquer et de nous orienter sur les aides. Sérieux. »</blockquote><cite>— Nathalie B., Carbonne</cite></div>
+      <div class="av reveal"><div class="st">★★★★★</div><blockquote>« Un artisan comme on en fait plus : ponctuel, soigneux, honnête. Notre salle de bain est magnifique. »</blockquote><cite>— Julien M., Rieumes</cite></div>
+    </div>
+  </div></section>
+
+  <section class="devis" id="devis">
+    <div class="pre">Devis gratuit</div>
+    <h2>Un projet, une panne ? Parlons-en.</h2>
+    <div class="info">
+      <div><b>Lun – Ven</b><span>7h30 – 19h</span></div>
+      <div><b>Samedi</b><span>8h – 12h</span></div>
+      <div><b>Urgences</b><span>7j/7</span></div>
+    </div>
+    <div class="zone">Zone d'intervention : Muret, Carbonne, Rieumes, Portet, et tout le Sud-Toulousain</div>
+    <a class="lk lk-fill" href="tel:+33500000000">📞 Appeler — 05 00 00 00 00</a>
+  </section>
+
+  <a class="float" href="#devis">Devis gratuit</a>
 
   <footer class="ff">
-    <div class="made">Site-modèle de démonstration (entreprise fictive), conçu par <b>François Leterrier</b> — création de site internet, Sud-Toulousain. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
-    Dubois &amp; Fils · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:#90a6b8;text-decoration:underline;">francoisleterrier.fr</a>
+    <div class="made">Site-modèle de démonstration (entreprise fictive), conçu par <b>François Leterrier</b> — créateur de sites internet, partout en France. <a href="https://francoisleterrier.fr/contact.html" target="_blank" rel="noopener">Je veux un site comme ça →</a></div>
+    Dubois &amp; Fils · <a href="https://francoisleterrier.fr" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:underline;">francoisleterrier.fr</a>
+    <div class="cr">Photos d'illustration : Pexels (libres de droit) — sur votre site, ce seront vos vraies photos.</div>
   </footer>
+
+  <script>
+    var bar=document.getElementById('bar');
+    addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);},{passive:true});
+    (function(){
+      var els=[].slice.call(document.querySelectorAll('.reveal'));
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+      els.forEach(function(e){io.observe(e);});
+    })();
+  </script>
 </body>
 </html>
