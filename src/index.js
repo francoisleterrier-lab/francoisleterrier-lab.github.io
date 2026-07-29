@@ -40,11 +40,15 @@ const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
   "/generate": { limit: 8, window: 60 },
   "/audit": { limit: 10, window: 60 },
+  "/site": { limit: 20, window: 60 },
   "/lead": { limit: 5, window: 60 },
   _default: { limit: 30, window: 60 },
 };
 
-const MAX_BODY_BYTES = 16 * 1024;
+// La sauvegarde d'une maquette embarque toute la spec de page (services, faq,
+// avis, URLs d'images) : on autorise un corps un peu plus large.
+const MAX_BODY_BYTES = 48 * 1024;
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 function corsHeaders(request) {
   const origin = request.headers.get("Origin");
@@ -128,15 +132,6 @@ function handleHealth(_request, env) {
   });
 }
 
-async function handleStub(name, request) {
-  const parsed = await readJson(request);
-  if (parsed.error) return parsed.error;
-  return json(
-    { ok: false, stub: true, endpoint: name, message: `${name} : socle en place, implémentation à venir.` },
-    501
-  );
-}
-
 function clampStr(x, max) {
   return typeof x === "string" ? x.trim().slice(0, max) : "";
 }
@@ -200,15 +195,68 @@ async function notifyLead(lead) {
 async function storeLead(env, lead) {
   const ts = new Date().toISOString();
   const ipHash = await sha256hex(lead.ip || "");
+  const ville = (lead.site && lead.site.input && lead.site.input.ville) || "";
   if (env && env.DB) {
     try {
       await env.DB.prepare("INSERT INTO leads (created_at,email,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?)")
-        .bind(ts, lead.email, "", lead.source || "audit", JSON.stringify({ url: lead.url, audit: lead.audit }).slice(0, 90000), ipHash).run();
+        .bind(ts, lead.email, ville, lead.source || "audit", JSON.stringify({ url: lead.url, audit: lead.audit, site: lead.site }).slice(0, 90000), ipHash).run();
       return "d1";
     } catch (_) {}
   }
-  if (env && env.CACHE) { try { await env.CACHE.put("lead:" + ts + ":" + (crypto.randomUUID ? crypto.randomUUID() : ""), JSON.stringify({ email: lead.email, url: lead.url, ts: ts }), { expirationTtl: 31536000 }); } catch (_) {} }
+  if (env && env.CACHE) { try { await env.CACHE.put("lead:" + ts + ":" + (crypto.randomUUID ? crypto.randomUUID() : ""), JSON.stringify({ email: lead.email, url: lead.url, source: lead.source || "audit", site: lead.site || null, ts: ts }), { expirationTtl: 31536000 }); } catch (_) {} }
   return "kv";
+}
+
+/** Notifie François d'un lead « générateur » (avec le lien de la maquette). */
+async function notifyGenLead(lead) {
+  try {
+    const s = lead.site || {}, inp = s.input || {}, ed = s.edits || {};
+    const link = s.id ? "https://francoisleterrier.fr/generateur.html?site=" + s.id : "";
+    const msg = "NOUVEAU LEAD — Générateur de site\n\nEmail : " + lead.email +
+      "\nMétier : " + (inp.metier || "?") + "\nÉtablissement : " + (inp.nom || "?") +
+      "\nVille : " + (inp.ville || "?") + "\nStyle choisi : " + (ed.ton || inp.ton || "?") +
+      (ed.accent ? "\nCouleur d'accent : " + ed.accent : "") +
+      (link ? "\n\nMaquette partageable : " + link : "");
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: W3F_KEY, subject: "🎨 Lead générateur — " + (inp.nom || inp.metier || ""), from_name: "FL Générateur", email: lead.email, message: msg }),
+    });
+  } catch (_) {}
+}
+
+/** Identifiant court url-safe pour les maquettes partagées (12 hex). */
+function shortId() {
+  const a = new Uint8Array(6);
+  if (crypto && crypto.getRandomValues) crypto.getRandomValues(a);
+  return Array.from(a).map(function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
+}
+
+/** POST /site — garde une maquette (aspirateur à leads) : e-mail requis. */
+async function handleSaveSite(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const email = clampStr(d.email, 120);
+  if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
+  const page = d.page && typeof d.page === "object" ? d.page : null;
+  if (!page) return json({ ok: false, error: "Maquette manquante." }, 422);
+  const edits = d.edits && typeof d.edits === "object" ? d.edits : {};
+  const input = d.input && typeof d.input === "object" ? d.input : {};
+  const id = shortId();
+  if (env.CACHE) { try { await env.CACHE.put("site:" + id, JSON.stringify({ page: page, edits: edits, input: input }), { expirationTtl: 15552000 }); } catch (_) {} } // 180 jours
+  const lead = { email: email, url: "", source: "generateur", ip: clientIp(request), site: { input: input, edits: edits, id: id } };
+  await Promise.all([notifyGenLead(lead), storeLead(env, lead)]);
+  return json({ ok: true, id: id });
+}
+
+/** GET /site?id=… — renvoie la maquette pour la vue partagée (sans e-mail). */
+async function handleGetSite(request, env) {
+  const id = clampStr(new URL(request.url).searchParams.get("id") || "", 40);
+  if (!id || !/^[a-f0-9]{6,40}$/i.test(id)) return json({ ok: false, error: "Identifiant manquant." }, 400);
+  let rec = null;
+  if (env.CACHE) { try { rec = await env.CACHE.get("site:" + id, "json"); } catch (_) {} }
+  if (!rec || !rec.page) return json({ ok: false, error: "Maquette introuvable ou expirée." }, 404);
+  return json({ ok: true, page: rec.page, edits: rec.edits || {} });
 }
 
 /** POST /lead — capture email (aspirateur à leads) : notifie + stocke l'audit complet. */
@@ -217,7 +265,7 @@ async function handleLead(request, env) {
   if (parsed.error) return parsed.error;
   const d = parsed.data || {};
   const email = clampStr(d.email, 120);
-  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
+  if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
   const url = clampStr(d.url, 300), auditId = clampStr(d.auditId, 60), source = clampStr(d.source, 40) || "audit";
   let audit = null;
   if (auditId && env.CACHE) { try { audit = await env.CACHE.get("audit:" + auditId, "json"); } catch (_) {} }
@@ -230,6 +278,8 @@ const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
+  "POST /site": (req, env) => handleSaveSite(req, env),
+  "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
 };
 

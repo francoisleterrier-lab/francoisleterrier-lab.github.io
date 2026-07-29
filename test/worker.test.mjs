@@ -73,6 +73,16 @@ ok(r.status === 415, "POST /lead (mauvais Content-Type) → 415");
 r = await worker.fetch(req("POST", "/audit", { body: "{oops", ct: "application/json" }), env);
 ok(r.status === 400, "POST /audit (JSON cassé) → 400");
 
+// 4b) /site : GET sans id → 400 ; POST e-mail invalide → 422 ; POST sans page → 422
+r = await worker.fetch(req("GET", "/site"), env);
+ok(r.status === 400, "GET /site (sans id) → 400");
+r = await worker.fetch(req("POST", "/site", { body: JSON.stringify({ email: "nope", page: {} }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /site (e-mail invalide) → 422");
+r = await worker.fetch(req("POST", "/site", { body: JSON.stringify({ email: "a@b.fr" }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /site (maquette manquante) → 422");
+r = await worker.fetch(req("GET", "/site?id=deadbeef", { origin: APEX }), env);
+ok(r.status === 404, "GET /site (id inconnu) → 404 (maquette introuvable)");
+
 // 5) méthode / inconnu
 r = await worker.fetch(req("GET", "/lead"), env);
 ok(r.status === 405, "GET /lead → 405 (méthode)");

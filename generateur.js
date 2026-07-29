@@ -54,9 +54,9 @@
   function seedOf(s) { var h = 0; s = String(s || ""); for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
   function img(o, name) { return o + "/modeles/img/" + name + ".webp"; }
 
-  function buildTheme(sector, ton) {
+  function buildTheme(sector, ton, accentOverride) {
     var t = TONS[ton] || TONS.chaleureux, im = IMG[sector] || IMG.default;
-    var accent = t.accent === "gold" ? "#c9a86a" : (SECTOR_ACCENT[sector] || SECTOR_ACCENT.default);
+    var accent = accentOverride || (t.accent === "gold" ? "#c9a86a" : (SECTOR_ACCENT[sector] || SECTOR_ACCENT.default));
     var th = {}; for (var k in t) th[k] = t[k];
     th.accent = accent; th.on = textOn(accent); th.im = im;
     return th;
@@ -65,7 +65,7 @@
   /* ---------- Renderer ---------- */
   function renderPage(page, opts) {
     opts = opts || {};
-    var o = opts.origin || "", th = buildTheme(page.sector, page.ton), seed = seedOf(page.brand);
+    var o = opts.origin || "", th = buildTheme(page.sector, page.ton, page._accent), seed = seedOf(page.brand);
     var PI = page.images || null;
     function esca(u) { return String(u).replace(/&/g, "&amp;"); } // pour les styles inline (URLs Pexels)
     var heroU = esca(PI && PI.hero ? PI.hero : img(o, th.im.hero));
@@ -85,8 +85,8 @@
     /* ---- HERO variants ---- */
     function hero(v) {
       var eyebrow = '<div class="eyebrow">' + esc(page.hero.eyebrow) + "</div>";
-      var H1 = "<h1>" + rich(page.hero.title) + "</h1>";
-      var sub = '<p class="sub">' + esc(page.hero.subtitle) + "</p>";
+      var H1 = '<h1 data-edit="heroTitle">' + rich(page.hero.title) + "</h1>";
+      var sub = '<p class="sub" data-edit="heroSub">' + esc(page.hero.subtitle) + "</p>";
       var btns = '<div class="btns">' + btn("p", page.hero.ctaPrimary) + btn("s", page.hero.ctaSecondary, "#offre") + "</div>";
       if (v === "split" || v === "left") {
         var badges = v === "left" ? '<ul class="badges"><li>Devis gratuit</li><li>Sans engagement</li><li>Réponse rapide</li></ul>' : "";
@@ -202,7 +202,7 @@
 
     var R = { hero: hero, services: services, altrows: altrows, about: about, gallery: gallery, stats: stats, steps: steps, trust: trust, proofs: proofs, bigquote: bigquote, signature: signature, faq: faq, cta: cta };
     var flow = ARCH[th.arch] || ARCH.boutique;
-    var nav = '<header class="nav"><span class="brand">' + esc(page.brand) + '</span><a class="cta" href="#contact">' + esc(page.cta.button) + "</a></header>";
+    var nav = '<header class="nav"><span class="brand" data-edit="brand">' + esc(page.brand) + '</span><a class="cta" href="#contact">' + esc(page.cta.button) + "</a></header>";
     var body = nav + flow.map(function (sec) { var fn = R[sec[0]]; return fn ? fn(sec[1]) : ""; }).join("");
 
     /* ---------- CSS ---------- */
@@ -263,10 +263,15 @@
 
     var reveal = '<script>(function(){var e=document.querySelectorAll(".reveal");if(!("IntersectionObserver" in window)){e.forEach(function(x){x.classList.add("in")});return}var o=new IntersectionObserver(function(t){t.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");o.unobserve(x.target)}})},{threshold:.1});e.forEach(function(x){o.observe(x)})})();<\/script>';
 
+    // Édition en direct : textes cliquables (contenteditable) qui renvoient
+    // leur nouvelle valeur au parent par postMessage. Activé sur demande.
+    var editCss = opts.edit ? "[data-edit]{cursor:text;transition:box-shadow .15s}[data-edit]:hover{outline:1px dashed color-mix(in srgb,var(--ac) 55%,transparent);outline-offset:4px}[data-edit]:focus{outline:none;box-shadow:0 0 0 2px var(--ac);border-radius:4px}[data-edit]::selection{background:color-mix(in srgb,var(--ac) 35%,transparent)}" : "";
+    var editJs = opts.edit ? '<script>(function(){function send(el){try{parent.postMessage({t:"fl-edited",k:el.getAttribute("data-edit"),v:(el.innerText||"").replace(/\\s+/g," ").trim()},"*")}catch(e){}}window.addEventListener("message",function(e){if(e&&e.data&&e.data.t==="fl-edit-on"){document.querySelectorAll("[data-edit]").forEach(function(el){el.setAttribute("contenteditable","true");el.setAttribute("spellcheck","false");el.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&el.tagName!=="P"){ev.preventDefault();el.blur();}});el.addEventListener("blur",function(){send(el);});});}});})();<\/script>' : "";
+
     return "<!doctype html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
       "<script>document.documentElement.className='js'<\/script>" + (o ? '<base href="' + o + '/">' : "") +
       '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600;700&family=Jost:wght@400;500;600&family=Oswald:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,600&display=swap">' +
-      "<title>" + esc(page.brand) + "</title><style>" + css + "</style></head><body>" + body + reveal + "</body></html>";
+      "<title>" + esc(page.brand) + "</title><style>" + css + editCss + "</style></head><body>" + body + reveal + editJs + "</body></html>";
   }
 
   /* ---------- Repli client curaté ---------- */
@@ -284,30 +289,142 @@
     return { brand: n, sector: s, ton: input.ton || "chaleureux", ville: v, hero: { eyebrow: p.eb + " · " + v, title: p.t, subtitle: n + " — " + p.sub, ctaPrimary: "Nous contacter", ctaSecondary: "En savoir plus" }, services: names.map(function (nm) { return { title: nm, desc: "Un service pensé pour vous, avec le souci du détail.", price: "" }; }), about: { title: "Qui sommes-nous", body: n + ", à " + v + ", c'est l'exigence du travail bien fait et le goût du contact." }, proofs: [{ quote: "Sérieux, à l'écoute, efficace. Je recommande vivement.", author: "Client satisfait" }, { quote: "Un accompagnement de qualité du début à la fin.", author: "Cliente fidèle" }, { quote: "Professionnalisme et proximité. Rien à redire.", author: "Client local" }], faq: [{ q: "Comment vous contacter ?", a: "Par téléphone ou via le formulaire — réponse rapide." }, { q: "Où êtes-vous situés ?", a: "À " + v + " et alentour." }, { q: "Un premier échange ?", a: "Oui, sans engagement." }], cta: { title: "Contactez-nous", subtitle: "On sera ravis d'échanger.", button: "Nous contacter" }, contact: { ville: v, phone: "", hours: "Sur rendez-vous" }, _source: "local" };
   }
 
+  /* Palette d'accents proposée en édition live (contraste géré par textOn). */
+  var SWATCHES = ["#c56a1e", "#b07a2e", "#c9a86a", "#3d7150", "#1f8fbf", "#7c4bd0", "#b83f76", "#c0392b", "#2c3e70"];
+
+  /* Applique les retouches live (ton, couleur, textes) sur la page de base. */
+  function applyEdits(base, ed) {
+    ed = ed || {};
+    var p = {}; for (var k in base) p[k] = base[k];
+    var t = ed.texts || {};
+    if (ed.ton) p.ton = ed.ton;
+    if (ed.accent) p._accent = ed.accent;
+    if (t.brand) p.brand = t.brand;
+    if (t.heroTitle != null || t.heroSub != null) {
+      p.hero = {}; for (var h in base.hero) p.hero[h] = base.hero[h];
+      if (t.heroTitle) p.hero.title = t.heroTitle;
+      if (t.heroSub) p.hero.subtitle = t.heroSub;
+    }
+    return p;
+  }
+
   /* ---------- UI ---------- */
   function $(s, r) { return (r || document).querySelector(s); }
   function ready(fn) { document.readyState !== "loading" ? fn() : document.addEventListener("DOMContentLoaded", fn); }
   ready(function () {
-    var form = $("#gen-form"), frame = $("#gen-frame"), stage = $("#gen-stage"), skel = $("#gen-skel"), errBox = $("#gen-err"), submitBtn = $("#gen-go"), deviceBtns = document.querySelectorAll("[data-device]"), redo = $("#gen-redo"), share = $("#gen-share");
-    if (!form) return;
-    var RM = matchMedia("(prefers-reduced-motion: reduce)").matches, origin = location.origin, lastInput = null;
+    var form = $("#gen-form"), frame = $("#gen-frame"), stage = $("#gen-stage"), skel = $("#gen-skel"),
+      errBox = $("#gen-err"), submitBtn = $("#gen-go"), deviceBtns = document.querySelectorAll("[data-device]"),
+      redo = $("#gen-redo"), share = $("#gen-share"), custom = $("#gen-custom"), tonRow = $("#cz-tons"),
+      accentRow = $("#cz-accents"), heroSec = $("#gen-hero"), capForm = $("#cap-form"), capEmail = $("#cap-email"),
+      capMsg = $("#cap-msg"), capDefault = $("#cap-default"), capDone = $("#cap-done"), capLink = $("#cap-link"),
+      capCopy = $("#cap-copy"), banner = $("#shared-banner");
+    if (!frame) return;
+    var RM = matchMedia("(prefers-reduced-motion: reduce)").matches, origin = location.origin;
+    var basePage = null, edits = { ton: "chaleureux", accent: null, texts: {} }, lastInput = null, editable = true;
+
+    function show(el, on) { if (el) el.hidden = !on; }
     function setDevice(m) { stage.setAttribute("data-device", m); deviceBtns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-device") === m); }); }
     deviceBtns.forEach(function (b) { b.addEventListener("click", function () { setDevice(b.getAttribute("data-device")); }); });
-    function show(el, on) { if (el) el.hidden = !on; }
+
+    // Rendu de l'état courant (page de base + retouches). Réactive l'édition au chargement.
+    function renderCurrent() {
+      if (!basePage) return;
+      var p = applyEdits(basePage, edits);
+      frame.onload = function () { if (editable) { try { frame.contentWindow.postMessage({ t: "fl-edit-on" }, "*"); } catch (_) {} } };
+      frame.setAttribute("srcdoc", renderPage(p, { origin: origin, edit: editable }));
+    }
+
+    // Retouches texte renvoyées par l'iframe (contenteditable).
+    window.addEventListener("message", function (e) {
+      var d = e && e.data; if (!d || d.t !== "fl-edited" || !d.k) return;
+      if (d.k === "brand") edits.texts.brand = d.v;
+      else if (d.k === "heroTitle") edits.texts.heroTitle = d.v;
+      else if (d.k === "heroSub") edits.texts.heroSub = d.v;
+    });
+
+    // Customizer : pastilles de ton + pastilles de couleur.
+    function markActive(row, attr, val) { if (!row) return; row.querySelectorAll("[" + attr + "]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute(attr) === String(val)); }); }
+    if (tonRow) tonRow.addEventListener("click", function (e) { var b = e.target.closest("[data-ton]"); if (!b) return; edits.ton = b.getAttribute("data-ton"); markActive(tonRow, "data-ton", edits.ton); renderCurrent(); });
+    if (accentRow) {
+      SWATCHES.forEach(function (c) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.setAttribute("data-accent", c);
+        b.setAttribute("aria-label", "Couleur " + c); b.setAttribute("aria-pressed", "false"); b.style.background = c;
+        accentRow.appendChild(b);
+      });
+      var defBtn = document.createElement("button"); defBtn.type = "button"; defBtn.className = "sw sw-def"; defBtn.setAttribute("data-accent", ""); defBtn.setAttribute("aria-label", "Couleur d'origine"); defBtn.setAttribute("aria-pressed", "true"); defBtn.textContent = "Auto";
+      accentRow.appendChild(defBtn);
+      accentRow.addEventListener("click", function (e) { var b = e.target.closest("[data-accent]"); if (!b) return; edits.accent = b.getAttribute("data-accent") || null; markActive(accentRow, "data-accent", edits.accent || ""); renderCurrent(); });
+    }
+
     async function generate(input) {
-      lastInput = input; show(errBox, false); show(skel, true); show(frame, false); submitBtn.disabled = true; submitBtn.setAttribute("aria-busy", "true"); stage.hidden = false;
+      lastInput = input; editable = true; edits = { ton: input.ton, accent: null, texts: {} };
+      show(errBox, false); show(skel, true); show(frame, false); submitBtn.disabled = true; submitBtn.setAttribute("aria-busy", "true"); stage.hidden = false;
       var page = null;
       try { var ctrl = new AbortController(); var to = setTimeout(function () { ctrl.abort(); }, 20000); var r = await fetch(API + "/generate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(input), signal: ctrl.signal }); clearTimeout(to); if (r.ok) { var j = await r.json(); if (j && j.ok && j.page) page = j.page; } } catch (_) {}
       if (!page) page = localCurated(input);
-      page.ton = input.ton;
+      page.ton = input.ton; basePage = page;
       await new Promise(function (res) { setTimeout(res, RM ? 0 : 300); });
-      frame.setAttribute("srcdoc", renderPage(page, { origin: origin }));
+      renderCurrent();
       show(skel, false); show(frame, true); submitBtn.disabled = false; submitBtn.removeAttribute("aria-busy");
+      show(custom, true); markActive(tonRow, "data-ton", edits.ton); markActive(accentRow, "data-accent", "");
       if (share) share.hidden = false; if (redo) redo.hidden = false; frame.dataset.source = page._source || "";
+      resetCapture();
     }
-    form.addEventListener("submit", function (e) { e.preventDefault(); var input = { metier: $("#f-metier").value.trim(), nom: $("#f-nom").value.trim(), ville: $("#f-ville").value.trim(), ton: (form.querySelector('input[name="ton"]:checked') || {}).value || "chaleureux" }; if (!input.metier || !input.nom) { show(errBox, true); errBox.textContent = "Indiquez au moins votre métier et le nom de votre établissement."; return; } generate(input); });
+
+    if (form) form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var input = { metier: $("#f-metier").value.trim(), nom: $("#f-nom").value.trim(), ville: $("#f-ville").value.trim(), ton: (form.querySelector('input[name="ton"]:checked') || {}).value || "chaleureux" };
+      if (!input.metier || !input.nom) { show(errBox, true); errBox.textContent = "Indiquez au moins votre métier et le nom de votre établissement."; return; }
+      generate(input);
+    });
     if (redo) redo.addEventListener("click", function () { if (lastInput) generate(lastInput); });
+    if (share) share.addEventListener("click", function () { if (capForm) { $("#gen-capture").scrollIntoView({ behavior: "smooth", block: "center" }); if (capEmail) capEmail.focus(); } });
+
+    // Capture e-mail → sauvegarde + lien partageable (aspirateur à leads).
+    function resetCapture() { if (capDone) capDone.hidden = true; if (capDefault) capDefault.hidden = false; if (capMsg) { capMsg.hidden = true; capMsg.textContent = ""; } }
+    if (capForm) capForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      if (!basePage) return;
+      var email = (capEmail.value || "").trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { show(capMsg, true); capMsg.style.color = "#ffb4b4"; capMsg.textContent = "Adresse e-mail invalide."; return; }
+      var btn = capForm.querySelector("button"); btn.disabled = true; show(capMsg, true); capMsg.style.color = "var(--muted)"; capMsg.textContent = "Enregistrement…";
+      try {
+        var r = await fetch(API + "/site", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, input: lastInput, page: basePage, edits: edits }) });
+        var j = await r.json();
+        if (j && j.ok && j.id) {
+          var link = origin + "/generateur.html?site=" + j.id;
+          if (capLink) capLink.value = link;
+          show(capDefault, false); show(capDone, true);
+        } else throw 0;
+      } catch (_) { btn.disabled = false; capMsg.style.color = "#ffb4b4"; capMsg.textContent = "Oups, réessayez dans un instant."; }
+    });
+    if (capCopy) capCopy.addEventListener("click", function () {
+      if (!capLink) return; capLink.select();
+      var done = function () { capCopy.textContent = "Copié ✓"; setTimeout(function () { capCopy.textContent = "Copier"; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(capLink.value).then(done, done);
+      else { try { document.execCommand("copy"); done(); } catch (_) {} }
+    });
+
+    // Vue partagée : ?site=<id> → on affiche la maquette en lecture seule.
+    var sid = new URLSearchParams(location.search).get("site");
+    if (sid && /^[a-f0-9]{6,40}$/i.test(sid)) {
+      editable = false;
+      if (heroSec) heroSec.hidden = true;
+      show(custom, false); if (redo) redo.hidden = true; if (share) share.hidden = true;
+      if (capDefault) { var h = capDefault.querySelector("h3"), pp = capDefault.querySelector("p"); if (h) h.textContent = "Vous voulez le vôtre ?"; if (pp) pp.textContent = "Cette maquette a été composée en quelques secondes. Créez la vôtre gratuitement, puis faites-la évoluer avec moi."; }
+      stage.hidden = false; show(skel, true); show(frame, false);
+      (async function () {
+        var page = null, ed = {};
+        try { var r = await fetch(API + "/site?id=" + encodeURIComponent(sid)); var j = await r.json(); if (j && j.ok && j.page) { page = j.page; ed = j.edits || {}; } } catch (_) {}
+        if (!page) { show(skel, false); if (banner) { banner.hidden = false; banner.innerHTML = '<span>Cette maquette n\'est plus disponible.</span><a class="btn-go" href="generateur.html">Créer la mienne →</a>'; } return; }
+        basePage = page; edits = { ton: ed.ton || page.ton, accent: ed.accent || null, texts: ed.texts || {} };
+        renderCurrent();
+        show(skel, false); show(frame, true);
+        if (banner) banner.hidden = false;
+      })();
+    }
+
     setDevice("desktop");
   });
-  window.__flGen = { renderPage: renderPage, localCurated: localCurated, buildTheme: buildTheme };
+  window.__flGen = { renderPage: renderPage, localCurated: localCurated, buildTheme: buildTheme, applyEdits: applyEdits };
 })();
