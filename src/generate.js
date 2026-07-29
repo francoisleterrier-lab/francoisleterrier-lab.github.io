@@ -237,9 +237,14 @@ export function curatedPage({ metier, nom, ville, ton }) {
 function buildMessages({ metier, nom, ville, ton }) {
   const sector = SECTOR_LABEL[sectorOf(metier)];
   const sys =
-    "Tu es un directeur de création et concepteur-rédacteur français d'élite. " +
-    "Tu écris des textes de site web haut de gamme, sur-mesure, jamais génériques, " +
-    "sobres et crédibles (pas de superlatifs creux, pas d'emoji). " +
+    "Tu es un concepteur-rédacteur français d'élite (niveau grande agence). " +
+    "Tu écris des textes de site web haut de gamme, sur-mesure, avec du caractère. " +
+    "RÈGLES : titres courts et évocateurs (une image, une émotion, pas une description) ; " +
+    "bannis les clichés et mots creux (« de qualité », « passion », « bienvenue », « expert », " +
+    "« à votre service », « n°1 », « unique »), les superlatifs vides et les emoji ; " +
+    "phrases concrètes et sensorielles ; vouvoiement, ton adapté au métier. " +
+    "Exemples de bons titres : « Le goût du <em>partage</em> », « Reprenez votre <em>souffle</em> », " +
+    "« Un travail <em>bien fait</em> ». " +
     "Tu réponds STRICTEMENT en JSON valide, sans texte autour, sans balises Markdown.";
   const user =
     `Rédige le contenu d'une page d'accueil pour cet établissement :\n` +
