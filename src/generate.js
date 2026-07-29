@@ -12,6 +12,17 @@ const MODELS = [
   "@cf/mistralai/mistral-small-3.1-24b-instruct",
 ];
 
+// Requête image par défaut (anglais) selon le secteur — repli si l'IA n'en donne pas.
+const SECTOR_Q = {
+  restaurant: "wine bar restaurant cozy interior food",
+  artisan: "craftsman plumber tradesman at work tools",
+  commerce: "boutique shop interior storefront",
+  "bien-etre": "wellness spa relaxation zen calm",
+  coiffure: "hair salon hairdresser styling",
+  evenementiel: "wedding event elegant decoration flowers",
+  default: "local small business professional",
+};
+
 /** Normalise le métier saisi vers une clé de secteur (direction artistique). */
 export function sectorOf(metier) {
   const m = (metier || "").toLowerCase();
@@ -227,8 +238,43 @@ export function curatedPage({ metier, nom, ville, ton }) {
     faq: p.faq(),
     cta: p.cta(),
     contact: { ville: v, phone: "", hours: p.hours },
+    imageQuery: SECTOR_Q[sector] || SECTOR_Q.default,
     _source: "curated",
   };
+}
+
+/** Cherche des photos pertinentes sur Pexels (clé serveur). [] si pas de clé/erreur. */
+async function fetchImages(env, query, n) {
+  if (!env || !env.PEXELS_KEY || !query) return [];
+  const key = "img:" + query.toLowerCase().replace(/[^a-z0-9 ]/g, "").slice(0, 64);
+  if (env.CACHE) {
+    try { const c = await env.CACHE.get(key, "json"); if (c && c.length) return c; } catch (_) {}
+  }
+  try {
+    const url = "https://api.pexels.com/v1/search?orientation=landscape&size=large&per_page=" + n +
+      "&query=" + encodeURIComponent(query);
+    const r = await fetch(url, { headers: { Authorization: env.PEXELS_KEY } });
+    if (!r.ok) return [];
+    const j = await r.json();
+    const urls = (j.photos || [])
+      .map(function (p) { return p && p.src && (p.src.large2x || p.src.large || p.src.original); })
+      .filter(Boolean);
+    if (env.CACHE && urls.length) {
+      try { await env.CACHE.put(key, JSON.stringify(urls), { expirationTtl: 604800 }); } catch (_) {}
+    }
+    return urls;
+  } catch (_) { return []; }
+}
+
+/** Attache page.images {hero, about, gallery[]} depuis Pexels si la clé existe. */
+async function attachImages(env, page) {
+  const q = page.imageQuery || SECTOR_Q[page.sector] || SECTOR_Q.default;
+  const imgs = await fetchImages(env, q, 8);
+  if (imgs.length >= 2) {
+    page.images = { hero: imgs[0], about: imgs[1] || imgs[0], gallery: imgs.slice(2, 6) };
+  }
+  if (page._debug) page._debug.pexels = { hasKey: Boolean(env && env.PEXELS_KEY), query: q, found: imgs.length };
+  return page;
 }
 
 /* ---------------------------------------------------------------------------
@@ -256,7 +302,8 @@ function buildMessages({ metier, nom, ville, ton }) {
     `"proofs":[{"quote":"avis client crédible","author":"Prénom N."}] (exactement 3),` +
     `"faq":[{"q":"","a":""}] (exactement 3),` +
     `"cta":{"title":"","subtitle":"","button":""},` +
-    `"contact":{"ville":"${ville}","phone":"","hours":"horaires plausibles"}}`;
+    `"contact":{"ville":"${ville}","phone":"","hours":"horaires plausibles"},` +
+    `"imageQuery":"3 à 5 mots-clés EN ANGLAIS pour trouver de vraies photos de ce métier précis (ex. fleuriste → \\"florist flower shop bouquet\\", boulangerie → \\"bakery bread pastry\\")"}`;
   return [
     { role: "system", content: sys },
     { role: "user", content: user },
@@ -306,6 +353,7 @@ function mergeOntoCurated(base, ai) {
   if (ai.about) out.about = { title: str(ai.about.title, base.about.title), body: str(ai.about.body, base.about.body) };
   if (ai.cta) out.cta = { title: str(ai.cta.title, base.cta.title), subtitle: str(ai.cta.subtitle, base.cta.subtitle), button: str(ai.cta.button, base.cta.button) };
   if (ai.contact) out.contact = { ville: base.contact.ville, phone: str(ai.contact.phone, base.contact.phone), hours: str(ai.contact.hours, base.contact.hours) };
+  out.imageQuery = str(ai.imageQuery, base.imageQuery);
   return out;
 }
 
@@ -314,7 +362,7 @@ export async function generatePage(env, input, opts) {
   const base = curatedPage(input);
   if (!env || !env.AI) {
     if (opts.debug) base._debug = { hasAI: false };
-    return base; // pas d'IA (dev local) → curaté
+    return await attachImages(env, base); // pas d'IA → curaté (+ photos Pexels si clé)
   }
   const messages = buildMessages(input);
   const tries = [];
@@ -333,5 +381,5 @@ export async function generatePage(env, input, opts) {
   const out = mergeOntoCurated(base, ai);
   if (usedModel) out._model = usedModel;
   if (opts.debug) out._debug = { hasAI: true, usedModel: usedModel, tries: tries };
-  return out;
+  return await attachImages(env, out);
 }

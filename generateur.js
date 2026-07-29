@@ -66,7 +66,10 @@
   function renderPage(page, opts) {
     opts = opts || {};
     var o = opts.origin || "", th = buildTheme(page.sector, page.ton), seed = seedOf(page.brand);
-    var heroU = img(o, th.im.hero), phU = img(o, th.im.ph);
+    var PI = page.images || null;
+    function esca(u) { return String(u).replace(/&/g, "&amp;"); } // pour les styles inline (URLs Pexels)
+    var heroU = esca(PI && PI.hero ? PI.hero : img(o, th.im.hero));
+    var phU = esca(PI && PI.about ? PI.about : img(o, th.im.ph));
     var overlay = th.light ? "linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.88))" : "linear-gradient(160deg,rgba(0,0,0,.5),rgba(0,0,0,.84))";
     var hsh = th.light ? "0 1px 3px rgba(255,255,255,.9)" : "0 2px 22px rgba(0,0,0,.6)";
     var UP = th.upper;
@@ -74,7 +77,10 @@
     function btn(cls, label, href) { return '<a class="btn ' + cls + '" href="' + (href || "#contact") + '">' + esc(label) + "</a>"; }
     function eb(txt) { return '<div class="eb">' + esc(txt) + "</div>"; }
     function h2(t2) { return '<h2 class="st">' + esc(t2) + "</h2>"; }
-    function gimg(i) { var g = th.im.g; return img(o, g[i % g.length]); }
+    function gimg(i) {
+      if (PI && PI.gallery && PI.gallery.length) return esca(PI.gallery[i % PI.gallery.length]);
+      var g = th.im.g; return esca(img(o, g[i % g.length]));
+    }
 
     /* ---- HERO variants ---- */
     function hero(v) {
