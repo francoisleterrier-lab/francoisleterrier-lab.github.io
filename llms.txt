@@ -17,6 +17,10 @@
 4. Référencement SEO : audit, optimisation et accompagnement (référencement naturel + local, fiche Google Business, contenu, netlinking) pour les pros du Sud-Toulousain. Aucune position garantie ; résultats en 3-6 mois. Voir referencement-seo.html.
 3. Faire-part digital : mini-site d'invitation événementiel privé (mariage, baptême, anniversaire, PACS) avec compte à rebours, RSVP en ligne (présence, enfants, allergies) consultable en temps réel, programme, infos pratiques, hébergements, itinéraire, dress code, galerie photos, livre d'or, installable sur téléphone (PWA), adresse web privée non indexée.
 
+## Outils gratuits en ligne (sans inscription, partout en France)
+- Générateur de site instantané : indiquer métier + nom d'établissement + ville → une vraie page d'accueil sur-mesure se compose en quelques secondes ; on peut changer le style et les couleurs, réécrire les textes en direct, et obtenir un lien partageable. https://francoisleterrier.fr/generateur.html
+- Audit de site gratuit et instantané : coller l'URL d'un site → note sur 100 (performance, SEO, structure, présence Google locale) + capture en direct + les 3 priorités les plus rentables ; le plan d'action détaillé est envoyé par e-mail. https://francoisleterrier.fr/audit.html
+
 ## Tarifs (à partir de, TVA non applicable art. 293 B du CGI)
 - Réseaux sociaux : Essentiel dès 180 €/mois (2 publications), Croissance dès 350 €/mois (4 publications, formule phare), Premium dès 520 €/mois (4 publications + 1 vidéo/Reel).
 - Sites internet : Site Express dès 590 €, Site Vitrine dès 1 400 €, Sur-Mesure dès 2 500 €.
@@ -41,6 +45,8 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Application web & mobile (PWA) : https://francoisleterrier.fr/createur-application-mobile.html
 - Référencement SEO : https://francoisleterrier.fr/referencement-seo.html
 - Faire-part digital (invitation événementielle) : https://francoisleterrier.fr/faire-part-digital.html
+- Générateur de site gratuit (outil) : https://francoisleterrier.fr/generateur.html
+- Audit de site gratuit (outil) : https://francoisleterrier.fr/audit.html
 - Tarifs : https://francoisleterrier.fr/tarifs.html
 - Contact : https://francoisleterrier.fr/contact.html
 - À propos (page entité) : https://francoisleterrier.fr/a-propos.html

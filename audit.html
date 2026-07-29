@@ -14,6 +14,49 @@
 <meta property="og:title" content="Audit de site gratuit et instantané — François Leterrier">
 <meta property="og:description" content="Votre site noté sur 100 en quelques secondes, avec un plan d'action clair. Gratuit, sans inscription.">
 <meta property="og:url" content="https://francoisleterrier.fr/audit.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Audit de site internet gratuit et instantané",
+  "url": "https://francoisleterrier.fr/audit.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "fr-FR",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "description": "Collez l'adresse de votre site et recevez en quelques secondes une note sur 100 : performance, SEO, structure et présence Google locale, avec les priorités les plus rentables. Gratuit, sans inscription, partout en France.",
+  "featureList": ["Note globale sur 100", "Sous-scores performance, SEO, accessibilité", "Analyse de la présence Google locale", "Capture en direct du site", "3 priorités les plus rentables"],
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "François Leterrier — Community Manager & Création web",
+    "telephone": "+33698200208",
+    "areaServed": "France",
+    "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Audit de site", "item": "https://francoisleterrier.fr/audit.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "L'audit de site est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, gratuit et instantané, sans inscription. Vous collez l'adresse de votre site et vous recevez une note sur 100 en quelques secondes." } },
+    { "@type": "Question", "name": "Qu'analyse l'audit de mon site ?", "acceptedAnswer": { "@type": "Answer", "text": "La performance (vitesse mobile), le référencement (SEO), la structure de la page, la présence Google locale, et une capture en direct de votre site. Vous obtenez aussi les trois priorités les plus rentables." } },
+    { "@type": "Question", "name": "Vais-je recevoir un rapport détaillé ?", "acceptedAnswer": { "@type": "Answer", "text": "Vous voyez immédiatement votre score et vos points faibles. Le plan d'action complet, avec les corrections étape par étape, vous est envoyé par e-mail." } },
+    { "@type": "Question", "name": "L'audit fonctionne-t-il pour tous les sites ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, quel que soit l'outil utilisé — WordPress, Wix, Shopify, Squarespace ou un site sur-mesure. L'analyse porte sur la page réellement en ligne." } }
+  ]
+}
+</script>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
@@ -78,6 +121,15 @@
   .ghostbtn{border:1px solid var(--line);background:transparent;color:#cfd6e6;font:inherit;font-weight:600;font-size:14px;padding:14px 22px;border-radius:12px;cursor:pointer;text-decoration:none}
   @media(max-width:820px){.rep-top{grid-template-columns:1fr;text-align:center}.gauge{margin:0 auto}.grid2{grid-template-columns:1fr}.mini-g{grid-template-columns:1fr 1fr}}
   @media print{header.top,.au-form,.au-hero .lede,.rep-cta,footer,#flburger{display:none!important}.report{display:block!important}}
+  /* FAQ (contenu statique, GEO + conversion) */
+  .au-faq{padding:6px 0 48px}
+  .au-faq h2{font-family:'Fraunces',Georgia,serif;font-weight:500;color:#fff;font-size:clamp(24px,4vw,34px);margin:0 0 18px}
+  .au-faq details{border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:10px;background:rgba(255,255,255,.03)}
+  .au-faq summary{cursor:pointer;color:#fff;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:14px}
+  .au-faq summary::-webkit-details-marker{display:none}
+  .au-faq summary::after{content:'+';color:var(--cyan);font-weight:700;font-size:20px;line-height:1}
+  .au-faq details[open] summary::after{content:'–'}
+  .au-faq details p{color:var(--muted);margin-top:10px;font-size:14.5px;line-height:1.62}
 </style>
 </head>
 <body>
@@ -117,6 +169,14 @@
     </div></section>
 
     <section class="report" id="au-report"><div class="wrap" id="au-report-in"></div></section>
+
+    <section class="au-faq"><div class="wrap">
+      <h2>Questions fréquentes</h2>
+      <details><summary>L'audit de site est-il gratuit&nbsp;?</summary><p>Oui, gratuit et instantané, sans inscription. Vous collez l'adresse de votre site et vous recevez une note sur 100 en quelques secondes.</p></details>
+      <details><summary>Qu'analyse l'audit de mon site&nbsp;?</summary><p>La performance (vitesse mobile), le référencement (SEO), la structure de la page, la présence Google locale, et une capture en direct de votre site. Vous obtenez aussi les trois priorités les plus rentables.</p></details>
+      <details><summary>Vais-je recevoir un rapport détaillé&nbsp;?</summary><p>Vous voyez immédiatement votre score et vos points faibles. Le plan d'action complet, avec les corrections étape par étape, vous est envoyé par e-mail.</p></details>
+      <details><summary>L'audit fonctionne-t-il pour tous les sites&nbsp;?</summary><p>Oui, quel que soit l'outil utilisé — WordPress, Wix, Shopify, Squarespace ou un site sur-mesure. L'analyse porte sur la page réellement en ligne.</p></details>
+    </div></section>
   </main>
 
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a></div></footer>

@@ -99,3 +99,6 @@ footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
   table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:13.5px;}
   th,td{padding:9px 10px;}
 }
+
+.tools-mini{margin-top:14px;font-size:13.5px;color:var(--muted);}
+.tools-mini a{color:var(--cyan);font-weight:600;}
