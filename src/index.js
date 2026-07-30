@@ -21,7 +21,7 @@ import { generatePage, aiText } from "./generate.js";
 import { runAudit, publicView, barometreStats } from "./audit.js";
 
 // Personnalité + connaissances de l'assistant on-site (LLM via Workers AI).
-const ASSISTANT_SYSTEM = "Tu es l'assistant du site de François Leterrier, community manager et créateur de sites internet (micro-entreprise) basé à Lavernose-Lacasse (Sud-Toulousain, 31410), qui travaille partout en France (visio + livraison en ligne). Réponds en français, chaleureux et pro, JAMAIS de jargon, en 1 à 3 phrases maximum. Offre et tarifs (à partir de) : sites internet — site vitrine dès 590 € (1 page) ou 1 400 € (jusqu'à 5 pages), référencement local inclus ; réseaux sociaux dès 180 €/mois sans engagement (formule Croissance 350 €/mois, la plus choisie) ; faire-part digital dès 290 € ; référencement/visibilité Google. « Application » = site web/PWA, jamais une appli native App Store. Oriente vers le bon outil quand c'est utile : audit de présence en ligne gratuit (page /audit.html), générateur de maquette de site (/generateur.html), configurateur de devis (/configurateur.html), ou le diagnostic gratuit (/contact.html). N'invente jamais de prix hors de ceux indiqués ; si tu ne sais pas, propose le diagnostic gratuit. Termine souvent par une invitation à agir (essayer un outil ou demander le diagnostic).";
+const ASSISTANT_SYSTEM = "Tu es l'assistant du site de François Leterrier, community manager et créateur de sites internet (micro-entreprise) basé à Lavernose-Lacasse (Sud-Toulousain, 31410), qui travaille partout en France (visio + livraison en ligne). Réponds en français, chaleureux et pro, JAMAIS de jargon, en 1 à 3 phrases maximum. Offre et tarifs (à partir de) : sites internet — site vitrine dès 590 € (1 page) ou 1 400 € (jusqu'à 5 pages), référencement local inclus ; réseaux sociaux dès 180 €/mois sans engagement (formule Croissance 350 €/mois, la plus choisie) ; faire-part digital dès 290 € ; référencement/visibilité Google. « Application » = site web/PWA, jamais une appli native App Store. Oriente vers le bon outil quand c'est utile : audit de présence en ligne gratuit (page /audit.html), générateur de maquette de site (/generateur.html), configurateur de devis (/configurateur.html), ou le diagnostic gratuit (/contact.html). Programme de parrainage : recommander un pro fait gagner 1 mois de gestion de réseaux offert par filleul qui démarre (page /parrainage.html) — mentionne-le si la personne connaît quelqu'un à recommander. N'invente jamais de prix hors de ceux indiqués ; si tu ne sais pas, propose le diagnostic gratuit. Termine souvent par une invitation à agir (essayer un outil ou demander le diagnostic).";
 
 // Clé publique du formulaire web3forms (déjà utilisée par le site) — sert à
 // notifier François de chaque lead par e-mail, sans nouvelle clé/secret.
@@ -257,19 +257,43 @@ async function notifyLead(lead) {
   } catch (_) {}
 }
 
-/** Notifie François d'un lead « assistant » (rappel demandé depuis le chat). */
+/** Notifie François d'un lead « assistant » (rappel depuis le chat) ou « parrainage ». */
 async function notifyContactLead(lead) {
   try {
     const c = lead.contact || {};
+    const isParr = c.source === "parrainage";
     const convo = (c.convo || "").slice(0, 1500);
-    const msg = "NOUVEAU LEAD — Assistant du site\n\n" +
-      "Nom : " + (c.nom || "?") + "\nEmail : " + lead.email +
+    const msg = (isParr ? "NOUVEAU PARRAINAGE 🤝" : "NOUVEAU LEAD — Assistant du site") + "\n\n" +
+      (isParr ? "Parrain" : "Nom") + " : " + (c.nom || "?") + "\nEmail : " + lead.email +
       (c.tel ? "\nTéléphone : " + c.tel : "") +
-      (c.message ? "\n\nSa demande :\n" + c.message : "") +
+      (c.message ? "\n\n" + (isParr ? "Détails" : "Sa demande") + " :\n" + c.message : "") +
       (convo ? "\n\n--- Fil de la conversation ---\n" + convo : "");
     await fetch("https://api.web3forms.com/submit", {
       method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ access_key: W3F_KEY, subject: "📞 Lead assistant — " + (c.nom || lead.email), from_name: "FL Assistant", email: lead.email, message: msg }),
+      body: JSON.stringify({ access_key: W3F_KEY, subject: (isParr ? "🤝 Parrainage — " : "📞 Lead assistant — ") + (c.nom || lead.email), from_name: isParr ? "FL Parrainage" : "FL Assistant", email: lead.email, message: msg }),
+    });
+  } catch (_) {}
+}
+
+/**
+ * Synchronise un lead vers Brevo (ex-Sendinblue) pour les relances automatiques.
+ * No-op tant que BREVO_API_KEY n'est pas configurée en secret Cloudflare — aucune clé dans le repo.
+ */
+async function syncBrevo(env, lead) {
+  if (!env || !env.BREVO_API_KEY || !lead || !lead.email) return;
+  try {
+    const c = lead.contact || {};
+    const body = {
+      email: lead.email,
+      updateEnabled: true,
+      attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" },
+    };
+    const listId = parseInt(env.BREVO_LIST_ID || "", 10);
+    if (listId) body.listIds = [listId];
+    await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(body),
     });
   } catch (_) {}
 }
@@ -297,6 +321,7 @@ async function storeLead(env, lead) {
       try {
         await env.DB.prepare("INSERT INTO leads (created_at,nom,email,metier,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?,?,?)")
           .bind(ts, nom, lead.email, metier, ville, lead.source || "audit", message, ipHash).run();
+        await syncBrevo(env, lead); // relances automatiques (no-op sans clé Brevo)
         return "d1";
       } catch (_) {
         if (attempt === 0) { try { await ensureSchema(env); } catch (_e) {} continue; } // 1er échec = table absente → on la crée et on retente
@@ -304,6 +329,7 @@ async function storeLead(env, lead) {
     }
   }
   if (env && env.CACHE) { try { await env.CACHE.put("lead:" + ts + ":" + (crypto.randomUUID ? crypto.randomUUID() : ""), JSON.stringify({ email: lead.email, url: lead.url, source: lead.source || "audit", site: lead.site || null, ts: ts }), { expirationTtl: 31536000 }); } catch (_) {} }
+  await syncBrevo(env, lead); // relances automatiques (no-op sans clé Brevo)
   return "kv";
 }
 
@@ -443,11 +469,16 @@ async function handleLead(request, env) {
   const email = clampStr(d.email, 120);
   if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
   const url = clampStr(d.url, 300), auditId = clampStr(d.auditId, 60), source = clampStr(d.source, 40) || "audit";
-  // Capture « rappel » depuis l'assistant : nom + tél + demande, arrivent dans /admin + e-mail dédié.
-  if (source === "assistant") {
-    const nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30), note = clampStr(d.message, 800), convo = clampStr(d.convo, 1500);
-    const lead = { email: email, url: "", source: "assistant", ip: clientIp(request),
-      contact: { nom: nom, tel: tel, message: note, convo: convo },
+  // Capture « rappel » (assistant) ou « parrainage » : nom + tél + demande → /admin + e-mail dédié.
+  if (source === "assistant" || source === "parrainage") {
+    const nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30), convo = clampStr(d.convo, 1500);
+    let note = clampStr(d.message, 800);
+    if (source === "parrainage") {
+      const filleul = clampStr(d.filleul, 200);
+      note = (filleul ? "Filleul : " + filleul : "") + (filleul && note ? " — " : "") + note;
+    }
+    const lead = { email: email, url: "", source: source, ip: clientIp(request),
+      contact: { nom: nom, tel: tel, message: note, convo: convo, source: source },
       site: { input: { nom: nom, ville: "", metier: "" }, contact: { tel: tel, message: note } } };
     await Promise.all([notifyContactLead(lead), storeLead(env, lead)]);
     return json({ ok: true });

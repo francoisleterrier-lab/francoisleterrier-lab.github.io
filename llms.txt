@@ -49,6 +49,7 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Générateur de site gratuit (outil) : https://francoisleterrier.fr/generateur.html
 - Audit de site gratuit (outil) : https://francoisleterrier.fr/audit.html
 - Tarifs : https://francoisleterrier.fr/tarifs.html
+- Parrainage (1 mois de gestion réseaux offert par filleul qui démarre) : https://francoisleterrier.fr/parrainage.html
 - Contact : https://francoisleterrier.fr/contact.html
 - À propos (page entité) : https://francoisleterrier.fr/a-propos.html
 - Community manager à Muret : https://francoisleterrier.fr/community-manager-muret.html
