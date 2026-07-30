@@ -313,7 +313,9 @@ export async function runAudit(env, input) {
 
   // Données réelles en parallèle : Lighthouse, fiche Google (Places, dormant),
   // moyenne secteur, audit précédent (ré-audit). On tient le budget de temps.
-  const placesQuery = (nom || ville) ? (nom + " " + ville).trim() : norm.host.replace(/^www\./, "");
+  // Places n'est appelé QUE si l'utilisateur donne nom/ville (économise le
+  // crédit Google : un audit sans ces champs n'interroge pas Places).
+  const placesQuery = (nom || ville) ? (nom + " " + ville).trim() : "";
   const [psi, places, agg, previous] = await Promise.all([
     runPSI(env, url),
     runPlaces(env, placesQuery),
