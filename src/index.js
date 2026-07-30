@@ -36,6 +36,10 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.francoisleterrier.fr",
 ]);
 
+// Endpoints « à valeur » : refusés si la requête vient d'une autre origine
+// (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead"]);
+
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
   "/generate": { limit: 8, window: 60 },
@@ -64,6 +68,21 @@ function corsHeaders(request) {
     };
   }
   return {};
+}
+
+/**
+ * Requête à refuser : elle vient explicitement d'une AUTRE origine que la nôtre.
+ * Un navigateur envoie toujours l'en-tête Origin sur un appel cross-origin →
+ * une copie de la page hébergée ailleurs (ex. le site d'un webmaster) est donc
+ * bloquée. Sans Origin NI Referer (curl, monitoring) on laisse passer : ça
+ * n'aide pas un copieur, qui lui passe forcément par un navigateur.
+ */
+function originForbidden(request) {
+  const origin = request.headers.get("Origin");
+  if (origin) return !ALLOWED_ORIGINS.has(origin);
+  const ref = request.headers.get("Referer");
+  if (ref) { try { return !ALLOWED_ORIGINS.has(new URL(ref).origin); } catch (_) { return false; } }
+  return false;
 }
 
 function json(data, status = 200, extra = {}) {
@@ -411,6 +430,12 @@ export default {
             "Retry-After": String(rl.retryAfter),
           })
         );
+      }
+
+      // Verrou d'origine : nos endpoints « à valeur » ne servent que notre site
+      // (une copie de la page hébergée ailleurs est refusée avant tout traitement).
+      if (PROTECTED_PATHS.has(path) && originForbidden(request)) {
+        return withCors(json({ ok: false, error: "Origine non autorisée." }, 403));
       }
 
       const handler = ROUTES[`${request.method} ${path}`];

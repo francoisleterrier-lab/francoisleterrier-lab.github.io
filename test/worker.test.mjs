@@ -109,6 +109,14 @@ ok(r.status === 422, "POST /site (maquette manquante) → 422");
 r = await worker.fetch(req("GET", "/site?id=deadbeef", { origin: APEX }), env);
 ok(r.status === 404, "GET /site (id inconnu) → 404 (maquette introuvable)");
 
+// 4c) verrou d'origine : les endpoints « à valeur » refusent une autre origine
+r = await worker.fetch(req("POST", "/audit", { body: JSON.stringify({ url: "https://x.fr" }), ct: "application/json", origin: "https://evil.example" }), env);
+ok(r.status === 403, "POST /audit depuis une origine non autorisée → 403 (anti-copie)");
+r = await worker.fetch(req("POST", "/generate", { body: JSON.stringify({ metier: "x", nom: "y" }), ct: "application/json", origin: "https://evil.example" }), env);
+ok(r.status === 403, "POST /generate depuis une origine non autorisée → 403");
+r = await worker.fetch(req("POST", "/audit", { body: "{cassé", ct: "application/json", origin: APEX }), env);
+ok(r.status === 400, "POST /audit depuis l'apex → passe le verrou (400 JSON, pas 403)");
+
 // 5) méthode / inconnu
 r = await worker.fetch(req("GET", "/lead"), env);
 ok(r.status === 405, "GET /lead → 405 (méthode)");
