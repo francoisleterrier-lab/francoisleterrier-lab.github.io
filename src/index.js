@@ -257,6 +257,23 @@ async function notifyLead(lead) {
   } catch (_) {}
 }
 
+/** Notifie François d'un lead « assistant » (rappel demandé depuis le chat). */
+async function notifyContactLead(lead) {
+  try {
+    const c = lead.contact || {};
+    const convo = (c.convo || "").slice(0, 1500);
+    const msg = "NOUVEAU LEAD — Assistant du site\n\n" +
+      "Nom : " + (c.nom || "?") + "\nEmail : " + lead.email +
+      (c.tel ? "\nTéléphone : " + c.tel : "") +
+      (c.message ? "\n\nSa demande :\n" + c.message : "") +
+      (convo ? "\n\n--- Fil de la conversation ---\n" + convo : "");
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: W3F_KEY, subject: "📞 Lead assistant — " + (c.nom || lead.email), from_name: "FL Assistant", email: lead.email, message: msg }),
+    });
+  } catch (_) {}
+}
+
 /** Crée/complète la table leads si besoin (D1 auto-provisionné, sans wrangler). */
 async function ensureSchema(env) {
   if (!env || !env.DB) return;
@@ -378,6 +395,8 @@ function parseLeadRow(r) {
     metier: r.metier || inp.metier || "",
     nom: r.nom || inp.nom || "",
     url: meta.url || "",
+    tel: (site && site.contact && site.contact.tel) || "",
+    note: (site && site.contact && site.contact.message) || "",
     score: audit && audit.overall != null ? audit.overall : null,
     shareId: site && site.id ? site.id : null,
   };
@@ -424,6 +443,15 @@ async function handleLead(request, env) {
   const email = clampStr(d.email, 120);
   if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
   const url = clampStr(d.url, 300), auditId = clampStr(d.auditId, 60), source = clampStr(d.source, 40) || "audit";
+  // Capture « rappel » depuis l'assistant : nom + tél + demande, arrivent dans /admin + e-mail dédié.
+  if (source === "assistant") {
+    const nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30), note = clampStr(d.message, 800), convo = clampStr(d.convo, 1500);
+    const lead = { email: email, url: "", source: "assistant", ip: clientIp(request),
+      contact: { nom: nom, tel: tel, message: note, convo: convo },
+      site: { input: { nom: nom, ville: "", metier: "" }, contact: { tel: tel, message: note } } };
+    await Promise.all([notifyContactLead(lead), storeLead(env, lead)]);
+    return json({ ok: true });
+  }
   let audit = null;
   if (auditId && env.CACHE) { try { audit = await env.CACHE.get("audit:" + auditId, "json"); } catch (_) {} }
   const lead = { email: email, url: url, source: source, audit: audit, ip: clientIp(request) };

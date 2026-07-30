@@ -130,6 +130,8 @@ r = await worker.fetch(req("GET", "/barometre"), env);
 ok(r.status === 200, "GET /barometre → 200");
 r = await worker.fetch(req("POST", "/assistant", { body: JSON.stringify({ message: "" }), ct: "application/json" }), env);
 ok(r.status === 422, "POST /assistant (message vide) → 422");
+r = await worker.fetch(req("POST", "/lead", { body: JSON.stringify({ source: "assistant", nom: "X", email: "pas-un-email" }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /lead source=assistant (e-mail invalide) → 422 (avant tout envoi)");
 
 // 4c) verrou d'origine : les endpoints « à valeur » refusent une autre origine
 r = await worker.fetch(req("POST", "/audit", { body: JSON.stringify({ url: "https://x.fr" }), ct: "application/json", origin: "https://evil.example" }), env);
@@ -189,6 +191,15 @@ r = await worker.fetch(req("POST", "/admin/lead-status", { token: "s3cr3t-test-t
 ok(r.status === 422, "POST /admin/lead-status (statut invalide) → 422");
 r = await worker.fetch(req("POST", "/admin/lead-status", { body: JSON.stringify({ id: 1, status: "contacte" }), ct: "application/json" }), adminEnv);
 ok(r.status === 401, "POST /admin/lead-status sans jeton → 401");
+
+// lead « assistant » (rappel depuis le chat) : parsé avec nom + tél + demande, sans effet réseau
+await adminEnv.DB.prepare("INSERT INTO leads (created_at,nom,email,metier,ville,source,message,ip_hash) VALUES (?,?,?,?,?,?,?,?)")
+  .bind("2026-07-30T09:00:00Z", "Marie D.", "marie@exemple.fr", "", "", "assistant",
+    JSON.stringify({ url: "", audit: null, site: { input: { nom: "Marie D." }, contact: { tel: "06 12 34 56 78", message: "Besoin d'un site pour mon salon" } } }), "hash").run();
+r = await worker.fetch(req("GET", "/admin/leads", { token: "s3cr3t-test-token" }), adminEnv);
+jl = await r.json();
+const al = jl.leads.find((x) => x.source === "assistant");
+ok(al && al.nom === "Marie D." && al.tel === "06 12 34 56 78" && al.note === "Besoin d'un site pour mon salon", "lead assistant parsé (nom + tél + demande)");
 
 console.log(`\n${pass} réussis, ${fail} échoués`);
 process.exit(fail ? 1 : 0);

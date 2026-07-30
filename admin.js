@@ -12,7 +12,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   var STATUS = { nouveau: "Nouveau", contacte: "Contacté", converti: "Converti", perdu: "Perdu" };
-  var SRC = { audit: "Audit", generateur: "Générateur", devis: "Devis" };
+  var SRC = { audit: "Audit", generateur: "Générateur", devis: "Devis", assistant: "Assistant" };
 
   var token = "", allLeads = [];
 
@@ -77,6 +77,11 @@
         var who = [l.metier, l.nom].filter(Boolean).map(esc).join(" · ");
         var link = l.shareId ? '<div class="sub"><a href="generateur.html?site=' + esc(l.shareId) + '" target="_blank" rel="noopener">Voir la maquette →</a></div>' : "";
         return (who || '<span class="muted">—</span>') + link;
+      }
+      if (l.source === "assistant") {
+        var who = [l.nom, l.tel].filter(Boolean).map(esc).join(" · ");
+        var note = l.note ? '<div class="sub">« ' + esc(l.note) + ' »</div>' : "";
+        return (who || '<span class="muted">rappel demandé</span>') + note;
       }
       if (l.source === "audit") {
         var u = l.url ? '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.url.replace(/^https?:\/\//, "")) + "</a>" : '<span class="muted">site non précisé</span>';

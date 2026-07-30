@@ -20,7 +20,7 @@
     { t: "🔍 Auditer mon site", href: "/audit.html" },
     { t: "🎨 Générer ma maquette", href: "/generateur.html" },
     { t: "📅 Réserver un RDV", cal: true },
-    { t: "✍️ Diagnostic gratuit", href: "/contact.html" }
+    { t: "📞 Être rappelé", capture: true }
   ];
 
   /* ---------- parcours scriptés ---------- */
@@ -157,9 +157,10 @@
       ]
     },
     contact: {
-      bot: "Avec plaisir. Le plus simple&nbsp;: le <b>diagnostic gratuit</b> (sans engagement). Laissez-moi votre demande et je réponds sous 48h en moyenne.",
+      bot: "Avec plaisir. Le plus simple&nbsp;: laissez-moi vos coordonnées ici, François vous recontacte (sous 48h en moyenne, sans engagement).",
       opts: [
-        { t: "✍️ Demander mon diagnostic", href: "/contact.html" },
+        { t: "📞 Être rappelé", cap: true },
+        { t: "✍️ Formulaire complet", href: "/contact.html" },
         { t: "📅 Réserver un créneau", href: "https://calendly.com/fl-conceptimmoplus/30min", ext: true },
         { t: "↩ Retour", go: "start" }
       ]
@@ -202,6 +203,13 @@
     + '.fl-as-form input:focus{outline:none;border-color:#28c8dd;box-shadow:0 0 0 3px rgba(40,200,221,.16)}'
     + '.fl-as-send{flex:none;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(90deg,#28c8dd,#7c3aed);color:#08111f;font-size:15px;font-weight:800}'
     + '.fl-as-send[disabled]{opacity:.55;cursor:progress}'
+    + '.fl-as-cap{display:flex;flex-direction:column;gap:8px;max-width:100%;width:100%}'
+    + '.fl-as-ci{width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1.5px solid rgba(143,230,240,.24);border-radius:11px;padding:9px 12px;color:#f2ecf4;font:inherit;font-size:13px}'
+    + '.fl-as-ci:focus{outline:none;border-color:#28c8dd;box-shadow:0 0 0 3px rgba(40,200,221,.16)}'
+    + 'textarea.fl-as-ci{resize:vertical;min-height:38px}'
+    + '.fl-as-cap-err{color:#ff8f8f;font-size:12px;font-weight:600}'
+    + '.fl-as-cap-send{cursor:pointer;border:0;border-radius:24px;padding:10px 16px;font:inherit;font-weight:800;font-size:13px;color:#08111f;background:linear-gradient(90deg,#28c8dd,#7c3aed,#e05bc8)}'
+    + '.fl-as-cap-send[disabled]{opacity:.6;cursor:progress}'
     + '.fl-as-typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#8fe6f0;animation:fl-as-blink 1s infinite}'
     + '.fl-as-typing span:nth-child(2){animation-delay:.2s}.fl-as-typing span:nth-child(3){animation-delay:.4s}'
     + '@keyframes fl-as-blink{0%,60%,100%{opacity:.3}30%{opacity:1}}'
@@ -254,6 +262,11 @@
         chip.href = o.href;
         chip.className = 'fl-as-chip cta';
         if (o.ext) { chip.target = '_blank'; chip.rel = 'noopener'; }
+      } else if (o.cap) {
+        chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'fl-as-chip cta';
+        chip.addEventListener('click', function () { renderCapture(); });
       } else {
         chip = document.createElement('button');
         chip.type = 'button';
@@ -275,11 +288,12 @@
     opts.innerHTML = '';
     QUICK.forEach(function (o) {
       var chip;
-      if (o.cal) {
+      if (o.cal || o.capture) {
         chip = document.createElement('button');
         chip.type = 'button';
-        chip.className = 'fl-as-chip';
+        chip.className = 'fl-as-chip' + (o.capture ? ' cta' : '');
         chip.addEventListener('click', function () {
+          if (o.capture) { renderCapture(); return; }
           if (typeof window.flOpenCalendly === 'function') window.flOpenCalendly();
           else location.href = '/contact.html';
         });
@@ -290,6 +304,66 @@
       }
       chip.innerHTML = o.t;
       opts.appendChild(chip);
+    });
+  }
+
+  /* Récapitule le fil pour donner le contexte à François. */
+  function buildConvo() {
+    return history.slice(-8).map(function (m) {
+      return (m.role === 'user' ? 'Vous : ' : 'Assistant : ') + String(m.content || '').slice(0, 300);
+    }).join('\n');
+  }
+
+  /* Formulaire « Être rappelé » injecté dans le fil : nom + e-mail (+ tél + demande) → /admin. */
+  function renderCapture() {
+    opts.innerHTML = '';
+    if (body.querySelector('.fl-as-cap')) { body.querySelector('.fl-as-cap input').focus(); return; }
+    addMsg("Avec plaisir 🙂 Laissez-moi vos coordonnées, François vous recontacte (réponse sous 48&nbsp;h en moyenne).", 'bot');
+    var card = document.createElement('form');
+    card.className = 'fl-as-msg fl-as-bot fl-as-cap';
+    card.setAttribute('novalidate', '');
+    card.innerHTML =
+      '<input class="fl-as-ci" type="text" name="nom" placeholder="Votre nom" autocomplete="name">' +
+      '<input class="fl-as-ci" type="email" name="email" placeholder="Votre e-mail *" autocomplete="email" required>' +
+      '<input class="fl-as-ci" type="tel" name="tel" placeholder="Téléphone (facultatif)" autocomplete="tel">' +
+      '<textarea class="fl-as-ci" name="message" rows="2" placeholder="Votre besoin en une phrase (facultatif)"></textarea>' +
+      '<div class="fl-as-cap-err" hidden></div>' +
+      '<button type="submit" class="fl-as-cap-send">Être rappelé →</button>';
+    body.appendChild(card);
+    body.scrollTop = body.scrollHeight;
+    var err = card.querySelector('.fl-as-cap-err');
+    card.querySelector('input[name="email"]').focus();
+    card.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var nom = card.querySelector('[name="nom"]').value.trim();
+      var email = card.querySelector('[name="email"]').value.trim();
+      var tel = card.querySelector('[name="tel"]').value.trim();
+      var message = card.querySelector('[name="message"]').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        err.textContent = "Merci d'indiquer un e-mail valide."; err.hidden = false; return;
+      }
+      err.hidden = true;
+      var btn = card.querySelector('.fl-as-cap-send');
+      btn.disabled = true; btn.textContent = 'Envoi…';
+      var okSent = false;
+      try {
+        var ctrl = new AbortController(), to = setTimeout(function () { ctrl.abort(); }, 15000);
+        var r = await fetch(API + '/lead', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'assistant', nom: nom, email: email, tel: tel, message: message, convo: buildConvo() }),
+          signal: ctrl.signal
+        });
+        clearTimeout(to);
+        var j = await r.json();
+        okSent = !!(j && j.ok);
+      } catch (_) {}
+      card.remove();
+      if (okSent) {
+        addMsg("C'est noté, merci " + (nom ? escHtml(nom.split(' ')[0]) : '') + "&nbsp;! 🎉 François vous recontacte très vite. En attendant, vous pouvez tester l'audit gratuit ou générer une maquette.", 'bot');
+      } else {
+        addMsg("Oups, l'envoi n'a pas abouti. Vous pouvez réessayer, ou passer par la page <a href=\"/contact.html\" style=\"color:#8fe6f0;font-weight:700\">contact</a> / m'appeler au 06&nbsp;98&nbsp;20&nbsp;02&nbsp;08.", 'bot');
+      }
+      showQuick();
     });
   }
 
