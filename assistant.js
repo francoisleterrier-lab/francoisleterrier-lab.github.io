@@ -15,6 +15,14 @@
   function escHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function linkify(s) { return escHtml(s).replace(/\/(audit|generateur|configurateur|contact|barometre|tarifs)\.html/g, function (m) { return '<a href="' + m + '" style="color:#8fe6f0;font-weight:700">' + m + "</a>"; }); }
 
+  /* Raccourcis d'action toujours proposés sous une réponse libre du LLM (conversion). */
+  var QUICK = [
+    { t: "🔍 Auditer mon site", href: "/audit.html" },
+    { t: "🎨 Générer ma maquette", href: "/generateur.html" },
+    { t: "📅 Réserver un RDV", cal: true },
+    { t: "✍️ Diagnostic gratuit", href: "/contact.html" }
+  ];
+
   /* ---------- parcours scriptés ---------- */
   var NODES = {
     start: {
@@ -262,6 +270,29 @@
     body.scrollTop = body.scrollHeight;
   }
 
+  /* Affiche les raccourcis de conversion sous une réponse libre. */
+  function showQuick() {
+    opts.innerHTML = '';
+    QUICK.forEach(function (o) {
+      var chip;
+      if (o.cal) {
+        chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'fl-as-chip';
+        chip.addEventListener('click', function () {
+          if (typeof window.flOpenCalendly === 'function') window.flOpenCalendly();
+          else location.href = '/contact.html';
+        });
+      } else {
+        chip = document.createElement('a');
+        chip.href = o.href;
+        chip.className = 'fl-as-chip';
+      }
+      chip.innerHTML = o.t;
+      opts.appendChild(chip);
+    });
+  }
+
   async function sendText() {
     var input = ui.panel.querySelector('#fl-as-input'), send = ui.panel.querySelector('.fl-as-send');
     var text = (input.value || '').trim();
@@ -287,6 +318,7 @@
     if (!reply) reply = "Désolé, je n'ai pas pu répondre à l'instant. Vous pouvez tester l'audit gratuit (/audit.html), le générateur (/generateur.html), ou demander le diagnostic offert (/contact.html).";
     addMsg(linkify(reply), 'bot');
     history.push({ role: 'assistant', content: reply });
+    showQuick();
     if (send) send.disabled = false;
     if (input) input.focus();
   }
