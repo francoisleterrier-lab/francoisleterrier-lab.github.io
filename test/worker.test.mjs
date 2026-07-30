@@ -109,6 +109,12 @@ ok(r.status === 422, "POST /site (maquette manquante) → 422");
 r = await worker.fetch(req("GET", "/site?id=deadbeef", { origin: APEX }), env);
 ok(r.status === 404, "GET /site (id inconnu) → 404 (maquette introuvable)");
 
+// 4b-bis) rapport d'audit partageable
+r = await worker.fetch(req("GET", "/audit"), env);
+ok(r.status === 400, "GET /audit (sans id) → 400");
+r = await worker.fetch(req("GET", "/audit?id=inconnu123", { origin: APEX }), env);
+ok(r.status === 404, "GET /audit?id inconnu → 404 (rapport introuvable)");
+
 // 4c) verrou d'origine : les endpoints « à valeur » refusent une autre origine
 r = await worker.fetch(req("POST", "/audit", { body: JSON.stringify({ url: "https://x.fr" }), ct: "application/json", origin: "https://evil.example" }), env);
 ok(r.status === 403, "POST /audit depuis une origine non autorisée → 403 (anti-copie)");

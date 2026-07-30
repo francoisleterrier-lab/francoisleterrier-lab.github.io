@@ -175,16 +175,27 @@ async function handleGenerate(request, env) {
   return json({ ok: true, page });
 }
 
-/** POST /audit — audit instantané : renvoie la vue PUBLIQUE, stocke le complet. */
+/** POST /audit — audit 360° : renvoie la vue PUBLIQUE, stocke le complet. */
 async function handleAudit(request, env) {
   const parsed = await readJson(request);
   if (parsed.error) return parsed.error;
-  const url = clampStr((parsed.data || {}).url, 300);
+  const d = parsed.data || {};
+  const url = clampStr(d.url, 300);
   if (!url) return json({ ok: false, error: "URL requise." }, 422);
-  const full = await runAudit(env, url);
+  const full = await runAudit(env, { url: url, nom: clampStr(d.nom, 80), ville: clampStr(d.ville, 80) });
   if (!full.ok) return json(full); // site injoignable / erreur → renvoyé tel quel
   const id = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now());
   if (env.CACHE) { try { await env.CACHE.put("audit:" + id, JSON.stringify(full), { expirationTtl: 2592000 }); } catch (_) {} }
+  return json(publicView(full, id));
+}
+
+/** GET /audit?id=… — rapport partageable : renvoie la vue PUBLIQUE stockée. */
+async function handleGetAuditReport(request, env) {
+  const id = clampStr(new URL(request.url).searchParams.get("id") || "", 60);
+  if (!id) return json({ ok: false, error: "Identifiant manquant." }, 400);
+  let full = null;
+  if (env.CACHE) { try { full = await env.CACHE.get("audit:" + id, "json"); } catch (_) {} }
+  if (!full || !full.ok) return json({ ok: false, error: "Rapport introuvable ou expiré." }, 404);
   return json(publicView(full, id));
 }
 
@@ -391,6 +402,7 @@ const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
+  "GET /audit": (req, env) => handleGetAuditReport(req, env),
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
