@@ -41,7 +41,8 @@ const ALLOWED_ORIGINS = new Set([
 
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/espace"]);
+// /stripe/webhook n'est PAS ici : Stripe appelle serveur-à-serveur (sans Origin) et le corps brut doit rester intact.
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/espace", "/checkout"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
@@ -53,6 +54,8 @@ const RATE_LIMITS = {
   "/devis/sign": { limit: 10, window: 60 },
   "/lead": { limit: 5, window: 60 },
   "/espace": { limit: 40, window: 60 },
+  "/checkout": { limit: 10, window: 60 },
+  "/stripe/webhook": { limit: 120, window: 60 },
   "/admin/leads": { limit: 60, window: 60 },
   "/admin/lead-status": { limit: 120, window: 60 },
   "/admin/espace": { limit: 60, window: 60 },
@@ -164,6 +167,8 @@ function handleHealth(_request, env) {
       brevo: Boolean(env && env.BREVO_API_KEY),
       places: Boolean(env && env.PLACES_API_KEY),
       pagespeed: Boolean(env && env.PAGESPEED_API_KEY),
+      stripe: Boolean(env && env.STRIPE_SECRET_KEY),
+      stripe_webhook: Boolean(env && env.STRIPE_WEBHOOK_SECRET),
     },
   });
 }
@@ -647,6 +652,133 @@ async function handleAdminEspace(request, env) {
   return json({ ok: true, slug: slug, link: "https://francoisleterrier.fr/espace.html?c=" + slug });
 }
 
+/* -------------------- Paiement en ligne (Stripe Checkout) --------------------
+ * Règle absolue : on ne manipule AUCUNE donnée bancaire et on n'encaisse rien.
+ * Stripe héberge toute la saisie de carte (Checkout). Le worker crée seulement
+ * la session (avec la clé secrète de François) et lit le webhook signé.
+ * Clés uniquement en secrets Cloudflare (STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET). */
+const SITE_BASE = "https://francoisleterrier.fr";
+const STRIPE_PLANS = {
+  essentiel: { label: "Réseaux sociaux — Essentiel", amount: 18000 },
+  croissance: { label: "Réseaux sociaux — Croissance", amount: 35000 },
+  premium: { label: "Réseaux sociaux — Premium", amount: 52000 },
+};
+
+async function stripeCreateCheckout(env, pairs) {
+  const body = pairs.map(function (p) { return encodeURIComponent(p[0]) + "=" + encodeURIComponent(p[1]); }).join("&");
+  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + env.STRIPE_SECRET_KEY, "Content-Type": "application/x-www-form-urlencoded" },
+    body: body,
+  });
+  const data = await res.json().catch(function () { return null; });
+  return { ok: res.ok, status: res.status, data: data };
+}
+
+/** POST /checkout — crée une session Stripe Checkout (abonnement réseaux ou acompte site). */
+async function handleCheckout(request, env) {
+  if (!env || !env.STRIPE_SECRET_KEY) return json({ ok: false, error: "Paiement en ligne pas encore activé." }, 503);
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const kind = d.kind === "payment" ? "payment" : "subscription";
+  const email = clampStr(d.email, 120);
+  const pairs = [];
+  if (kind === "subscription") {
+    const plan = clampStr(d.plan, 20).toLowerCase();
+    const p = STRIPE_PLANS[plan];
+    if (!p) return json({ ok: false, error: "Formule inconnue." }, 422);
+    pairs.push(["mode", "subscription"], ["line_items[0][quantity]", "1"]);
+    const priceId = env["STRIPE_PRICE_" + plan.toUpperCase()];
+    if (priceId) {
+      pairs.push(["line_items[0][price]", priceId]);
+    } else {
+      pairs.push(
+        ["line_items[0][price_data][currency]", "eur"],
+        ["line_items[0][price_data][unit_amount]", String(p.amount)],
+        ["line_items[0][price_data][recurring][interval]", "month"],
+        ["line_items[0][price_data][product_data][name]", p.label]
+      );
+    }
+    pairs.push(["metadata[kind]", "abonnement"], ["metadata[plan]", plan], ["subscription_data[metadata][plan]", plan]);
+  } else {
+    const euros = Math.round(Number(d.amount) || 0);
+    if (!(euros >= 50 && euros <= 5000)) return json({ ok: false, error: "Montant invalide (entre 50 et 5000 €)." }, 422);
+    const label = clampStr(d.label, 80) || "Acompte — projet de site";
+    pairs.push(
+      ["mode", "payment"], ["line_items[0][quantity]", "1"],
+      ["line_items[0][price_data][currency]", "eur"],
+      ["line_items[0][price_data][unit_amount]", String(euros * 100)],
+      ["line_items[0][price_data][product_data][name]", label],
+      ["metadata[kind]", "acompte"], ["metadata[amount_eur]", String(euros)]
+    );
+  }
+  if (email && EMAIL_RE.test(email)) pairs.push(["customer_email", email]);
+  pairs.push(
+    ["success_url", SITE_BASE + "/abonnement-merci.html?session_id={CHECKOUT_SESSION_ID}"],
+    ["cancel_url", SITE_BASE + "/abonnement.html?annule=1"],
+    ["allow_promotion_codes", "true"]
+  );
+  const r = await stripeCreateCheckout(env, pairs);
+  if (!r.ok || !r.data || !r.data.url) return json({ ok: false, error: "Création du paiement impossible." }, 502);
+  return json({ ok: true, url: r.data.url });
+}
+
+async function hmacSha256Hex(secret, payload) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(payload));
+  return Array.from(new Uint8Array(sig)).map(function (x) { return x.toString(16).padStart(2, "0"); }).join("");
+}
+
+/** Notifie François d'un paiement encaissé (sur SON compte Stripe). */
+async function notifyStripe(session, kind, label, email) {
+  try {
+    const amount = session && session.amount_total != null ? (session.amount_total / 100) : null;
+    const name = (session && session.customer_details && session.customer_details.name) || "";
+    const msg = "PAIEMENT STRIPE — " + (kind === "acompte" ? "Acompte site" : "Abonnement réseaux") + "\n\n" +
+      "Client : " + (name || "?") + (email ? " <" + email + ">" : "") + "\n" + label +
+      (amount != null ? "\nMontant : " + amount + " €" + (kind === "abonnement" ? " / mois" : "") : "") +
+      "\n\n(Encaissé sur ton compte Stripe.)";
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: W3F_KEY, subject: "💳 Paiement — " + (name || email || label), from_name: "FL Paiement", email: email || "paiement@francoisleterrier.fr", message: msg }),
+    });
+  } catch (_) {}
+}
+
+/** POST /stripe/webhook — reçoit les événements Stripe (signés). Enregistre le paiement. */
+async function handleStripeWebhook(request, env) {
+  if (!env || !env.STRIPE_WEBHOOK_SECRET) return json({ ok: false, error: "Webhook non configuré." }, 503);
+  const raw = await request.text();
+  const sigHeader = request.headers.get("Stripe-Signature") || "";
+  let t = "", v1 = "";
+  sigHeader.split(",").forEach(function (part) {
+    const i = part.indexOf("=");
+    if (i < 0) return;
+    const k = part.slice(0, i).trim(), val = part.slice(i + 1).trim();
+    if (k === "t") t = val; else if (k === "v1" && !v1) v1 = val;
+  });
+  if (!t || !v1) return json({ ok: false, error: "Signature manquante." }, 400);
+  if (Math.abs(Math.floor(Date.now() / 1000) - parseInt(t, 10)) > 300) return json({ ok: false, error: "Horodatage périmé." }, 400);
+  const expected = await hmacSha256Hex(env.STRIPE_WEBHOOK_SECRET, t + "." + raw);
+  if (!timingSafeEqual(expected, v1)) return json({ ok: false, error: "Signature invalide." }, 400);
+  let evt = null;
+  try { evt = JSON.parse(raw); } catch (_) { return json({ ok: false, error: "Corps invalide." }, 400); }
+  if (evt && evt.type === "checkout.session.completed") {
+    const s = (evt.data && evt.data.object) || {};
+    const md = s.metadata || {};
+    const email = s.customer_email || (s.customer_details && s.customer_details.email) || "";
+    const name = (s.customer_details && s.customer_details.name) || "";
+    const kind = md.kind === "acompte" ? "acompte" : "abonnement";
+    const label = kind === "acompte" ? ("Acompte" + (md.amount_eur ? " " + md.amount_eur + " €" : "")) : ("Abonnement réseaux — " + (md.plan || ""));
+    const lead = { email: email || "client-stripe@francoisleterrier.fr", url: "", source: kind, ip: "",
+      contact: { nom: name, tel: "", message: label, source: kind },
+      site: { input: { nom: name }, contact: { tel: "", message: label } } };
+    await Promise.all([notifyStripe(s, kind, label, email), storeLead(env, lead)]);
+  }
+  return json({ ok: true, received: true });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
@@ -665,6 +797,8 @@ const ROUTES = {
   "POST /admin/lead-status": (req, env) => handleAdminStatus(req, env),
   "GET /admin/espace": (req, env) => handleAdminEspaceList(req, env),
   "POST /admin/espace": (req, env) => handleAdminEspace(req, env),
+  "POST /checkout": (req, env) => handleCheckout(req, env),
+  "POST /stripe/webhook": (req, env) => handleStripeWebhook(req, env),
 };
 
 /** Enlève un éventuel préfixe /api pour que /health == /api/health. */

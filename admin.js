@@ -12,7 +12,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   var STATUS = { nouveau: "Nouveau", contacte: "Contacté", converti: "Converti", perdu: "Perdu" };
-  var SRC = { audit: "Audit", generateur: "Générateur", devis: "Devis", assistant: "Assistant", parrainage: "Parrainage" };
+  var SRC = { audit: "Audit", generateur: "Générateur", devis: "Devis", assistant: "Assistant", parrainage: "Parrainage", abonnement: "Abonnement", acompte: "Acompte" };
 
   var token = "", allLeads = [];
 
@@ -85,6 +85,11 @@
         var note = l.note ? '<div class="sub">« ' + esc(l.note) + ' »</div>' : "";
         var ph = l.source === "parrainage" ? "parrainage" : "rappel demandé";
         return (who || '<span class="muted">' + ph + '</span>') + note;
+      }
+      if (l.source === "abonnement" || l.source === "acompte") {
+        var pw = [l.nom].filter(Boolean).map(esc).join(" · ");
+        var pl = l.note ? '<div class="sub">💳 ' + esc(l.note) + '</div>' : "";
+        return (pw || '<span class="muted">paiement Stripe</span>') + pl;
       }
       if (l.source === "audit") {
         var u = l.url ? '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.url.replace(/^https?:\/\//, "")) + "</a>" : '<span class="muted">site non précisé</span>';

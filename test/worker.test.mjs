@@ -4,6 +4,7 @@
  * Lancer :  npm test   (ou  node test/worker.test.mjs)
  */
 import worker from "../src/index.js";
+import crypto from "node:crypto";
 
 let pass = 0,
   fail = 0;
@@ -59,6 +60,7 @@ function memDB() {
 
 const env = { CACHE: memKV(), DB: {}, ASSETS: {} };
 const adminEnv = { CACHE: memKV(), DB: memDB(), ASSETS: {}, ADMIN_TOKEN: "s3cr3t-test-token" };
+const stripeEnv = { CACHE: memKV(), DB: memDB(), ASSETS: {}, STRIPE_SECRET_KEY: "sk_test_dummy", STRIPE_WEBHOOK_SECRET: "whsec_test_dummy" };
 const APEX = "https://francoisleterrier.fr";
 const req = (method, path, { body, ct, origin, token } = {}) =>
   new Request("https://api.francoisleterrier.fr" + path, {
@@ -137,6 +139,29 @@ r = await worker.fetch(req("GET", "/espace"), env);
 ok(r.status === 400, "GET /espace (sans slug) → 400");
 r = await worker.fetch(req("GET", "/espace?c=inconnu", { origin: APEX }), env);
 ok(r.status === 404, "GET /espace?c inconnu → 404");
+
+// 4d) paiement Stripe : validations AVANT tout appel réseau + webhook signé (aucun appel réel à Stripe)
+r = await worker.fetch(req("POST", "/checkout", { body: JSON.stringify({ kind: "subscription", plan: "croissance" }), ct: "application/json" }), env);
+ok(r.status === 503, "POST /checkout sans clé Stripe → 503");
+r = await worker.fetch(req("POST", "/checkout", { body: JSON.stringify({ plan: "x" }), ct: "application/json", origin: "https://evil.example" }), env);
+ok(r.status === 403, "POST /checkout origine non autorisée → 403 (anti-copie)");
+r = await worker.fetch(req("POST", "/checkout", { body: JSON.stringify({ kind: "subscription", plan: "inconnu" }), ct: "application/json" }), stripeEnv);
+ok(r.status === 422, "POST /checkout formule inconnue → 422 (avant appel Stripe)");
+r = await worker.fetch(req("POST", "/checkout", { body: JSON.stringify({ kind: "payment", amount: 10 }), ct: "application/json" }), stripeEnv);
+ok(r.status === 422, "POST /checkout acompte hors bornes → 422");
+r = await worker.fetch(req("POST", "/stripe/webhook", { body: "{}", ct: "application/json" }), env);
+ok(r.status === 503, "POST /stripe/webhook sans secret → 503");
+r = await worker.fetch(new Request("https://api.francoisleterrier.fr/stripe/webhook", { method: "POST", headers: { "CF-Connecting-IP": "203.0.113.7" }, body: "{}" }), stripeEnv);
+ok(r.status === 400, "POST /stripe/webhook sans signature → 400");
+{
+  const payload = JSON.stringify({ type: "payment_intent.succeeded", data: { object: {} } });
+  const ts = Math.floor(Date.now() / 1000);
+  const good = crypto.createHmac("sha256", "whsec_test_dummy").update(ts + "." + payload).digest("hex");
+  r = await worker.fetch(new Request("https://api.francoisleterrier.fr/stripe/webhook", { method: "POST", headers: { "CF-Connecting-IP": "203.0.113.7", "Stripe-Signature": "t=" + ts + ",v1=" + good }, body: payload }), stripeEnv);
+  ok(r.status === 200, "POST /stripe/webhook signature valide → 200 (événement bénin, aucun effet)");
+  r = await worker.fetch(new Request("https://api.francoisleterrier.fr/stripe/webhook", { method: "POST", headers: { "CF-Connecting-IP": "203.0.113.7", "Stripe-Signature": "t=" + ts + ",v1=deadbeef" }, body: payload }), stripeEnv);
+  ok(r.status === 400, "POST /stripe/webhook signature invalide → 400");
+}
 r = await worker.fetch(req("POST", "/assistant", { body: JSON.stringify({ message: "" }), ct: "application/json" }), env);
 ok(r.status === 422, "POST /assistant (message vide) → 422");
 r = await worker.fetch(req("POST", "/lead", { body: JSON.stringify({ source: "assistant", nom: "X", email: "pas-un-email" }), ct: "application/json" }), env);

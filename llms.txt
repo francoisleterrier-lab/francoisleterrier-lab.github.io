@@ -50,6 +50,7 @@ Artisans, commerçants, indépendants, professions libérales et TPE du Sud-Toul
 - Audit de site gratuit (outil) : https://francoisleterrier.fr/audit.html
 - Tarifs : https://francoisleterrier.fr/tarifs.html
 - Parrainage (1 mois de gestion réseaux offert par filleul qui démarre) : https://francoisleterrier.fr/parrainage.html
+- S'abonner en ligne (formules réseaux mensuelles + acompte de site, paiement sécurisé Stripe) : https://francoisleterrier.fr/abonnement.html
 - Contact : https://francoisleterrier.fr/contact.html
 - À propos (page entité) : https://francoisleterrier.fr/a-propos.html
 - Community manager à Muret : https://francoisleterrier.fr/community-manager-muret.html

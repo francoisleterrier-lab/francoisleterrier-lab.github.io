@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S'abonner en ligne — Réseaux sociaux &amp; acompte | François Leterrier</title>
+<meta name="description" content="Abonnez-vous en ligne à la gestion de vos réseaux sociaux (dès 180 €/mois, sans engagement) ou réglez l'acompte de votre projet de site. Paiement 100 % sécurisé par Stripe.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#060410">
+<link rel="canonical" href="https://francoisleterrier.fr/abonnement.html">
+<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="S'abonner en ligne — François Leterrier">
+<meta property="og:description" content="Gestion des réseaux dès 180 €/mois sans engagement. Paiement sécurisé par Stripe.">
+<meta property="og:image" content="https://francoisleterrier.fr/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://francoisleterrier.fr/abonnement.html">
+<meta property="og:locale" content="fr_FR">
+<link rel="preconnect" href="https://main.francois-leterrier-cmw.workers.dev">
+<link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
+<link rel="stylesheet" href="/aurora.css">
+<link rel="stylesheet" href="/popups.css">
+<link rel="stylesheet" href="pages.css">
+<style>
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0 10px;}
+  .plan{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  .plan.best{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 18px 40px -18px rgba(40,200,221,.5);}
+  .plan .pop{position:absolute;top:-11px;left:22px;background:var(--grad);color:#08111f;font-family:'Montserrat';font-weight:800;font-size:11px;padding:3px 11px;border-radius:20px;}
+  .plan h3{margin:2px 0 4px;font-size:19px;}
+  .plan .pr{font-family:'Montserrat';font-weight:800;font-size:30px;color:#fff;line-height:1;margin:6px 0 2px;}
+  .plan .pr span{font-size:14px;color:var(--muted);font-weight:600;}
+  .plan ul{list-style:none;padding:0;margin:14px 0 18px;}
+  .plan li{font-size:14px;color:#c4cbdb;padding:6px 0 6px 24px;position:relative;}
+  .plan li::before{content:"✓";position:absolute;left:0;color:var(--cyan);font-weight:800;}
+  .plan .btn{margin-top:auto;width:100%;justify-content:center;}
+  .acompte{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;max-width:620px;margin-top:14px;}
+  .acompte .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+  .acompte input{background:rgba(255,255,255,.05);border:1.5px solid var(--line2);border-radius:11px;padding:12px 14px;color:#f2ecf4;font:inherit;font-size:15px;width:150px;}
+  .acompte input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(40,200,221,.16);}
+  .trust{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:26px 0 8px;color:var(--muted);font-size:13px;}
+  .trust b{color:#e7e2f0;}
+  .pay-msg{border-radius:12px;padding:13px 16px;font-size:14px;margin:14px 0;display:none;}
+  .pay-msg.err{display:block;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.4);color:#ff9d9d;}
+  .pay-msg.info{display:block;background:rgba(40,200,221,.1);border:1px solid rgba(40,200,221,.35);color:#a7e8f2;}
+  @media(max-width:820px){.plans{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier">François Leterrier<small>Community Manager · Web</small></a>
+    <nav class="navlinks" id="flnav">
+      <a href="community-manager.html">Réseaux sociaux</a>
+      <a href="creation-site-internet.html">Création de site</a>
+      <a href="modeles/">Modèles</a>
+      <a href="realisations.html">Réalisations</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a class="cta" href="contact.html">Diagnostic gratuit</a>
+    </nav>
+    <button class="burger" id="flburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="flnav"><span></span><span></span><span></span></button>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <div class="crumb"><a href="index.html">Accueil</a> › S'abonner en ligne</div>
+    <span class="tag">Paiement en ligne</span>
+    <h1>Lancez votre <span>accompagnement</span> en ligne</h1>
+    <p class="sub">Choisissez votre formule réseaux sociaux ou réglez l'acompte de votre site. La saisie de carte se fait sur la page sécurisée de Stripe — jamais sur ce site.</p>
+  </div></section>
+
+  <main><div class="wrap">
+    <div class="pay-msg" id="pay-msg" role="status" aria-live="polite"></div>
+
+    <h2>Gestion de vos réseaux sociaux</h2>
+    <p class="lead">Sans engagement, résiliable à tout moment (préavis 30 jours). Vous validez chaque contenu avant publication.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Essentiel</h3>
+        <div class="pr">180 €<span> / mois</span></div>
+        <ul><li>2 publications / mois</li><li>Facebook, Instagram &amp; Google Business</li><li>Modération de base</li><li>Sans engagement</li></ul>
+        <button class="btn btn-ghost" type="button" data-plan="essentiel">S'abonner →</button>
+      </div>
+      <div class="plan best">
+        <div class="pop">La plus choisie</div>
+        <h3>Croissance</h3>
+        <div class="pr">350 €<span> / mois</span></div>
+        <ul><li>4 publications / mois</li><li>Modération &amp; réponses</li><li>Bilan mensuel</li><li>Sans engagement</li></ul>
+        <button class="btn" type="button" data-plan="croissance">S'abonner →</button>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <div class="pr">520 €<span> / mois</span></div>
+        <ul><li>4 publications / mois</li><li>1 vidéo / Reel monté</li><li>1 story par semaine</li><li>Sans engagement</li></ul>
+        <button class="btn btn-ghost" type="button" data-plan="premium">S'abonner →</button>
+      </div>
+    </div>
+
+    <h2 style="margin-top:38px;">Régler l'acompte de mon site</h2>
+    <div class="acompte">
+      <p style="margin:0;color:var(--muted);">Vous avez convenu d'un acompte avec François pour lancer votre projet de site ? Réglez-le ici en toute sécurité.</p>
+      <div class="row">
+        <label for="ac-montant" style="font-weight:600;">Montant convenu :</label>
+        <input id="ac-montant" type="number" min="50" max="5000" step="10" inputmode="numeric" placeholder="ex. 300" aria-label="Montant de l'acompte en euros">
+        <span style="font-weight:700;">€</span>
+        <button class="btn" type="button" id="ac-pay">Payer l'acompte →</button>
+      </div>
+      <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted);">Paiement unique. Le solde est réglé au lancement, selon votre devis.</p>
+    </div>
+
+    <div class="trust">
+      <span>🔒 Paiement sécurisé par <b>Stripe</b></span>
+      <span>💳 Carte jamais saisie sur ce site</span>
+      <span>🚪 Résiliable (préavis 30 j)</span>
+      <span>🧾 TVA non applicable (art. 293 B du CGI)</span>
+    </div>
+
+    <div class="relart">
+      Voir aussi :
+      <a href="tarifs.html">Tous les tarifs</a> ·
+      <a href="configurateur.html">Configurer mon projet</a> ·
+      <a href="contact.html">Poser une question</a>
+    </div>
+  </div></main>
+
+  <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> · <a href="mailto:francois&#46;leterrier&#46;cmw&#64;gmail&#46;com">francois&#46;leterrier&#46;cmw&#64;gmail&#46;com</a> — © <span id="y">2026</span> · <a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></div></footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>(function(){var b=document.getElementById("flburger"),n=document.getElementById("flnav");if(b&&n){b.addEventListener("click",function(){var o=n.classList.toggle("show");b.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false");});}})();</script>
+  <script>
+  (function(){
+    var API="https://main.francois-leterrier-cmw.workers.dev";
+    var msg=document.getElementById("pay-msg");
+    function show(cls,txt){msg.className="pay-msg "+cls;msg.textContent=txt;window.scrollTo({top:0,behavior:"smooth"});}
+    try{ if(new URLSearchParams(location.search).get("annule")){ show("info","Paiement annulé — aucun montant n'a été prélevé. Vous pouvez réessayer quand vous voulez."); } }catch(e){}
+    function go(payload,btn){
+      var old=btn?btn.textContent:""; if(btn){btn.disabled=true;btn.textContent="Redirection…";}
+      var ctrl=new AbortController(),to=setTimeout(function(){ctrl.abort();},15000);
+      fetch(API+"/checkout",{method:"POST",headers:{"Content-Type":"application/json"},signal:ctrl.signal,body:JSON.stringify(payload)})
+        .then(function(r){clearTimeout(to);if(r.status===503)throw new Error("Le paiement en ligne sera activé très bientôt. Écrivez-moi et je vous envoie un lien de paiement.");return r.json();})
+        .then(function(j){ if(j&&j.ok&&j.url){location.href=j.url;} else {throw new Error((j&&j.error)||"Impossible de démarrer le paiement.");} })
+        .catch(function(e){ show("err",(e&&e.message)||"Connexion interrompue. Réessayez, ou appelez le 06 98 20 02 08."); if(btn){btn.disabled=false;btn.textContent=old;} });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("[data-plan]"),function(b){
+      b.addEventListener("click",function(){ go({kind:"subscription",plan:b.getAttribute("data-plan")},b); });
+    });
+    var acPay=document.getElementById("ac-pay");
+    if(acPay) acPay.addEventListener("click",function(){
+      var v=Math.round(Number(document.getElementById("ac-montant").value)||0);
+      if(!(v>=50&&v<=5000)){ show("err","Indiquez un montant d'acompte entre 50 et 5000 €."); return; }
+      go({kind:"payment",amount:v,label:"Acompte site — "+v+" €"},acPay);
+    });
+  })();
+  </script>
+  <script src="/consent.js" defer></script>
+  <script src="/popups.js" defer></script>
+  <script src="/assistant.js" defer></script>
+</body>
+</html>
