@@ -74,12 +74,13 @@ async function fetchWithTimeout(url, ms, opts) {
   finally { clearTimeout(t); }
 }
 
-/** PageSpeed Insights (mobile). Null si pas de clé ou erreur. */
+/** PageSpeed Insights (mobile). Avec clé = fiable ; sans clé = tentative
+ *  best-effort (quota anonyme, souvent limité). Null si indisponible/erreur. */
 async function runPSI(env, url) {
-  if (!env || !env.PAGESPEED_API_KEY) return null;
   try {
-    const api = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices&url=" + encodeURIComponent(url) + "&key=" + env.PAGESPEED_API_KEY;
-    const r = await fetchWithTimeout(api, 28000);
+    const key = env && env.PAGESPEED_API_KEY ? "&key=" + env.PAGESPEED_API_KEY : "";
+    const api = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?strategy=mobile&category=performance&category=seo&category=accessibility&category=best-practices&url=" + encodeURIComponent(url) + key;
+    const r = await fetchWithTimeout(api, 18000);
     if (!r.ok) return null;
     const j = await r.json();
     const cat = j.lighthouseResult && j.lighthouseResult.categories;
@@ -151,15 +152,19 @@ export async function runAudit(env, input) {
   const gotW = seo.checks.reduce(function (a, c) { return a + (c.ok ? c.w : 0); }, 0);
   const overall = Math.round((gotW / totalW) * 100);
 
-  const [psi, hasRobots, hasSitemap] = await Promise.all([
-    runPSI(env, url),
+  const [hasRobots, hasSitemap] = await Promise.all([
     existsPath(norm.origin, "/robots.txt"),
     existsPath(norm.origin, "/sitemap.xml"),
   ]);
   seo.checks.push({ id: "robots", label: "Fichier robots.txt", ok: hasRobots, w: 3, detail: "" });
   seo.checks.push({ id: "sitemap", label: "Sitemap.xml", ok: hasSitemap, w: 4, detail: "" });
 
-  const plan = await aiPlan(env, { host: norm.host, checks: seo.checks, overall: overall, local: local, psi: psi });
+  // PSI (Lighthouse) et plan IA lancés en parallèle : indépendants → on tient
+  // le budget de temps même quand PageSpeed prend plusieurs secondes.
+  const [psi, plan] = await Promise.all([
+    runPSI(env, url),
+    aiPlan(env, { host: norm.host, checks: seo.checks, overall: overall, local: local, psi: null }),
+  ]);
   const shot = "https://s.wordpress.com/mshots/v1/" + encodeURIComponent(url) + "?w=1200";
 
   return {

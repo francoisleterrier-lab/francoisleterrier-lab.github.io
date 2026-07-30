@@ -78,7 +78,7 @@
       report.classList.remove("on"); load.classList.add("on"); runSteps();
       var data = null;
       try {
-        var ctrl = new AbortController(); var to = setTimeout(function () { ctrl.abort(); }, 35000);
+        var ctrl = new AbortController(); var to = setTimeout(function () { ctrl.abort(); }, 45000);
         var r = await fetch(API + "/audit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: url }), signal: ctrl.signal });
         clearTimeout(to);
         data = await r.json();
