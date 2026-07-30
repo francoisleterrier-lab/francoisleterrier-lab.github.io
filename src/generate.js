@@ -26,6 +26,20 @@ export async function aiJSON(env, messages, maxTokens) {
   return null;
 }
 
+/** Réponse en texte libre du LLM (assistant on-site). Renvoie une chaîne ou null. */
+export async function aiText(env, messages, maxTokens) {
+  if (!env || !env.AI) return null;
+  for (const model of MODELS) {
+    try {
+      const res = await env.AI.run(model, { messages: messages, max_tokens: maxTokens || 400 });
+      const raw = res && (res.response != null ? res.response : res.output_text != null ? res.output_text : res.result != null ? res.result : res);
+      const txt = typeof raw === "string" ? raw : (raw && raw.response) || "";
+      if (txt && String(txt).trim()) return String(txt).trim();
+    } catch (_) {}
+  }
+  return null;
+}
+
 // Requête image par défaut (anglais) selon le secteur — repli si l'IA n'en donne pas.
 const SECTOR_Q = {
   restaurant: "wine bar restaurant cozy interior food",

@@ -10,11 +10,15 @@
   "use strict";
   if (window.__flAssistant) return; window.__flAssistant = true;
   var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var API = "https://main.francois-leterrier-cmw.workers.dev";
+  var history = [];
+  function escHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function linkify(s) { return escHtml(s).replace(/\/(audit|generateur|configurateur|contact|barometre|tarifs)\.html/g, function (m) { return '<a href="' + m + '" style="color:#8fe6f0;font-weight:700">' + m + "</a>"; }); }
 
   /* ---------- parcours scriptés ---------- */
   var NODES = {
     start: {
-      bot: "Bonjour 👋 Je suis l'assistant du site (réponses guidées). Dites-moi ce qui vous amène&nbsp;:",
+      bot: "Bonjour 👋 Je suis l'assistant du site. Choisissez ci-dessous, ou <b>écrivez-moi directement</b> votre question en bas&nbsp;:",
       opts: [
         { t: "Créer un site internet", go: "site" },
         { t: "Gérer mes réseaux sociaux", go: "reseaux" },
@@ -185,6 +189,14 @@
     + 'color:#e7e2f0;font:inherit;font-size:13px;font-weight:600;transition:.15s;text-decoration:none;display:inline-block}'
     + '.fl-as-chip:hover{border-color:#28c8dd;color:#fff;background:rgba(40,200,221,.1)}'
     + '.fl-as-chip.cta{background:linear-gradient(90deg,#28c8dd,#7c3aed,#e05bc8);color:#08111f;border-color:transparent}'
+    + '.fl-as-form{display:flex;gap:8px;padding:10px 12px 12px;border-top:1px solid rgba(143,230,240,.14)}'
+    + '.fl-as-form input{flex:1;min-width:0;background:rgba(255,255,255,.05);border:1.5px solid rgba(143,230,240,.24);border-radius:22px;padding:10px 14px;color:#e7e2f0;font:inherit;font-size:13.5px}'
+    + '.fl-as-form input:focus{outline:none;border-color:#28c8dd;box-shadow:0 0 0 3px rgba(40,200,221,.16)}'
+    + '.fl-as-send{flex:none;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(90deg,#28c8dd,#7c3aed);color:#08111f;font-size:15px;font-weight:800}'
+    + '.fl-as-send[disabled]{opacity:.55;cursor:progress}'
+    + '.fl-as-typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#8fe6f0;animation:fl-as-blink 1s infinite}'
+    + '.fl-as-typing span:nth-child(2){animation-delay:.2s}.fl-as-typing span:nth-child(3){animation-delay:.4s}'
+    + '@keyframes fl-as-blink{0%,60%,100%{opacity:.3}30%{opacity:1}}'
     + '@media(max-width:760px){#fl-as-launch{bottom:86px;padding:11px 15px}#fl-as-panel{bottom:150px;height:64vh}}'
     + (RM ? '' : '#fl-as-panel.show{animation:fl-as-in .22s ease}@keyframes fl-as-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}');
 
@@ -202,10 +214,11 @@
 
     var panel = el('<div id="fl-as-panel" role="dialog" aria-modal="false" aria-label="Assistant à réponses guidées">'
       + '<div class="fl-as-head"><div class="fl-as-av" aria-hidden="true">💬</div>'
-      + '<div class="fl-as-ht"><b>Assistant du site</b><span>Réponses guidées · sans engagement</span></div>'
+      + '<div class="fl-as-ht"><b>Assistant du site</b><span>Assistant IA · sans engagement</span></div>'
       + '<button class="fl-as-x" aria-label="Fermer l\'assistant">×</button></div>'
       + '<div id="fl-as-body" aria-live="polite"></div>'
-      + '<div class="fl-as-opts" id="fl-as-opts"></div></div>');
+      + '<div class="fl-as-opts" id="fl-as-opts"></div>'
+      + '<form id="fl-as-form" class="fl-as-form"><input id="fl-as-input" type="text" placeholder="Écrivez votre question…" autocomplete="off" aria-label="Votre message"><button type="submit" class="fl-as-send" aria-label="Envoyer">➤</button></form></div>');
 
     document.body.appendChild(launch);
     document.body.appendChild(panel);
@@ -249,6 +262,35 @@
     body.scrollTop = body.scrollHeight;
   }
 
+  async function sendText() {
+    var input = ui.panel.querySelector('#fl-as-input'), send = ui.panel.querySelector('.fl-as-send');
+    var text = (input.value || '').trim();
+    if (!text) return;
+    input.value = '';
+    addMsg(escHtml(text), 'user');
+    opts.innerHTML = '';
+    history.push({ role: 'user', content: text });
+    if (send) send.disabled = true;
+    var typing = document.createElement('div');
+    typing.className = 'fl-as-msg fl-as-bot fl-as-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(typing); body.scrollTop = body.scrollHeight;
+    var reply = '';
+    try {
+      var ctrl = new AbortController(), to = setTimeout(function () { ctrl.abort(); }, 22000);
+      var r = await fetch(API + '/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, history: history.slice(-6) }), signal: ctrl.signal });
+      clearTimeout(to);
+      var j = await r.json();
+      reply = (j && j.reply) || '';
+    } catch (_) {}
+    typing.remove();
+    if (!reply) reply = "Désolé, je n'ai pas pu répondre à l'instant. Vous pouvez tester l'audit gratuit (/audit.html), le générateur (/generateur.html), ou demander le diagnostic offert (/contact.html).";
+    addMsg(linkify(reply), 'bot');
+    history.push({ role: 'assistant', content: reply });
+    if (send) send.disabled = false;
+    if (input) input.focus();
+  }
+
   function open() {
     ui.panel.classList.add('show');
     ui.launch.classList.add('open');
@@ -271,6 +313,8 @@
     opts = ui.panel.querySelector('#fl-as-opts');
     ui.launch.addEventListener('click', function () { opened ? close() : open(); });
     ui.panel.querySelector('.fl-as-x').addEventListener('click', close);
+    var form = ui.panel.querySelector('#fl-as-form');
+    if (form) form.addEventListener('submit', function (e) { e.preventDefault(); sendText(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && opened) close(); });
   }
 

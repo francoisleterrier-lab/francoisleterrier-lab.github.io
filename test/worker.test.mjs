@@ -128,6 +128,8 @@ r = await worker.fetch(req("POST", "/devis/sign", { body: JSON.stringify({ id: "
 ok(r.status === 422, "POST /devis/sign (sans nom) → 422");
 r = await worker.fetch(req("GET", "/barometre"), env);
 ok(r.status === 200, "GET /barometre → 200");
+r = await worker.fetch(req("POST", "/assistant", { body: JSON.stringify({ message: "" }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /assistant (message vide) → 422");
 
 // 4c) verrou d'origine : les endpoints « à valeur » refusent une autre origine
 r = await worker.fetch(req("POST", "/audit", { body: JSON.stringify({ url: "https://x.fr" }), ct: "application/json", origin: "https://evil.example" }), env);

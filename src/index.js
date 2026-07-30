@@ -17,8 +17,11 @@
  * ---------------------------------------------------------------------------
  */
 
-import { generatePage } from "./generate.js";
+import { generatePage, aiText } from "./generate.js";
 import { runAudit, publicView, barometreStats } from "./audit.js";
+
+// Personnalité + connaissances de l'assistant on-site (LLM via Workers AI).
+const ASSISTANT_SYSTEM = "Tu es l'assistant du site de François Leterrier, community manager et créateur de sites internet (micro-entreprise) basé à Lavernose-Lacasse (Sud-Toulousain, 31410), qui travaille partout en France (visio + livraison en ligne). Réponds en français, chaleureux et pro, JAMAIS de jargon, en 1 à 3 phrases maximum. Offre et tarifs (à partir de) : sites internet — site vitrine dès 590 € (1 page) ou 1 400 € (jusqu'à 5 pages), référencement local inclus ; réseaux sociaux dès 180 €/mois sans engagement (formule Croissance 350 €/mois, la plus choisie) ; faire-part digital dès 290 € ; référencement/visibilité Google. « Application » = site web/PWA, jamais une appli native App Store. Oriente vers le bon outil quand c'est utile : audit de présence en ligne gratuit (page /audit.html), générateur de maquette de site (/generateur.html), configurateur de devis (/configurateur.html), ou le diagnostic gratuit (/contact.html). N'invente jamais de prix hors de ceux indiqués ; si tu ne sais pas, propose le diagnostic gratuit. Termine souvent par une invitation à agir (essayer un outil ou demander le diagnostic).";
 
 // Clé publique du formulaire web3forms (déjà utilisée par le site) — sert à
 // notifier François de chaque lead par e-mail, sans nouvelle clé/secret.
@@ -38,12 +41,13 @@ const ALLOWED_ORIGINS = new Set([
 
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign"]);
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
   "/generate": { limit: 8, window: 60 },
   "/audit": { limit: 10, window: 60 },
+  "/assistant": { limit: 20, window: 60 },
   "/site": { limit: 20, window: 60 },
   "/devis": { limit: 15, window: 60 },
   "/devis/sign": { limit: 10, window: 60 },
@@ -189,6 +193,21 @@ async function handleAudit(request, env) {
   const id = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now());
   if (env.CACHE) { try { await env.CACHE.put("audit:" + id, JSON.stringify(full), { expirationTtl: 2592000 }); } catch (_) {} }
   return json(publicView(full, id));
+}
+
+/** POST /assistant — assistant on-site branché sur le LLM (Workers AI). */
+async function handleAssistant(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const msg = clampStr(d.message, 500);
+  if (!msg) return json({ ok: false, error: "Message vide." }, 422);
+  const history = Array.isArray(d.history) ? d.history.slice(-6).map(function (m) {
+    return { role: m && m.role === "user" ? "user" : "assistant", content: clampStr(m && m.content, 500) };
+  }).filter(function (m) { return m.content; }) : [];
+  const messages = [{ role: "system", content: ASSISTANT_SYSTEM }].concat(history).concat([{ role: "user", content: msg }]);
+  const reply = await aiText(env, messages, 300);
+  return json({ ok: true, reply: reply || "Je peux vous orienter tout de suite : un audit gratuit de votre site, une maquette générée en direct, ou un diagnostic offert. Que préférez-vous ?" });
 }
 
 /** GET /barometre — agrégats anonymisés pour le baromètre GEO (public, caché 30 min). */
@@ -491,6 +510,7 @@ const ROUTES = {
   "POST /audit": (req, env) => handleAudit(req, env),
   "GET /audit": (req, env) => handleGetAuditReport(req, env),
   "GET /barometre": (req, env) => handleBarometre(req, env),
+  "POST /assistant": (req, env) => handleAssistant(req, env),
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
