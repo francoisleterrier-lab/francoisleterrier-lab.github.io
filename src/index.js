@@ -158,6 +158,13 @@ function handleHealth(_request, env) {
       d1: Boolean(env && env.DB),
       r2: Boolean(env && env.ASSETS),
     },
+    // Présence des clés/secrets (booléens seulement — jamais les valeurs) : self-check des intégrations.
+    integrations: {
+      ai: Boolean(env && env.AI),
+      brevo: Boolean(env && env.BREVO_API_KEY),
+      places: Boolean(env && env.PLACES_API_KEY),
+      pagespeed: Boolean(env && env.PAGESPEED_API_KEY),
+    },
   });
 }
 
