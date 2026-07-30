@@ -186,9 +186,7 @@ async function handleAudit(request, env) {
   if (!full.ok) return json(full); // site injoignable / erreur → renvoyé tel quel
   const id = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now());
   if (env.CACHE) { try { await env.CACHE.put("audit:" + id, JSON.stringify(full), { expirationTtl: 2592000 }); } catch (_) {} }
-  const pv = publicView(full, id);
-  if (d.debug === true) pv._placesDbg = full._placesDbg; // diagnostic (jamais la clé)
-  return json(pv);
+  return json(publicView(full, id));
 }
 
 /** GET /audit?id=… — rapport partageable : renvoie la vue PUBLIQUE stockée. */

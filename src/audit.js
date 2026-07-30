@@ -126,13 +126,13 @@ async function runPlaces(env, query) {
     const find = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + encodeURIComponent(query) + "&inputtype=textquery&fields=place_id&key=" + env.PLACES_API_KEY;
     const j1 = await (await fetchWithTimeout(find, 8000)).json();
     const cand = j1 && j1.candidates && j1.candidates[0];
-    if (!cand || !cand.place_id) return { found: false, _dbg: (j1 && j1.status || "?") + (j1 && j1.error_message ? " — " + j1.error_message : "") };
+    if (!cand || !cand.place_id) return { found: false };
     const det = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(cand.place_id) + "&fields=rating,user_ratings_total,website,url&key=" + env.PLACES_API_KEY;
     const jd = await (await fetchWithTimeout(det, 8000)).json();
     const res = jd && jd.result;
-    if (!res) return { found: false, _dbg: "details:" + (jd && jd.status || "?") };
+    if (!res) return { found: false };
     return { found: true, rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, mapUrl: res.url || "" };
-  } catch (e) { return { found: false, _dbg: "err:" + (e && e.message || "?") }; }
+  } catch (_) { return { found: false }; }
 }
 
 // Devine le secteur d'après le contenu (regroupement du benchmark).
@@ -348,7 +348,6 @@ export async function runAudit(env, input) {
     pillars: pillars,
     social: social,
     places: places && places.found ? { rating: places.rating, reviews: places.reviews } : null,
-    _placesDbg: places === null ? "no-key-or-noquery" : (places.found ? "ok" : (places._dbg || "not-found")),
     seo: { title: seo.title, desc: seo.desc, h1: seo.h1, words: seo.words, ldTypes: seo.ldTypes, imgs: seo.imgs },
     checks: seo.checks,
     local: local,
