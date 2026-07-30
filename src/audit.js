@@ -207,16 +207,18 @@ export async function barometreStats(env) {
   const SECTOR_LBL = { restaurant: "Restauration", artisan: "Artisanat & BTP", commerce: "Commerce", "bien-etre": "Beauté & bien-être", sante: "Santé", immobilier: "Immobilier", services: "Services", autre: "Autres" };
   const out = { total: 0, avg: null, sectors: [], pillars: null, distrib: null, seeds: SECTOR_SEED };
   if (!env || !env.DB) return out;
+  // Exclut les domaines de test/démo pour ne compter que de vrais établissements.
+  const W = " WHERE host NOT IN ('example.com','www.example.com','example.org','example.net','localhost','127.0.0.1') ";
   try { await ensureAuditSchema(env); } catch (_) {}
   try {
-    const g = (await env.DB.prepare("SELECT COUNT(*) c, AVG(score) a FROM audits").all()).results[0];
+    const g = (await env.DB.prepare("SELECT COUNT(*) c, AVG(score) a FROM audits" + W).all()).results[0];
     out.total = g ? Number(g.c) : 0;
     out.avg = g && g.a != null ? Math.round(g.a) : null;
-    const s = (await env.DB.prepare("SELECT sector, COUNT(*) c, AVG(score) a FROM audits GROUP BY sector ORDER BY c DESC").all()).results || [];
+    const s = (await env.DB.prepare("SELECT sector, COUNT(*) c, AVG(score) a FROM audits" + W + "GROUP BY sector ORDER BY c DESC").all()).results || [];
     out.sectors = s.map(function (r) { return { key: r.sector, label: SECTOR_LBL[r.sector] || r.sector, count: Number(r.c), avg: Math.round(r.a) }; });
-    const p = (await env.DB.prepare("SELECT AVG(json_extract(resultats_json,'$.site')) si, AVG(json_extract(resultats_json,'$.google')) go, AVG(json_extract(resultats_json,'$.social')) so, AVG(json_extract(resultats_json,'$.reviews')) re FROM audits").all()).results[0];
+    const p = (await env.DB.prepare("SELECT AVG(json_extract(resultats_json,'$.site')) si, AVG(json_extract(resultats_json,'$.google')) go, AVG(json_extract(resultats_json,'$.social')) so, AVG(json_extract(resultats_json,'$.reviews')) re FROM audits" + W).all()).results[0];
     if (p && p.si != null) out.pillars = { site: Math.round(p.si), google: Math.round(p.go), social: Math.round(p.so), reviews: Math.round(p.re) };
-    const d = (await env.DB.prepare("SELECT SUM(CASE WHEN score<50 THEN 1 ELSE 0 END) low, SUM(CASE WHEN score>=50 AND score<80 THEN 1 ELSE 0 END) mid, SUM(CASE WHEN score>=80 THEN 1 ELSE 0 END) high FROM audits").all()).results[0];
+    const d = (await env.DB.prepare("SELECT SUM(CASE WHEN score<50 THEN 1 ELSE 0 END) low, SUM(CASE WHEN score>=50 AND score<80 THEN 1 ELSE 0 END) mid, SUM(CASE WHEN score>=80 THEN 1 ELSE 0 END) high FROM audits" + W).all()).results[0];
     if (d) out.distrib = { low: Number(d.low || 0), mid: Number(d.mid || 0), high: Number(d.high || 0) };
   } catch (_) {}
   return out;

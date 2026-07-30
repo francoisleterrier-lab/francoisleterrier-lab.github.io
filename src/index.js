@@ -192,11 +192,11 @@ async function handleAudit(request, env) {
 /** GET /barometre — agrégats anonymisés pour le baromètre GEO (public, caché 30 min). */
 async function handleBarometre(request, env) {
   let data = null;
-  if (env && env.CACHE) { try { data = await env.CACHE.get("barometre", "json"); } catch (_) {} }
+  if (env && env.CACHE) { try { data = await env.CACHE.get("barometre_v2", "json"); } catch (_) {} }
   if (!data) {
     const stats = await barometreStats(env);
     data = { ok: true, stats: stats, generated: new Date().toISOString() };
-    if (env && env.CACHE) { try { await env.CACHE.put("barometre", JSON.stringify(data), { expirationTtl: 1800 }); } catch (_) {} }
+    if (env && env.CACHE) { try { await env.CACHE.put("barometre_v2", JSON.stringify(data), { expirationTtl: 1800 }); } catch (_) {} }
   }
   return json(data);
 }
