@@ -18,7 +18,7 @@
  */
 
 import { generatePage } from "./generate.js";
-import { runAudit, publicView } from "./audit.js";
+import { runAudit, publicView, barometreStats } from "./audit.js";
 
 // Clé publique du formulaire web3forms (déjà utilisée par le site) — sert à
 // notifier François de chaque lead par e-mail, sans nouvelle clé/secret.
@@ -187,6 +187,18 @@ async function handleAudit(request, env) {
   const id = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now());
   if (env.CACHE) { try { await env.CACHE.put("audit:" + id, JSON.stringify(full), { expirationTtl: 2592000 }); } catch (_) {} }
   return json(publicView(full, id));
+}
+
+/** GET /barometre — agrégats anonymisés pour le baromètre GEO (public, caché 30 min). */
+async function handleBarometre(request, env) {
+  let data = null;
+  if (env && env.CACHE) { try { data = await env.CACHE.get("barometre", "json"); } catch (_) {} }
+  if (!data) {
+    const stats = await barometreStats(env);
+    data = { ok: true, stats: stats, generated: new Date().toISOString() };
+    if (env && env.CACHE) { try { await env.CACHE.put("barometre", JSON.stringify(data), { expirationTtl: 1800 }); } catch (_) {} }
+  }
+  return json(data);
 }
 
 /** GET /audit?id=… — rapport partageable : renvoie la vue PUBLIQUE stockée. */
@@ -403,6 +415,7 @@ const ROUTES = {
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
   "GET /audit": (req, env) => handleGetAuditReport(req, env),
+  "GET /barometre": (req, env) => handleBarometre(req, env),
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),

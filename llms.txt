@@ -19,7 +19,8 @@
 
 ## Outils gratuits en ligne (sans inscription, partout en France)
 - Générateur de site instantané : indiquer métier + nom d'établissement + ville → une vraie page d'accueil sur-mesure se compose en quelques secondes ; on peut changer le style et les couleurs, réécrire les textes en direct, et obtenir un lien partageable. https://francoisleterrier.fr/generateur.html
-- Audit de site gratuit et instantané : coller l'URL d'un site → note sur 100 (performance, SEO, structure, présence Google locale) + capture en direct + les 3 priorités les plus rentables ; le plan d'action détaillé est envoyé par e-mail. https://francoisleterrier.fr/audit.html
+- Audit de présence en ligne gratuit et instantané : coller l'URL d'un site (+ nom et ville en option) → score sur 100 réparti en 4 piliers (site web, fiche Google, réseaux sociaux, avis) + capture en direct + les 3 priorités les plus rentables ; le plan d'action détaillé est envoyé par e-mail. https://francoisleterrier.fr/audit.html
+- Baromètre de la présence en ligne des TPE (France & Sud-Toulousain) : état des lieux chiffré et anonymisé, mis à jour en continu à partir des audits réalisés — score moyen, répartition, maillon faible, moyennes par secteur. Contenu de référence citable. https://francoisleterrier.fr/barometre.html
 
 ## Tarifs (à partir de, TVA non applicable art. 293 B du CGI)
 - Réseaux sociaux : Essentiel dès 180 €/mois (2 publications), Croissance dès 350 €/mois (4 publications, formule phare), Premium dès 520 €/mois (4 publications + 1 vidéo/Reel).
