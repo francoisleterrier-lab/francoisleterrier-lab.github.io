@@ -21,7 +21,8 @@
     var loginSec = $("#ad-login"), dash = $("#ad-dash"), actions = $("#ad-actions"),
       loginForm = $("#ad-login-form"), tokenInput = $("#ad-token"), loginMsg = $("#ad-login-msg"),
       rowsEl = $("#ad-rows"), statsEl = $("#ad-stats"), emptyEl = $("#ad-empty"),
-      searchEl = $("#ad-search"), srcEl = $("#ad-source"), stFilterEl = $("#ad-status-filter");
+      searchEl = $("#ad-search"), srcEl = $("#ad-source"), stFilterEl = $("#ad-status-filter"),
+      espForm = $("#esp-form"), espNom = $("#esp-nom"), espUrl = $("#esp-url"), espMsg = $("#esp-msg"), espList = $("#esp-list");
 
     function authHeaders(extra) { var h = { Authorization: "Bearer " + token }; if (extra) for (var k in extra) h[k] = extra[k]; return h; }
     function showLogin(msg) { dash.hidden = true; actions.hidden = true; loginSec.hidden = false; if (msg) { loginMsg.style.color = "#ffb4b4"; loginMsg.textContent = msg; } }
@@ -38,6 +39,7 @@
         localStorage.setItem(KEY, token);
         showDash();
         render();
+        loadEspaces();
       } catch (_) { showLogin("Connexion impossible. Vérifiez votre réseau."); }
     }
 
@@ -146,6 +148,55 @@
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
     }
+
+    /* ---------- Espaces clients (Looker Studio) ---------- */
+    function espShow(txt, err) { if (!espMsg) return; espMsg.style.color = err ? "#ffb4b4" : "var(--muted)"; espMsg.textContent = txt || ""; }
+    async function loadEspaces() {
+      if (!espList) return;
+      try {
+        var r = await fetch(API + "/admin/espace", { headers: authHeaders() });
+        var j = await r.json();
+        if (j && j.ok) renderEspaces(j.espaces || []);
+      } catch (_) {}
+    }
+    function renderEspaces(list) {
+      if (!list.length) { espList.innerHTML = '<div class="muted" style="font-size:13px">Aucun espace client pour l\'instant. Créez-en un ci-dessus.</div>'; return; }
+      espList.innerHTML = list.map(function (e) {
+        var link = "https://francoisleterrier.fr/espace.html?c=" + esc(e.slug);
+        return '<div class="esp-item"><div><div class="en">' + esc(e.name) + '</div><div class="el">' + esc(link) + '</div></div>' +
+          '<div class="ea"><button class="esp-copy" data-link="' + esc(link) + '">Copier le lien</button>' +
+          '<a class="esp-copy" href="' + esc(link) + '" target="_blank" rel="noopener">Ouvrir</a>' +
+          '<button class="esp-del" data-slug="' + esc(e.slug) + '" data-name="' + esc(e.name) + '">Supprimer</button></div></div>';
+      }).join("");
+      Array.prototype.forEach.call(espList.querySelectorAll(".esp-copy[data-link]"), function (b) {
+        b.addEventListener("click", function () { try { navigator.clipboard.writeText(b.getAttribute("data-link")); } catch (_) {} b.textContent = "Copié ✓"; setTimeout(function () { b.textContent = "Copier le lien"; }, 1500); });
+      });
+      Array.prototype.forEach.call(espList.querySelectorAll(".esp-del"), function (b) {
+        b.addEventListener("click", function () { if (confirm("Supprimer l'espace de " + b.getAttribute("data-name") + " ? Son lien ne fonctionnera plus.")) removeEspace(b.getAttribute("data-slug")); });
+      });
+    }
+    async function addEspace(name, report) {
+      espShow("Enregistrement…");
+      try {
+        var r = await fetch(API + "/admin/espace", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ name: name, report: report }) });
+        var j = await r.json();
+        if (j && j.ok) { espShow("Espace enregistré ✓ — lien : " + j.link); espNom.value = ""; espUrl.value = ""; loadEspaces(); }
+        else espShow((j && j.error) || "Enregistrement impossible.", true);
+      } catch (_) { espShow("Connexion impossible.", true); }
+    }
+    async function removeEspace(slug) {
+      try {
+        var r = await fetch(API + "/admin/espace", { method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ slug: slug, remove: true }) });
+        var j = await r.json();
+        if (j && j.ok) loadEspaces();
+      } catch (_) {}
+    }
+    if (espForm) espForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var n = (espNom.value || "").trim(), u = (espUrl.value || "").trim();
+      if (!n || !u) { espShow("Nom et URL du rapport requis.", true); return; }
+      addEspace(n, u);
+    });
 
     loginForm.addEventListener("submit", function (e) { e.preventDefault(); token = (tokenInput.value || "").trim(); if (!token) return; loginMsg.style.color = "var(--muted)"; loginMsg.textContent = "Connexion…"; load(); });
     $("#ad-refresh").addEventListener("click", load);

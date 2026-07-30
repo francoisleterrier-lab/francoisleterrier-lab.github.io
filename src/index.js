@@ -41,7 +41,7 @@ const ALLOWED_ORIGINS = new Set([
 
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant"]);
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/espace"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
@@ -52,8 +52,10 @@ const RATE_LIMITS = {
   "/devis": { limit: 15, window: 60 },
   "/devis/sign": { limit: 10, window: 60 },
   "/lead": { limit: 5, window: 60 },
+  "/espace": { limit: 40, window: 60 },
   "/admin/leads": { limit: 60, window: 60 },
   "/admin/lead-status": { limit: 120, window: 60 },
+  "/admin/espace": { limit: 60, window: 60 },
   _default: { limit: 30, window: 60 },
 };
 
@@ -563,6 +565,81 @@ async function handleSignDevis(request, env) {
   return json({ ok: true });
 }
 
+/* -------------------- Espace client (statistiques Looker Studio) -------------------- */
+
+/** Transforme un nom en identifiant d'URL sûr (a-z0-9-, 2 à 42 car.). */
+function slugify(s) {
+  return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 42);
+}
+
+/** N'autorise QUE des rapports Looker Studio en iframe (anti-injection d'iframe arbitraire). */
+function isLookerUrl(u) {
+  try {
+    const url = new URL(u);
+    if (url.protocol !== "https:") return false;
+    const h = url.hostname.toLowerCase();
+    return h === "lookerstudio.google.com" || h === "datastudio.google.com";
+  } catch (_) { return false; }
+}
+
+async function espaceIndex(env) {
+  let idx = [];
+  if (env && env.CACHE) { try { idx = await env.CACHE.get("espaces:index", "json"); } catch (_) {} }
+  return Array.isArray(idx) ? idx : [];
+}
+
+/** GET /espace?c=slug — vue PUBLIQUE d'un espace client (slug = jeton d'accès non devinable). */
+async function handleEspace(request, env) {
+  const url = new URL(request.url);
+  const slug = clampStr(url.searchParams.get("c"), 42).toLowerCase();
+  if (!slug) return json({ ok: false, error: "Identifiant manquant." }, 400);
+  let rec = null;
+  if (env && env.CACHE) { try { rec = await env.CACHE.get("espace:" + slug, "json"); } catch (_) {} }
+  if (!rec) return json({ ok: false, error: "Espace introuvable." }, 404);
+  return json({ ok: true, name: rec.name || "", report: rec.report || "" });
+}
+
+/** GET /admin/espace — liste les espaces clients (auth requise). */
+async function handleAdminEspaceList(request, env) {
+  const auth = checkAdmin(request, env);
+  if (!auth.ok) return json({ ok: false, error: auth.error }, auth.code);
+  const idx = await espaceIndex(env);
+  const espaces = [];
+  for (const slug of idx) {
+    let rec = null;
+    if (env && env.CACHE) { try { rec = await env.CACHE.get("espace:" + slug, "json"); } catch (_) {} }
+    if (rec) espaces.push({ slug: slug, name: rec.name || "", report: rec.report || "", updated: rec.updated || "" });
+  }
+  return json({ ok: true, espaces: espaces });
+}
+
+/** POST /admin/espace — crée / met à jour / supprime un espace client (auth requise). */
+async function handleAdminEspace(request, env) {
+  const auth = checkAdmin(request, env);
+  if (!auth.ok) return json({ ok: false, error: auth.error }, auth.code);
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const slug = slugify(d.slug || d.name);
+  if (!/^[a-z0-9][a-z0-9-]{1,41}$/.test(slug)) return json({ ok: false, error: "Identifiant client invalide." }, 422);
+  if (d.remove) {
+    if (env && env.CACHE) { try { await env.CACHE.delete("espace:" + slug); } catch (_) {} }
+    const idx = (await espaceIndex(env)).filter(function (s) { return s !== slug; });
+    if (env && env.CACHE) { try { await env.CACHE.put("espaces:index", JSON.stringify(idx)); } catch (_) {} }
+    return json({ ok: true, removed: slug });
+  }
+  const name = clampStr(d.name, 80);
+  const report = clampStr(d.report, 500);
+  if (!name) return json({ ok: false, error: "Nom du client requis." }, 422);
+  if (!isLookerUrl(report)) return json({ ok: false, error: "L'URL doit être un rapport Looker Studio (lookerstudio.google.com)." }, 422);
+  const rec = { name: name, report: report, updated: new Date().toISOString() };
+  if (env && env.CACHE) { try { await env.CACHE.put("espace:" + slug, JSON.stringify(rec)); } catch (_) {} }
+  const idx = await espaceIndex(env);
+  if (idx.indexOf(slug) < 0) { idx.push(slug); if (env && env.CACHE) { try { await env.CACHE.put("espaces:index", JSON.stringify(idx)); } catch (_) {} } }
+  return json({ ok: true, slug: slug, link: "https://francoisleterrier.fr/espace.html?c=" + slug });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
@@ -576,8 +653,11 @@ const ROUTES = {
   "POST /devis": (req, env) => handleCreateDevis(req, env),
   "GET /devis": (req, env) => handleGetDevis(req, env),
   "POST /devis/sign": (req, env) => handleSignDevis(req, env),
+  "GET /espace": (req, env) => handleEspace(req, env),
   "GET /admin/leads": (req, env) => handleAdminLeads(req, env),
   "POST /admin/lead-status": (req, env) => handleAdminStatus(req, env),
+  "GET /admin/espace": (req, env) => handleAdminEspaceList(req, env),
+  "POST /admin/espace": (req, env) => handleAdminEspace(req, env),
 };
 
 /** Enlève un éventuel préfixe /api pour que /health == /api/health. */

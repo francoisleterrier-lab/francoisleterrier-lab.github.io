@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace client — Vos statistiques | François Leterrier</title>
+<meta name="description" content="Votre tableau de bord personnel : trafic de votre site et visibilité sur Google, mis à jour en continu.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#060410">
+<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="preconnect" href="https://main.francois-leterrier-cmw.workers.dev">
+<link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
+<link rel="stylesheet" href="/aurora.css">
+<link rel="stylesheet" href="pages.css">
+<style>
+  .esp-head{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);margin-bottom:8px;}
+  .esp-head img{height:38px;width:auto;}
+  .esp-head b{font-family:'Montserrat';font-weight:800;color:#fff;font-size:16px;line-height:1.1;}
+  .esp-head span{display:block;color:var(--cyan);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
+  .esp-head a{margin-left:auto;font-size:13px;color:var(--muted);}
+  .esp-load{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:34px 26px;text-align:center;margin:18px 0;}
+  .esp-load h2{margin:0 0 8px;}
+  .esp-load p{color:var(--muted);max-width:52ch;margin:0 auto 18px;}
+  .esp-frame{position:relative;width:100%;min-height:820px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--panel);}
+  .esp-frame iframe{width:100%;height:100%;min-height:820px;border:0;display:block;}
+  .esp-note{color:var(--muted);font-size:12.5px;text-align:center;margin:14px 0 30px;}
+  .esp-err{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.35);color:#ffb3b3;border-radius:14px;padding:22px;text-align:center;}
+</style>
+</head>
+<body>
+  <main><div class="wrap">
+    <div class="esp-head">
+      <img src="logo.png" alt="Logo FL — François Leterrier">
+      <div><b>François Leterrier</b><span>Espace client</span></div>
+      <a href="index.html">← Retour au site</a>
+    </div>
+
+    <div id="esp-app">
+      <div class="esp-load"><h2>Chargement de votre espace…</h2><p>Un instant, je récupère votre tableau de bord.</p></div>
+    </div>
+
+    <p class="esp-note">Données mises à jour en continu (trafic du site &amp; visibilité Google). Espace privé — merci de ne pas partager ce lien.</p>
+  </div></main>
+
+  <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 · <a href="tel:+33698200208">06 98 20 02 08</a> · <a href="mailto:francois&#46;leterrier&#46;cmw&#64;gmail&#46;com">francois&#46;leterrier&#46;cmw&#64;gmail&#46;com</a> — © <span id="y">2026</span></div></footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+  <script>
+  (function(){
+    var API="https://main.francois-leterrier-cmw.workers.dev";
+    var app=document.getElementById("esp-app");
+    function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+    function slug(){try{return (new URLSearchParams(location.search).get("c")||"").trim().toLowerCase().slice(0,42);}catch(e){return "";}}
+    function fail(msg){app.innerHTML='<div class="esp-err">'+esc(msg)+'</div>';}
+    var c=slug();
+    if(!c){fail("Lien incomplet. Utilisez le lien personnel que François vous a transmis.");return;}
+    var ctrl=new AbortController(),to=setTimeout(function(){ctrl.abort();},15000);
+    fetch(API+"/espace?c="+encodeURIComponent(c),{signal:ctrl.signal})
+      .then(function(r){clearTimeout(to);if(r.status===404)throw new Error("404");if(!r.ok)throw new Error("net");return r.json();})
+      .then(function(j){
+        if(!j||!j.ok||!j.report)throw new Error("data");
+        var card=document.createElement("div");
+        card.className="esp-load";
+        card.innerHTML='<h2>Bonjour '+esc(j.name||"")+' 👋</h2>'+
+          '<p>Voici votre tableau de bord : le trafic de votre site et votre visibilité sur Google, en un coup d\'œil.</p>'+
+          '<button class="btn" type="button" id="esp-show">Afficher mes statistiques →</button>'+
+          '<p style="font-size:12px;margin-top:14px;margin-bottom:0;">En cliquant, un rapport Google Looker Studio se charge (cookies Google).</p>';
+        app.innerHTML="";app.appendChild(card);
+        document.getElementById("esp-show").addEventListener("click",function(){
+          var box=document.createElement("div");
+          box.className="esp-frame";
+          var f=document.createElement("iframe");
+          f.setAttribute("title","Tableau de bord — "+(j.name||"statistiques"));
+          f.setAttribute("loading","lazy");
+          f.setAttribute("allow","fullscreen");
+          f.src=j.report;
+          box.appendChild(f);
+          app.innerHTML="";app.appendChild(box);
+        });
+      })
+      .catch(function(e){
+        clearTimeout(to);
+        if(e&&e.message==="404")fail("Espace introuvable. Vérifiez votre lien personnel, ou contactez François au 06 98 20 02 08.");
+        else fail("Impossible de charger votre espace pour le moment. Réessayez dans un instant.");
+      });
+  })();
+  </script>
+  <script src="/consent.js" defer></script>
+</body>
+</html>

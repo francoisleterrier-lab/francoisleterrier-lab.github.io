@@ -64,6 +64,20 @@
   .dt{color:var(--muted);white-space:nowrap;font-size:12.5px}
   .ad-empty{padding:40px;text-align:center;color:var(--muted)}
   .muted{color:var(--muted)}
+  /* espaces clients */
+  .esp-panel{margin-top:34px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .esp-panel h2{font-size:18px;font-weight:800}
+  .esp-panel h2 small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.03em;margin-top:3px}
+  #esp-form{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 6px}
+  #esp-form input{flex:1;min-width:220px}
+  .esp-msg{font-size:13px;min-height:16px;margin:4px 0}
+  .esp-list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+  .esp-item{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.02)}
+  .esp-item .en{font-weight:700}
+  .esp-item .el{color:var(--cyan);font-size:12.5px;word-break:break-all}
+  .esp-item .ea{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .esp-copy{border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--txt);font-size:12px;font-weight:600;padding:7px 12px;border-radius:9px}
+  .esp-del{border:1px solid var(--red);background:transparent;color:var(--red);font-size:12px;font-weight:600;padding:7px 12px;border-radius:9px}
   @media(max-width:820px){.ad-stats{grid-template-columns:1fr 1fr 1fr}}
   @media(max-width:520px){.ad-stats{grid-template-columns:1fr 1fr}}
 </style>
@@ -97,6 +111,9 @@
           <option value="">Toutes sources</option>
           <option value="audit">Audit</option>
           <option value="generateur">Générateur</option>
+          <option value="assistant">Assistant</option>
+          <option value="parrainage">Parrainage</option>
+          <option value="devis">Devis</option>
         </select>
         <select id="ad-status-filter" aria-label="Filtrer par statut">
           <option value="">Tous statuts</option>
@@ -113,6 +130,17 @@
         </table>
       </div>
       <div class="ad-empty" id="ad-empty" hidden>Aucun lead pour le moment.</div>
+
+      <section class="esp-panel" id="ad-espaces">
+        <h2>📊 Espaces clients <small>Tableaux de bord Looker Studio · liens privés</small></h2>
+        <form id="esp-form" autocomplete="off">
+          <input type="text" id="esp-nom" placeholder="Nom du client (ex. Boulangerie Dupont)" aria-label="Nom du client">
+          <input type="url" id="esp-url" placeholder="URL du rapport Looker Studio (lookerstudio.google.com/…)" aria-label="URL du rapport Looker Studio">
+          <button class="pbtn" type="submit">Créer / mettre à jour</button>
+        </form>
+        <div class="esp-msg" id="esp-msg" role="status"></div>
+        <div id="esp-list" class="esp-list"></div>
+      </section>
     </section>
   </div>
   <script src="/admin.js" defer></script>

@@ -20,11 +20,16 @@ function ok(cond, label) {
 function memKV() {
   const m = new Map();
   return {
-    async get(k) {
-      return m.has(k) ? m.get(k) : null;
+    async get(k, type) {
+      const v = m.has(k) ? m.get(k) : null;
+      if (v == null) return null;
+      return type === "json" ? JSON.parse(v) : v; // mime le vrai KV Cloudflare
     },
     async put(k, v) {
       m.set(k, v);
+    },
+    async delete(k) {
+      m.delete(k);
     },
   };
 }
@@ -128,6 +133,10 @@ r = await worker.fetch(req("POST", "/devis/sign", { body: JSON.stringify({ id: "
 ok(r.status === 422, "POST /devis/sign (sans nom) → 422");
 r = await worker.fetch(req("GET", "/barometre"), env);
 ok(r.status === 200, "GET /barometre → 200");
+r = await worker.fetch(req("GET", "/espace"), env);
+ok(r.status === 400, "GET /espace (sans slug) → 400");
+r = await worker.fetch(req("GET", "/espace?c=inconnu", { origin: APEX }), env);
+ok(r.status === 404, "GET /espace?c inconnu → 404");
 r = await worker.fetch(req("POST", "/assistant", { body: JSON.stringify({ message: "" }), ct: "application/json" }), env);
 ok(r.status === 422, "POST /assistant (message vide) → 422");
 r = await worker.fetch(req("POST", "/lead", { body: JSON.stringify({ source: "assistant", nom: "X", email: "pas-un-email" }), ct: "application/json" }), env);
@@ -202,6 +211,25 @@ r = await worker.fetch(req("GET", "/admin/leads", { token: "s3cr3t-test-token" }
 jl = await r.json();
 const al = jl.leads.find((x) => x.source === "assistant");
 ok(al && al.nom === "Marie D." && al.tel === "06 12 34 56 78" && al.note === "Besoin d'un site pour mon salon", "lead assistant parsé (nom + tél + demande)");
+
+// espaces clients (Looker Studio) : auth, validation, CRUD
+r = await worker.fetch(req("POST", "/admin/espace", { body: JSON.stringify({ name: "X", report: "https://lookerstudio.google.com/embed/reporting/abc" }), ct: "application/json" }), adminEnv);
+ok(r.status === 401, "POST /admin/espace sans jeton → 401");
+r = await worker.fetch(req("POST", "/admin/espace", { token: "s3cr3t-test-token", body: JSON.stringify({ name: "Boulangerie Dupont", report: "https://evil.example/report" }), ct: "application/json" }), adminEnv);
+ok(r.status === 422, "POST /admin/espace URL non-Looker → 422 (anti-iframe arbitraire)");
+r = await worker.fetch(req("POST", "/admin/espace", { token: "s3cr3t-test-token", body: JSON.stringify({ name: "Boulangerie Dupont", report: "https://lookerstudio.google.com/embed/reporting/abc123/page/p1" }), ct: "application/json" }), adminEnv);
+let je = await r.json();
+ok(r.status === 200 && je.ok === true && je.slug === "boulangerie-dupont", "POST /admin/espace valide → 200 + slug dérivé du nom");
+r = await worker.fetch(req("GET", "/espace?c=boulangerie-dupont", { origin: APEX }), adminEnv);
+je = await r.json();
+ok(r.status === 200 && je.ok === true && je.name === "Boulangerie Dupont" && /lookerstudio/.test(je.report), "GET /espace?c → 200 + nom + rapport");
+r = await worker.fetch(req("GET", "/admin/espace", { token: "s3cr3t-test-token" }), adminEnv);
+je = await r.json();
+ok(r.status === 200 && Array.isArray(je.espaces) && je.espaces.some((e) => e.slug === "boulangerie-dupont"), "GET /admin/espace → liste l'espace créé");
+r = await worker.fetch(req("POST", "/admin/espace", { token: "s3cr3t-test-token", body: JSON.stringify({ slug: "boulangerie-dupont", remove: true }), ct: "application/json" }), adminEnv);
+ok(r.status === 200, "POST /admin/espace remove → 200");
+r = await worker.fetch(req("GET", "/espace?c=boulangerie-dupont", { origin: APEX }), adminEnv);
+ok(r.status === 404, "GET /espace?c après suppression → 404");
 
 console.log(`\n${pass} réussis, ${fail} échoués`);
 process.exit(fail ? 1 : 0);
