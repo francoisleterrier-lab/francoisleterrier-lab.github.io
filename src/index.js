@@ -38,13 +38,15 @@ const ALLOWED_ORIGINS = new Set([
 
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead"]);
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
   "/generate": { limit: 8, window: 60 },
   "/audit": { limit: 10, window: 60 },
   "/site": { limit: 20, window: 60 },
+  "/devis": { limit: 15, window: 60 },
+  "/devis/sign": { limit: 10, window: 60 },
   "/lead": { limit: 5, window: 60 },
   "/admin/leads": { limit: 60, window: 60 },
   "/admin/lead-status": { limit: 120, window: 60 },
@@ -410,6 +412,79 @@ async function handleLead(request, env) {
   return json({ ok: true });
 }
 
+/* -------------------- Devis instantané signable (Chantier 4) -------------------- */
+
+/** Notifie François (web3forms) à la création puis à la signature d'un devis. */
+async function notifyDevis(rec, etat) {
+  try {
+    const lignes = (rec.items || []).map(function (it) { return "• " + it.label + " : " + it.amount + " €"; }).join("\n");
+    const msg = "DEVIS " + etat + "\n\nClient : " + (rec.client.nom || "") + " <" + rec.client.email + ">" +
+      (rec.client.tel ? " · " + rec.client.tel : "") + (rec.client.ville ? " · " + rec.client.ville : "") +
+      "\nProjet : " + (rec.projet || "—") + (rec.delay ? " · délai " + rec.delay : "") +
+      "\n\n" + lignes + "\n\nTOTAL : " + rec.total + " €" + (rec.monthly ? " + " + rec.monthly + " €/mois" : "") +
+      (rec.signature ? "\n\n✍️ SIGNÉ par " + rec.signature.name + " le " + rec.signature.date : "") +
+      "\n\nLien du devis : https://francoisleterrier.fr/devis.html?id=" + rec.id;
+    await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: W3F_KEY, subject: "🧾 Devis " + etat + " — " + (rec.client.nom || rec.client.email), from_name: "FL Devis", email: rec.client.email, message: msg }),
+    });
+  } catch (_) {}
+}
+
+/** POST /devis — crée un devis signable (lead chaud + engagement). */
+async function handleCreateDevis(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const client = d.client && typeof d.client === "object" ? d.client : {};
+  const email = clampStr(client.email, 120);
+  if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
+  const items = Array.isArray(d.items) ? d.items.slice(0, 40).map(function (it) { return { label: clampStr(it.label, 120), amount: Math.max(0, Math.round(Number(it.amount) || 0)) }; }).filter(function (it) { return it.label; }) : [];
+  if (!items.length) return json({ ok: false, error: "Le devis est vide." }, 422);
+  const rec = {
+    id: shortId(), ts: new Date().toISOString(),
+    client: { nom: clampStr(client.nom, 100), email: email, tel: clampStr(client.tel, 30), ville: clampStr(client.ville, 80) },
+    items: items,
+    total: Math.max(0, Math.round(Number(d.total) || 0)),
+    monthly: Math.max(0, Math.round(Number(d.monthly) || 0)),
+    delay: clampStr(d.delay, 40), projet: clampStr(d.projet, 80), message: clampStr(d.message, 500),
+    validityDays: 30, status: "sent", signature: null,
+  };
+  if (env.CACHE) { try { await env.CACHE.put("devis:" + rec.id, JSON.stringify(rec), { expirationTtl: 15552000 }); } catch (_) {} }
+  const lead = { email: email, url: "", source: "devis", ip: clientIp(request), site: { input: { metier: rec.projet, nom: rec.client.nom, ville: rec.client.ville }, id: rec.id } };
+  await Promise.all([notifyDevis(rec, "créé"), storeLead(env, lead)]);
+  return json({ ok: true, id: rec.id });
+}
+
+/** GET /devis?id=… — renvoie le devis pour affichage/signature (sans l'IP). */
+async function handleGetDevis(request, env) {
+  const id = clampStr(new URL(request.url).searchParams.get("id") || "", 40);
+  if (!id || !/^[a-f0-9]{6,40}$/i.test(id)) return json({ ok: false, error: "Identifiant manquant." }, 400);
+  let rec = null;
+  if (env.CACHE) { try { rec = await env.CACHE.get("devis:" + id, "json"); } catch (_) {} }
+  if (!rec) return json({ ok: false, error: "Devis introuvable ou expiré." }, 404);
+  if (rec.signature) rec.signature = { name: rec.signature.name, date: rec.signature.date }; // pas l'ip_hash
+  return json({ ok: true, devis: rec });
+}
+
+/** POST /devis/sign — signature électronique (bon pour accord). */
+async function handleSignDevis(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const id = clampStr(d.id, 40), name = clampStr(d.name, 100);
+  if (!id || !name || name.length < 2) return json({ ok: false, error: "Nom requis pour signer." }, 422);
+  let rec = null;
+  if (env.CACHE) { try { rec = await env.CACHE.get("devis:" + id, "json"); } catch (_) {} }
+  if (!rec) return json({ ok: false, error: "Devis introuvable." }, 404);
+  if (rec.status === "signed") return json({ ok: true, already: true });
+  rec.status = "signed";
+  rec.signature = { name: name, date: new Date().toISOString(), ip_hash: await sha256hex(clientIp(request)) };
+  if (env.CACHE) { try { await env.CACHE.put("devis:" + id, JSON.stringify(rec), { expirationTtl: 15552000 }); } catch (_) {} }
+  await notifyDevis(rec, "SIGNÉ");
+  return json({ ok: true });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
@@ -419,6 +494,9 @@ const ROUTES = {
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
+  "POST /devis": (req, env) => handleCreateDevis(req, env),
+  "GET /devis": (req, env) => handleGetDevis(req, env),
+  "POST /devis/sign": (req, env) => handleSignDevis(req, env),
   "GET /admin/leads": (req, env) => handleAdminLeads(req, env),
   "POST /admin/lead-status": (req, env) => handleAdminStatus(req, env),
 };

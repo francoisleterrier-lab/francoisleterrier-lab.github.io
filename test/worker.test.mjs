@@ -115,6 +115,20 @@ ok(r.status === 400, "GET /audit (sans id) → 400");
 r = await worker.fetch(req("GET", "/audit?id=inconnu123", { origin: APEX }), env);
 ok(r.status === 404, "GET /audit?id inconnu → 404 (rapport introuvable)");
 
+// 4b-ter) devis signable + baromètre (chemins de validation, sans effet réseau)
+r = await worker.fetch(req("GET", "/devis"), env);
+ok(r.status === 400, "GET /devis (sans id) → 400");
+r = await worker.fetch(req("POST", "/devis", { body: JSON.stringify({ client: { email: "nope" }, items: [{ label: "x", amount: 100 }] }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /devis (e-mail invalide) → 422");
+r = await worker.fetch(req("POST", "/devis", { body: JSON.stringify({ client: { email: "a@b.fr" }, items: [] }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /devis (vide) → 422");
+r = await worker.fetch(req("GET", "/devis?id=deadbeef", { origin: APEX }), env);
+ok(r.status === 404, "GET /devis?id inconnu → 404");
+r = await worker.fetch(req("POST", "/devis/sign", { body: JSON.stringify({ id: "x" }), ct: "application/json" }), env);
+ok(r.status === 422, "POST /devis/sign (sans nom) → 422");
+r = await worker.fetch(req("GET", "/barometre"), env);
+ok(r.status === 200, "GET /barometre → 200");
+
 // 4c) verrou d'origine : les endpoints « à valeur » refusent une autre origine
 r = await worker.fetch(req("POST", "/audit", { body: JSON.stringify({ url: "https://x.fr" }), ct: "application/json", origin: "https://evil.example" }), env);
 ok(r.status === 403, "POST /audit depuis une origine non autorisée → 403 (anti-copie)");

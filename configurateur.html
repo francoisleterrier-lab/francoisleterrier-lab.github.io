@@ -201,7 +201,8 @@
           <div class="field"><label for="message">Une précision sur votre projet&nbsp;?</label><textarea id="message" name="message" placeholder="Activité, échéance, exemples que vous aimez... (facultatif)"></textarea></div>
           <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
           <button class="btn btn-submit" type="submit">Recevoir mon devis détaillé →</button>
-          <p class="form-note">Vos données ne sont jamais cédées à des tiers. Votre configuration est jointe automatiquement à la demande.</p>
+          <button class="btn" type="button" id="genDevis" style="margin-top:10px;background:transparent;border:1.5px solid var(--cyan);color:var(--cyan)">🧾 Générer un devis signable en ligne →</button>
+          <p class="form-note">Vos données ne sont jamais cédées à des tiers. Le devis signable est immédiat&nbsp;: vous pouvez le signer en ligne (bon pour accord) et l'enregistrer en PDF.</p>
         </form>
       </div>
     </div>
@@ -257,6 +258,23 @@
       if(el.classList.contains('on'))state.opts[id]={p:+el.dataset.p,name:id};else delete state.opts[id];calc();});});
     document.querySelectorAll('#cm .chip').forEach(function(el){el.addEventListener('click',function(){
       document.querySelectorAll('#cm .chip').forEach(function(x){x.classList.remove('on');});el.classList.add('on');state.cm=+el.dataset.m;calc();});});
+    // Devis signable : construit les lignes depuis la configuration puis crée le devis.
+    var gd=document.getElementById('genDevis');
+    if(gd)gd.addEventListener('click',function(){
+      var nom=(document.getElementById('name').value||'').trim();
+      var email=(document.getElementById('email').value||'').trim();
+      var tel=(document.getElementById('phone').value||'').trim();
+      var message=(document.getElementById('message').value||'').trim();
+      if(nom.length<2){alert('Indiquez votre nom pour générer le devis.');document.getElementById('name').focus();return;}
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){alert('Indiquez un e-mail valide.');document.getElementById('email').focus();return;}
+      var T=TYPE[state.type];var items=[{label:T.name,amount:T.base}];var total=T.base;
+      if(state.type==='vitrine'&&state.pages>5){var ex=(state.pages-5)*110;items.push({label:'Pages supplémentaires ('+(state.pages-5)+')',amount:ex});total+=ex;}
+      Object.keys(state.opts).forEach(function(k){var o=state.opts[k];items.push({label:o.name,amount:o.p});total+=o.p;});
+      gd.disabled=true;var old=gd.textContent;gd.textContent='Génération…';
+      fetch('https://main.francois-leterrier-cmw.workers.dev/devis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{nom:nom,email:email,tel:tel},items:items,total:total,monthly:state.cm||0,delay:T.delay,projet:T.name,message:message})})
+      .then(function(r){return r.json();}).then(function(j){if(j&&j.ok&&j.id){location.href='devis.html?id='+j.id;}else{throw 0;}})
+      .catch(function(){gd.disabled=false;gd.textContent=old;alert('Oups, réessayez dans un instant.');});
+    });
     calc();
   })();
   </script>

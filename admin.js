@@ -12,7 +12,7 @@
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
   var STATUS = { nouveau: "Nouveau", contacte: "Contacté", converti: "Converti", perdu: "Perdu" };
-  var SRC = { audit: "Audit", generateur: "Générateur" };
+  var SRC = { audit: "Audit", generateur: "Générateur", devis: "Devis" };
 
   var token = "", allLeads = [];
 
@@ -68,6 +68,11 @@
     }
 
     function detailCell(l) {
+      if (l.source === "devis") {
+        var w = [l.metier, l.nom].filter(Boolean).map(esc).join(" · ");
+        var lk = l.shareId ? '<div class="sub"><a href="devis.html?id=' + esc(l.shareId) + '" target="_blank" rel="noopener">Voir le devis →</a></div>' : "";
+        return (w || '<span class="muted">devis</span>') + lk;
+      }
       if (l.source === "generateur") {
         var who = [l.metier, l.nom].filter(Boolean).map(esc).join(" · ");
         var link = l.shareId ? '<div class="sub"><a href="generateur.html?site=' + esc(l.shareId) + '" target="_blank" rel="noopener">Voir la maquette →</a></div>' : "";
