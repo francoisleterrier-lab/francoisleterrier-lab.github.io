@@ -715,6 +715,10 @@ async function handleCheckout(request, env) {
   }
   if (email && EMAIL_RE.test(email)) pairs.push(["customer_email", email]);
   pairs.push(
+    // Managed Payments est activé par défaut sur certains comptes et exige un
+    // tax_code par produit ; on le désactive par requête (micro-entreprise, TVA
+    // non applicable art. 293 B) — sinon Stripe refuse la création de session.
+    ["managed_payments[enabled]", "false"],
     ["success_url", SITE_BASE + "/abonnement-merci.html?session_id={CHECKOUT_SESSION_ID}"],
     ["cancel_url", SITE_BASE + "/abonnement.html?annule=1"],
     ["allow_promotion_codes", "true"]
