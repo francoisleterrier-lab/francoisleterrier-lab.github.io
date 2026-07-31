@@ -134,6 +134,44 @@
   <main><div class="wrap">
     <p class="lead">Je crée le <strong>faire-part digital</strong> de votre mariage, baptême, anniversaire ou PACS : un <strong>mini-site d'invitation privé</strong>, conçu sur mesure, avec <strong>réponses des invités en ligne</strong>. À partir de <strong>290 €</strong>, devis écrit avant tout engagement.</p>
 
+    <style>
+      .fp-showcase{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;margin:8px 0 30px;padding:34px;border:1px solid var(--line2,rgba(143,230,240,.2));border-radius:20px;background:linear-gradient(120deg,rgba(224,91,200,.06),rgba(124,58,237,.07));}
+      .fp-phone{width:232px;height:474px;flex:none;border-radius:40px;padding:12px;background:linear-gradient(160deg,#2a2440,#141225);box-shadow:0 34px 66px -22px rgba(0,0,0,.65),inset 0 0 0 1px rgba(255,255,255,.06);position:relative;}
+      .fp-phone::before{content:"";position:absolute;top:21px;left:50%;transform:translateX(-50%);width:74px;height:6px;border-radius:6px;background:rgba(255,255,255,.16);z-index:2;}
+      .fp-screen{height:100%;border-radius:29px;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#f8f2e9,#ece3d5);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 22px;color:#3a3327;}
+      .fp-mono{width:76px;height:76px;border-radius:50%;border:1.5px solid #c9a86a;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:23px;color:#9c7b3f;margin-bottom:18px;}
+      .fp-kick{font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:#a98d5e;margin-bottom:12px;}
+      .fp-names{font-family:'Fraunces',serif;font-size:31px;line-height:1.05;color:#2e2820;margin-bottom:7px;}
+      .fp-names em{font-style:italic;color:#bf9a55;}
+      .fp-date{font-size:11px;letter-spacing:.16em;color:#6a5f4c;margin-bottom:20px;}
+      .fp-count{display:flex;gap:14px;margin-bottom:22px;}
+      .fp-count b{display:block;font-family:'Fraunces',serif;font-size:21px;color:#2e2820;line-height:1;}
+      .fp-count span{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#8a7c63;margin-top:4px;}
+      .fp-rsvp{background:linear-gradient(90deg,#c9a86a,#b8903f);color:#fff;font-size:12px;font-weight:700;letter-spacing:.08em;padding:11px 26px;border-radius:30px;}
+      .fp-txt h3{margin:0 0 10px;}
+      .fp-chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px;}
+      .fp-chips span{font-size:12.5px;padding:6px 12px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line2,rgba(143,230,240,.22));color:var(--muted,#aab2c6);}
+      @media(max-width:680px){.fp-showcase{grid-template-columns:1fr;justify-items:center;text-align:center;padding:26px 18px;}.fp-chips{justify-content:center;}}
+    </style>
+    <div class="fp-showcase">
+      <div class="fp-phone" aria-hidden="true">
+        <div class="fp-screen">
+          <div class="fp-mono">C&amp;J</div>
+          <div class="fp-kick">Nous nous marions</div>
+          <div class="fp-names">Camille <em>&amp;</em> Jules</div>
+          <div class="fp-date">14 JUIN 2026 · TOULOUSE</div>
+          <div class="fp-count"><div><b>128</b><span>jours</span></div><div><b>07</b><span>heures</span></div><div><b>42</b><span>min</span></div></div>
+          <div class="fp-rsvp">Je réponds →</div>
+        </div>
+      </div>
+      <div class="fp-txt">
+        <h3>À quoi ressemble votre faire-part</h3>
+        <p>Un mini-site à vos couleurs, que vos invités ouvrent d'un simple lien — compte à rebours, programme, plan d'accès, galerie, et le bouton <strong>RSVP</strong> qui centralise toutes les réponses en temps réel.</p>
+        <div class="fp-chips"><span>📅 Compte à rebours</span><span>✅ RSVP en ligne</span><span>📸 Galerie</span><span>📍 Plan &amp; hébergements</span><span>💬 Livre d'or</span><span>📱 Installable (PWA)</span></div>
+        <a class="btn" href="modeles/faire-part.html">Voir l'exemple complet en vrai →</a>
+      </div>
+    </div>
+
     <h2>Qu'est-ce qu'un faire-part de mariage digital ?</h2>
     <p>Sous ce nom, on trouve deux familles très différentes. La première est la simple <strong>carte numérique</strong> : une image envoyée par email ou WhatsApp, jolie mais figée. La seconde est le <strong>mini-site d'invitation</strong> : une vraie page web privée, à vos couleurs, qui rassemble tout ce que vos invités doivent savoir — et qui leur permet de <strong>répondre en ligne</strong>.</p>
     <p>C'est cette seconde famille que je propose : un <strong>faire-part de mariage en ligne</strong> conçu sur mesure (pas un template rempli), accessible par un simple lien, sans application à télécharger ni compte à créer. Il peut remplacer le faire-part papier, le compléter — ou servir d'abord de <strong>save the date en ligne</strong> dès que votre date est fixée.</p>
