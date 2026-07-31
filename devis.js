@@ -30,13 +30,22 @@
       var clientLine = [cl.nom, cl.ville].filter(Boolean).map(esc).join(" · ");
       var contact = [cl.email, cl.tel].filter(Boolean).map(esc).join(" · ");
 
+      var ac = Math.round((Number(dv.total) || 0) * 0.30);
+      var payBlock = ac >= 50
+        ? '<div class="dv-pay" style="margin-top:18px;text-align:center">' +
+          '<button class="dv-btn" id="dv-paybtn">💳 Régler l\'acompte (30 %) — ' + fmt(ac) + ' € en ligne →</button>' +
+          '<div style="font-size:12.5px;color:#77727f;margin-top:9px">Paiement sécurisé par Stripe. Le solde se règle au lancement. Rien ne vous oblige à payer maintenant.</div>' +
+          '<div class="dv-msg-out" id="dv-paymsg"></div></div>'
+        : (dv.monthly ? '<div class="dv-pay" style="margin-top:18px;text-align:center"><a class="dv-btn" href="abonnement.html" style="display:inline-block;text-decoration:none">S\'abonner en ligne →</a></div>' : "");
+
       var sign = dv.status === "signed" && dv.signature
         ? '<div class="dv-signed"><div class="stamp">✅ Devis accepté &amp; signé</div>' +
           '<div class="who">' + esc(dv.signature.name) + "</div>" +
           '<div style="font-size:13px;color:#77727f">Bon pour accord le ' + dfr(dv.signature.date) + "</div>" +
-          '<div class="dv-msg-out" style="color:#1c8a4a">Merci&nbsp;! Je reviens vers vous très vite pour lancer le projet.</div></div>'
+          '<div class="dv-msg-out" style="color:#1c8a4a">Merci&nbsp;! Vous pouvez régler l\'acompte en ligne dès maintenant — sinon, je reviens vers vous très vite pour lancer le projet.</div>' +
+          payBlock + "</div>"
         : '<div class="dv-sign"><h3>Bon pour accord</h3>' +
-          '<p>Signez en ligne pour valider ce devis. C\'est un accord de principe, sans paiement — je vous recontacte pour démarrer.</p>' +
+          '<p>Signez en ligne pour valider ce devis. Une fois signé, vous pourrez <strong>régler l\'acompte (30 %) en ligne</strong> — ou en discuter d\'abord avec moi, sans engagement.</p>' +
           '<div class="row"><input type="text" id="dv-name" placeholder="Votre nom et prénom" value="' + esc(cl.nom || "") + '" aria-label="Votre nom"></div>' +
           '<label class="dv-consent"><input type="checkbox" id="dv-ok"><span>Je certifie être la personne indiquée et j\'accepte ce devis (« bon pour accord »).</span></label>' +
           '<button class="dv-btn" id="dv-signbtn">✍️ Signer le devis</button>' +
@@ -59,6 +68,22 @@
         "</div>";
 
       if (dv.status !== "signed") wireSign(dv);
+      else wirePay(dv);
+    }
+
+    function wirePay(dv) {
+      var btn = $("#dv-paybtn"); if (!btn) return;
+      btn.addEventListener("click", async function () {
+        var ac = Math.round((Number(dv.total) || 0) * 0.30);
+        var msg = $("#dv-paymsg");
+        btn.disabled = true; if (msg) { msg.style.color = "#55505f"; msg.textContent = "Redirection vers le paiement sécurisé…"; }
+        try {
+          var r = await fetch(API + "/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind: "payment", amount: ac, label: "Acompte 30 % — devis " + dv.id, email: (dv.client && dv.client.email) || "" }) });
+          var j = await r.json();
+          if (j && j.ok && j.url) { location.href = j.url; }
+          else throw 0;
+        } catch (_) { btn.disabled = false; if (msg) { msg.style.color = "#c0392b"; msg.textContent = "Paiement momentanément indisponible. Réessayez, ou appelez le 06 98 20 02 08."; } }
+      });
     }
 
     function wireSign(dv) {
