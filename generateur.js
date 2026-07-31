@@ -367,7 +367,7 @@
       renderCurrent();
       show(skel, false); show(frame, true); submitBtn.disabled = false; submitBtn.removeAttribute("aria-busy");
       show(custom, true); markActive(tonRow, "data-ton", edits.ton); markActive(accentRow, "data-accent", "");
-      if (share) share.hidden = false; if (redo) redo.hidden = false; frame.dataset.source = page._source || "";
+      if (share) share.hidden = false; if (redo) redo.hidden = false; var gdv = $("#gen-devis"); if (gdv) gdv.hidden = false; frame.dataset.source = page._source || "";
       resetCapture();
     }
 
@@ -410,7 +410,7 @@
     if (sid && /^[a-f0-9]{6,40}$/i.test(sid)) {
       editable = false;
       if (heroSec) heroSec.hidden = true;
-      show(custom, false); if (redo) redo.hidden = true; if (share) share.hidden = true;
+      show(custom, false); if (redo) redo.hidden = true; if (share) share.hidden = true; var gdv2 = $("#gen-devis"); if (gdv2) gdv2.hidden = true;
       if (capDefault) { var h = capDefault.querySelector("h3"), pp = capDefault.querySelector("p"); if (h) h.textContent = "Vous voulez le vôtre ?"; if (pp) pp.textContent = "Cette maquette a été composée en quelques secondes. Créez la vôtre gratuitement, puis faites-la évoluer avec moi."; }
       stage.hidden = false; show(skel, true); show(frame, false);
       (async function () {
