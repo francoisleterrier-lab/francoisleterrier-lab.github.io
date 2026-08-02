@@ -170,12 +170,13 @@
 
   /* ---------- styles ---------- */
   var css = ''
-    + '#fl-as-launch{position:fixed;right:18px;bottom:18px;z-index:95;display:inline-flex;align-items:center;gap:9px;'
-    + 'padding:12px 18px 12px 14px;border:0;border-radius:40px;cursor:pointer;font:inherit;font-weight:700;font-size:14px;'
+    + '#fl-as-launch{position:fixed;right:18px;bottom:18px;z-index:95;display:inline-flex;align-items:center;justify-content:center;'
+    + 'width:56px;height:56px;padding:0;border:0;border-radius:50%;cursor:pointer;'
     + 'color:#08111f;background:linear-gradient(90deg,#28c8dd 0%,#7c3aed 52%,#e05bc8 100%);'
     + 'box-shadow:0 14px 34px -10px rgba(124,58,237,.7),0 0 22px -8px rgba(40,200,221,.7);transition:transform .2s}'
     + '#fl-as-launch:hover{transform:translateY(-2px)}'
     + '#fl-as-launch svg{width:22px;height:22px;flex:none}'
+    + '#fl-as-launch .fl-as-lbl{display:none}'
     + '#fl-as-launch .fl-as-close-i{display:none}'
     + '#fl-as-launch.open .fl-as-open-i{display:none}#fl-as-launch.open .fl-as-close-i{display:block}'
     + '#fl-as-panel{position:fixed;right:18px;bottom:82px;z-index:95;width:360px;max-width:calc(100vw - 36px);'
@@ -217,7 +218,7 @@
     + '.fl-as-typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#8fe6f0;animation:fl-as-blink 1s infinite}'
     + '.fl-as-typing span:nth-child(2){animation-delay:.2s}.fl-as-typing span:nth-child(3){animation-delay:.4s}'
     + '@keyframes fl-as-blink{0%,60%,100%{opacity:.3}30%{opacity:1}}'
-    + '@media(max-width:760px){#fl-as-launch{bottom:18px;padding:0;width:56px;height:56px;border-radius:50%;justify-content:center}#fl-as-launch .fl-as-lbl{display:none}#fl-as-panel{bottom:84px;height:64vh}}'
+    + '@media(max-width:760px){#fl-as-panel{bottom:84px;height:64vh}}'
     + (RM ? '' : '#fl-as-panel.show{animation:fl-as-in .22s ease}@keyframes fl-as-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}');
 
   /* ---------- construction du DOM ---------- */
@@ -227,7 +228,7 @@
     var style = document.createElement('style'); style.id = 'fl-as-css'; style.textContent = css;
     document.head.appendChild(style);
 
-    var launch = el('<button id="fl-as-launch" aria-haspopup="dialog" aria-expanded="false" aria-controls="fl-as-panel">'
+    var launch = el('<button id="fl-as-launch" aria-haspopup="dialog" aria-expanded="false" aria-controls="fl-as-panel" aria-label="Une question ? Ouvrir l\'assistant du site">'
       + '<svg class="fl-as-open-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
       + '<svg class="fl-as-close-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>'
       + '<span class="fl-as-lbl">Une question&nbsp;?</span></button>');
