@@ -32,7 +32,8 @@
         { t: "Gérer mes réseaux sociaux", go: "reseaux" },
         { t: "Les deux", go: "deux" },
         { t: "Un faire-part digital", go: "fairepart" },
-        { t: "Une question rapide", go: "faq" }
+        { t: "Une question rapide", go: "faq" },
+        { t: "📞 Appeler François", href: "tel:+33698200208" }
       ]
     },
     site: {
@@ -186,7 +187,10 @@
     + '#fl-as-panel .fl-as-av{width:38px;height:38px;border-radius:50%;flex:none;background:linear-gradient(90deg,#28c8dd,#7c3aed,#e05bc8);display:flex;align-items:center;justify-content:center;font-size:19px}'
     + '#fl-as-panel .fl-as-ht b{display:block;color:#fff;font-size:14px;font-weight:700}'
     + '#fl-as-panel .fl-as-ht span{display:block;color:#8fe6f0;font-size:11px;font-weight:600;letter-spacing:.02em}'
-    + '#fl-as-panel .fl-as-x{margin-left:auto;background:none;border:0;color:#b9b3c6;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}'
+    + '#fl-as-panel .fl-as-call{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex:none;border-radius:50%;background:rgba(40,200,221,.14);border:1px solid rgba(143,230,240,.3);color:#8fe6f0;text-decoration:none;transition:.15s}'
+    + '#fl-as-panel .fl-as-call:hover{background:rgba(40,200,221,.26);color:#fff}'
+    + '#fl-as-panel .fl-as-call svg{width:17px;height:17px}'
+    + '#fl-as-panel .fl-as-x{background:none;border:0;color:#b9b3c6;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}'
     + '#fl-as-panel .fl-as-x:hover{color:#fff}'
     + '#fl-as-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}'
     + '.fl-as-msg{max-width:86%;padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.55}'
@@ -213,7 +217,7 @@
     + '.fl-as-typing span{display:inline-block;width:6px;height:6px;margin:0 1px;border-radius:50%;background:#8fe6f0;animation:fl-as-blink 1s infinite}'
     + '.fl-as-typing span:nth-child(2){animation-delay:.2s}.fl-as-typing span:nth-child(3){animation-delay:.4s}'
     + '@keyframes fl-as-blink{0%,60%,100%{opacity:.3}30%{opacity:1}}'
-    + '@media(max-width:760px){#fl-as-launch{bottom:86px;padding:11px 15px}#fl-as-panel{bottom:150px;height:64vh}}'
+    + '@media(max-width:760px){#fl-as-launch{bottom:18px;padding:0;width:56px;height:56px;border-radius:50%;justify-content:center}#fl-as-launch .fl-as-lbl{display:none}#fl-as-panel{bottom:84px;height:64vh}}'
     + (RM ? '' : '#fl-as-panel.show{animation:fl-as-in .22s ease}@keyframes fl-as-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}');
 
   /* ---------- construction du DOM ---------- */
@@ -231,6 +235,8 @@
     var panel = el('<div id="fl-as-panel" role="dialog" aria-modal="false" aria-label="Assistant à réponses guidées">'
       + '<div class="fl-as-head"><div class="fl-as-av" aria-hidden="true">💬</div>'
       + '<div class="fl-as-ht"><b>Assistant du site</b><span>Assistant IA · sans engagement</span></div>'
+      + '<a class="fl-as-call" href="tel:+33698200208" aria-label="Appeler le 06 98 20 02 08" title="Appeler le 06 98 20 02 08">'
+      + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></a>'
       + '<button class="fl-as-x" aria-label="Fermer l\'assistant">×</button></div>'
       + '<div id="fl-as-body" aria-live="polite"></div>'
       + '<div class="fl-as-opts" id="fl-as-opts"></div>'
