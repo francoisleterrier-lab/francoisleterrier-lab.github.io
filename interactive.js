@@ -165,7 +165,7 @@
     ] }
   ];
   var RECO = {
-    social: { h: 'La gestion de vos réseaux sociaux', p: 'Pour une présence régulière sur Facebook, Instagram &amp; Google Business : ma formule réseaux sociaux, <b>dès 180 €/mois, sans engagement</b>.', c: [{ l: 'Voir les formules réseaux →', u: 'community-manager.html', p: true }, { l: 'En parler (offert)', u: 'contact.html' }] },
+    social: { h: 'La gestion de vos réseaux sociaux', p: 'Pour une présence régulière sur Facebook, Instagram &amp; Google Business : ma formule réseaux sociaux, <b>dès 290 €/mois, sans engagement</b>.', c: [{ l: 'Voir les formules réseaux →', u: 'community-manager.html', p: true }, { l: 'En parler (offert)', u: 'contact.html' }] },
     web: { h: 'La création de votre site internet', p: 'Un site vitrine moderne, rapide et <b>référencé localement</b> — dès 590 €, référencement local inclus.', c: [{ l: 'Voir la création de site →', u: 'creation-site-internet.html', p: true }, { l: 'Voir des modèles', u: 'modeles/' }] },
     both: { h: 'Réseaux sociaux + site internet', p: 'La présence complète, gérée par <b>un seul interlocuteur</b> : un site qui vous appartient et des réseaux animés. C\'est exactement ma double casquette.', c: [{ l: 'En discuter (échange offert) →', u: 'contact.html', p: true }, { l: 'Voir les tarifs', u: 'tarifs.html' }] },
     unsure: { h: 'Commençons par un diagnostic gratuit', p: 'Je passe au crible votre présence actuelle et je vous renvoie <b>3 actions concrètes</b>, sans engagement. On y verra clair ensemble.', c: [{ l: 'Demander mon diagnostic →', u: 'contact.html', p: true }, { l: 'Tester mon SEO', u: 'audit-seo-gratuit.html' }] }
@@ -372,8 +372,8 @@
   }
 
   /* ---------- 9. Estimateur de devis transparent (tarifs RÉELS « à partir de ») ---------- */
-  var EST_SITE = { express: 590, vitrine: 1400, surmesure: 2500 };
-  var EST_SOCIAL = { essentiel: 180, croissance: 350, premium: 520 };
+  var EST_SITE = { express: 590, vitrine: 1690, surmesure: 2900 };
+  var EST_SOCIAL = { essentiel: 290, croissance: 490, premium: 790 };
   function eur(n) { return ('' + n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
   function initEstim() {
     var root = document.getElementById('estimateur');

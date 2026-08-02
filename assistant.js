@@ -36,7 +36,7 @@
       ]
     },
     site: {
-      bot: "Bon choix 🖥️ Un site vitrine démarre à <b>590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>référencement local inclus</b>. Je peux vous montrer un exemple dans votre secteur, ou chiffrer votre projet en 30&nbsp;secondes.",
+      bot: "Bon choix 🖥️ Un site vitrine démarre à <b>590&nbsp;€</b> (1 page) ou <b>1&nbsp;690&nbsp;€</b> (jusqu'à 5 pages), <b>référencement local inclus</b>. Je peux vous montrer un exemple dans votre secteur, ou chiffrer votre projet en 30&nbsp;secondes.",
       opts: [
         { t: "🔎 Voir un exemple de mon métier", go: "metier" },
         { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
@@ -67,7 +67,7 @@
       ]
     },
     reseaux: {
-      bot: "La gestion de vos réseaux (Facebook, Instagram, Google Business) démarre à <b>180&nbsp;€/mois</b>, <b>sans engagement</b>. La formule Croissance (350&nbsp;€/mois) est la plus choisie. Vous validez chaque contenu avant publication.",
+      bot: "La gestion de vos réseaux (Facebook, Instagram, Google Business) démarre à <b>290&nbsp;€/mois</b>, <b>sans engagement</b>. La formule Croissance (490&nbsp;€/mois) est la plus choisie. Vous validez chaque contenu avant publication.",
       opts: [
         { t: "Voir les formules", href: "/tarifs.html" },
         { t: "⚙️ Estimer mon projet", href: "/configurateur.html" },
@@ -106,7 +106,7 @@
       ]
     },
     faq_prix: {
-      bot: "En transparence&nbsp;: <b>site vitrine dès 590&nbsp;€</b> (1 page) ou <b>1&nbsp;400&nbsp;€</b> (jusqu'à 5 pages), <b>réseaux dès 180&nbsp;€/mois</b> sans engagement, <b>faire-part digital dès 290&nbsp;€</b>. Référencement local inclus sur les sites. Le configurateur chiffre votre cas précis.",
+      bot: "En transparence&nbsp;: <b>site vitrine dès 590&nbsp;€</b> (1 page) ou <b>1&nbsp;690&nbsp;€</b> (jusqu'à 5 pages), <b>réseaux dès 290&nbsp;€/mois</b> sans engagement, <b>faire-part digital dès 290&nbsp;€</b>. Référencement local inclus sur les sites. Le configurateur chiffre votre cas précis.",
       opts: [
         { t: "⚙️ Chiffrer mon projet", href: "/configurateur.html" },
         { t: "Voir tous les tarifs", href: "/tarifs.html" },

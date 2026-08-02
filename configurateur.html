@@ -162,9 +162,9 @@
             <div class="lbl"><span class="num">4</span> Gestion des réseaux (mensuel, optionnel)</div>
             <div class="chips" id="cm">
               <div class="chip on" data-m="0">Aucune</div>
-              <div class="chip" data-m="180">Essentiel <small>180&nbsp;€/mois</small></div>
-              <div class="chip" data-m="350">Croissance <small>350&nbsp;€/mois</small></div>
-              <div class="chip" data-m="520">Premium <small>520&nbsp;€/mois</small></div>
+              <div class="chip" data-m="290">Essentiel <small>290&nbsp;€/mois</small></div>
+              <div class="chip" data-m="490">Croissance <small>490&nbsp;€/mois</small></div>
+              <div class="chip" data-m="790">Premium <small>790&nbsp;€/mois</small></div>
             </div>
           </div>
         </div>
@@ -217,14 +217,14 @@
   (function(){
     var TYPE={
       landing:{name:'Landing page',base:590,delay:'1 semaine'},
-      vitrine:{name:'Site vitrine',base:1400,delay:'2–3 semaines'},
-      surmesure:{name:'Site sur-mesure',base:2500,delay:'4–6 semaines'},
+      vitrine:{name:'Site vitrine',base:1690,delay:'2–3 semaines'},
+      surmesure:{name:'Site sur-mesure',base:2900,delay:'4–6 semaines'},
       app:{name:'Application web (PWA)',base:1900,delay:'3–5 semaines'}
     };
-    var CMNAME={0:'Aucune',180:'Essentiel',350:'Croissance',520:'Premium'};
+    var CMNAME={0:"Aucune",290:"Essentiel",490:"Croissance",790:"Premium"};
     var state={type:'vitrine',pages:5,opts:{},cm:0};
     function fmt(n){return n.toLocaleString('fr-FR');}
-    var cur=1400;
+    var cur=1690;
     function animateTo(n){var el=document.getElementById('total');var from=cur,st=null;cur=n;
       function a(t){st=st||t;var p=Math.min((t-st)/500,1);p=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(from+(n-from)*p));if(p<1)requestAnimationFrame(a);}requestAnimationFrame(a);}
     function calc(){
