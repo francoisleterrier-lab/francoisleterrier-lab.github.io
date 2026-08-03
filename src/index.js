@@ -277,11 +277,24 @@ async function handleMyReviews(request, env) {
   let data = null;
   if (env.CACHE && !nocache) { try { data = await env.CACHE.get("myreviews_v1", "json"); } catch (_) {} }
   if (!data) {
-    const q = (env.MY_PLACE_QUERY && env.MY_PLACE_QUERY.trim()) || "François Leterrier community manager Lavernose-Lacasse";
-    const r = await runPlaces(env, q);
-    data = (r && r.found && r.reviews != null && r.rating != null)
-      ? { ok: true, rating: r.rating, total: r.reviews, mapUrl: r.mapUrl || "" }
-      : { ok: false };
+    const cands = (env.MY_PLACE_QUERY && env.MY_PLACE_QUERY.trim())
+      ? [env.MY_PLACE_QUERY.trim()]
+      : [
+          "François Leterrier Lavernose-Lacasse",
+          "François Leterrier community manager Sud-Toulousain",
+          "François Leterrier création site internet Lavernose-Lacasse",
+          "FL-System Lavernose-Lacasse",
+          "Faire-part Vivant Lavernose-Lacasse",
+        ];
+    data = { ok: false };
+    for (let i = 0; i < cands.length; i++) {
+      const r = await runPlaces(env, cands[i]);
+      // On n'accepte QUE si la fiche pointe vers francoisleterrier.fr (garantit que c'est bien la sienne, jamais un homonyme).
+      if (r && r.found && r.reviews != null && r.rating != null && r.website && /francoisleterrier\.fr/i.test(r.website)) {
+        data = { ok: true, rating: r.rating, total: r.reviews, mapUrl: r.mapUrl || "" };
+        break;
+      }
+    }
     if (env.CACHE && data.ok) { try { await env.CACHE.put("myreviews_v1", JSON.stringify(data), { expirationTtl: 43200 }); } catch (_) {} }
   }
   return json(data);

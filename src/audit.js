@@ -131,7 +131,7 @@ export async function runPlaces(env, query) {
     const jd = await (await fetchWithTimeout(det, 8000)).json();
     const res = jd && jd.result;
     if (!res) return { found: false };
-    return { found: true, rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, mapUrl: res.url || "" };
+    return { found: true, rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, website: res.website || "", mapUrl: res.url || "" };
   } catch (_) { return { found: false }; }
 }
 
