@@ -29,3 +29,5 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://francoisleterrier.fr/sitemap.xml
+Sitemap: https://francoisleterrier.fr/faire-part-vivant/sitemap.xml
+# Carte IA (Faire-part Vivant) : https://francoisleterrier.fr/faire-part-vivant/llms.txt
