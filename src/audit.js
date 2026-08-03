@@ -150,6 +150,22 @@ export async function placesTextSearch(env, query) {
   } catch (_) { return []; }
 }
 
+// Variante brute (diagnostic) : renvoie le statut de l'API + les résultats bruts.
+export async function placesTextSearchRaw(env, query) {
+  if (!env || !env.PLACES_API_KEY || !query) return { status: "NO_KEY_OR_QUERY", results: [] };
+  try {
+    const u = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + encodeURIComponent(query) + "&region=fr&language=fr&key=" + env.PLACES_API_KEY;
+    const j = await (await fetchWithTimeout(u, 8000)).json();
+    return {
+      status: (j && j.status) || "NO_STATUS",
+      error: (j && j.error_message) || "",
+      results: ((j && j.results) || []).slice(0, 8).map(function (r) {
+        return { place_id: r.place_id || "", name: r.name || "", addr: r.formatted_address || "", rating: r.rating != null ? r.rating : null, reviews: r.user_ratings_total != null ? r.user_ratings_total : null };
+      }),
+    };
+  } catch (e) { return { status: "EXCEPTION", error: String(e), results: [] }; }
+}
+
 // Détails d'une fiche à partir d'un place_id connu (voie la plus fiable et la moins coûteuse).
 export async function placeDetails(env, placeId) {
   if (!env || !env.PLACES_API_KEY || !placeId) return null;

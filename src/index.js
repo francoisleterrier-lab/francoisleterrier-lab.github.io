@@ -18,7 +18,7 @@
  */
 
 import { generatePage, aiText } from "./generate.js";
-import { runAudit, publicView, barometreStats, runPlaces, placesTextSearch, placeDetails } from "./audit.js";
+import { runAudit, publicView, barometreStats, runPlaces, placesTextSearch, placesTextSearchRaw, placeDetails } from "./audit.js";
 
 // Personnalité + connaissances de l'assistant on-site (LLM via Workers AI).
 const ASSISTANT_SYSTEM = "Tu es l'assistant du site de François Leterrier, community manager et créateur de sites internet (micro-entreprise) basé à Lavernose-Lacasse (Sud-Toulousain, 31410), qui travaille partout en France (visio + livraison en ligne). Réponds en français, chaleureux et pro, JAMAIS de jargon, en 1 à 3 phrases maximum. Offre et tarifs (à partir de) : sites internet — landing express dès 590 € (1 page), site vitrine dès 1 690 € (jusqu'à 5 pages), sur-mesure dès 2 900 €, référencement local inclus ; réseaux sociaux dès 290 €/mois sans engagement (Essentiel 290, Croissance 490 la plus choisie, Premium 790) ; faire-part digital dès 290 € ; référencement/visibilité Google. « Application » = site web/PWA, jamais une appli native App Store. Oriente vers le bon outil quand c'est utile : audit de présence en ligne gratuit (page /audit.html), générateur de maquette de site (/generateur.html), configurateur qui génère un devis signable en ligne (/configurateur.html), paiement en ligne des formules réseaux ou d'un acompte de site (/abonnement.html), ou le diagnostic gratuit (/contact.html). Programme de parrainage : recommander un pro fait gagner 1 mois de gestion de réseaux offert par filleul qui démarre (page /parrainage.html) — mentionne-le si la personne connaît quelqu'un à recommander. N'invente jamais de prix hors de ceux indiqués ; si tu ne sais pas, propose le diagnostic gratuit. Termine souvent par une invitation à agir (essayer un outil ou demander le diagnostic).";
@@ -340,6 +340,11 @@ async function handleMyReviews(request, env) {
     const trace = [];
     const hit = await findMyPlace(env, trace);
     return json({ resolved: !!hit, hit: hit ? { rating: hit.rating, total: hit.reviews, name: hit.name, mapUrl: hit.mapUrl } : null, trace: trace });
+  }
+  if (_sp.get("debug") === "2") {
+    const q = clampStr(_sp.get("q") || "François Leterrier Community Manager Création de site Lavernose-Lacasse", 120);
+    const raw = await placesTextSearchRaw(env, q);
+    return json({ q: q, raw: raw });
   }
   const nocache = _sp.get("nocache") === "1";
   let data = null;
