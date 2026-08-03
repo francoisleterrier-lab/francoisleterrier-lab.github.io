@@ -272,25 +272,51 @@ async function handleReactions(request, env) {
 }
 
 /** GET /my-reviews — note + volume d'avis Google de François, via l'API Places (caché 12 h). */
+// Liste des requêtes candidates pour retrouver la fiche Google Business de François.
+// La 1re est le nom EXACT de la fiche (confirmé via le lien de partage Google).
+function myPlaceCandidates(env) {
+  if (env && env.MY_PLACE_QUERY && env.MY_PLACE_QUERY.trim()) return [env.MY_PLACE_QUERY.trim()];
+  return [
+    "François Leterrier - Community Manager & Création de site",
+    "François Leterrier Community Manager Création de site",
+    "François Leterrier Lavernose-Lacasse",
+    "François Leterrier community manager Sud-Toulousain",
+    "François Leterrier création site internet Lavernose-Lacasse",
+    "FL-System Lavernose-Lacasse",
+    "Faire-part Vivant Lavernose-Lacasse",
+  ];
+}
+
+// Garde-fou anti-homonyme : on n'accepte la fiche que si son identité est prouvée,
+// soit par le site lié (francoisleterrier.fr), soit par un nom sans ambiguïté
+// (« Leterrier » + activité community manager / création de site).
+function isMyPlace(r) {
+  if (!r || !r.found || r.reviews == null || r.rating == null) return false;
+  if (r.website && /francoisleterrier\.fr/i.test(r.website)) return true;
+  const name = (r.name || "").toLowerCase();
+  return /leterrier/.test(name) && /(community|manager|cr[ée]ation|site)/.test(name);
+}
+
 async function handleMyReviews(request, env) {
-  const nocache = new URL(request.url).searchParams.get("nocache") === "1";
+  const _sp = new URL(request.url).searchParams;
+  if (_sp.get("debug") === "1") {
+    const out = [];
+    const cands = myPlaceCandidates(env);
+    for (let i = 0; i < cands.length; i++) {
+      const r = await runPlaces(env, cands[i]);
+      out.push({ q: cands[i], found: !!(r && r.found), name: r && r.name, rating: r && r.rating, total: r && r.reviews, website: r && r.website, accept: isMyPlace(r) });
+    }
+    return json({ debug: out });
+  }
+  const nocache = _sp.get("nocache") === "1";
   let data = null;
   if (env.CACHE && !nocache) { try { data = await env.CACHE.get("myreviews_v1", "json"); } catch (_) {} }
   if (!data) {
-    const cands = (env.MY_PLACE_QUERY && env.MY_PLACE_QUERY.trim())
-      ? [env.MY_PLACE_QUERY.trim()]
-      : [
-          "François Leterrier Lavernose-Lacasse",
-          "François Leterrier community manager Sud-Toulousain",
-          "François Leterrier création site internet Lavernose-Lacasse",
-          "FL-System Lavernose-Lacasse",
-          "Faire-part Vivant Lavernose-Lacasse",
-        ];
+    const cands = myPlaceCandidates(env);
     data = { ok: false };
     for (let i = 0; i < cands.length; i++) {
       const r = await runPlaces(env, cands[i]);
-      // On n'accepte QUE si la fiche pointe vers francoisleterrier.fr (garantit que c'est bien la sienne, jamais un homonyme).
-      if (r && r.found && r.reviews != null && r.rating != null && r.website && /francoisleterrier\.fr/i.test(r.website)) {
+      if (isMyPlace(r)) {
         data = { ok: true, rating: r.rating, total: r.reviews, mapUrl: r.mapUrl || "" };
         break;
       }

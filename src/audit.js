@@ -127,11 +127,11 @@ export async function runPlaces(env, query) {
     const j1 = await (await fetchWithTimeout(find, 8000)).json();
     const cand = j1 && j1.candidates && j1.candidates[0];
     if (!cand || !cand.place_id) return { found: false };
-    const det = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(cand.place_id) + "&fields=rating,user_ratings_total,website,url&key=" + env.PLACES_API_KEY;
+    const det = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(cand.place_id) + "&fields=name,rating,user_ratings_total,website,url&key=" + env.PLACES_API_KEY;
     const jd = await (await fetchWithTimeout(det, 8000)).json();
     const res = jd && jd.result;
     if (!res) return { found: false };
-    return { found: true, rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, website: res.website || "", mapUrl: res.url || "" };
+    return { found: true, name: res.name || "", rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, website: res.website || "", mapUrl: res.url || "" };
   } catch (_) { return { found: false }; }
 }
 
