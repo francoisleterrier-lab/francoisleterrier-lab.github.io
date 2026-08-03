@@ -13,6 +13,13 @@ compatibility_date = "2026-07-01"
 workers_dev = true
 account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
 
+# Identifiant Google Places de la fiche de François (place_id, PAS un secret).
+# Dérivé du « feature id » de sa fiche Google Maps. Permet la synchro auto
+# note+avis via l'API Places Details (fetch direct), là où la recherche par
+# nom/téléphone échoue (activité « zone de service » sans adresse publique).
+[vars]
+MY_PLACE_ID = "ChIJrdmKKv3CL00RahwQsKV9JbU"
+
 # Workers AI — LLM intégré (aucune clé externe). Utilisé par /generate.
 [ai]
 binding = "AI"
