@@ -13,12 +13,15 @@ compatibility_date = "2026-07-01"
 workers_dev = true
 account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
 
-# Identifiant Google Places de la fiche de François (place_id, PAS un secret).
-# Dérivé du « feature id » de sa fiche Google Maps. Permet la synchro auto
-# note+avis via l'API Places Details (fetch direct), là où la recherche par
-# nom/téléphone échoue (activité « zone de service » sans adresse publique).
-[vars]
-MY_PLACE_ID = "ChIJrdmKKv3CL00RahwQsKV9JbU"
+# Synchro auto des avis Google : DÉSACTIVÉE (diagnostic complet effectué).
+# La fiche de François est une activité « zone de service » sans adresse publique :
+# elle n'est PAS exposée par l'API Google Places (NOT_FOUND par nom, par téléphone
+# ET par place_id — elle n'existe que dans le Knowledge Panel de la recherche, qui
+# n'a pas d'API). Le compteur d'avis est donc géré en statique dans le HTML (à jour).
+# Pour réactiver l'auto-fetch si Google indexe la fiche un jour :
+#   [vars]
+#   MY_REVIEWS_AUTOFETCH = "1"
+#   MY_PLACE_ID = "…"   # place_id renvoyé par une vraie réponse Places (pas construit)
 
 # Workers AI — LLM intégré (aucune clé externe). Utilisé par /generate.
 [ai]
