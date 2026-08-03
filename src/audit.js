@@ -120,7 +120,7 @@ function reviewsPillar(html, local, places) {
 }
 
 // Google Places : note + volume d'avis d'une fiche. Dormant sans PLACES_API_KEY.
-async function runPlaces(env, query) {
+export async function runPlaces(env, query) {
   if (!env || !env.PLACES_API_KEY || !query) return null;
   try {
     const find = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + encodeURIComponent(query) + "&inputtype=textquery&fields=place_id&key=" + env.PLACES_API_KEY;
