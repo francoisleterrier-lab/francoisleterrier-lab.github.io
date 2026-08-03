@@ -68,6 +68,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Qu'est-ce qu'un faire-part de mariage digital exactement ?", "acceptedAnswer": { "@type": "Answer", "text": "Il en existe deux familles : la simple carte numérique (une image envoyée par email ou WhatsApp) et le mini-site d'invitation. Ici, il s'agit d'un vrai mini-site privé à votre image : compte à rebours, programme de la journée, infos pratiques, hébergements, plan d'accès, dress code, galerie photos, livre d'or et formulaire de réponse (RSVP). Vos invités y accèdent par un simple lien, sans rien installer." } },
+    { "@type": "Question", "name": "Qu'est-ce qui rend le faire-part « vivant » ?", "acceptedAnswer": { "@type": "Answer", "text": "Contrairement à une carte figée, le Faire-part Vivant évolue avec votre mariage : un arbre de vie s'illumine à chaque réponse reçue, la timeline se dévoile au bon moment, vos invités partagent photos et messages en direct, choisissent leur table sur un plan interactif, et tout se met à jour instantanément — du save-the-date jusqu'aux souvenirs d'après la fête. Une démo complète (« Émilie & Julien ») est en ligne." } },
     { "@type": "Question", "name": "Comment mes invités reçoivent-ils l'invitation ?", "acceptedAnswer": { "@type": "Answer", "text": "Vous partagez un lien privé par WhatsApp, SMS ou email. Le lien s'affiche avec un aperçu soigné (photo et titre de votre mariage) plutôt qu'une adresse brute. Si vous tenez au papier, l'approche hybride fonctionne très bien : un faire-part imprimé avec un QR code qui renvoie vers le mini-site." } },
     { "@type": "Question", "name": "Et pour les invités âgés ou peu à l'aise avec internet ?", "acceptedAnswer": { "@type": "Answer", "text": "Le site s'ouvre dans n'importe quel navigateur, sans application à télécharger ni compte à créer. Pour les proches vraiment déconnectés, le plus sûr reste de prévoir quelques exemplaires papier ou un appel téléphonique : c'est une limite réelle du tout-digital, et l'approche hybride est souvent le bon compromis." } },
     { "@type": "Question", "name": "Comment fonctionne le RSVP en ligne ?", "acceptedAnswer": { "@type": "Answer", "text": "Chaque invité remplit un court formulaire : présence, nombre d'adultes et d'enfants, allergies ou régimes particuliers. Les réponses sont enregistrées en base de données et vous les consultez en temps réel, à tout moment. C'est plus fiable que de compter les réponses éparpillées entre SMS, appels et messages." } },
@@ -105,6 +106,11 @@
   .fpv-links a{font-size:13px;font-weight:600;color:var(--txt);background:var(--panel);border:1px solid var(--line2);border-radius:30px;padding:7px 14px;}
   .fpv-links a:hover{border-color:var(--cyan);color:#fff;text-decoration:none;}
   .fpv-links a.fpv-demo{background:var(--grad);color:#08111f;border-color:transparent;font-weight:700;}
+  .fpv-signature{display:block;margin:0 0 16px;padding:18px 20px;border-radius:14px;border:1px solid transparent;background:linear-gradient(var(--panel),var(--panel)) padding-box,var(--grad) border-box;box-shadow:0 0 0 1px rgba(40,200,221,.12),0 24px 60px -34px rgba(124,58,237,.6);color:var(--txt);transition:transform .15s;}
+  .fpv-signature:hover{transform:translateY(-2px);text-decoration:none;}
+  .fpv-badge{display:inline-block;background:var(--grad);color:#08111f;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:5px 12px;border-radius:30px;margin-bottom:10px;}
+  .fpv-signature b{display:block;font-family:'Montserrat';font-size:18px;line-height:1.2;color:#fff;margin-bottom:6px;}
+  .fpv-signature .fpv-desc{display:block;font-size:13.5px;color:var(--muted);}
   @media(max-width:860px){.fpv-grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:520px){.fpv-grid{grid-template-columns:1fr;}}
 </style>
@@ -194,21 +200,25 @@
     </div>
     <p>Les sections et fonctionnalités incluses dépendent de la formule choisie (voir ci-dessous) : on compose ensemble le site qui correspond à votre événement.</p>
 
-    <h2>Découvrez le faire-part vivant, catégorie par catégorie</h2>
+    <h2>Le faire-part <em>vivant</em> : l'invitation qui évolue jusqu'au jour J</h2>
+    <p>La version la plus aboutie du faire-part digital, c'est le <strong>Faire-part Vivant</strong> : un site d'invitation qui ne se contente pas d'informer, il <strong>évolue avec votre mariage</strong> — du save-the-date jusqu'aux souvenirs d'après la fête. J'en ai mis une <strong>vraie démo en ligne</strong> (exemple «&nbsp;Émilie&nbsp;&amp;&nbsp;Julien&nbsp;»). Cliquez sur une catégorie pour la découvrir en direct.</p>
     <div class="fpv">
-      <p class="fpv-lead">Le meilleur moyen de comprendre, c'est de voir&nbsp;: j'ai mis en ligne <strong>Faire-part Vivant</strong>, un vrai site de démonstration (exemple «&nbsp;Émilie &amp; Julien&nbsp;»). Cliquez sur une catégorie pour la découvrir en détail, en direct.</p>
+      <a class="fpv-signature" href="/faire-part-vivant/#lumiere">
+        <span class="fpv-badge">✨ La signature — unique sur le marché</span>
+        <b>Un arbre de vie qui s'illumine à chaque «&nbsp;oui&nbsp;»</b>
+        <span class="fpv-desc">À chaque réponse reçue, une lumière de plus s'allume sur votre faire-part&nbsp;: vos invités regardent la constellation grandir à mesure que la fête se confirme. L'attente devient un spectacle — et c'est un détail que personne d'autre ne propose. <span class="fpv-go">Voir l'arbre s'illuminer en démo&nbsp;→</span></span>
+      </a>
       <div class="fpv-grid">
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#invitation"><b>L'invitation dans leur poche</b><span>Un mini-site à vos prénoms, installable comme une app. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#rsvp"><b>Les réponses, sans les relances</b><span>RSVP en ligne et tableau de bord en temps réel. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#jour-j"><b>Le jour J, bien guidé</b><span>Lieu, itinéraire, programme, plan de table. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#souvenirs"><b>Les souvenirs partagés</b><span>Album photo &amp; vidéo, livre d'or filmé, diaporama. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#logistique"><b>Covoiturage &amp; hébergements</b><span>Toute la logistique invités réunie au même endroit. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#cadeaux"><b>Cagnotte &amp; liste de cadeaux</b><span>Intégrées avec élégance à votre faire-part. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#coulisses"><b>Vous gardez la main</b><span>Un espace simple pour tout piloter, sans coder. <span class="fpv-go">Voir&nbsp;→</span></span></a>
-        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#confiance"><b>Privé &amp; sécurisé</b><span>Intime, rapide et toujours à jour. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#invitation"><b>L'invitation dans leur poche</b><span>Un mini-site à vos prénoms, installable comme une app (PWA), avec compte à rebours, bande-son d'ambiance et détection français&nbsp;/&nbsp;anglais. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#rsvp"><b>Les réponses, sans les relances</b><span>RSVP pensé pour les familles (adultes, enfants, allergies), tableau de bord en temps réel, comptage toujours juste et export. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#jour-j"><b>Le jour J, orchestré</b><span>Le lieu révélé au bon moment, itinéraire Maps&nbsp;/&nbsp;Waze, ajout à l'agenda en un clic et un <strong>plan de table interactif</strong>. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#souvenirs"><b>La fête dans leurs mains</b><span>Album photo collaboratif, livre d'or vidéo, playlist partagée, défis photo, quiz et diaporama live sur grand écran. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#logistique"><b>Covoiturage &amp; hébergements</b><span>Toute la logistique invités réunie&nbsp;: covoiturage avec suivi des places, hébergements sélectionnés à proximité. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#cadeaux"><b>Cagnotte &amp; liste de cadeaux</b><span>Cagnotte reliée à vos outils (Leetchi, Lydia, PayPal, RIB) et liste de cadeaux avec réservation anti-doublon. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#coulisses"><b>Vous gardez la main</b><span>Un éditeur sans code pour tout piloter, diffusion WhatsApp&nbsp;/&nbsp;SMS&nbsp;/&nbsp;e-mail, et des notifications envoyées quand vous le décidez. <span class="fpv-go">Voir&nbsp;→</span></span></a>
+        <a class="fpv-cat" href="/faire-part-vivant/fonctionnalites.html#confiance"><b>Privé &amp; sécurisé</b><span>Jamais référencé sur Google, chaque invité ne voit que ce qui le concerne, et vos mises à jour sont visibles instantanément. <span class="fpv-go">Voir&nbsp;→</span></span></a>
       </div>
       <div class="fpv-links">
-        <a href="/faire-part-vivant/#lumiere">✨ L'arbre de vie qui s'illumine</a>
         <a href="/faire-part-vivant/#formules">Les formules</a>
         <a href="/faire-part-vivant/#faq">Questions fréquentes</a>
         <a class="fpv-demo" href="/faire-part-vivant/">Voir la démo en vrai (Émilie &amp; Julien)&nbsp;→</a>
@@ -286,6 +296,7 @@
     <div class="faqs">
       <h2>Questions fréquentes</h2>
       <details open><summary>Qu'est-ce qu'un faire-part de mariage digital exactement ?</summary><div class="a">Il en existe deux familles : la simple carte numérique (une image envoyée par email ou WhatsApp) et le mini-site d'invitation. Ici, il s'agit d'un vrai mini-site privé à votre image : compte à rebours, programme de la journée, infos pratiques, hébergements, plan d'accès, dress code, galerie photos, livre d'or et formulaire de réponse (RSVP). Vos invités y accèdent par un simple lien, sans rien installer.</div></details>
+      <details><summary>Qu'est-ce qui rend le faire-part «&nbsp;vivant&nbsp;»&nbsp;?</summary><div class="a">Contrairement à une carte figée, le <strong>Faire-part Vivant</strong> évolue avec votre mariage : un <strong>arbre de vie s'illumine à chaque réponse</strong> reçue, la timeline se dévoile au bon moment, vos invités partagent photos et messages en direct, <strong>choisissent leur table</strong> sur un plan interactif, et tout se met à jour instantanément — du save-the-date jusqu'aux souvenirs d'après la fête. Une démo complète («&nbsp;Émilie &amp; Julien&nbsp;») est <a href="/faire-part-vivant/">en ligne ici</a>.</div></details>
       <details><summary>Comment mes invités reçoivent-ils l'invitation ?</summary><div class="a">Vous partagez un lien privé par WhatsApp, SMS ou email. Le lien s'affiche avec un aperçu soigné (photo et titre de votre mariage) plutôt qu'une adresse brute. Si vous tenez au papier, l'approche hybride fonctionne très bien : un faire-part imprimé avec un QR code qui renvoie vers le mini-site.</div></details>
       <details><summary>Et pour les invités âgés ou peu à l'aise avec internet ?</summary><div class="a">Le site s'ouvre dans n'importe quel navigateur, sans application à télécharger ni compte à créer. Pour les proches vraiment déconnectés, le plus sûr reste de prévoir quelques exemplaires papier ou un appel téléphonique : c'est une limite réelle du tout-digital, et l'approche hybride est souvent le bon compromis.</div></details>
       <details><summary>Comment fonctionne le RSVP en ligne ?</summary><div class="a">Chaque invité remplit un court formulaire : présence, nombre d'adultes et d'enfants, allergies ou régimes particuliers. Les réponses sont enregistrées en base de données et vous les consultez en temps réel, à tout moment. C'est plus fiable que de compter les réponses éparpillées entre SMS, appels et messages.</div></details>
