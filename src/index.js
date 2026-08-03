@@ -42,13 +42,15 @@ const ALLOWED_ORIGINS = new Set([
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
 // /stripe/webhook n'est PAS ici : Stripe appelle serveur-à-serveur (sans Origin) et le corps brut doit rester intact.
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/espace", "/checkout"]);
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/ask-article", "/espace", "/checkout"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
   "/generate": { limit: 8, window: 60 },
   "/audit": { limit: 10, window: 60 },
   "/assistant": { limit: 20, window: 60 },
+  "/ask-article": { limit: 12, window: 60 },
+  "/reactions": { limit: 40, window: 60 },
   "/site": { limit: 20, window: 60 },
   "/devis": { limit: 15, window: 60 },
   "/devis/sign": { limit: 10, window: 60 },
@@ -222,6 +224,50 @@ async function handleAssistant(request, env) {
   const messages = [{ role: "system", content: ASSISTANT_SYSTEM }].concat(history).concat([{ role: "user", content: msg }]);
   const reply = await aiText(env, messages, 300);
   return json({ ok: true, reply: reply || "Je peux vous orienter tout de suite : un audit gratuit de votre site, une maquette générée en direct, ou un diagnostic offert. Que préférez-vous ?" });
+}
+
+/** POST /ask-article — mini-chat IA ancré STRICTEMENT sur le texte de l'article envoyé par le front. */
+async function handleAskArticle(request, env) {
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const q = clampStr(d.q, 400);
+  const context = clampStr(d.context, 6000);
+  if (!q) return json({ ok: false, error: "Question vide." }, 422);
+  if (!context) return json({ ok: true, reply: "Je réponds à partir du contenu de l'article, mais je n'en ai pas reçu le texte. Rechargez la page de l'article et réessayez." });
+  const system = "Tu es l'assistant du blog de François Leterrier (community manager & création de site web, Sud-Toulousain, national à distance). "
+    + "Réponds à la question UNIQUEMENT à partir de l'EXTRAIT d'article ci-dessous. Si la réponse ne s'y trouve pas, dis-le simplement et invite à contacter François — n'invente JAMAIS de prix, de chiffre ni de fait absent de l'extrait. "
+    + "Réponds en français, clair et concret, en 2 à 5 phrases.\n\nEXTRAIT DE L'ARTICLE :\n" + context;
+  const messages = [{ role: "system", content: system }, { role: "user", content: q }];
+  const reply = await aiText(env, messages, 260);
+  return json({ ok: true, reply: reply || "Je n'ai pas trouvé la réponse dans cet article. Pour un conseil personnalisé, écrivez à François via la page contact." });
+}
+
+const REACT_TYPES = new Set(["utile", "coeur", "waouh"]);
+function reactSlugOk(s) { return /^[a-z0-9-]{1,80}$/.test(s); }
+/** GET/POST /reactions — compteurs de réactions par article (KV, sans compte). */
+async function handleReactions(request, env) {
+  const empty = { utile: 0, coeur: 0, waouh: 0 };
+  if (request.method === "GET") {
+    const slug = clampStr(new URL(request.url).searchParams.get("slug") || "", 80);
+    if (!reactSlugOk(slug)) return json({ ok: false, error: "slug invalide" }, 400);
+    let counts = Object.assign({}, empty);
+    if (env.CACHE) { try { const v = await env.CACHE.get("react:" + slug, "json"); if (v) counts = Object.assign(counts, v); } catch (_) {} }
+    return json({ ok: true, counts: counts });
+  }
+  const parsed = await readJson(request);
+  if (parsed.error) return parsed.error;
+  const d = parsed.data || {};
+  const slug = clampStr(d.slug, 80);
+  const type = clampStr(d.type, 12);
+  if (!reactSlugOk(slug) || !REACT_TYPES.has(type)) return json({ ok: false, error: "paramètres invalides" }, 400);
+  let counts = Object.assign({}, empty);
+  if (env.CACHE) {
+    try { const v = await env.CACHE.get("react:" + slug, "json"); if (v) counts = Object.assign(counts, v); } catch (_) {}
+    counts[type] = (counts[type] || 0) + 1;
+    try { await env.CACHE.put("react:" + slug, JSON.stringify(counts)); } catch (_) {}
+  } else { counts[type] = 1; }
+  return json({ ok: true, counts: counts });
 }
 
 /** GET /barometre — agrégats anonymisés pour le baromètre GEO (public, caché 30 min). */
@@ -790,6 +836,9 @@ const ROUTES = {
   "GET /audit": (req, env) => handleGetAuditReport(req, env),
   "GET /barometre": (req, env) => handleBarometre(req, env),
   "POST /assistant": (req, env) => handleAssistant(req, env),
+  "POST /ask-article": (req, env) => handleAskArticle(req, env),
+  "GET /reactions": (req, env) => handleReactions(req, env),
+  "POST /reactions": (req, env) => handleReactions(req, env),
   "POST /site": (req, env) => handleSaveSite(req, env),
   "GET /site": (req, env) => handleGetSite(req, env),
   "POST /lead": (req, env) => handleLead(req, env),
