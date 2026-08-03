@@ -177,6 +177,17 @@ export async function placesFindByPhone(env, phone) {
   } catch (e) { return { status: "EXCEPTION", error: String(e), candidates: [] }; }
 }
 
+// Variante brute (diagnostic) : renvoie le statut exact renvoyé par l'API Details.
+export async function placeDetailsRaw(env, placeId) {
+  if (!env || !env.PLACES_API_KEY || !placeId) return { status: "NO_KEY_OR_ID" };
+  try {
+    const det = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(placeId) + "&fields=name,rating,user_ratings_total,url&language=fr&key=" + env.PLACES_API_KEY;
+    const jd = await (await fetchWithTimeout(det, 8000)).json();
+    const r = jd && jd.result;
+    return { status: (jd && jd.status) || "NO_STATUS", error: (jd && jd.error_message) || "", name: r && r.name, rating: r && r.rating, total: r && r.user_ratings_total };
+  } catch (e) { return { status: "EXCEPTION", error: String(e) }; }
+}
+
 // Détails d'une fiche à partir d'un place_id connu (voie la plus fiable et la moins coûteuse).
 export async function placeDetails(env, placeId) {
   if (!env || !env.PLACES_API_KEY || !placeId) return null;
