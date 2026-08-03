@@ -166,6 +166,17 @@ export async function placesTextSearchRaw(env, query) {
   } catch (e) { return { status: "EXCEPTION", error: String(e), results: [] }; }
 }
 
+// Recherche par NUMÉRO DE TÉLÉPHONE : lookup exact, fiable même pour les
+// activités « zone de service » (adresse masquée) que la recherche par nom rate.
+export async function placesFindByPhone(env, phone) {
+  if (!env || !env.PLACES_API_KEY || !phone) return { status: "NO_KEY_OR_PHONE", candidates: [] };
+  try {
+    const u = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + encodeURIComponent(phone) + "&inputtype=phonenumber&fields=place_id,name,rating,user_ratings_total&language=fr&key=" + env.PLACES_API_KEY;
+    const j = await (await fetchWithTimeout(u, 8000)).json();
+    return { status: (j && j.status) || "NO_STATUS", error: (j && j.error_message) || "", candidates: (j && j.candidates) || [] };
+  } catch (e) { return { status: "EXCEPTION", error: String(e), candidates: [] }; }
+}
+
 // Détails d'une fiche à partir d'un place_id connu (voie la plus fiable et la moins coûteuse).
 export async function placeDetails(env, placeId) {
   if (!env || !env.PLACES_API_KEY || !placeId) return null;
