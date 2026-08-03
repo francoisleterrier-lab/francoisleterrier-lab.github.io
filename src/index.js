@@ -18,7 +18,7 @@
  */
 
 import { generatePage, aiText } from "./generate.js";
-import { runAudit, publicView, barometreStats, runPlaces } from "./audit.js";
+import { runAudit, publicView, barometreStats, runPlaces, placesTextSearch, placeDetails } from "./audit.js";
 
 // Personnalité + connaissances de l'assistant on-site (LLM via Workers AI).
 const ASSISTANT_SYSTEM = "Tu es l'assistant du site de François Leterrier, community manager et créateur de sites internet (micro-entreprise) basé à Lavernose-Lacasse (Sud-Toulousain, 31410), qui travaille partout en France (visio + livraison en ligne). Réponds en français, chaleureux et pro, JAMAIS de jargon, en 1 à 3 phrases maximum. Offre et tarifs (à partir de) : sites internet — landing express dès 590 € (1 page), site vitrine dès 1 690 € (jusqu'à 5 pages), sur-mesure dès 2 900 €, référencement local inclus ; réseaux sociaux dès 290 €/mois sans engagement (Essentiel 290, Croissance 490 la plus choisie, Premium 790) ; faire-part digital dès 290 € ; référencement/visibilité Google. « Application » = site web/PWA, jamais une appli native App Store. Oriente vers le bon outil quand c'est utile : audit de présence en ligne gratuit (page /audit.html), générateur de maquette de site (/generateur.html), configurateur qui génère un devis signable en ligne (/configurateur.html), paiement en ligne des formules réseaux ou d'un acompte de site (/abonnement.html), ou le diagnostic gratuit (/contact.html). Programme de parrainage : recommander un pro fait gagner 1 mois de gestion de réseaux offert par filleul qui démarre (page /parrainage.html) — mentionne-le si la personne connaît quelqu'un à recommander. N'invente jamais de prix hors de ceux indiqués ; si tu ne sais pas, propose le diagnostic gratuit. Termine souvent par une invitation à agir (essayer un outil ou demander le diagnostic).";
@@ -287,40 +287,66 @@ function myPlaceCandidates(env) {
   ];
 }
 
-// Garde-fou anti-homonyme : on n'accepte la fiche que si son identité est prouvée,
-// soit par le site lié (francoisleterrier.fr), soit par un nom sans ambiguïté
-// (« Leterrier » + activité community manager / création de site).
+// Le nom d'une fiche prouve-t-il sans ambiguïté qu'il s'agit bien de François ?
+// (« Leterrier » + une activité). Protège contre les homonymes.
+function nameIsMe(name) {
+  const n = (name || "").toLowerCase();
+  return /leterrier/.test(n) && /(community|manager|cr[ée]ation|creation|\bsite\b|faire-part|fl-system)/.test(n);
+}
+
+// Garde-fou anti-homonyme : identité prouvée par le site lié (francoisleterrier.fr)
+// OU par un nom de fiche sans ambiguïté.
 function isMyPlace(r) {
   if (!r || !r.found || r.reviews == null || r.rating == null) return false;
   if (r.website && /francoisleterrier\.fr/i.test(r.website)) return true;
-  const name = (r.name || "").toLowerCase();
-  return /leterrier/.test(name) && /(community|manager|cr[ée]ation|site)/.test(name);
+  return nameIsMe(r.name);
+}
+
+// Résout la fiche Google Business de François, dans l'ordre du plus fiable/économe :
+//  1) place_id explicite (env.MY_PLACE_ID) -> 1 seul appel Details ;
+//  2) findplacefromtext (exact, rapide) ;
+//  3) Text Search (filet large) filtré par identité -> Details.
+// Renvoie l'objet fiche accepté, ou null.
+async function findMyPlace(env, trace) {
+  if (env && env.MY_PLACE_ID && env.MY_PLACE_ID.trim()) {
+    const det = await placeDetails(env, env.MY_PLACE_ID.trim());
+    if (trace) trace.push({ via: "place_id", id: env.MY_PLACE_ID.trim(), name: det && det.name, rating: det && det.rating, total: det && det.reviews, accept: isMyPlace(det) });
+    if (isMyPlace(det)) return det;
+  }
+  const cands = myPlaceCandidates(env);
+  for (let i = 0; i < cands.length; i++) {
+    const q = cands[i];
+    const r = await runPlaces(env, q);
+    if (trace) trace.push({ via: "find", q: q, found: !!(r && r.found), name: r && r.name, rating: r && r.rating, total: r && r.reviews, website: r && r.website, accept: isMyPlace(r) });
+    if (isMyPlace(r)) return r;
+    // Text Search seulement sur les 3 requêtes les plus fortes (coût API borné).
+    if (i < 3) {
+      const list = await placesTextSearch(env, q);
+      for (let k = 0; k < list.length && k < 5; k++) {
+        const c = list[k];
+        if (!c.place_id || !nameIsMe(c.name)) continue;
+        const det = await placeDetails(env, c.place_id);
+        if (trace) trace.push({ via: "textsearch", q: q, id: c.place_id, name: det && det.name, rating: det && det.rating, total: det && det.reviews, website: det && det.website, accept: isMyPlace(det) });
+        if (isMyPlace(det)) return det;
+      }
+    }
+  }
+  return null;
 }
 
 async function handleMyReviews(request, env) {
   const _sp = new URL(request.url).searchParams;
   if (_sp.get("debug") === "1") {
-    const out = [];
-    const cands = myPlaceCandidates(env);
-    for (let i = 0; i < cands.length; i++) {
-      const r = await runPlaces(env, cands[i]);
-      out.push({ q: cands[i], found: !!(r && r.found), name: r && r.name, rating: r && r.rating, total: r && r.reviews, website: r && r.website, accept: isMyPlace(r) });
-    }
-    return json({ debug: out });
+    const trace = [];
+    const hit = await findMyPlace(env, trace);
+    return json({ resolved: !!hit, hit: hit ? { rating: hit.rating, total: hit.reviews, name: hit.name, mapUrl: hit.mapUrl } : null, trace: trace });
   }
   const nocache = _sp.get("nocache") === "1";
   let data = null;
   if (env.CACHE && !nocache) { try { data = await env.CACHE.get("myreviews_v1", "json"); } catch (_) {} }
   if (!data) {
-    const cands = myPlaceCandidates(env);
-    data = { ok: false };
-    for (let i = 0; i < cands.length; i++) {
-      const r = await runPlaces(env, cands[i]);
-      if (isMyPlace(r)) {
-        data = { ok: true, rating: r.rating, total: r.reviews, mapUrl: r.mapUrl || "" };
-        break;
-      }
-    }
+    const r = await findMyPlace(env, null);
+    data = r ? { ok: true, rating: r.rating, total: r.reviews, mapUrl: r.mapUrl || "" } : { ok: false };
     if (env.CACHE && data.ok) { try { await env.CACHE.put("myreviews_v1", JSON.stringify(data), { expirationTtl: 43200 }); } catch (_) {} }
   }
   return json(data);

@@ -135,6 +135,33 @@ export async function runPlaces(env, query) {
   } catch (_) { return { found: false }; }
 }
 
+// Google Places Text Search : filet large (renvoie plusieurs résultats avec place_id).
+// Bien plus robuste que findplacefromtext pour les activités « zone de service »
+// (indépendants sans adresse publique) que la recherche exacte ne fait pas remonter.
+export async function placesTextSearch(env, query) {
+  if (!env || !env.PLACES_API_KEY || !query) return [];
+  try {
+    const u = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + encodeURIComponent(query) + "&region=fr&language=fr&key=" + env.PLACES_API_KEY;
+    const j = await (await fetchWithTimeout(u, 8000)).json();
+    const results = (j && j.results) || [];
+    return results.map(function (r) {
+      return { place_id: r.place_id || "", name: r.name || "", rating: r.rating != null ? r.rating : null, reviews: r.user_ratings_total != null ? r.user_ratings_total : null };
+    });
+  } catch (_) { return []; }
+}
+
+// Détails d'une fiche à partir d'un place_id connu (voie la plus fiable et la moins coûteuse).
+export async function placeDetails(env, placeId) {
+  if (!env || !env.PLACES_API_KEY || !placeId) return null;
+  try {
+    const det = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(placeId) + "&fields=name,rating,user_ratings_total,website,url&language=fr&key=" + env.PLACES_API_KEY;
+    const jd = await (await fetchWithTimeout(det, 8000)).json();
+    const res = jd && jd.result;
+    if (!res) return null;
+    return { found: true, name: res.name || "", rating: res.rating != null ? res.rating : null, reviews: res.user_ratings_total != null ? res.user_ratings_total : null, hasSite: !!res.website, website: res.website || "", mapUrl: res.url || "" };
+  } catch (_) { return null; }
+}
+
 // Devine le secteur d'après le contenu (regroupement du benchmark).
 function guessSector(title, html) {
   const m = ((title || "") + " " + (html || "").replace(/<[^>]+>/g, " ")).toLowerCase().slice(0, 5000);
