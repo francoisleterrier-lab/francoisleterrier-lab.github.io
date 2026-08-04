@@ -60,9 +60,9 @@
   /* ---------- texte décodé ---------- */
   function initDecode(){
     var CH='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·#%@';
-    function run(el){var t=el.getAttribute('data-text');var f=0,tot=t.length*2;
-      var iv=setInterval(function(){var o='';for(var i=0;i<t.length;i++){o+=(i<f/3)?t[i]:(t[i]===' '||t[i]==='·'?t[i]:CH[Math.floor(Math.random()*CH.length)]);}
-        el.innerHTML=o.replace(/·/g,'<span class="c">·</span>');f++;if(f>tot){clearInterval(iv);el.innerHTML=t.replace(/·/g,'<span class="c">·</span>');}},26);}
+    function run(el){var t=el.getAttribute('data-text');var f=0,tot=t.length*2+3;
+      var iv=setInterval(function(){var o='';for(var i=0;i<t.length;i++){o+=(f>i*2)?t[i]:(t[i]===' '||t[i]==='·'?t[i]:CH[Math.floor(Math.random()*CH.length)]);}
+        el.innerHTML=o.replace(/·/g,'<span class="c">·</span>');f++;if(f>tot){clearInterval(iv);el.innerHTML=t.replace(/·/g,'<span class="c">·</span>');}},24);}
     $('.fl-decode[data-text]').forEach(function(el){
       if(RM){el.innerHTML=el.getAttribute('data-text').replace(/·/g,'<span class="c">·</span>');return;}
       run(el); el.addEventListener('mouseenter',function(){run(el);});
