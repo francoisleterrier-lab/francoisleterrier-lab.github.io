@@ -85,6 +85,44 @@ curl https://api.francoisleterrier.fr/health      # → {"ok":true, ...}
       présent est l'ID public web3forms du formulaire, pas un secret serveur).
 - [ ] Lighthouse mobile ≥ 95 (les photos sont déjà en WebP + fallback, contraste AA OK).
 
+## 7. En-têtes de sécurité + parité des URLs (audit P2)
+
+### En-têtes de sécurité — fichier `_headers` (déjà dans le dépôt)
+Le fichier **`_headers`** applique, sur Cloudflare Pages, tous les en-têtes demandés :
+`Strict-Transport-Security` (1 an, includeSubDomains, preload), `X-Content-Type-Options: nosniff`,
+`X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`,
+`Permissions-Policy` (fonctionnalités sensibles désactivées) et une **`Content-Security-Policy`
+adaptée aux ressources réellement chargées** (GA4/Tag Manager, Ahrefs, Calendly, Google Fonts,
+Looker Studio, web3forms, Pexels, API Worker). GitHub Pages ignore ce fichier → aucun effet
+tant que le site n'est pas sur Pages.
+- **Vérifier après bascule** : <https://securityheaders.com/?q=francoisleterrier.fr> (viser A/A+).
+- **Rollout prudent de la CSP** : d'abord tester sur l'URL `*.pages.dev`. En cas de doute,
+  renommer l'en-tête `Content-Security-Policy` en `Content-Security-Policy-Report-Only`, ouvrir
+  la console 24-48 h pour repérer d'éventuels blocages, puis rebasculer en mode bloquant.
+- **HSTS `preload`** : le mot-clé est présent, mais l'inscription réelle se fait sur
+  <https://hstspreload.org> — ne la soumets que quand **tous** les sous-domaines sont en HTTPS
+  (engagement long, difficile à annuler).
+- **Deux intégrations à garder dans la CSP** (déjà incluses) : les rapports **Looker Studio**
+  de l'espace client (`frame-src lookerstudio.google.com`) et la synchro **DoubleClick** de GA4
+  (`connect-src stats.g.doubleclick.net`). Si un jour tu retires GA4/Looker, tu peux les enlever.
+
+### Prérequis DNS (seul toi peux le faire)
+Pour que Cloudflare serve `francoisleterrier.fr` (Pages) **et** la route `/api/*` (Worker), le
+domaine doit être **géré par Cloudflare** — aujourd'hui le DNS est encore chez OVH :
+1. Ajouter `francoisleterrier.fr` dans ton compte Cloudflare (« Add a site »).
+2. Chez OVH, remplacer les **serveurs de noms** par ceux fournis par Cloudflare.
+3. Attendre la propagation (Cloudflare devient autoritaire), puis brancher Pages (§5) et la
+   route Worker `/api/*` — dès lors `https://francoisleterrier.fr/api/health` répond.
+
+### Parité des URLs — `check-url-parity.sh` (déjà dans le dépôt)
+Garde-fou SEO « aucune URL indexée cassée ». À lancer AVANT puis APRÈS, et comparer les sorties
+(aucun code HTTP ne doit changer) :
+```bash
+bash check-url-parity.sh https://francoisleterrier.fr     # avant (GitHub Pages) — baseline
+bash check-url-parity.sh https://<projet>.pages.dev       # après, sans toucher au DNS
+```
+Baseline du 03/08/2026 : **123 URLs, 0 réponse non-200** ✅ (rien de cassé aujourd'hui).
+
 ---
 
 ### Ce qui est déjà livré dans le dépôt (prêt à l'emploi)
