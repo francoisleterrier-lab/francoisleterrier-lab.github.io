@@ -158,7 +158,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
-    rev: "2026-08-05-contact-brevo",
+    rev: "2026-08-05-brevo-3tier",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -450,24 +450,21 @@ async function syncBrevo(env, lead) {
   const c = lead.contact || {};
   const listId = parseInt(env.BREVO_LIST_ID || "", 10);
   const headers = { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" };
-  const withList = (o) => { if (listId) o.listIds = [listId]; return o; };
+  const post = (o) => fetch("https://api.brevo.com/v3/contacts", { method: "POST", headers, body: JSON.stringify(o) });
+  const base = { email: lead.email, updateEnabled: true };
+  const withList = listId ? Object.assign({}, base, { listIds: [listId] }) : base;
   try {
-    // 1) email + attributs (prénom, tél, source) + liste
-    const r = await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST", headers,
-      body: JSON.stringify(withList({
-        email: lead.email,
-        updateEnabled: true,
-        attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" },
-      })),
-    });
+    // 1) complet : attributs (prénom, tél, source) + liste
+    let r = await post(Object.assign({}, withList, { attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" } }));
     if (r.ok || r.status === 204) return;
-    // 2) Repli : si un attribut custom (ex. SOURCE) n'existe pas dans le compte,
-    //    Brevo rejette TOUT le contact. On le recrée au minimum garanti : email + liste.
-    await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST", headers,
-      body: JSON.stringify(withList({ email: lead.email, updateEnabled: true })),
-    });
+    // 2) sans attributs : un attribut custom (ex. SOURCE) peut ne pas exister dans le compte
+    //    → Brevo rejette alors tout le contact. On retente email + liste seuls.
+    r = await post(withList);
+    if (r.ok || r.status === 204) return;
+    // 3) minimum absolu : e-mail seul, sans liste — au cas où l'ID de liste serait invalide
+    //    (Brevo refuse tout le contact si la liste n'existe pas). Le contact atterrit au
+    //    moins dans « Tous les contacts ».
+    if (listId) await post(base);
   } catch (_) {}
 }
 
