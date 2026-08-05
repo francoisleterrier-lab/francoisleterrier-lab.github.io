@@ -446,19 +446,26 @@ async function notifyContactLead(lead) {
  */
 async function syncBrevo(env, lead) {
   if (!env || !env.BREVO_API_KEY || !lead || !lead.email) return;
+  const c = lead.contact || {};
+  const listId = parseInt(env.BREVO_LIST_ID || "", 10);
+  const headers = { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" };
+  const withList = (o) => { if (listId) o.listIds = [listId]; return o; };
   try {
-    const c = lead.contact || {};
-    const body = {
-      email: lead.email,
-      updateEnabled: true,
-      attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" },
-    };
-    const listId = parseInt(env.BREVO_LIST_ID || "", 10);
-    if (listId) body.listIds = [listId];
+    // 1) email + attributs (prénom, tél, source) + liste
+    const r = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST", headers,
+      body: JSON.stringify(withList({
+        email: lead.email,
+        updateEnabled: true,
+        attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" },
+      })),
+    });
+    if (r.ok || r.status === 204) return;
+    // 2) Repli : si un attribut custom (ex. SOURCE) n'existe pas dans le compte,
+    //    Brevo rejette TOUT le contact. On le recrée au minimum garanti : email + liste.
     await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST",
-      headers: { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(body),
+      method: "POST", headers,
+      body: JSON.stringify(withList({ email: lead.email, updateEnabled: true })),
     });
   } catch (_) {}
 }
