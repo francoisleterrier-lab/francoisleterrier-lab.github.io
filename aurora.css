@@ -72,3 +72,8 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
    toutes les animations INTERNES aux pages restent actives.
    (Pour réactiver : remettre @view-transition{navigation:auto} + les règles.)
    ===================================================================== */
+
+/* Accessibilité — lien d'évitement (skip link) : caché puis visible au focus clavier */
+.skiplink{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#060410;padding:10px 16px;border-radius:0 0 10px 0;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.skiplink:focus{left:0}
+.skiplink:focus-visible{outline:3px solid #7c5cff;outline-offset:2px}

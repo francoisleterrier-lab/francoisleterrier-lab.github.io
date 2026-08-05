@@ -53,3 +53,8 @@ footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
 .cfaq summary::after{content:"+";float:right;color:var(--cyan);font-weight:700;}
 .cfaq details[open] summary::after{content:"–";}
 .cfaq .a{padding:0 16px 14px;color:#c4cbdb;font-size:14.5px;}
+
+/* Accessibilité — lien d'évitement (skip link) : caché puis visible au focus clavier */
+.skiplink{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#060410;padding:10px 16px;border-radius:0 0 10px 0;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.skiplink:focus{left:0}
+.skiplink:focus-visible{outline:3px solid #7c5cff;outline-offset:2px}
