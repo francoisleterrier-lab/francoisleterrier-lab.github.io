@@ -12,3 +12,6 @@ dist/
 .dev.vars
 .env
 *.local
+
+# scripts de travail (hors déploiement)
+scratchpad/
