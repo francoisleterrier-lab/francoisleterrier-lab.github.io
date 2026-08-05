@@ -1,10 +1,24 @@
 /* Consentement cookies + chargement conditionnel des outils de mesure d'audience (RGPD/CNIL).
-   Google Analytics 4 ET Ahrefs Analytics ne se chargent QUE si l'utilisateur clique sur « Accepter ».
-   Choix mémorisé en localStorage. Aucun tracker tiers n'est chargé avant le consentement. */
+   Aucun outil (Google Analytics, Ahrefs, Meta Pixel) ne se charge AVANT le clic « Accepter ».
+   Choix mémorisé en localStorage (portée par origine, donc propre à francoisleterrier.fr).
+
+   ┌─────────────────────────────────────────────────────────────────────────┐
+   │ À CONFIGURER (une seule ligne à changer pour chaque outil) :             │
+   │                                                                          │
+   │ • GA_ID : ⚠️ À VÉRIFIER. « G-WTRP1WD9VV » ressemble à la propriété d'un   │
+   │   autre site (préfixes « cip » = Concept Immo Plus). Confère ta propriété │
+   │   GA4 de francoisleterrier.fr (Admin → Flux de données) et remplace la    │
+   │   valeur ci-dessous si besoin, sinon les stats partent dans le mauvais    │
+   │   compte.                                                                 │
+   │ • FB_PIXEL_ID : colle ton identifiant de Pixel Meta (ex. « 1234567890 ») │
+   │   pour activer le suivi Meta/Facebook Ads. Laissé vide = désactivé, aucun │
+   │   script Meta n'est chargé. Rien d'autre à faire (CSP & bandeau prêts).   │
+   └─────────────────────────────────────────────────────────────────────────┘ */
 (function () {
   var KEY = 'cip-consent';
-  var GA_ID = 'G-WTRP1WD9VV';
+  var GA_ID = 'G-WTRP1WD9VV';          // ⚠️ vérifier que c'est bien la propriété francoisleterrier.fr
   var AHREFS_KEY = '70o1z25QpySuipMTMk7FMg';
+  var FB_PIXEL_ID = '';                // ← colle ici ton ID de Pixel Meta pour l'activer (vide = off)
 
   function loadGA() {
     if (window.__cipGaLoaded) return;
@@ -30,7 +44,21 @@
     document.head.appendChild(s);
   }
 
-  function loadAnalytics() { loadGA(); loadAhrefs(); }
+  function loadMetaPixel() {
+    if (!FB_PIXEL_ID || window.__flPixelLoaded) return;   // rien si l'ID n'est pas renseigné
+    window.__flPixelLoaded = true;
+    /* eslint-disable */
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,
+      'script','https://connect.facebook.net/en_US/fbevents.js');
+    /* eslint-enable */
+    window.fbq('init', FB_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }
+
+  function loadAnalytics() { loadGA(); loadAhrefs(); loadMetaPixel(); }
 
   var choice = null;
   try { choice = localStorage.getItem(KEY); } catch (e) {}
@@ -55,8 +83,13 @@
   bar.className = 'cip-consent';
   bar.setAttribute('role', 'dialog');
   bar.setAttribute('aria-label', 'Consentement aux cookies');
+  var toolNames = ['Google Analytics', 'Ahrefs'];
+  if (FB_PIXEL_ID) toolNames.push('Meta (Facebook)');
+  var toolList = toolNames.length > 1
+    ? toolNames.slice(0, -1).join(', ') + ' &amp; ' + toolNames[toolNames.length - 1]
+    : toolNames[0];
   bar.innerHTML = '<div class="cip-c-in">'
-    + '<p>🍪 Ce site utilise des outils de mesure d’audience (Google Analytics &amp; Ahrefs) pour comprendre sa fréquentation. Rien n’est chargé sans votre accord — le site fonctionne dans les deux cas. <a href="/confidentialite.html">En savoir plus</a>.</p>'
+    + '<p>🍪 Ce site utilise des outils de mesure d’audience (' + toolList + ') pour comprendre sa fréquentation. Rien n’est chargé sans votre accord — le site fonctionne dans les deux cas. <a href="/confidentialite.html">En savoir plus</a>.</p>'
     + '<div class="cip-c-btns">'
     + '<button type="button" class="cip-c-no">Refuser</button>'
     + '<button type="button" class="cip-c-yes">Accepter</button>'
