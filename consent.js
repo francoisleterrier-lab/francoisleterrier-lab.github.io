@@ -5,18 +5,16 @@
    ┌─────────────────────────────────────────────────────────────────────────┐
    │ À CONFIGURER (une seule ligne à changer pour chaque outil) :             │
    │                                                                          │
-   │ • GA_ID : ⚠️ À VÉRIFIER. « G-WTRP1WD9VV » ressemble à la propriété d'un   │
-   │   autre site (préfixes « cip » = Concept Immo Plus). Confère ta propriété │
-   │   GA4 de francoisleterrier.fr (Admin → Flux de données) et remplace la    │
-   │   valeur ci-dessous si besoin, sinon les stats partent dans le mauvais    │
-   │   compte.                                                                 │
+   │ • GA_ID : « G-WTRP1WD9VV » = propriété GA4 de francoisleterrier.fr        │
+   │   (vérifié le 05/08/2026). Les préfixes « cip » du code ne sont qu'un      │
+   │   nommage hérité d'un gabarit — l'ID lui-même est le bon.                  │
    │ • FB_PIXEL_ID : colle ton identifiant de Pixel Meta (ex. « 1234567890 ») │
    │   pour activer le suivi Meta/Facebook Ads. Laissé vide = désactivé, aucun │
    │   script Meta n'est chargé. Rien d'autre à faire (CSP & bandeau prêts).   │
    └─────────────────────────────────────────────────────────────────────────┘ */
 (function () {
   var KEY = 'cip-consent';
-  var GA_ID = 'G-WTRP1WD9VV';          // ⚠️ vérifier que c'est bien la propriété francoisleterrier.fr
+  var GA_ID = 'G-WTRP1WD9VV';          // propriété GA4 francoisleterrier.fr (vérifié 05/08/2026)
   var AHREFS_KEY = '70o1z25QpySuipMTMk7FMg';
   var FB_PIXEL_ID = '';                // ← colle ici ton ID de Pixel Meta pour l'activer (vide = off)
 

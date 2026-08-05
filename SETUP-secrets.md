@@ -98,10 +98,9 @@ wrangler secret put ADMIN_TOKEN
 Ceux-là se règlent dans le fichier **`consent.js`** (une ligne chacun) — ce sont
 des IDs publics, pas des secrets, donc ils vont bien dans le dépôt :
 
-- **`GA_ID`** — ⚠️ à vérifier : la valeur actuelle `G-WTRP1WD9VV` ressemble à la
-  propriété d'un autre site (préfixes « cip » = Concept Immo Plus). Confirme dans
-  GA4 (Admin → Flux de données) l'ID de **francoisleterrier.fr** et remplace-le si
-  besoin, sinon tes statistiques partent dans le mauvais compte.
+- **`GA_ID`** — `G-WTRP1WD9VV` = propriété GA4 de **francoisleterrier.fr**
+  (vérifié le 05/08/2026). ✅ Rien à changer. Le nommage « cip » dans le code
+  n'est qu'un reliquat de gabarit ; l'ID lui-même est le bon.
 - **`FB_PIXEL_ID`** — colle ton identifiant de **Pixel Meta** pour activer le suivi
   Meta/Facebook Ads. Laissé vide = désactivé. Le bandeau de consentement et la CSP
   sont **déjà prêts** : dès que tu renseignes l'ID, le Pixel se charge (après
