@@ -158,6 +158,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
+    rev: "2026-08-05-contact-brevo",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -641,6 +642,17 @@ async function handleLead(request, env) {
   const email = clampStr(d.email, 120);
   if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "Adresse e-mail invalide." }, 422);
   const url = clampStr(d.url, 300), auditId = clampStr(d.auditId, 60), source = clampStr(d.source, 40) || "audit";
+  // Formulaire de contact : l'e-mail part déjà via Web3Forms côté formulaire → ici on ne
+  // fait QUE synchroniser le contact vers Brevo (prénom, tél, besoin), sans notif en double.
+  if (source === "contact") {
+    const nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30);
+    const besoin = clampStr(d.besoin, 120), note = clampStr(d.message, 800);
+    const lead = { email: email, url: "", source: "contact", ip: clientIp(request),
+      contact: { nom: nom, tel: tel, message: (besoin ? besoin + " — " : "") + note, source: "contact" },
+      site: { input: { nom: nom, ville: "", metier: "" } } };
+    await storeLead(env, lead);
+    return json({ ok: true });
+  }
   // Capture « rappel » (assistant) ou « parrainage » : nom + tél + demande → /admin + e-mail dédié.
   if (source === "assistant" || source === "parrainage") {
     const nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30), convo = clampStr(d.convo, 1500);
