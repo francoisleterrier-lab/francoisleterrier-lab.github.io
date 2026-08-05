@@ -158,7 +158,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
-    rev: "2026-08-05-brevo-3tier",
+    rev: "2026-08-05-brevo-diag",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -445,6 +445,9 @@ async function notifyContactLead(lead) {
  * Synchronise un lead vers Brevo (ex-Sendinblue) pour les relances automatiques.
  * No-op tant que BREVO_API_KEY n'est pas configurée en secret Cloudflare — aucune clé dans le repo.
  */
+async function recordBrevo(env, d) {
+  if (env && env.CACHE) { try { await env.CACHE.put("brevo:last", JSON.stringify(d), { expirationTtl: 3600 }); } catch (_) {} }
+}
 async function syncBrevo(env, lead) {
   if (!env || !env.BREVO_API_KEY || !lead || !lead.email) return;
   const c = lead.contact || {};
@@ -453,19 +456,20 @@ async function syncBrevo(env, lead) {
   const post = (o) => fetch("https://api.brevo.com/v3/contacts", { method: "POST", headers, body: JSON.stringify(o) });
   const base = { email: lead.email, updateEnabled: true };
   const withList = listId ? Object.assign({}, base, { listIds: [listId] }) : base;
+  // Diagnostic (sans secret) : statut + message d'erreur Brevo de chaque tentative → KV.
+  const diag = { ts: new Date().toISOString(), email: lead.email, listId: Number.isNaN(listId) ? null : listId, tiers: [], ok: false };
+  const note = async (t, r) => { const e = { t: t, status: r.status }; if (!(r.ok || r.status === 204)) { e.err = (await r.text()).slice(0, 300); } else { diag.ok = true; } diag.tiers.push(e); return diag.ok; };
   try {
     // 1) complet : attributs (prénom, tél, source) + liste
     let r = await post(Object.assign({}, withList, { attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" } }));
-    if (r.ok || r.status === 204) return;
-    // 2) sans attributs : un attribut custom (ex. SOURCE) peut ne pas exister dans le compte
-    //    → Brevo rejette alors tout le contact. On retente email + liste seuls.
+    if (await note(1, r)) return await recordBrevo(env, diag);
+    // 2) sans attributs : un attribut custom (ex. SOURCE) peut ne pas exister dans le compte.
     r = await post(withList);
-    if (r.ok || r.status === 204) return;
-    // 3) minimum absolu : e-mail seul, sans liste — au cas où l'ID de liste serait invalide
-    //    (Brevo refuse tout le contact si la liste n'existe pas). Le contact atterrit au
-    //    moins dans « Tous les contacts ».
-    if (listId) await post(base);
-  } catch (_) {}
+    if (await note(2, r)) return await recordBrevo(env, diag);
+    // 3) minimum absolu : e-mail seul, sans liste — au cas où l'ID de liste serait invalide.
+    if (listId) { r = await post(base); await note(3, r); }
+    await recordBrevo(env, diag);
+  } catch (e) { diag.error = String(e).slice(0, 200); try { await recordBrevo(env, diag); } catch (_) {} }
 }
 
 /** Crée/complète la table leads si besoin (D1 auto-provisionné, sans wrangler). */
@@ -950,8 +954,15 @@ async function handleStripeWebhook(request, env) {
   return json({ ok: true, received: true });
 }
 
+async function handleBrevoStatus(_request, env) {
+  let last = null;
+  if (env && env.CACHE) { try { last = await env.CACHE.get("brevo:last", "json"); } catch (_) {} }
+  return json({ ok: true, brevoKeyConfigured: Boolean(env && env.BREVO_API_KEY), listIdConfigured: Boolean(env && env.BREVO_LIST_ID), lastSync: last });
+}
+
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
+  "GET /brevo-status": (req, env) => handleBrevoStatus(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
   "GET /audit": (req, env) => handleGetAuditReport(req, env),
