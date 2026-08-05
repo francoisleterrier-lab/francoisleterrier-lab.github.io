@@ -17,12 +17,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://francoisleterrier.fr/contact.html">
 <meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — François Leterrier, community manager Sud-Toulousain">
+<meta name="twitter:description" content="Téléphone, email et formulaire. Premier échange offert dans tout le Sud-Toulousain.">
+<meta name="twitter:image" content="https://francoisleterrier.fr/og-image.png">
 <link rel="preconnect" href="https://api.web3forms.com">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
 <link rel="stylesheet" href="/aurora.css">
-<link rel="stylesheet" href="/popups.css">
+<link rel="preload" href="/popups.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/popups.css"></noscript>
 <link rel="stylesheet" href="pages.css">
 <script type="application/ld+json">
 {
@@ -113,6 +117,7 @@
           <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" placeholder="06 ..."></div>
           <div class="field"><label for="besoin">Votre besoin</label>
             <select id="besoin" name="besoin">
+              <option>🎁 Mon diagnostic en ligne gratuit</option>
               <option>Gestion de mes réseaux sociaux</option>
               <option>Création d'un site internet</option>
               <option>Un faire-part digital (mariage, événement)</option>
@@ -123,6 +128,7 @@
           <div class="field"><label for="message">Votre message *</label><textarea id="message" name="message" required placeholder="Parlez-moi de votre activité et de ce que vous cherchez..."></textarea></div>
           <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Envoyer ma demande →</button>
+          <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6;">Réponse sous 48 h en moyenne · sans engagement · vos données ne sont jamais cédées à des tiers — voir la <a href="confidentialite.html" style="color:var(--cyan)">politique de confidentialité</a>.</p>
         </form>
       </div>
     </div>

@@ -77,12 +77,13 @@
   .chip{cursor:pointer;padding:10px 15px;border-radius:30px;background:var(--panel);border:1.5px solid var(--line2);font-size:13.5px;font-weight:600;color:#d7d0e0;transition:.2s;user-select:none}
   .chip:hover{border-color:var(--cyan)}
   .chip.on{background:var(--grad);color:#08111f;border-color:transparent}
+.type:focus-visible,.chip:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
   .chip small{opacity:.85;font-weight:500}
   .stepper{display:inline-flex;align-items:center;gap:14px;background:var(--panel);border:1.5px solid var(--line2);border-radius:40px;padding:7px 9px}
   .stepper button{width:32px;height:32px;border-radius:50%;border:0;background:rgba(143,230,240,.15);color:#cfe9ff;font-size:19px;font-weight:700;cursor:pointer;line-height:1}
   .stepper b{min-width:84px;text-align:center;font-size:14.5px;color:#fff}
   .sum{position:sticky;top:80px;background:var(--panel);border:1px solid var(--line2);border-radius:18px;padding:24px}
-  .sum h3{font-family:'Montserrat';font-weight:700;font-size:18px;margin:0 0 2px;color:#fff}
+  .sum h2{font-family:'Montserrat';font-weight:700;font-size:18px;margin:0 0 2px;color:#fff}
   .sum .st{color:var(--muted);font-size:13px;margin-bottom:16px}
   .sum .line{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
   .sum .line span:first-child{color:#cdc6d6}
@@ -171,7 +172,7 @@
         </div>
 
         <aside class="sum" aria-live="polite">
-          <h3>Votre projet</h3><div class="st">Estimation personnalisée</div>
+          <h2>Votre projet</h2><div class="st">Estimation personnalisée</div>
           <div id="lines"></div>
           <div class="price"><div class="from">À PARTIR DE</div><div class="big"><span id="total">1 400</span> €</div></div>
           <div class="mo" id="mo" style="display:none"></div>
@@ -249,6 +250,12 @@
       document.getElementById('f_config').value=cfg;
       document.getElementById('f_estim').value=estim;
       document.getElementById('recap').innerHTML='<b>Votre configuration&nbsp;:</b> '+cfg.replace(/ \| /g,' · ')+'<br><b>Estimation&nbsp;:</b> '+estim;
+      syncAria();
+    }
+    // a11y : expose l'état sélectionné (aria-pressed) aux lecteurs d'écran, resynchronisé à chaque calcul
+    function syncAria(){
+      document.querySelectorAll('#types .type').forEach(function(el){el.setAttribute('aria-pressed',el.classList.contains('sel')?'true':'false');});
+      document.querySelectorAll('#opts .chip,#cm .chip').forEach(function(el){el.setAttribute('aria-pressed',el.classList.contains('on')?'true':'false');});
     }
     document.querySelectorAll('#types .type').forEach(function(el){el.addEventListener('click',function(){
       document.querySelectorAll('#types .type').forEach(function(x){x.classList.remove('sel');});el.classList.add('sel');
@@ -276,6 +283,15 @@
       fetch('https://main.francois-leterrier-cmw.workers.dev/devis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{nom:nom,email:email,tel:tel},items:items,total:total,monthly:state.cm||0,delay:T.delay,projet:T.name,message:message})})
       .then(function(r){return r.json();}).then(function(j){if(j&&j.ok&&j.id){location.href='devis.html?id='+j.id;}else{throw 0;}})
       .catch(function(){gd.disabled=false;gd.textContent=old;alert('Oups, réessayez dans un instant.');});
+    });
+    // a11y : rend les cartes/puces opérables au clavier (focus + Entrée/Espace)
+    [['types','Type de projet'],['opts','Options du site'],['cm','Gestion des réseaux sociaux']].forEach(function(g){
+      var box=document.getElementById(g[0]); if(!box)return;
+      box.setAttribute('role','group'); box.setAttribute('aria-label',g[1]);
+      box.querySelectorAll('.type,.chip').forEach(function(el){
+        el.setAttribute('role','button'); if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
+        el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();el.click();}});
+      });
     });
     calc();
   })();
