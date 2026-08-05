@@ -171,6 +171,26 @@
   }catch(e){}
 })();
 </script>
+<script>
+/* Formulaire de contact : en plus de l'e-mail (Web3Forms), on synchronise le contact
+   vers Brevo via le Worker. Fire-and-forget en keepalive → survit à la navigation et
+   ne bloque JAMAIS l'envoi du formulaire ni le mail. */
+(function(){
+  var f=document.getElementById('contactForm');
+  if(!f) return;
+  f.addEventListener('submit', function(){
+    try{
+      var v=function(n){var el=f.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';};
+      var email=v('email'); if(!email) return;
+      fetch('https://main.francois-leterrier-cmw.workers.dev/lead',{
+        method:'POST', keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({source:'contact',email:email,nom:v('name'),tel:v('phone'),besoin:v('besoin'),message:v('message')})
+      }).catch(function(){});
+    }catch(e){}
+  });
+})();
+</script>
 <script src="/consent.js" defer></script>
 <script src="/popups.js" defer></script>
 <script src="/assistant.js" defer></script>
