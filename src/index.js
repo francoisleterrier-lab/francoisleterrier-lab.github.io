@@ -159,7 +159,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
-    rev: "2026-08-05-brevo-beacon",
+    rev: "2026-08-05-brevo-phone",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -446,6 +446,16 @@ async function notifyContactLead(lead) {
  * Synchronise un lead vers Brevo (ex-Sendinblue) pour les relances automatiques.
  * No-op tant que BREVO_API_KEY n'est pas configurée en secret Cloudflare — aucune clé dans le repo.
  */
+/** Normalise un téléphone FR au format E.164 (+33…) attendu par Brevo pour le champ SMS.
+ *  Renvoie "" si le format n'est pas reconnu → on n'envoie alors pas de SMS (évite le rejet). */
+function toE164FR(tel) {
+  if (!tel) return "";
+  const d = String(tel).replace(/[\s.\-()]/g, "");
+  if (/^\+33[1-9]\d{8}$/.test(d)) return d;
+  if (/^0[1-9]\d{8}$/.test(d)) return "+33" + d.slice(1);
+  if (/^33[1-9]\d{8}$/.test(d)) return "+" + d;
+  return "";
+}
 async function recordBrevo(env, d) {
   if (env && env.CACHE) { try { await env.CACHE.put("brevo:last", JSON.stringify(d), { expirationTtl: 3600 }); } catch (_) {} }
 }
@@ -461,8 +471,11 @@ async function syncBrevo(env, lead) {
   const diag = { ts: new Date().toISOString(), email: lead.email, listId: Number.isNaN(listId) ? null : listId, tiers: [], ok: false };
   const note = async (t, r) => { const e = { t: t, status: r.status }; if (!(r.ok || r.status === 204)) { e.err = (await r.text()).slice(0, 300); } else { diag.ok = true; } diag.tiers.push(e); return diag.ok; };
   try {
-    // 1) complet : attributs (prénom, tél, source) + liste
-    let r = await post(Object.assign({}, withList, { attributes: { PRENOM: c.nom || "", SMS: c.tel || "", SOURCE: lead.source || "site" } }));
+    // 1) complet : attributs (prénom, tél au format E.164, source) + liste
+    const attrs = { PRENOM: c.nom || "", SOURCE: lead.source || "site" };
+    const sms = toE164FR(c.tel);
+    if (sms) attrs.SMS = sms;   // n'envoie SMS que si le numéro est valide (sinon Brevo rejette tout)
+    let r = await post(Object.assign({}, withList, { attributes: attrs }));
     if (await note(1, r)) return await recordBrevo(env, diag);
     // 2) sans attributs : un attribut custom (ex. SOURCE) peut ne pas exister dans le compte.
     r = await post(withList);
