@@ -172,29 +172,24 @@
 })();
 </script>
 <script>
-/* Formulaire de contact : on synchronise le contact vers Brevo (via le Worker) AVANT de
-   laisser partir l'envoi e-mail. Un fetch keepalive + preflight n'aboutit pas de façon
-   fiable pendant la navigation (surtout iOS/Safari) → on fait donc l'appel pendant que la
-   page est encore là, puis on envoie le formulaire. Filet : l'e-mail part de toute façon
-   au bout de 1,4 s max, donc il n'est JAMAIS bloqué. */
+/* Formulaire de contact : en plus de l'e-mail (Web3Forms), on synchronise le contact vers
+   Brevo. On utilise navigator.sendBeacon (corps text/plain = requête « simple », sans
+   preflight CORS) — c'est le mécanisme conçu pour envoyer des données de façon fiable au
+   moment où la page part vers une autre URL (contrairement à fetch, coupé par la navigation
+   sur iOS/Safari). N'interrompt jamais l'envoi du formulaire ni le mail. Repli : fetch keepalive. */
 (function(){
   var f=document.getElementById('contactForm');
   if(!f) return;
-  f.addEventListener('submit', function(e){
-    if(f.__sent) return;                 // envoi programmatique : on laisse passer
-    e.preventDefault();
-    var done=false;
-    var go=function(){ if(done) return; done=true; f.__sent=true; f.submit(); };
-    var t=setTimeout(go, 1400);          // filet de sécurité : envoi garanti
+  f.addEventListener('submit', function(){
     try{
       var v=function(n){var el=f.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';};
-      var email=v('email');
-      if(!email){ clearTimeout(t); go(); return; }
-      fetch('https://main.francois-leterrier-cmw.workers.dev/lead',{
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({source:'contact',email:email,nom:v('name'),tel:v('phone'),besoin:v('besoin'),message:v('message')})
-      }).then(function(){clearTimeout(t);go();}, function(){clearTimeout(t);go();});
-    }catch(err){ clearTimeout(t); go(); }
+      var email=v('email'); if(!email) return;
+      var payload=JSON.stringify({email:email,nom:v('name'),tel:v('phone'),besoin:v('besoin'),message:v('message')});
+      var url='https://main.francois-leterrier-cmw.workers.dev/contact-beacon';
+      var ok=false;
+      try{ if(navigator.sendBeacon){ ok=navigator.sendBeacon(url, new Blob([payload],{type:'text/plain'})); } }catch(_){}
+      if(!ok){ fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){}); }
+    }catch(e){}
   });
 })();
 </script>

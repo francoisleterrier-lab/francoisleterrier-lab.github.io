@@ -56,6 +56,7 @@ const RATE_LIMITS = {
   "/devis": { limit: 15, window: 60 },
   "/devis/sign": { limit: 10, window: 60 },
   "/lead": { limit: 5, window: 60 },
+  "/contact-beacon": { limit: 5, window: 60 },
   "/espace": { limit: 40, window: 60 },
   "/checkout": { limit: 10, window: 60 },
   "/stripe/webhook": { limit: 120, window: 60 },
@@ -158,7 +159,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
-    rev: "2026-08-05-brevo-diag",
+    rev: "2026-08-05-brevo-beacon",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -954,6 +955,22 @@ async function handleStripeWebhook(request, env) {
   return json({ ok: true, received: true });
 }
 
+/** POST /contact-beacon — reçoit le formulaire de contact via navigator.sendBeacon
+ *  (corps text/plain, requête « simple » sans preflight → fiable pendant la navigation).
+ *  Ne fait QUE synchroniser vers Brevo (l'e-mail part déjà via Web3Forms). Répond 204. */
+async function handleContactBeacon(request, env) {
+  let d = {};
+  try { const raw = await request.text(); d = raw ? JSON.parse(raw) : {}; } catch (_) { return new Response(null, { status: 204 }); }
+  const email = clampStr(d.email, 120);
+  if (!email || !EMAIL_RE.test(email)) return new Response(null, { status: 204 });
+  const besoin = clampStr(d.besoin, 120), note = clampStr(d.message, 800), nom = clampStr(d.nom, 80);
+  const lead = { email: email, url: "", source: "contact", ip: clientIp(request),
+    contact: { nom: nom, tel: clampStr(d.tel, 30), message: (besoin ? besoin + " — " : "") + note, source: "contact" },
+    site: { input: { nom: nom, ville: "", metier: "" } } };
+  try { await storeLead(env, lead); } catch (_) {}
+  return new Response(null, { status: 204 });
+}
+
 async function handleBrevoStatus(_request, env) {
   let last = null;
   if (env && env.CACHE) { try { last = await env.CACHE.get("brevo:last", "json"); } catch (_) {} }
@@ -963,6 +980,7 @@ async function handleBrevoStatus(_request, env) {
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "GET /brevo-status": (req, env) => handleBrevoStatus(req, env),
+  "POST /contact-beacon": (req, env) => handleContactBeacon(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
   "GET /audit": (req, env) => handleGetAuditReport(req, env),
