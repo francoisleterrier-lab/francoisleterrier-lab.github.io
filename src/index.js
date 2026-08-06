@@ -175,7 +175,7 @@ function handleHealth(_request, env) {
       pagespeed: Boolean(env && env.PAGESPEED_API_KEY),
       stripe: Boolean(env && env.STRIPE_SECRET_KEY),
       stripe_webhook: Boolean(env && env.STRIPE_WEBHOOK_SECRET),
-      turnstile: Boolean(env && env.TURNSTILE_SECRET_KEY),
+      turnstile: Boolean(env && (env.TURNSTILE_SECRET || env.TURNSTILE_SECRET_KEY)),
     },
   });
 }
@@ -981,10 +981,11 @@ async function handleStripeWebhook(request, env) {
  *   jamais un vrai lead pour un hoquet de Cloudflare. Fail-closed sur un refus explicite (success:false).
  */
 async function verifyTurnstile(env, token, ip) {
-  if (!env || !env.TURNSTILE_SECRET_KEY) return { ok: true, skipped: true };
+  const secret = env && (env.TURNSTILE_SECRET || env.TURNSTILE_SECRET_KEY);
+  if (!secret) return { ok: true, skipped: true };
   if (!token) return { ok: false, error: "missing-token" };
   try {
-    const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token });
+    const body = new URLSearchParams({ secret: secret, response: token });
     if (ip) body.append("remoteip", ip);
     const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
