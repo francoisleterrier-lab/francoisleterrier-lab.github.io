@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="/aurora.css">
 <link rel="preload" href="/popups.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/popups.css"></noscript>
 <link rel="stylesheet" href="pages.css">
+<link rel="preconnect" href="https://challenges.cloudflare.com">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -127,6 +129,9 @@
           </div>
           <div class="field"><label for="message">Votre message *</label><textarea id="message" name="message" required placeholder="Parlez-moi de votre activité et de ce que vous cherchez..."></textarea></div>
           <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
+          <!-- Anti-spam Cloudflare Turnstile. data-sitekey = clé de TEST (passe toujours) le temps
+               du déploiement : à remplacer par la vraie clé publique du widget francoisleterrier.fr. -->
+          <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" data-language="fr" style="margin:4px 0 16px;"></div>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Envoyer ma demande →</button>
           <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6;">Réponse sous 48 h en moyenne · sans engagement · vos données ne sont jamais cédées à des tiers — voir la <a href="confidentialite.html" style="color:var(--cyan)">politique de confidentialité</a>.</p>
         </form>
@@ -172,24 +177,51 @@
 })();
 </script>
 <script>
-/* Formulaire de contact : en plus de l'e-mail (Web3Forms), on synchronise le contact vers
-   Brevo. On utilise navigator.sendBeacon (corps text/plain = requête « simple », sans
-   preflight CORS) — c'est le mécanisme conçu pour envoyer des données de façon fiable au
-   moment où la page part vers une autre URL (contrairement à fetch, coupé par la navigation
-   sur iOS/Safari). N'interrompt jamais l'envoi du formulaire ni le mail. Repli : fetch keepalive. */
+/* Formulaire de contact — anti-spam Cloudflare Turnstile.
+   Le formulaire poste vers le Worker /contact, qui VÉRIFIE le jeton Turnstile côté serveur
+   avant de notifier François (e-mail via Web3Forms) et de synchroniser le contact vers Brevo.
+   Sécurité « à toute épreuve » pendant le déploiement : si le Worker est injoignable, si le
+   jeton n'est pas prêt, ou en cas de refus, on retombe sur l'envoi Web3Forms natif du <form>
+   (attributs action/access_key/redirect conservés) → jamais un vrai lead perdu. */
 (function(){
   var f=document.getElementById('contactForm');
   if(!f) return;
-  f.addEventListener('submit', function(){
-    try{
-      var v=function(n){var el=f.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';};
-      var email=v('email'); if(!email) return;
-      var payload=JSON.stringify({email:email,nom:v('name'),tel:v('phone'),besoin:v('besoin'),message:v('message')});
-      var url='https://main.francois-leterrier-cmw.workers.dev/contact-beacon';
-      var ok=false;
-      try{ if(navigator.sendBeacon){ ok=navigator.sendBeacon(url, new Blob([payload],{type:'text/plain'})); } }catch(_){}
-      if(!ok){ fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){}); }
-    }catch(e){}
+  var ENDPOINT='https://main.francois-leterrier-cmw.workers.dev/contact';
+  var MERCI='https://francoisleterrier.fr/merci.html';
+  var sending=false, done=false;
+  function v(n){var el=f.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';}
+  function tsToken(){
+    var el=f.querySelector('[name="cf-turnstile-response"]');
+    if(el && el.value) return el.value;
+    try{ if(window.turnstile) return window.turnstile.getResponse()||''; }catch(_){}
+    return '';
+  }
+  function nativeSubmit(){            /* repli : laisse le POST Web3Forms natif se faire */
+    done=true;
+    try{ if(typeof f.requestSubmit==='function'){ f.requestSubmit(); return; } }catch(_){}
+    HTMLFormElement.prototype.submit.call(f);
+  }
+  f.addEventListener('submit', function(e){
+    if(done) return;                  /* second passage = repli natif en cours */
+    e.preventDefault();
+    if(sending) return;
+    var hp=f.querySelector('[name="botcheck"]');
+    if(hp && hp.checked){ window.location.href=MERCI; return; }   /* honeypot */
+    var email=v('email'); if(!email) return;
+    var token=tsToken();
+    if(!token){ nativeSubmit(); return; }   /* Turnstile pas prêt/bloqué → repli natif */
+    sending=true;
+    var btn=f.querySelector('button[type=submit]'); var label=btn?btn.innerHTML:'';
+    if(btn){ btn.disabled=true; btn.innerHTML='Envoi…'; }
+    var payload=JSON.stringify({nom:v('name'),email:email,tel:v('phone'),besoin:v('besoin'),message:v('message'),token:token});
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:payload})
+      .then(function(r){ return r.json().catch(function(){return {ok:false};}); })
+      .then(function(d){
+        if(d && d.ok){ window.location.href=MERCI; return; }
+        try{ if(window.turnstile) window.turnstile.reset(); }catch(_){}
+        nativeSubmit();               /* refus/erreur → repli natif, lead jamais perdu */
+      })
+      .catch(function(){ nativeSubmit(); });   /* Worker injoignable → repli natif */
   });
 })();
 </script>

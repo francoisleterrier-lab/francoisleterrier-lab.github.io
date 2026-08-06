@@ -42,7 +42,7 @@ const ALLOWED_ORIGINS = new Set([
 // Endpoints « à valeur » : refusés si la requête vient d'une autre origine
 // (empêche une copie de la page, hébergée ailleurs, d'utiliser notre moteur).
 // /stripe/webhook n'est PAS ici : Stripe appelle serveur-à-serveur (sans Origin) et le corps brut doit rester intact.
-const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/devis", "/devis/sign", "/assistant", "/ask-article", "/espace", "/checkout"]);
+const PROTECTED_PATHS = new Set(["/audit", "/generate", "/site", "/lead", "/contact", "/devis", "/devis/sign", "/assistant", "/ask-article", "/espace", "/checkout"]);
 
 const RATE_LIMITS = {
   "/health": { limit: 60, window: 60 },
@@ -56,6 +56,7 @@ const RATE_LIMITS = {
   "/devis": { limit: 15, window: 60 },
   "/devis/sign": { limit: 10, window: 60 },
   "/lead": { limit: 5, window: 60 },
+  "/contact": { limit: 5, window: 60 },
   "/contact-beacon": { limit: 5, window: 60 },
   "/espace": { limit: 40, window: 60 },
   "/checkout": { limit: 10, window: 60 },
@@ -159,7 +160,7 @@ function handleHealth(_request, env) {
   return json({
     ok: true,
     service: "fl-api",
-    rev: "2026-08-05-brevo-phone",
+    rev: "2026-08-06-turnstile-contact",
     time: new Date().toISOString(),
     bindings: {
       kv: Boolean(env && env.CACHE),
@@ -174,6 +175,7 @@ function handleHealth(_request, env) {
       pagespeed: Boolean(env && env.PAGESPEED_API_KEY),
       stripe: Boolean(env && env.STRIPE_SECRET_KEY),
       stripe_webhook: Boolean(env && env.STRIPE_WEBHOOK_SECRET),
+      turnstile: Boolean(env && env.TURNSTILE_SECRET_KEY),
     },
   });
 }
@@ -971,6 +973,59 @@ async function handleStripeWebhook(request, env) {
 /** POST /contact-beacon — reçoit le formulaire de contact via navigator.sendBeacon
  *  (corps text/plain, requête « simple » sans preflight → fiable pendant la navigation).
  *  Ne fait QUE synchroniser vers Brevo (l'e-mail part déjà via Web3Forms). Répond 204. */
+/**
+ * Vérifie un jeton Cloudflare Turnstile côté serveur (anti-spam du formulaire de contact).
+ * - Tant que TURNSTILE_SECRET_KEY n'est pas configuré en secret Cloudflare, on NE bloque PAS
+ *   (rollout progressif : aucune clé dans le repo, le formulaire continue de fonctionner).
+ * - Fail-open UNIQUEMENT si l'endpoint de vérif est injoignable (incident réseau) : on ne perd
+ *   jamais un vrai lead pour un hoquet de Cloudflare. Fail-closed sur un refus explicite (success:false).
+ */
+async function verifyTurnstile(env, token, ip) {
+  if (!env || !env.TURNSTILE_SECRET_KEY) return { ok: true, skipped: true };
+  if (!token) return { ok: false, error: "missing-token" };
+  try {
+    const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token });
+    if (ip) body.append("remoteip", ip);
+    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+    const data = await r.json().catch(() => ({}));
+    return { ok: Boolean(data && data.success === true), data };
+  } catch (_) {
+    return { ok: true, error: "verify-unreachable" };
+  }
+}
+
+/**
+ * POST /contact — soumission du formulaire de contact, protégée par Turnstile.
+ * Vérifie le jeton, puis (en tâche de fond) notifie François par e-mail (web3forms) et
+ * synchronise le contact vers Brevo. Réponse JSON { ok } consommée par le front pour rediriger.
+ */
+async function handleContact(request, env, ctx) {
+  let d = {};
+  try { const raw = await request.text(); d = raw ? JSON.parse(raw) : {}; } catch (_) { return json({ ok: false, error: "bad-json" }, 400); }
+  // Honeypot : le champ « botcheck » n'est rempli que par un robot → on renvoie ok sans rien envoyer.
+  if (d.botcheck) return json({ ok: true, skipped: "honeypot" });
+  const email = clampStr(d.email, 120);
+  if (!email || !EMAIL_RE.test(email)) return json({ ok: false, error: "email" }, 400);
+  const verdict = await verifyTurnstile(env, clampStr(d.token, 4000), clientIp(request));
+  if (!verdict.ok) return json({ ok: false, error: "captcha" }, 403);
+  const besoin = clampStr(d.besoin, 120), note = clampStr(d.message, 2000), nom = clampStr(d.nom, 80), tel = clampStr(d.tel, 30);
+  const lead = {
+    email: email, url: "", source: "contact", ip: clientIp(request),
+    contact: { nom: nom, tel: tel, message: (besoin ? besoin + " — " : "") + note, source: "contact" },
+    site: { input: { nom: nom, ville: "", metier: "" } },
+  };
+  const deliver = (async () => {
+    try { await notifyContactLead(lead); } catch (_) {}
+    try { await storeLead(env, lead); } catch (_) {}
+  })();
+  if (ctx && typeof ctx.waitUntil === "function") ctx.waitUntil(deliver); else await deliver;
+  return json({ ok: true });
+}
+
 async function handleContactBeacon(request, env) {
   let d = {};
   try { const raw = await request.text(); d = raw ? JSON.parse(raw) : {}; } catch (_) { return new Response(null, { status: 204 }); }
@@ -993,6 +1048,7 @@ async function handleBrevoStatus(_request, env) {
 const ROUTES = {
   "GET /health": (req, env) => handleHealth(req, env),
   "GET /brevo-status": (req, env) => handleBrevoStatus(req, env),
+  "POST /contact": (req, env, ctx) => handleContact(req, env, ctx),
   "POST /contact-beacon": (req, env) => handleContactBeacon(req, env),
   "POST /generate": (req, env) => handleGenerate(req, env),
   "POST /audit": (req, env) => handleAudit(req, env),
