@@ -444,9 +444,8 @@
   var els = document.querySelectorAll('.reveal');
   var i;
   function show(el) {
-    if ((' ' + el.className + ' ').indexOf(' vis ') === -1) {
-      el.className += ' vis';
-    }
+    if (el.classList) { el.classList.add('vis'); }
+    else if ((' ' + el.className + ' ').indexOf(' vis ') === -1) { el.className += ' vis'; }
   }
   if (!('IntersectionObserver' in window)) {
     for (i = 0; i < els.length; i++) { show(els[i]); }
