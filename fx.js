@@ -1,10 +1,11 @@
 /* =====================================================================
    FL — FX premium (vanilla, léger, a11y).
-   1) Reflet/spotlight au curseur dans les cartes (délégué, passif).
-   2) Halo d'ambiance qui suit la souris.
-   3) Constellation vivante en fond, réactive à la souris.
-   Coupé si prefers-reduced-motion ou pointeur non-fin (mobile/tactile).
-   La constellation se met en pause quand l'onglet n'est pas visible.
+   A) Révélations au scroll (.reveal) — mobile + desktop.
+   B) Reflet/spotlight au curseur dans les cartes (desktop).
+   C) Halo d'ambiance qui suit la souris (desktop).
+   D) Constellation vivante en fond, réactive à la souris (desktop).
+   Coupé si prefers-reduced-motion. B/C/D limités aux pointeurs fins.
+   Filet de sécurité : les .reveal réapparaissent toujours (jamais bloqués).
    ===================================================================== */
 (function () {
   'use strict';
@@ -12,9 +13,25 @@
   if (!mm) return;
   var RM = mm('(prefers-reduced-motion: reduce)').matches;
   var FINE = mm('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- A. Révélations au scroll (tous appareils, sauf RM) ---------- */
+  if (!RM && 'IntersectionObserver' in window) {
+    var rv = document.querySelectorAll('.reveal');
+    if (rv.length) {
+      document.documentElement.classList.add('fl-rvl');
+      var rio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      Array.prototype.forEach.call(rv, function (e) { rio.observe(e); });
+      // filet de sécurité : tout révéler après 4 s quoi qu'il arrive
+      setTimeout(function () { Array.prototype.forEach.call(rv, function (e) { e.classList.add('in'); }); }, 4000);
+    }
+  }
+
+  /* ---------- effets curseur : desktop uniquement ---------- */
   if (RM || !FINE) return;
 
-  /* ---------- 1. Reflet au curseur dans les cartes ---------- */
+  /* B. Reflet au curseur dans les cartes */
   var cards = document.querySelectorAll('.svc,.why-card,.tm-card:not(.feature),.avis-card');
   Array.prototype.forEach.call(cards, function (c) { c.classList.add('fl-glare'); });
   var graf = 0, gpend = null;
@@ -31,19 +48,19 @@
     });
   }, { passive: true });
 
-  /* ---------- 2. Halo d'ambiance ---------- */
+  /* C. Halo d'ambiance */
   var halo = document.createElement('div');
   halo.className = 'fl-halo'; halo.setAttribute('aria-hidden', 'true');
   document.body.appendChild(halo);
   var hx = innerWidth / 2, hy = innerHeight / 2, tx = hx, ty = hy, hshown = false;
 
-  /* ---------- 3. Constellation ---------- */
+  /* D. Constellation */
   var cv = document.createElement('canvas');
   cv.className = 'fl-constel'; cv.setAttribute('aria-hidden', 'true');
   document.body.appendChild(cv);
   var ctx = cv.getContext('2d'), pts = [], W = 0, H = 0, DPR = Math.min(devicePixelRatio || 1, 2);
   var COLS = [[40, 200, 221], [124, 92, 255], [224, 91, 200]];
-  var mx = -999, my = -999;
+  var mx = -999, my = -999, running = false;
 
   function resize() {
     W = innerWidth; H = innerHeight;
@@ -57,19 +74,16 @@
       r: Math.random() * 1.4 + 0.6, c: COLS[i % 3]
     });
   }
-
   function frame() {
     if (document.hidden) { running = false; return; }
     ctx.clearRect(0, 0, W, H);
     for (var i = 0; i < pts.length; i++) {
       var p = pts[i];
-      // légère attraction vers la souris
       if (mx > -900) {
         var ddx = mx - p.x, ddy = my - p.y, dm = ddx * ddx + ddy * ddy;
         if (dm < 34000) { p.vx += ddx / dm * 6; p.vy += ddy / dm * 6; }
       }
-      p.vx *= 0.985; p.vy *= 0.985;
-      p.x += p.vx; p.y += p.vy;
+      p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > W) p.vx *= -1;
       if (p.y < 0 || p.y > H) p.vy *= -1;
       p.x = Math.max(0, Math.min(W, p.x)); p.y = Math.max(0, Math.min(H, p.y));
@@ -89,11 +103,8 @@
     }
     requestAnimationFrame(frame);
   }
-
-  var running = false;
   function start() { if (!running) { running = true; requestAnimationFrame(frame); } }
 
-  /* pointeur global : halo + constellation */
   var hraf = 0;
   addEventListener('mousemove', function (e) {
     tx = e.clientX; ty = e.clientY; mx = e.clientX; my = e.clientY;
