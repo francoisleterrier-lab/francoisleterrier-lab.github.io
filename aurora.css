@@ -64,14 +64,24 @@ footer.ft{ background:rgba(5,6,12,.55) !important; } /* accueil : neutralise #05
 }
 
 /* =====================================================================
-   TRANSITIONS DE PAGE : DÉSACTIVÉES volontairement.
-   La View Transition cross-document provoquait un « flash » au changement
-   de page (modèles / réalisations / audit…), car l'aurore (body::before)
-   repart à zéro à chaque nouveau document et ce saut était capturé par la
-   transition. Navigation normale = instantanée, zéro flash. L'aurore et
-   toutes les animations INTERNES aux pages restent actives.
-   (Pour réactiver : remettre @view-transition{navigation:auto} + les règles.)
+   TRANSITIONS DE PAGE (cross-document) — RÉACTIVÉES avec correctif anti-flash.
+   Le flash précédent venait de l'aurore (body::before) capturée par la
+   transition « root » et remise à zéro à chaque page. Correctif : on donne
+   à l'aurore un view-transition-name stable -> elle sort du groupe « root »
+   et n'est donc plus resetée/animée pendant la bascule = plus de flash.
+   Seul le CONTENU fait un fondu doux. Dégradation propre : les navigateurs
+   sans View Transitions naviguent normalement (zéro impact).
+   POUR REVENIR EN ARRIÈRE : supprimer ce bloc (les 12 lignes ci-dessous).
    ===================================================================== */
+@view-transition{ navigation:auto; }
+body::before{ view-transition-name:fl-aurora; }   /* aurore = calque persistant */
+::view-transition-old(root){ animation:fl-vt-out .24s ease both; }
+::view-transition-new(root){ animation:fl-vt-in .32s ease both; }
+@keyframes fl-vt-out{ to{ opacity:0; } }
+@keyframes fl-vt-in{ from{ opacity:0; } }
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root), ::view-transition-new(root){ animation:none !important; }
+}
 
 /* Accessibilité — lien d'évitement (skip link) : caché puis visible au focus clavier */
 .skiplink{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#060410;padding:10px 16px;border-radius:0 0 10px 0;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.35)}
