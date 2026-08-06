@@ -1,10 +1,13 @@
 /* =====================================================================
    FL — Couche FX « premium » (isolée, additive, non-destructive).
-   Un seul effet, discret : un reflet doux qui suit le curseur DANS les
-   cartes sombres (spotlight). Aucune modification de mise en page —
-   uniquement un pseudo-élément décoratif (pointer-events:none).
+   1) Reflet/spotlight qui suit le curseur DANS les cartes sombres.
+   2) Halo d'ambiance qui suit le curseur sur toute la page.
+   3) Constellation vivante (canvas) en fond, réactive à la souris.
+   Décoratif uniquement (pointer-events:none) — zéro impact layout.
    Coupé si prefers-reduced-motion ; limité aux pointeurs fins (desktop).
    ===================================================================== */
+
+/* ---- 1. Reflet au curseur dans les cartes ---- */
 @media (hover:hover) and (pointer:fine){
   .fl-glare{ position:relative; }
   .fl-glare::after{
@@ -15,4 +18,22 @@
   }
   .fl-glare:hover::after{ opacity:1; }
 }
-@media (prefers-reduced-motion:reduce){ .fl-glare::after{ display:none; } }
+
+/* ---- 2. Halo d'ambiance (suit la souris) ---- */
+.fl-halo{
+  position:fixed; top:0; left:0; width:560px; height:560px; margin:-280px 0 0 -280px;
+  z-index:-1; pointer-events:none; border-radius:50%; opacity:0;
+  transition:opacity .8s ease; will-change:transform;
+  background:radial-gradient(circle, rgba(124,92,255,.15), rgba(40,200,221,.06) 42%, transparent 64%);
+}
+.fl-halo.on{ opacity:1; }
+
+/* ---- 3. Constellation (fond) ---- */
+.fl-constel{
+  position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.55;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fl-glare::after{ display:none; }
+  .fl-halo, .fl-constel{ display:none !important; }
+}
