@@ -1,0 +1,18 @@
+/* =====================================================================
+   FL — Couche FX « premium » (isolée, additive, non-destructive).
+   Un seul effet, discret : un reflet doux qui suit le curseur DANS les
+   cartes sombres (spotlight). Aucune modification de mise en page —
+   uniquement un pseudo-élément décoratif (pointer-events:none).
+   Coupé si prefers-reduced-motion ; limité aux pointeurs fins (desktop).
+   ===================================================================== */
+@media (hover:hover) and (pointer:fine){
+  .fl-glare{ position:relative; }
+  .fl-glare::after{
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
+    background:radial-gradient(200px circle at var(--mx,50%) var(--my,50%),
+              rgba(150,210,255,.10), transparent 46%);
+    opacity:0; transition:opacity .4s ease;
+  }
+  .fl-glare:hover::after{ opacity:1; }
+}
+@media (prefers-reduced-motion:reduce){ .fl-glare::after{ display:none; } }
