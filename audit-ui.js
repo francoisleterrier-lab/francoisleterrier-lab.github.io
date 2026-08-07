@@ -169,7 +169,7 @@
         try {
           var r = await fetch(API + "/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, url: d.url, auditId: d.auditId, source: "audit" }) });
           var j = await r.json();
-          if (j && j.ok) { lead.style.display = "none"; msg.style.color = "#37d67a"; msg.innerHTML = "✅ C'est noté&nbsp;! Je vous envoie le rapport complet et je vous recontacte très vite."; }
+          if (j && j.ok) { lead.style.display = "none"; msg.style.color = "#37d67a"; msg.innerHTML = "✅ C'est noté&nbsp;! Je vous envoie le rapport complet et je vous recontacte très vite."; if (window.flTrack) window.flTrack('audit_email', { event_category: 'lead', value: 0, currency: 'EUR' }); }
           else throw 0;
         } catch (_) { btn.disabled = false; msg.style.color = "#ffb4b4"; msg.textContent = "Oups, réessayez dans un instant."; }
       });

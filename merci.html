@@ -68,5 +68,18 @@
 </script>
 <script src="/consent.js" defer></script>
 <script src="/fx.js" defer></script>
+<!-- Conversion GA4 : lead confirmé (formulaire diagnostic / contact / configurateur). -->
+<!-- Ne se déclenche que si ?ok=1 (vraie soumission) ; l'URL est nettoyée pour éviter un double comptage au rechargement. -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    if (new URLSearchParams(location.search).get('ok') !== '1') return;
+    var p = { event_category: 'lead', value: 0, currency: 'EUR' };
+    if (window.flTrack) window.flTrack('generate_lead', p);
+    else if (typeof gtag === 'function') gtag('event', 'generate_lead', p);
+    if (history.replaceState) history.replaceState(null, '', location.pathname);
+  } catch (e) {}
+});
+</script>
 </body>
 </html>

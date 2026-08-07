@@ -176,6 +176,26 @@
   /* API publique : rouvrir le gestionnaire (lien « Gérer mes cookies »). */
   window.flOpenConsent = function () { showBar(); };
 
+  /* ---------- Événements de conversion GA4 (verrou 2 — Google Ads) ---------- */
+  /* Envoie un événement GA4. Consent Mode décide s'il est mesuré (analytics_storage)
+     ou modélisé — on peut donc toujours l'émettre sans risque RGPD. */
+  window.flTrack = function (name, params) {
+    try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) {}
+  };
+  /* RDV pris via Calendly (message posté par l'iframe Calendly) → book_appointment. */
+  window.addEventListener('message', function (e) {
+    if (e && e.data && e.data.event === 'calendly.event_scheduled') {
+      window.flTrack('book_appointment', { event_category: 'lead', value: 0, currency: 'EUR' });
+    }
+  });
+  /* Clic sur un lien téléphone ou e-mail → contact_click (observation). */
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="tel:"], a[href^="mailto:"]') : null;
+    if (!a) return;
+    var kind = a.getAttribute('href').indexOf('tel:') === 0 ? 'tel' : 'email';
+    window.flTrack('contact_click', { event_category: 'contact', method: kind });
+  }, true);
+
   /* ---------- lien « Gérer mes cookies » injecté dans le pied de page ---------- */
   function injectManageLink() {
     if (document.querySelector('.fl-cookie-manage')) return;

@@ -395,6 +395,7 @@
           var link = origin + "/generateur.html?site=" + j.id;
           if (capLink) capLink.value = link;
           show(capDefault, false); show(capDone, true);
+          if (window.flTrack) window.flTrack('generator_lead', { event_category: 'lead', value: 0, currency: 'EUR' });
         } else throw 0;
       } catch (_) { btn.disabled = false; capMsg.style.color = "#ffb4b4"; capMsg.textContent = "Oups, réessayez dans un instant."; }
     });
