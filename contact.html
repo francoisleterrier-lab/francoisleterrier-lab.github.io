@@ -21,7 +21,6 @@
 <meta name="twitter:title" content="Contact — François Leterrier, community manager Sud-Toulousain">
 <meta name="twitter:description" content="Téléphone, email et formulaire. Premier échange offert dans tout le Sud-Toulousain.">
 <meta name="twitter:image" content="https://francoisleterrier.fr/og-image.png">
-<link rel="preconnect" href="https://api.web3forms.com">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
@@ -108,11 +107,9 @@
 
       <div>
         <h2>Écrivez-moi</h2>
-        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="65a34e63-ed73-4214-a9b4-bc144d952cd5">
-          <input type="hidden" name="subject" value="Nouvelle demande depuis le site (page Contact) — François Leterrier">
-          <input type="hidden" name="from_name" value="Site François Leterrier">
-          <input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html">
+        <form id="contactForm" method="POST">
+          <!-- Envoi 100 % via le Worker /contact, protégé par Turnstile. Aucun envoi web3forms
+               natif ni clé publique dans la page → la vérification anti-robot ne peut pas être contournée. -->
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field"><label for="name">Nom *</label><input id="name" name="name" type="text" required placeholder="Votre nom"></div>
           <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required placeholder="vous@exemple.fr"></div>
@@ -131,6 +128,7 @@
           <label class="consent"><input type="checkbox" required><span>J'accepte d'être recontacté et que mes données soient traitées selon la <a href="confidentialite.html">politique de confidentialité</a>.</span></label>
           <!-- Anti-spam Cloudflare Turnstile — clé publique (Site Key) du widget francoisleterrier.fr. -->
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIrWHh-v_dU4c7P" data-theme="dark" data-language="fr" style="margin:4px 0 16px;"></div>
+          <noscript><p style="font-size:13px;color:var(--muted);text-align:center;margin:4px 0 12px;line-height:1.6;">L'envoi en ligne nécessite JavaScript. Vous pouvez aussi m'appeler au <a href="tel:+33698200208">06 98 20 02 08</a> ou m'écrire à <a href="mailto:francois.leterrier.cmw@gmail.com">francois.leterrier.cmw@gmail.com</a>.</p></noscript>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Envoyer ma demande →</button>
           <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.6;">Réponse sous 48 h en moyenne · sans engagement · vos données ne sont jamais cédées à des tiers — voir la <a href="confidentialite.html" style="color:var(--cyan)">politique de confidentialité</a>.</p>
         </form>
@@ -176,18 +174,19 @@
 })();
 </script>
 <script>
-/* Formulaire de contact — anti-spam Cloudflare Turnstile.
-   Le formulaire poste vers le Worker /contact, qui VÉRIFIE le jeton Turnstile côté serveur
-   avant de notifier François (e-mail via Web3Forms) et de synchroniser le contact vers Brevo.
-   Sécurité « à toute épreuve » pendant le déploiement : si le Worker est injoignable, si le
-   jeton n'est pas prêt, ou en cas de refus, on retombe sur l'envoi Web3Forms natif du <form>
-   (attributs action/access_key/redirect conservés) → jamais un vrai lead perdu. */
+/* Formulaire de contact — envoi 100 % via le Worker /contact, protégé par Cloudflare Turnstile.
+   Le Worker vérifie le jeton côté serveur AVANT de notifier François (e-mail) et de synchroniser
+   Brevo. Plus d'envoi web3forms natif ni de clé publique : un robot qui ne résout pas Turnstile
+   est bloqué (aucun repli). En cas d'incident technique réel, on affiche le téléphone et l'e-mail
+   pour que le visiteur ait toujours un moyen de me joindre. */
 (function(){
   var f=document.getElementById('contactForm');
   if(!f) return;
   var ENDPOINT='https://main.francois-leterrier-cmw.workers.dev/contact';
   var MERCI='https://francoisleterrier.fr/merci.html';
-  var sending=false, done=false;
+  var TEL='<a href="tel:+33698200208" style="color:inherit;text-decoration:underline;">06 98 20 02 08</a>';
+  var MAIL='<a href="mailto:francois.leterrier.cmw@gmail.com" style="color:inherit;text-decoration:underline;">francois.leterrier.cmw@gmail.com</a>';
+  var sending=false, box=null;
   function v(n){var el=f.querySelector('[name="'+n+'"]');return el?(el.value||'').trim():'';}
   function tsToken(){
     var el=f.querySelector('[name="cf-turnstile-response"]');
@@ -195,20 +194,25 @@
     try{ if(window.turnstile) return window.turnstile.getResponse()||''; }catch(_){}
     return '';
   }
-  function nativeSubmit(){            /* repli : laisse le POST Web3Forms natif se faire */
-    done=true;
-    try{ if(typeof f.requestSubmit==='function'){ f.requestSubmit(); return; } }catch(_){}
-    HTMLFormElement.prototype.submit.call(f);
+  function resetWidget(){ try{ if(window.turnstile) window.turnstile.reset(); }catch(_){} }
+  function note(html){
+    if(!box){
+      box=document.createElement('p');
+      box.setAttribute('role','alert');
+      box.style.cssText='font-size:13.5px;line-height:1.6;margin:2px 0 12px;padding:10px 12px;border-radius:10px;background:rgba(255,110,110,.12);color:#ffb3b3;';
+      var btn=f.querySelector('button[type=submit]');
+      if(btn && btn.parentNode) btn.parentNode.insertBefore(box, btn);
+    }
+    box.innerHTML=html;
   }
   f.addEventListener('submit', function(e){
-    if(done) return;                  /* second passage = repli natif en cours */
     e.preventDefault();
     if(sending) return;
     var hp=f.querySelector('[name="botcheck"]');
-    if(hp && hp.checked){ window.location.href=MERCI; return; }   /* honeypot */
+    if(hp && hp.checked){ window.location.href=MERCI; return; }   /* honeypot : robot → sortie discrète */
     var email=v('email'); if(!email) return;
     var token=tsToken();
-    if(!token){ nativeSubmit(); return; }   /* Turnstile pas prêt/bloqué → repli natif */
+    if(!token){ note('Vérification anti-robot en cours… patientez une seconde puis réessayez.'); resetWidget(); return; }
     sending=true;
     var btn=f.querySelector('button[type=submit]'); var label=btn?btn.innerHTML:'';
     if(btn){ btn.disabled=true; btn.innerHTML='Envoi…'; }
@@ -217,10 +221,14 @@
       .then(function(r){ return r.json().catch(function(){return {ok:false};}); })
       .then(function(d){
         if(d && d.ok){ window.location.href=MERCI; return; }
-        try{ if(window.turnstile) window.turnstile.reset(); }catch(_){}
-        nativeSubmit();               /* refus/erreur → repli natif, lead jamais perdu */
+        sending=false; if(btn){ btn.disabled=false; btn.innerHTML=label; } resetWidget();
+        if(d && d.error==='captcha'){ note('La vérification anti-robot n\'a pas abouti. Merci de réessayer.'); }
+        else { note('Envoi momentanément indisponible. Appelez-moi au '+TEL+' ou écrivez à '+MAIL+'.'); }
       })
-      .catch(function(){ nativeSubmit(); });   /* Worker injoignable → repli natif */
+      .catch(function(){
+        sending=false; if(btn){ btn.disabled=false; btn.innerHTML=label; } resetWidget();
+        note('Connexion interrompue. Réessayez, ou appelez-moi au '+TEL+'.');
+      });
   });
 })();
 </script>

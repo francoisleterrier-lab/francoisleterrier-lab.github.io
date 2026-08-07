@@ -13,6 +13,13 @@ compatibility_date = "2026-07-01"
 workers_dev = true
 account_id = "f64ba9ca7e5fc6e0d3f22eb9f97445d9"
 
+# Variables NON secrètes (versionnées ici pour survivre à chaque `wrangler deploy` —
+# une variable posée seulement dans le dashboard est effacée par un deploy).
+# BREVO_LIST_ID = liste Brevo où atterrissent les contacts du site (relances). Pas un secret.
+# Les clés/API restent des secrets → `wrangler secret put …`, jamais ici.
+[vars]
+BREVO_LIST_ID = "2"
+
 # Synchro auto des avis Google : DÉSACTIVÉE (diagnostic complet effectué).
 # La fiche de François est une activité « zone de service » sans adresse publique :
 # elle n'est PAS exposée par l'API Google Places (NOT_FOUND par nom, par téléphone

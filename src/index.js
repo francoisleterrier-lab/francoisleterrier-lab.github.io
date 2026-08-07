@@ -430,16 +430,21 @@ async function notifyLead(lead) {
 async function notifyContactLead(lead) {
   try {
     const c = lead.contact || {};
-    const isParr = c.source === "parrainage";
+    const src = c.source || "assistant";
+    const isParr = src === "parrainage";
+    const isContact = src === "contact";
+    const head = isParr ? "NOUVEAU PARRAINAGE 🤝" : (isContact ? "NOUVEAU LEAD — Formulaire de contact" : "NOUVEAU LEAD — Assistant du site");
+    const subjectPrefix = isParr ? "🤝 Parrainage — " : (isContact ? "📞 Lead contact — " : "📞 Lead assistant — ");
+    const fromName = isParr ? "FL Parrainage" : (isContact ? "FL Contact" : "FL Assistant");
     const convo = (c.convo || "").slice(0, 1500);
-    const msg = (isParr ? "NOUVEAU PARRAINAGE 🤝" : "NOUVEAU LEAD — Assistant du site") + "\n\n" +
+    const msg = head + "\n\n" +
       (isParr ? "Parrain" : "Nom") + " : " + (c.nom || "?") + "\nEmail : " + lead.email +
       (c.tel ? "\nTéléphone : " + c.tel : "") +
       (c.message ? "\n\n" + (isParr ? "Détails" : "Sa demande") + " :\n" + c.message : "") +
       (convo ? "\n\n--- Fil de la conversation ---\n" + convo : "");
     await fetch("https://api.web3forms.com/submit", {
       method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ access_key: W3F_KEY, subject: (isParr ? "🤝 Parrainage — " : "📞 Lead assistant — ") + (c.nom || lead.email), from_name: isParr ? "FL Parrainage" : "FL Assistant", email: lead.email, message: msg }),
+      body: JSON.stringify({ access_key: W3F_KEY, subject: subjectPrefix + (c.nom || lead.email), from_name: fromName, email: lead.email, message: msg }),
     });
   } catch (_) {}
 }
