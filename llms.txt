@@ -14,8 +14,8 @@
 ## Services
 1. Gestion des réseaux sociaux (Facebook, Instagram, Google Business Profile) : création de visuels et de textes, programmation, modération, bilans de performance.
 2. Création de sites internet : landing page, site vitrine jusqu'à 5 pages, sur-mesure (e-commerce / réservation), avec référencement local (SEO) inclus.
-4. Référencement SEO : audit, optimisation et accompagnement (référencement naturel + local, fiche Google Business, contenu, netlinking) pour les pros du Sud-Toulousain. Aucune position garantie ; résultats en 3-6 mois. Voir referencement-seo.html.
-3. Faire-part digital : mini-site d'invitation événementiel privé (mariage, baptême, anniversaire, PACS) avec compte à rebours, RSVP en ligne (présence, enfants, allergies) consultable en temps réel, programme, infos pratiques, hébergements, itinéraire, dress code, galerie photos, livre d'or, installable sur téléphone (PWA), adresse web privée non indexée.
+3. Référencement SEO : audit, optimisation et accompagnement (référencement naturel + local, fiche Google Business, contenu, netlinking) pour les pros du Sud-Toulousain. Aucune position garantie ; résultats en 3-6 mois. Voir referencement-seo.html.
+4. Faire-part digital : mini-site d'invitation événementiel privé (mariage, baptême, anniversaire, PACS) avec compte à rebours, RSVP en ligne (présence, enfants, allergies) consultable en temps réel, programme, infos pratiques, hébergements, itinéraire, dress code, galerie photos, livre d'or, installable sur téléphone (PWA), adresse web privée non indexée.
 
 ## Outils gratuits en ligne (sans inscription, partout en France)
 - Générateur de site instantané : indiquer métier + nom d'établissement + ville → une vraie page d'accueil sur-mesure se compose en quelques secondes ; on peut changer le style et les couleurs, réécrire les textes en direct, et obtenir un lien partageable. https://francoisleterrier.fr/generateur.html
