@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var p = { event_category: 'lead', value: 0, currency: 'EUR' };
     if (window.flTrack) window.flTrack('generate_lead', p);
     else if (typeof gtag === 'function') gtag('event', 'generate_lead', p);
+    try { if (window.fbq) window.fbq('track', 'Lead'); } catch (_) {}   // conversion Meta (si consentement pub)
     if (history.replaceState) history.replaceState(null, '', location.pathname);
   } catch (e) {}
 });

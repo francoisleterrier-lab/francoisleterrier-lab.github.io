@@ -22,7 +22,7 @@
   var OLDKEY = 'cip-consent';     // ancien format 'granted'/'denied' (rétro-compat)
   var GA_ID = 'G-WTRP1WD9VV';     // propriété GA4 francoisleterrier.fr
   var AHREFS_KEY = '70o1z25QpySuipMTMk7FMg';
-  var FB_PIXEL_ID = '';           // ← ID de Pixel Meta pour l'activer (vide = off)
+  var FB_PIXEL_ID = '941645512292397';   // Pixel Meta (Facebook/Instagram) — chargé seulement après consentement « Publicité »
 
   /* ---------- Consent Mode v2 : socle (DOIT précéder gtag.js) ---------- */
   window.dataLayer = window.dataLayer || [];
@@ -186,6 +186,7 @@
   window.addEventListener('message', function (e) {
     if (e && e.data && e.data.event === 'calendly.event_scheduled') {
       window.flTrack('book_appointment', { event_category: 'lead', value: 0, currency: 'EUR' });
+      try { if (window.fbq) window.fbq('track', 'Schedule'); } catch (_) {}   // conversion Meta (si consentement pub)
     }
   });
   /* Clic sur un lien téléphone ou e-mail → contact_click (observation). */
