@@ -172,7 +172,7 @@
         .then(function(r){return r.json();})
         .then(function(j){
           clearTimeout(to);
-          if(j&&j.ok){f.reset();show("ok","Merci "+nom.split(" ")[0]+" ! 🎉 J'ai bien reçu votre recommandation, je contacte "+filleul.split(",")[0].split(" ")[0]+" avec soin. Vous recevrez votre mois offert dès qu'il démarre.");btn.style.display="none";}
+          if(j&&j.ok){try{if(window.flTrack)window.flTrack('conversion_event_submit_lead_form');else if(typeof gtag==='function')gtag('event','conversion_event_submit_lead_form');}catch(_){}f.reset();show("ok","Merci "+nom.split(" ")[0]+" ! 🎉 J'ai bien reçu votre recommandation, je contacte "+filleul.split(",")[0].split(" ")[0]+" avec soin. Vous recevrez votre mois offert dès qu'il démarre.");btn.style.display="none";}
           else{show("err","L'envoi n'a pas abouti. Réessayez, ou écrivez-moi à francois&#46;leterrier&#46;cmw&#64;gmail&#46;com.");btn.disabled=false;btn.textContent="Envoyer ma recommandation →";}
         })
         .catch(function(){clearTimeout(to);show("err","Connexion interrompue. Réessayez, ou appelez le 06 98 20 02 08.");btn.disabled=false;btn.textContent="Envoyer ma recommandation →";});

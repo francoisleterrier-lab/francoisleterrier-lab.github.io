@@ -283,7 +283,7 @@
       Object.keys(state.opts).forEach(function(k){var o=state.opts[k];items.push({label:o.name,amount:o.p});total+=o.p;});
       gd.disabled=true;var old=gd.textContent;gd.textContent='Génération…';
       fetch('https://main.francois-leterrier-cmw.workers.dev/devis',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({client:{nom:nom,email:email,tel:tel},items:items,total:total,monthly:state.cm||0,delay:T.delay,projet:T.name,message:message})})
-      .then(function(r){return r.json();}).then(function(j){if(j&&j.ok&&j.id){location.href='devis.html?id='+j.id;}else{throw 0;}})
+      .then(function(r){return r.json();}).then(function(j){if(j&&j.ok&&j.id){try{if(window.flTrack)window.flTrack('conversion_event_submit_lead_form');else if(typeof gtag==='function')gtag('event','conversion_event_submit_lead_form');}catch(_){}location.href='devis.html?id='+j.id;}else{throw 0;}})
       .catch(function(){gd.disabled=false;gd.textContent=old;alert('Oups, réessayez dans un instant.');});
     });
     // a11y : rend les cartes/puces opérables au clavier (focus + Entrée/Espace)
