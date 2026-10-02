@@ -70,7 +70,7 @@ h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif!important;font-weigh
   </div></header>
   <main id="contenu">
     <h1>Politique de confidentialité</h1>
-    <p class="sub">Protection des données personnelles (RGPD) — dernière mise à jour : juin 2026</p>
+    <p class="sub">Protection des données personnelles (RGPD) — dernière mise à jour : octobre 2026</p>
 
     <p>La présente politique explique comment sont collectées et traitées vos données personnelles lorsque vous utilisez ce site, conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés ».</p>
 
@@ -90,12 +90,21 @@ h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif!important;font-weigh
     <p>Ces données servent <b>uniquement</b> à répondre à votre demande et à vous recontacter. La base légale est votre <b>consentement</b> (envoi volontaire du formulaire) et l'intérêt légitime à traiter une demande commerciale.</p>
 
     <h2>Destinataires et sous-traitants</h2>
-    <p>Vos données sont reçues directement par François Leterrier. L'envoi du formulaire transite par le service <b>Web3Forms</b> (prestataire technique d'acheminement des emails), qui agit en sous-traitant et ne conserve pas vos données à d'autres fins. Le site est hébergé par GitHub Pages (statique, sans base de données côté serveur).</p>
+    <p>Vos données sont reçues directement par François Leterrier. Pour les acheminer et assurer le suivi de votre demande, les sous-traitants suivants interviennent, chacun pour la seule finalité indiquée :</p>
+    <ul>
+      <li><b>Cloudflare, Inc.</b> (États-Unis) — service applicatif (Cloudflare Workers) qui reçoit les formulaires et les outils du site, base de données associée (Cloudflare D1, où les demandes sont enregistrées avec une empreinte anonymisée de l'adresse IP), réseau de diffusion et protection anti-robot <b>Cloudflare Turnstile</b> (traite l'adresse IP et des signaux techniques du navigateur, sans cookie publicitaire).</li>
+      <li><b>Web3Forms</b> — acheminement de la notification par e-mail vers François Leterrier ; ne conserve pas vos données à d'autres fins.</li>
+      <li><b>Brevo SAS</b> (France) — outil de gestion des contacts dans lequel vos coordonnées et l'origine de votre demande peuvent être enregistrées pour assurer le suivi commercial (relance, envoi de documents).</li>
+      <li><b>Stripe Payments Europe, Ltd</b> (Irlande) — traitement des paiements en ligne (abonnements et acomptes) : aucune donnée bancaire n'est saisie ni conservée sur ce site.</li>
+      <li><b>GitHub, Inc.</b> (États-Unis) — hébergement des pages statiques du site.</li>
+    </ul>
+    <p>Les outils gratuits du site (audit, générateur, configurateur, simulateur) enregistrent les informations que vous y saisissez (adresse de site, nom, ville, e-mail) afin de produire et de vous envoyer le résultat demandé.</p>
+    <p>Certains de ces prestataires sont établis hors de l'Union européenne ; les transferts sont encadrés, selon le prestataire, par les clauses contractuelles types adoptées par la Commission européenne et/ou le cadre de protection des données UE–États-Unis (Data Privacy Framework).</p>
     <p>Si vous choisissez de <b>réserver un rendez-vous en ligne</b>, vous utilisez l'outil <b>Calendly</b> (Calendly LLC), qui agit comme sous-traitant pour la prise de rendez-vous. Calendly n'est chargé <b>que lorsque vous cliquez sur « Réserver un créneau »</b> (aucun script ni cookie tiers avant ce clic) et traite alors les informations que vous y saisissez (nom, e-mail, créneau choisi). Voir la <a href="https://calendly.com/privacy" target="_blank" rel="noopener">politique de confidentialité de Calendly</a>.</p>
     <p>De même, la <b>carte Google Maps</b> de la page contact n'est chargée <b>que si vous cliquez sur « Afficher la carte »</b> — aucune requête ni cookie Google avant ce clic.</p>
 
     <h2>Durée de conservation</h2>
-    <p>Les messages sont conservés le temps nécessaire au traitement de votre demande et à la relation commerciale, puis supprimés. Vous pouvez demander leur suppression à tout moment.</p>
+    <p>Les demandes de contact, de devis et les résultats d'outils sont conservés <b>3 ans à compter du dernier échange</b> (durée recommandée par la CNIL pour les prospects), puis supprimés. Les documents de facturation sont conservés 10 ans (obligation comptable). Les choix de consentement aux cookies sont mémorisés dans votre navigateur pour 6 mois au plus. Vous pouvez demander la suppression de vos données à tout moment.</p>
 
     <h2>Cookies et mesure d'audience</h2>
     <p>Ce site utilise <b>Google Analytics 4</b> pour mesurer sa fréquentation (pages vues, provenance des visiteurs). Cet outil dépose des cookies de mesure d'audience.</p>
@@ -111,7 +120,7 @@ h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif!important;font-weigh
     <h2>Contact</h2>
     <p>Pour toute question relative à vos données : <a href="mailto:francois&#46;leterrier&#46;cmw&#64;gmail&#46;com">francois&#46;leterrier&#46;cmw&#64;gmail&#46;com</a>.</p>
   </main>
-  <footer>© <span id="y">2026</span> François Leterrier · Lavernose-Lacasse (31410) · <a href="mentions-legales.html">Mentions légales</a> · <a href="/">Accueil</a></footer>
+  <footer>© <span id="y">2026</span> François Leterrier · Lavernose-Lacasse (31410) · <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="/">Accueil</a></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 <script src="/consent.js" defer></script>
 <script src="/assistant.js" defer></script>

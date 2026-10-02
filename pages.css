@@ -104,3 +104,4 @@ footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
 .tools-mini a{color:var(--cyan);font-weight:600;}
 .hero-cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}.hero-cta .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(120deg,#28c8dd,#7c3aed);color:#08111f;font-weight:700;border-radius:30px;padding:12px 22px;text-decoration:none;transition:transform .18s}.hero-cta .cta:hover{transform:translateY(-2px)}.hero-cta .cta-ghost{background:rgba(255,255,255,.06);color:#f2ecf4;border:1px solid rgba(255,255,255,.22)}.hero-cta .proof{flex-basis:100%;margin:4px 0 0;font-size:13px;color:#8b93a8}
 @media (hover:none){.top{backdrop-filter:none;background:rgba(6,7,14,.95);}.navlinks{backdrop-filter:none;}}
+.garanties{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:#aab2c6;margin:0 0 18px}.garanties b{color:#f2ecf4}.garanties a{color:var(--cyan)}

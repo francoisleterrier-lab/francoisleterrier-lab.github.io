@@ -111,8 +111,9 @@
   <url><loc>https://francoisleterrier.fr/checklist-visibilite-locale.html</loc><lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://francoisleterrier.fr/comparateur-fiche-google.html</loc><lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://francoisleterrier.fr/glossaire.html</loc><lastmod>2026-08-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://francoisleterrier.fr/confidentialite.html</loc><lastmod>2026-08-08</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://francoisleterrier.fr/mentions-legales.html</loc><lastmod>2026-08-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://francoisleterrier.fr/confidentialite.html</loc><lastmod>2026-10-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://francoisleterrier.fr/cgv.html</loc><lastmod>2026-10-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://francoisleterrier.fr/mentions-legales.html</loc><lastmod>2026-10-02</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <!-- Faire-part Vivant (sous-site) -->
   <url><loc>https://francoisleterrier.fr/evenementiel-vivant.html</loc><lastmod>2026-08-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
