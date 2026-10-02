@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#060410">
 <link rel="canonical" href="https://francoisleterrier.fr/audit.html">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
-<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
-<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:title" content="Audit de site gratuit et instantané — François Leterrier">
 <meta property="og:description" content="Votre site noté sur 100 en quelques secondes, avec un plan d'action clair. Gratuit, sans inscription.">
@@ -74,12 +74,12 @@
 <style>
   .au-hero{padding:38px 0 6px}
   .au-hero .crumb{font-size:13px;color:var(--muted);margin-bottom:14px}.au-hero .crumb a{color:var(--cyan);text-decoration:none}
-  .au-hero h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,5.4vw,50px);line-height:1.05;color:#fff;margin:0 0 12px}.au-hero h1 em{font-style:italic;color:var(--cyan)}
+  .au-hero h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif;font-weight:500;font-size:clamp(30px,5.4vw,50px);line-height:1.05;color:#fff;margin:0 0 12px}.au-hero h1 em{font-style:italic;color:var(--cyan)}
   .au-hero .lede{max-width:640px;font-size:17px;color:var(--muted);line-height:1.6}
   .au-form{margin:24px 0 4px;display:flex;gap:12px;flex-wrap:wrap;max-width:720px}
   .au-form input{flex:1;min-width:240px;background:rgba(255,255,255,.05);border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;color:#f2ecf4;font:inherit;font-size:16px}
   .au-form input:focus-visible{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(40,200,221,.18)}
-  .btn-go{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font:inherit;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#08111f;background:var(--grad);padding:15px 26px;border-radius:12px;box-shadow:0 14px 34px -12px rgba(124,58,237,.7)}
+  .btn-go{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font:inherit;font-family:'Montserrat','Montserrat Fallback',sans-serif;font-weight:700;font-size:15px;color:#08111f;background:var(--grad);padding:15px 26px;border-radius:12px;box-shadow:0 14px 34px -12px rgba(124,58,237,.7)}
   .btn-go[disabled]{opacity:.6;cursor:progress}
   .au-note{font-size:12.5px;color:var(--muted);margin-top:10px}
   .au-extra{display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:720px;margin-top:12px}
@@ -98,18 +98,18 @@
   .rep-top{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:26px}
   .gauge{--v:0;--c:var(--cyan);width:132px;height:132px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--v)*1%),rgba(255,255,255,.08) 0);flex:none}
   .gauge .in{width:104px;height:104px;border-radius:50%;background:#0c0a16;display:grid;place-items:center;text-align:center}
-  .gauge .n{font-family:'Montserrat';font-weight:800;font-size:34px;color:#fff;line-height:1}.gauge .s{font-size:11px;color:var(--muted)}
+  .gauge .n{font-family:'Montserrat','Montserrat Fallback',sans-serif;font-weight:800;font-size:34px;color:#fff;line-height:1}.gauge .s{font-size:11px;color:var(--muted)}
   .rep-verdict h2{font-family:'Fraunces',serif;font-weight:500;color:#fff;font-size:24px;margin:0 0 6px}.rep-verdict p{color:var(--muted);font-size:15px;margin:0}
   .rep-host{color:var(--cyan);font-weight:600;font-size:13px;word-break:break-all}
   .mini-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
   .mini{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
-  .mini .mn{font-family:'Montserrat';font-weight:800;font-size:26px}.mini .ml{font-size:12px;color:var(--muted);margin-top:4px}
+  .mini .mn{font-family:'Montserrat','Montserrat Fallback',sans-serif;font-weight:800;font-size:26px}.mini .ml{font-size:12px;color:var(--muted);margin-top:4px}
   .mini-cap{font-size:12px;color:var(--muted);margin:16px 0 6px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
   /* piliers 360° */
   .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0 4px}
   .pcard{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:18px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
   .pgauge{--v:0;--c:var(--cyan);width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--v)*1%),rgba(255,255,255,.09) 0)}
-  .pgauge span{width:56px;height:56px;border-radius:50%;background:#0c0a16;display:grid;place-items:center;font-family:'Montserrat';font-weight:800;font-size:19px;color:#fff}
+  .pgauge span{width:56px;height:56px;border-radius:50%;background:#0c0a16;display:grid;place-items:center;font-family:'Montserrat','Montserrat Fallback',sans-serif;font-weight:800;font-size:19px;color:#fff}
   .pcard .pl{font-weight:700;font-size:13.5px;color:#fff}
   .pcard .ps{font-size:11.5px;color:var(--muted);line-height:1.4}
   /* projection + delta + partage */
@@ -135,7 +135,7 @@
   .shot .cap{font-size:12px;color:var(--muted);margin-top:8px}
   .bench{display:grid;gap:12px;margin-top:6px}
   .bar{display:grid;grid-template-columns:110px 1fr 44px;gap:10px;align-items:center;font-size:13px}
-  .bar>span:first-child{color:var(--muted)}.bar>b{text-align:right;color:#fff;font-family:'Montserrat',sans-serif}
+  .bar>span:first-child{color:var(--muted)}.bar>b{text-align:right;color:#fff;font-family:'Montserrat','Montserrat Fallback',sans-serif}
   .bar .track{display:block;height:12px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}
   .bar .fill{display:block;height:100%;border-radius:8px;min-width:8px;box-shadow:0 0 12px -2px currentColor;transition:width 1s cubic-bezier(.22,1,.36,1)}
   @media(prefers-reduced-motion:reduce){.shot-skel .sp{animation:none}.bar .fill{transition:none}.shot-wrap img{transition:none}}
@@ -151,7 +151,7 @@
   @media print{header.top,.au-form,.au-extra,.au-note,.au-hero .lede,.rep-cta,.sharebar,.au-faq,footer,#flburger{display:none!important}.report{display:block!important}body{background:#fff}}
   /* FAQ (contenu statique, GEO + conversion) */
   .au-faq{padding:6px 0 48px}
-  .au-faq h2{font-family:'Fraunces',Georgia,serif;font-weight:500;color:#fff;font-size:clamp(24px,4vw,34px);margin:0 0 18px}
+  .au-faq h2{font-family:'Fraunces','Fraunces Fallback',Georgia,serif;font-weight:500;color:#fff;font-size:clamp(24px,4vw,34px);margin:0 0 18px}
   .au-faq details{border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:10px;background:rgba(255,255,255,.03)}
   .au-faq summary{cursor:pointer;color:#fff;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:14px}
   .au-faq summary::-webkit-details-marker{display:none}
@@ -163,7 +163,7 @@
 <body>
   <a class="skiplink" href="#contenu">Aller au contenu</a>
   <header class="top"><div class="wrap">
-    <a class="brand" href="/"><img src="logo.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
+    <a class="brand" href="/"><img src="/logo-100.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
     <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
@@ -225,7 +225,7 @@
   <script src="/assistant.js" defer></script>
 <script src="/fx.js" defer></script>
 <!-- fl-mbar -->
-<style>.fl-mbar{display:none}@media(max-width:720px){body{padding-bottom:66px}.fl-mbar{display:flex;position:fixed;left:10px;right:88px;bottom:12px;z-index:90;gap:8px}.fl-mbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:30px;font:700 14px/1 'Montserrat',sans-serif;text-decoration:none;box-shadow:0 8px 24px -8px rgba(0,0,0,.6)}.fl-mbar .m1{background:linear-gradient(120deg,#28c8dd,#7c3aed);color:#08111f}.fl-mbar .m2{background:rgba(14,19,34,.96);color:#f2ecf4;border:1px solid rgba(255,255,255,.22)}}</style>
+<style>.fl-mbar{display:none}@media(max-width:720px){body{padding-bottom:66px}.fl-mbar{display:flex;position:fixed;left:10px;right:88px;bottom:12px;z-index:90;gap:8px}.fl-mbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:30px;font:700 14px/1 'Montserrat','Montserrat Fallback',sans-serif;text-decoration:none;box-shadow:0 8px 24px -8px rgba(0,0,0,.6)}.fl-mbar .m1{background:linear-gradient(120deg,#28c8dd,#7c3aed);color:#08111f}.fl-mbar .m2{background:rgba(14,19,34,.96);color:#f2ecf4;border:1px solid rgba(255,255,255,.22)}}</style>
 <nav class="fl-mbar" aria-label="Contact rapide"><a class="m2" href="tel:+33698200208">📞 Appeler</a><a class="m1" href="/configurateur.html">Devis gratuit →</a></nav>
 </body>
 </html>

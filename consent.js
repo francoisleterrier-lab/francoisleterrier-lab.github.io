@@ -90,8 +90,17 @@
     try { localStorage.setItem(KEY, JSON.stringify({ a: !!a, ad: !!ad, t: Date.now() })); } catch (e) {}
   }
 
-  /* Consent Mode : gtag démarre toujours (en mode refusé jusqu'à un éventuel « update »). */
-  startGtag();
+  /* Consent Mode : gtag démarre toujours (en mode refusé jusqu'à un éventuel « update »),
+     mais DIFFÉRÉ (premier geste ou 4 s après load) pour ne pas peser sur le chargement mobile.
+     Exception : pages de conversion (merci.html, ?ok=1, window.flGtagNow) → immédiat. */
+  (function () {
+    var urgent = /[?&]ok=1/.test(location.search) || window.flGtagNow === true || /\/(merci|abonnement-merci)\.html$/.test(location.pathname);
+    if (urgent) { startGtag(); return; }
+    var done = false, evs = ['pointerdown', 'keydown', 'scroll', 'touchstart'];
+    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go); }); if ('requestIdleCallback' in window) requestIdleCallback(startGtag, { timeout: 2000 }); else setTimeout(startGtag, 0); }
+    evs.forEach(function (e) { window.addEventListener(e, go, { passive: true }); });
+    if (document.readyState === 'complete') setTimeout(go, 4000); else window.addEventListener('load', function () { setTimeout(go, 4000); });
+  })();
 
   /* ---------- lecture du choix mémorisé (+ migration ancien format) ---------- */
   var saved = null;
@@ -104,7 +113,7 @@
   if (saved) { apply(!!saved.a, !!saved.ad); }
 
   /* ---------- Bandeau ---------- */
-  var css = '.cip-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;max-width:880px;margin:0 auto;background:rgba(14,19,34,.97);backdrop-filter:blur(10px);border:1px solid rgba(129,74,236,.35);border-radius:16px;padding:16px 18px;box-shadow:0 14px 44px -12px rgba(0,0,0,.7);font-family:Manrope,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}'
+  var css = '.cip-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:99999;max-width:880px;margin:0 auto;background:rgba(14,19,34,.97);backdrop-filter:blur(10px);border:1px solid rgba(129,74,236,.35);border-radius:16px;padding:16px 18px;box-shadow:0 14px 44px -12px rgba(0,0,0,.7);font-family:inherit;}'
     + '.cip-consent .cip-c-in{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between;}'
     + '.cip-consent p{margin:0;color:#c4cbdb;font-size:13.5px;line-height:1.6;flex:1;min-width:240px;}'
     + '.cip-consent a{color:#22d3ee;text-decoration:none;}.cip-consent a:hover{text-decoration:underline;}'

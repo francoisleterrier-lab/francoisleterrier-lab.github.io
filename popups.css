@@ -13,7 +13,7 @@
 .fl-ov.open .fl-modal{transform:none;}
 .fl-modal::before{content:"";position:absolute;top:-1px;right:-1px;width:220px;height:160px;pointer-events:none;
   background:radial-gradient(circle at 80% 0%,rgba(124,58,237,.22),transparent 60%);border-radius:18px;}
-.fl-modal h3{font-family:'Montserrat','Montserrat',sans-serif;font-weight:800;font-size:22px;color:#fff;margin:0 0 10px;line-height:1.18;position:relative;}
+.fl-modal h3{font-family:'Montserrat','Montserrat','Montserrat Fallback',sans-serif;font-weight:800;font-size:22px;color:#fff;margin:0 0 10px;line-height:1.18;position:relative;}
 .fl-modal p{color:#c4cbdb;font-size:15px;line-height:1.6;margin:0 0 20px;position:relative;}
 .fl-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
   background:rgba(255,255,255,.05);color:#f2ecf4;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
@@ -74,7 +74,7 @@
 /* ---- Placeholder du calendrier Calendly inline (chargé au clic) ---- */
 .fl-cal-ph{font-family:'Montserrat',system-ui,sans-serif;background:rgba(14,19,34,.6);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:38px 26px;text-align:center;}
 .fl-cal-ph-ic{font-size:38px;line-height:1;margin-bottom:10px;}
-.fl-cal-ph h3{font-family:'Montserrat','Montserrat',sans-serif;font-weight:800;color:#fff;font-size:20px;margin:0 0 8px;}
+.fl-cal-ph h3{font-family:'Montserrat','Montserrat','Montserrat Fallback',sans-serif;font-weight:800;color:#fff;font-size:20px;margin:0 0 8px;}
 .fl-cal-ph p{color:#b9b3c6;font-size:14px;line-height:1.6;max-width:48ch;margin:0 auto 18px;}
 .fl-cal-ph .fl-btn{display:inline-flex;}
 

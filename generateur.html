@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#060410">
 <link rel="canonical" href="https://francoisleterrier.fr/generateur.html">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
-<link rel="icon" type="image/png" sizes="180x180" href="favicon-180.png">
-<link rel="apple-touch-icon" href="favicon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:title" content="Générateur de site instantané — François Leterrier">
 <meta property="og:description" content="Votre page d'accueil sur-mesure se compose sous vos yeux en quelques secondes. Gratuit, sans inscription.">
@@ -75,25 +75,25 @@
   .gen-hero{padding:38px 0 8px}
   .gen-hero .crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
   .gen-hero .crumb a{color:var(--cyan);text-decoration:none}
-  .gen-hero h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(30px,5.4vw,50px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0 0 12px}
+  .gen-hero h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif;font-weight:500;font-size:clamp(30px,5.4vw,50px);line-height:1.05;letter-spacing:-.01em;color:#fff;margin:0 0 12px}
   .gen-hero h1 em{font-style:italic;color:var(--cyan)}
   .gen-hero .lede{max-width:640px;font-size:17px;color:var(--muted);line-height:1.6}
   /* formulaire */
   .gen-form{margin:26px 0 6px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:18px;padding:22px}
   .gen-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-  .fld label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:#fff;margin:0 0 6px;font-family:'Montserrat',sans-serif}
+  .fld label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:#fff;margin:0 0 6px;font-family:'Montserrat','Montserrat Fallback',sans-serif}
   .fld input[type=text]{width:100%;background:rgba(255,255,255,.05);border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;color:#f2ecf4;font:inherit;font-size:15px}
   .fld input::placeholder{color:#79738a}
   .fld input:focus-visible{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(40,200,221,.18)}
   .ton{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-  .ton legend{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:8px;font-family:'Montserrat',sans-serif}
+  .ton legend{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:8px;font-family:'Montserrat','Montserrat Fallback',sans-serif}
   .ton label{cursor:pointer}
   .ton input{position:absolute;opacity:0;width:0;height:0}
   .ton span{display:inline-block;padding:8px 15px;border-radius:30px;border:1.5px solid var(--line);font-size:13px;color:#cfd6e6;transition:.15s}
   .ton input:checked+span{border-color:var(--cyan);color:#fff;background:rgba(40,200,221,.12)}
   .ton input:focus-visible+span{box-shadow:0 0 0 3px rgba(40,200,221,.25)}
   .gen-actions{display:flex;align-items:center;gap:14px;margin-top:18px;flex-wrap:wrap}
-  .btn-go{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font:inherit;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#08111f;background:var(--grad);padding:14px 26px;border-radius:30px;box-shadow:0 14px 34px -12px rgba(124,58,237,.7)}
+  .btn-go{display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;font:inherit;font-family:'Montserrat','Montserrat Fallback',sans-serif;font-weight:700;font-size:15px;color:#08111f;background:var(--grad);padding:14px 26px;border-radius:30px;box-shadow:0 14px 34px -12px rgba(124,58,237,.7)}
   .btn-go[disabled]{opacity:.6;cursor:progress}
   .gen-note{font-size:12.5px;color:var(--muted)}
   .gen-err{margin-top:12px;color:#ffb4b4;font-size:14px}
@@ -125,7 +125,7 @@
   /* customizer (édition en direct) */
   .gen-custom{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin:0 0 14px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px}
   .cz-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .cz-lbl{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-family:'Montserrat',sans-serif}
+  .cz-lbl{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-family:'Montserrat','Montserrat Fallback',sans-serif}
   .cz-tons{display:flex;flex-wrap:wrap;gap:6px}
   .cz-tons button{border:1.5px solid var(--line);background:transparent;color:#cfd6e6;font:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:24px;cursor:pointer;transition:.15s}
   .cz-tons button:hover{border-color:rgba(40,200,221,.5)}
@@ -154,7 +154,7 @@
   @media print{header.top,.gen-hero,.gen-form,.stage-bar,.gen-custom,.gen-capture,footer,#flburger{display:none!important}}
   /* FAQ (contenu statique, GEO + conversion) */
   .gen-faq{padding:14px 0 46px}
-  .gen-faq h2{font-family:'Fraunces',Georgia,serif;font-weight:500;color:#fff;font-size:clamp(24px,4vw,34px);margin:0 0 18px}
+  .gen-faq h2{font-family:'Fraunces','Fraunces Fallback',Georgia,serif;font-weight:500;color:#fff;font-size:clamp(24px,4vw,34px);margin:0 0 18px}
   .gen-faq details{border:1px solid var(--line);border-radius:12px;padding:15px 18px;margin-bottom:10px;background:rgba(255,255,255,.03)}
   .gen-faq summary{cursor:pointer;color:#fff;font-weight:600;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:14px}
   .gen-faq summary::-webkit-details-marker{display:none}
@@ -166,7 +166,7 @@
 <body>
   <a class="skiplink" href="#gen-main">Aller au contenu</a>
   <header class="top"><div class="wrap">
-    <a class="brand" href="/"><img src="logo.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
+    <a class="brand" href="/"><img src="/logo-100.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
     <nav class="navlinks" id="flnav">
       <a href="community-manager.html">Réseaux sociaux</a>
       <a href="creation-site-internet.html">Création de site</a>
@@ -287,7 +287,7 @@
   <script src="/assistant.js" defer></script>
 <script src="/fx.js" defer></script>
 <!-- fl-mbar -->
-<style>.fl-mbar{display:none}@media(max-width:720px){body{padding-bottom:66px}.fl-mbar{display:flex;position:fixed;left:10px;right:88px;bottom:12px;z-index:90;gap:8px}.fl-mbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:30px;font:700 14px/1 'Montserrat',sans-serif;text-decoration:none;box-shadow:0 8px 24px -8px rgba(0,0,0,.6)}.fl-mbar .m1{background:linear-gradient(120deg,#28c8dd,#7c3aed);color:#08111f}.fl-mbar .m2{background:rgba(14,19,34,.96);color:#f2ecf4;border:1px solid rgba(255,255,255,.22)}}</style>
+<style>.fl-mbar{display:none}@media(max-width:720px){body{padding-bottom:66px}.fl-mbar{display:flex;position:fixed;left:10px;right:88px;bottom:12px;z-index:90;gap:8px}.fl-mbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;border-radius:30px;font:700 14px/1 'Montserrat','Montserrat Fallback',sans-serif;text-decoration:none;box-shadow:0 8px 24px -8px rgba(0,0,0,.6)}.fl-mbar .m1{background:linear-gradient(120deg,#28c8dd,#7c3aed);color:#08111f}.fl-mbar .m2{background:rgba(14,19,34,.96);color:#f2ecf4;border:1px solid rgba(255,255,255,.22)}}</style>
 <nav class="fl-mbar" aria-label="Contact rapide"><a class="m2" href="tel:+33698200208">📞 Appeler</a><a class="m1" href="/configurateur.html">Devis gratuit →</a></nav>
 </body>
 </html>
