@@ -30,44 +30,363 @@
 <link rel="stylesheet" href="pages.css">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Création de site internet",
-  "serviceType": "Créateur de site web — création de site internet et référencement local",
-  "url": "https://francoisleterrier.fr/creation-site-internet.html",
-  "areaServed": [{ "@type": "AdministrativeArea", "name": "Sud-Toulousain (Haute-Garonne)" }, { "@type": "Country", "name": "France" }],
-  "provider": {
-    "@type": "ProfessionalService",
-    "name": "François Leterrier — Community Manager & Création de site internet",
-    "telephone": "+33698200208",
-    "email": "francois.leterrier.cmw@gmail.com",
-    "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "49938528400025" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" }
+ "@context": "https://schema.org",
+ "@type": "Service",
+ "name": "Création de site internet",
+ "serviceType": "Créateur de site web — création de site internet et référencement local",
+ "url": "https://francoisleterrier.fr/creation-site-internet.html",
+ "areaServed": [
+  {
+   "@type": "AdministrativeArea",
+   "name": "Sud-Toulousain (Haute-Garonne)"
   },
-  "offers": { "@type": "Offer", "description": "Création de site internet à partir de 590 €, référencement local inclus.", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "590", "priceCurrency": "EUR" } }
+  {
+   "@type": "Country",
+   "name": "France"
+  }
+ ],
+ "provider": {
+  "@id": "https://francoisleterrier.fr/#business"
+ },
+ "offers": {
+  "@type": "Offer",
+  "description": "Création de site internet à partir de 590 €, référencement local inclus.",
+  "priceSpecification": {
+   "@type": "PriceSpecification",
+   "minPrice": "590",
+   "priceCurrency": "EUR"
+  }
+ },
+ "@id": "https://francoisleterrier.fr/#service-web"
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Création de site internet", "item": "https://francoisleterrier.fr/creation-site-internet.html" }
-  ]
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://francoisleterrier.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Création de site internet",
+   "item": "https://francoisleterrier.fr/creation-site-internet.html"
+  }
+ ]
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Combien coûte un site internet ?", "acceptedAnswer": { "@type": "Answer", "text": "Un site une page (landing) démarre à 590 €, un site vitrine jusqu'à 5 pages à 1 690 €, et les projets sur-mesure (e-commerce, réservation) à partir de 2 900 €. Le référencement local est inclus." } },
-    { "@type": "Question", "name": "Le référencement est-il inclus ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, chaque site inclut le référencement local de base : optimisation des pages, des balises, de la vitesse et mise en place ou optimisation de votre fiche Google Business Profile." } },
-    { "@type": "Question", "name": "Le site est-il adapté au mobile ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, tous les sites sont 100 % responsive : ils s'affichent parfaitement sur mobile, tablette et ordinateur, ce qui est essentiel pour les recherches locales." } },
-    { "@type": "Question", "name": "Travaillez-vous partout en France ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Je crée des sites à distance partout en France (échanges en visio, livraison en ligne), tout en étant basé dans le Sud-Toulousain : un interlocuteur unique et joignable." } },
-    { "@type": "Question", "name": "En combien de temps mon site est-il prêt ?", "acceptedAnswer": { "@type": "Answer", "text": "Comptez environ 1 à 2 semaines pour une landing page (site une page), 2 à 4 semaines pour un site vitrine et 4 à 6 semaines pour un projet sur-mesure. Les délais exacts sont confirmés dans le devis." } }
-  ]
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Combien coûte un site internet ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Un site une page (landing) démarre à 590 €, un site vitrine jusqu'à 5 pages à 1 690 €, et les projets sur-mesure (e-commerce, réservation) à partir de 2 900 €. Le référencement local est inclus."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le référencement est-il inclus ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui, chaque site inclut le référencement local de base : optimisation des pages, des balises, de la vitesse et mise en place ou optimisation de votre fiche Google Business Profile."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le site est-il adapté au mobile ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui, tous les sites sont 100 % responsive : ils s'affichent parfaitement sur mobile, tablette et ordinateur, ce qui est essentiel pour les recherches locales."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Travaillez-vous partout en France ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui. Je crée des sites à distance partout en France (échanges en visio, livraison en ligne), tout en étant basé dans le Sud-Toulousain : un interlocuteur unique et joignable."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "En combien de temps mon site est-il prêt ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Comptez environ 1 à 2 semaines pour une landing page (site une page), 2 à 4 semaines pour un site vitrine et 4 à 6 semaines pour un projet sur-mesure. Les délais exacts sont confirmés dans le devis."
+   }
+  }
+ ]
+}
+</script>
+<!-- fl-entity : entité commune (références par @id dans les autres blocs) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": [
+    "ProfessionalService",
+    "LocalBusiness"
+   ],
+   "@id": "https://francoisleterrier.fr/#business",
+   "name": "François Leterrier — Community Manager & Création de site internet",
+   "description": "Gestion des réseaux sociaux (Facebook, Instagram, Google Business) et création de sites internet pour artisans, commerçants et indépendants de Toulouse et du Sud-Toulousain.",
+   "url": "https://francoisleterrier.fr/",
+   "image": "https://francoisleterrier.fr/og-image.png",
+   "logo": "https://francoisleterrier.fr/logo.png",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "SIRET",
+    "value": "49938528400025"
+   },
+   "priceRange": "€€",
+   "currenciesAccepted": "EUR",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+   },
+   "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.4206,
+    "longitude": 1.2519
+   },
+   "hasMap": "https://share.google/2OdO1wQRwHTY5aaxs",
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Toulouse"
+    },
+    {
+     "@type": "City",
+     "name": "Auterive"
+    },
+    {
+     "@type": "City",
+     "name": "Beaumont-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Capens"
+    },
+    {
+     "@type": "City",
+     "name": "Carbonne"
+    },
+    {
+     "@type": "City",
+     "name": "Cazères"
+    },
+    {
+     "@type": "City",
+     "name": "Cintegabelle"
+    },
+    {
+     "@type": "City",
+     "name": "Cugnaux"
+    },
+    {
+     "@type": "City",
+     "name": "Eaunes"
+    },
+    {
+     "@type": "City",
+     "name": "Fonsorbes"
+    },
+    {
+     "@type": "City",
+     "name": "Frouzins"
+    },
+    {
+     "@type": "City",
+     "name": "Labarthe-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lavernose-Lacasse"
+    },
+    {
+     "@type": "City",
+     "name": "Le Fauga"
+    },
+    {
+     "@type": "City",
+     "name": "Le Vernet"
+    },
+    {
+     "@type": "City",
+     "name": "Lézat-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lherm"
+    },
+    {
+     "@type": "City",
+     "name": "Longages"
+    },
+    {
+     "@type": "City",
+     "name": "Muret"
+    },
+    {
+     "@type": "City",
+     "name": "Noé"
+    },
+    {
+     "@type": "City",
+     "name": "Pinsaguel"
+    },
+    {
+     "@type": "City",
+     "name": "Portet-sur-Garonne"
+    },
+    {
+     "@type": "City",
+     "name": "Rieumes"
+    },
+    {
+     "@type": "City",
+     "name": "Roques"
+    },
+    {
+     "@type": "City",
+     "name": "Roquettes"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Lys"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Sulpice-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Saubens"
+    },
+    {
+     "@type": "City",
+     "name": "Seysses"
+    },
+    {
+     "@type": "City",
+     "name": "Venerque"
+    },
+    {
+     "@type": "City",
+     "name": "Villeneuve-Tolosane"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Sud-Toulousain"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Haute-Garonne"
+    },
+    {
+     "@type": "Country",
+     "name": "France"
+    }
+   ],
+   "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00",
+    "description": "Sur rendez-vous"
+   },
+   "founder": {
+    "@id": "https://francoisleterrier.fr/#francois"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Facebook",
+    "Instagram",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local",
+    "SEO local Toulouse"
+   ],
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33698200208",
+    "contactType": "customer service",
+    "areaServed": "FR",
+    "availableLanguage": "French"
+   },
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413",
+    "https://www.google.com/search?kgmid=/g/11z8h9z1wb"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://francoisleterrier.fr/#francois",
+   "name": "François Leterrier",
+   "jobTitle": "Community Manager & Créateur de sites internet",
+   "url": "https://francoisleterrier.fr/a-propos.html",
+   "image": "https://francoisleterrier.fr/photo-francois.jpg",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressCountry": "FR"
+   },
+   "worksFor": {
+    "@id": "https://francoisleterrier.fr/#business"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local"
+   ],
+   "areaServed": "Sud-Toulousain",
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://francoisleterrier.fr/#website",
+   "url": "https://francoisleterrier.fr/",
+   "name": "François Leterrier — Community Manager & Création web",
+   "inLanguage": "fr-FR",
+   "publisher": {
+    "@id": "https://francoisleterrier.fr/#business"
+   }
+  }
+ ]
 }
 </script>
 </head>
@@ -170,9 +489,9 @@
 
     <div class="faqs">
       <h2 class="reveal">Questions fréquentes</h2>
-      <details open><summary>Combien coûte un site internet ?</summary><div class="a">Landing dès 590 €, site vitrine (jusqu'à 5 pages) dès 1 690 €, sur-mesure dès 2 900 €. Référencement local inclus.</div></details>
-      <details><summary>Le référencement est-il inclus ?</summary><div class="a">Oui : optimisation des pages, balises, vitesse, et mise en place/optimisation de votre fiche Google Business Profile.</div></details>
-      <details><summary>Le site est-il adapté au mobile ?</summary><div class="a">Oui, 100 % responsive : parfait sur mobile, tablette et ordinateur — essentiel pour le local.</div></details>
+      <details open><summary>Combien coûte un site internet ?</summary><div class="a">Un site une page (landing) démarre à 590 €, un site vitrine jusqu'à 5 pages à 1 690 €, et les projets sur-mesure (e-commerce, réservation) à partir de 2 900 €. Le référencement local est inclus.</div></details>
+      <details><summary>Le référencement est-il inclus ?</summary><div class="a">Oui, chaque site inclut le référencement local de base : optimisation des pages, des balises, de la vitesse et mise en place ou optimisation de votre fiche Google Business Profile.</div></details>
+      <details><summary>Le site est-il adapté au mobile ?</summary><div class="a">Oui, tous les sites sont 100 % responsive : ils s'affichent parfaitement sur mobile, tablette et ordinateur, ce qui est essentiel pour les recherches locales.</div></details>
       <details><summary>Travaillez-vous partout en France ?</summary><div class="a">Oui. Je crée des sites à distance partout en France (échanges en visio, livraison en ligne), tout en étant basé dans le Sud-Toulousain : un interlocuteur unique et joignable.</div></details>
       <details><summary>En combien de temps mon site est-il prêt ?</summary><div class="a">Comptez environ 1 à 2 semaines pour une landing page (site une page), 2 à 4 semaines pour un site vitrine et 4 à 6 semaines pour un projet sur-mesure. Les délais exacts sont confirmés dans le devis.</div></details>
     </div>

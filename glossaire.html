@@ -29,36 +29,102 @@
 <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Glossaire", "item": "https://francoisleterrier.fr/glossaire.html" }
-  ]
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://francoisleterrier.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Glossaire",
+   "item": "https://francoisleterrier.fr/glossaire.html"
+  }
+ ]
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "DefinedTermSet",
-  "name": "Glossaire du web local et du référencement",
-  "url": "https://francoisleterrier.fr/glossaire.html",
-  "hasDefinedTerm": [
-    { "@type": "DefinedTerm", "name": "Référencement local (SEO local)", "description": "L'ensemble des techniques pour apparaître dans Google quand un client proche de vous cherche votre activité (par exemple « coiffeur Muret »)." },
-    { "@type": "DefinedTerm", "name": "Fiche Google Business (Google Business Profile)", "description": "L'encart gratuit affiché par Google et Maps avec vos horaires, votre adresse, vos photos et vos avis. C'est le premier levier de visibilité locale." },
-    { "@type": "DefinedTerm", "name": "Avis Google", "description": "Les notes et commentaires laissés par vos clients sur votre fiche. Ils rassurent les nouveaux clients et pèsent dans le classement local." },
-    { "@type": "DefinedTerm", "name": "NAP (Nom, Adresse, Téléphone)", "description": "Vos coordonnées. Elles doivent être strictement identiques partout (site, Google, réseaux, annuaires), sinon Google s'y perd." },
-    { "@type": "DefinedTerm", "name": "Responsive (site adaptatif)", "description": "Un site qui s'affiche bien sur téléphone, tablette et ordinateur. Indispensable : la majorité des recherches locales se font sur mobile." },
-    { "@type": "DefinedTerm", "name": "Nom de domaine", "description": "Votre adresse sur le web, par exemple moncommerce.fr. Vous le réservez pour environ 10 à 15 € par an." },
-    { "@type": "DefinedTerm", "name": "Hébergement", "description": "L'espace en ligne où sont stockés les fichiers de votre site pour qu'il soit accessible 24h/24. Loué à l'année." },
-    { "@type": "DefinedTerm", "name": "CMS", "description": "Un outil de gestion de contenu comme WordPress. Pratique pour mettre à jour soi-même, mais pas toujours nécessaire pour un petit site (un site « statique » est souvent plus rapide et plus sûr)." },
-    { "@type": "DefinedTerm", "name": "Balise title & méta description", "description": "Le titre bleu et le texte gris qui apparaissent dans les résultats Google. Bien rédigés, ils donnent envie de cliquer." },
-    { "@type": "DefinedTerm", "name": "Backlink (lien entrant)", "description": "Un lien d'un autre site vers le vôtre. Quelques liens de qualité (annuaires locaux, presse, partenaires) renforcent votre crédibilité aux yeux de Google." },
-    { "@type": "DefinedTerm", "name": "Longue traîne", "description": "Des recherches précises et peu concurrentielles, comme « plombier dépannage week-end Muret ». Moins de volume, mais des visiteurs très qualifiés." },
-    { "@type": "DefinedTerm", "name": "GEO (référencement dans les IA)", "description": "Être cité par les intelligences artificielles (ChatGPT, Google AI…) quand elles répondent aux questions des internautes. Un contenu clair et structuré y aide." },
-    { "@type": "DefinedTerm", "name": "Taux de conversion", "description": "Le pourcentage de visiteurs qui passent à l'action (appel, formulaire, réservation). Un site n'est pas là pour être joli, mais pour transformer." },
-    { "@type": "DefinedTerm", "name": "Call-to-action (CTA)", "description": "Le bouton ou l'incitation qui pousse le visiteur à agir : « Appeler », « Réserver », « Demander un devis »." }
-  ]
+ "@context": "https://schema.org",
+ "@type": "DefinedTermSet",
+ "name": "Glossaire du web local et du référencement",
+ "url": "https://francoisleterrier.fr/glossaire.html",
+ "hasDefinedTerm": [
+  {
+   "@type": "DefinedTerm",
+   "name": "Référencement local (SEO local)",
+   "description": "L'ensemble des techniques pour apparaître dans Google quand un client proche de vous cherche votre activité (par exemple « coiffeur Muret »)."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Fiche Google Business (Google Business Profile)",
+   "description": "L'encart gratuit affiché par Google et Maps avec vos horaires, votre adresse, vos photos et vos avis. C'est le premier levier de visibilité locale."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Avis Google",
+   "description": "Les notes et commentaires laissés par vos clients sur votre fiche. Ils rassurent les nouveaux clients et pèsent dans le classement local."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "NAP (Nom, Adresse, Téléphone)",
+   "description": "Vos coordonnées. Elles doivent être strictement identiques partout (site, Google, réseaux, annuaires), sinon Google s'y perd."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Responsive (site adaptatif)",
+   "description": "Un site qui s'affiche bien sur téléphone, tablette et ordinateur. Indispensable : la majorité des recherches locales se font sur mobile."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Nom de domaine",
+   "description": "Votre adresse sur le web, par exemple moncommerce.fr. Vous le réservez pour environ 10 à 15 € par an."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Hébergement",
+   "description": "L'espace en ligne où sont stockés les fichiers de votre site pour qu'il soit accessible 24h/24. Loué à l'année."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "CMS",
+   "description": "Un outil de gestion de contenu comme WordPress. Pratique pour mettre à jour soi-même, mais pas toujours nécessaire pour un petit site (un site « statique » est souvent plus rapide et plus sûr)."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Balise title & méta description",
+   "description": "Le titre bleu et le texte gris qui apparaissent dans les résultats Google. Bien rédigés, ils donnent envie de cliquer."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Backlink (lien entrant)",
+   "description": "Un lien d'un autre site vers le vôtre. Quelques liens de qualité (annuaires locaux, presse, partenaires) renforcent votre crédibilité aux yeux de Google."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Longue traîne",
+   "description": "Des recherches précises et peu concurrentielles, comme « plombier dépannage week-end Muret ». Moins de volume, mais des visiteurs très qualifiés."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "GEO (référencement dans les IA)",
+   "description": "Être cité par les intelligences artificielles (ChatGPT, Google AI…) quand elles répondent aux questions des internautes. Un contenu clair et structuré y aide."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Taux de conversion",
+   "description": "Le pourcentage de visiteurs qui passent à l'action (appel, formulaire, réservation). Un site n'est pas là pour être joli, mais pour transformer."
+  },
+  {
+   "@type": "DefinedTerm",
+   "name": "Call-to-action (CTA)",
+   "description": "Le bouton ou l'incitation qui pousse le visiteur à agir : « Appeler », « Réserver », « Demander un devis »."
+  }
+ ]
 }
 </script>
 <style>
@@ -98,6 +164,267 @@
 /* fl-ui : titre display serif */
 h1{font-family:'Fraunces','Fraunces Fallback',Georgia,serif!important;font-weight:500!important;letter-spacing:-.01em;}
 </style>
+<!-- fl-entity : entité commune (références par @id dans les autres blocs) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": [
+    "ProfessionalService",
+    "LocalBusiness"
+   ],
+   "@id": "https://francoisleterrier.fr/#business",
+   "name": "François Leterrier — Community Manager & Création de site internet",
+   "description": "Gestion des réseaux sociaux (Facebook, Instagram, Google Business) et création de sites internet pour artisans, commerçants et indépendants de Toulouse et du Sud-Toulousain.",
+   "url": "https://francoisleterrier.fr/",
+   "image": "https://francoisleterrier.fr/og-image.png",
+   "logo": "https://francoisleterrier.fr/logo.png",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "SIRET",
+    "value": "49938528400025"
+   },
+   "priceRange": "€€",
+   "currenciesAccepted": "EUR",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+   },
+   "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.4206,
+    "longitude": 1.2519
+   },
+   "hasMap": "https://share.google/2OdO1wQRwHTY5aaxs",
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Toulouse"
+    },
+    {
+     "@type": "City",
+     "name": "Auterive"
+    },
+    {
+     "@type": "City",
+     "name": "Beaumont-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Capens"
+    },
+    {
+     "@type": "City",
+     "name": "Carbonne"
+    },
+    {
+     "@type": "City",
+     "name": "Cazères"
+    },
+    {
+     "@type": "City",
+     "name": "Cintegabelle"
+    },
+    {
+     "@type": "City",
+     "name": "Cugnaux"
+    },
+    {
+     "@type": "City",
+     "name": "Eaunes"
+    },
+    {
+     "@type": "City",
+     "name": "Fonsorbes"
+    },
+    {
+     "@type": "City",
+     "name": "Frouzins"
+    },
+    {
+     "@type": "City",
+     "name": "Labarthe-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lavernose-Lacasse"
+    },
+    {
+     "@type": "City",
+     "name": "Le Fauga"
+    },
+    {
+     "@type": "City",
+     "name": "Le Vernet"
+    },
+    {
+     "@type": "City",
+     "name": "Lézat-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lherm"
+    },
+    {
+     "@type": "City",
+     "name": "Longages"
+    },
+    {
+     "@type": "City",
+     "name": "Muret"
+    },
+    {
+     "@type": "City",
+     "name": "Noé"
+    },
+    {
+     "@type": "City",
+     "name": "Pinsaguel"
+    },
+    {
+     "@type": "City",
+     "name": "Portet-sur-Garonne"
+    },
+    {
+     "@type": "City",
+     "name": "Rieumes"
+    },
+    {
+     "@type": "City",
+     "name": "Roques"
+    },
+    {
+     "@type": "City",
+     "name": "Roquettes"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Lys"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Sulpice-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Saubens"
+    },
+    {
+     "@type": "City",
+     "name": "Seysses"
+    },
+    {
+     "@type": "City",
+     "name": "Venerque"
+    },
+    {
+     "@type": "City",
+     "name": "Villeneuve-Tolosane"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Sud-Toulousain"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Haute-Garonne"
+    },
+    {
+     "@type": "Country",
+     "name": "France"
+    }
+   ],
+   "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00",
+    "description": "Sur rendez-vous"
+   },
+   "founder": {
+    "@id": "https://francoisleterrier.fr/#francois"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Facebook",
+    "Instagram",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local",
+    "SEO local Toulouse"
+   ],
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33698200208",
+    "contactType": "customer service",
+    "areaServed": "FR",
+    "availableLanguage": "French"
+   },
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413",
+    "https://www.google.com/search?kgmid=/g/11z8h9z1wb"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://francoisleterrier.fr/#francois",
+   "name": "François Leterrier",
+   "jobTitle": "Community Manager & Créateur de sites internet",
+   "url": "https://francoisleterrier.fr/a-propos.html",
+   "image": "https://francoisleterrier.fr/photo-francois.jpg",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressCountry": "FR"
+   },
+   "worksFor": {
+    "@id": "https://francoisleterrier.fr/#business"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local"
+   ],
+   "areaServed": "Sud-Toulousain",
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://francoisleterrier.fr/#website",
+   "url": "https://francoisleterrier.fr/",
+   "name": "François Leterrier — Community Manager & Création web",
+   "inLanguage": "fr-FR",
+   "publisher": {
+    "@id": "https://francoisleterrier.fr/#business"
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
   <a class="skiplink" href="#contenu">Aller au contenu</a>

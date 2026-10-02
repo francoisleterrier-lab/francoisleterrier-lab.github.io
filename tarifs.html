@@ -30,57 +30,533 @@
 <link rel="stylesheet" href="pages.css">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Tarifs", "item": "https://francoisleterrier.fr/tarifs.html" }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "Les formules réseaux sociaux engagent-elles sur la durée ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, elles sont sans engagement, facturées au mois et résiliables avec un préavis de 30 jours." } },
-    { "@type": "Question", "name": "Le nom de domaine et l'hébergement sont-ils compris ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, le nom de domaine et l'hébergement sont en sus (sur devis), car ils dépendent du prestataire choisi. Ils restent peu coûteux (environ 10 à 20 € par an pour le domaine)." } },
-    { "@type": "Question", "name": "Appliquez-vous la TVA ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, TVA non applicable selon l'article 293 B du Code général des impôts (micro-entreprise)." } }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://francoisleterrier.fr/#business",
-  "name": "François Leterrier — Community Manager & Création de site internet",
-  "url": "https://francoisleterrier.fr/",
-  "priceRange": "€€",
-  "areaServed": [{ "@type": "AdministrativeArea", "name": "Sud-Toulousain (Haute-Garonne)" }, { "@type": "Country", "name": "France" }],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Tarifs — réseaux sociaux, création de sites internet & faire-part digital",
-    "itemListElement": [
-      { "@type": "Offer", "name": "Réseaux sociaux — Essentiel", "description": "2 publications/mois sur Facebook, Instagram et Google Business, sans engagement", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "290", "priceCurrency": "EUR", "unitText": "par mois" } },
-      { "@type": "Offer", "name": "Réseaux sociaux — Croissance", "description": "4 publications/mois, modération et bilan mensuel", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "490", "priceCurrency": "EUR", "unitText": "par mois" } },
-      { "@type": "Offer", "name": "Réseaux sociaux — Premium", "description": "4 publications + 1 vidéo/Reel monté + 1 story par semaine", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "790", "priceCurrency": "EUR", "unitText": "par mois" } },
-      { "@type": "Offer", "name": "Site internet — Express (une page)", "description": "Landing page responsive avec formulaire et mise en ligne", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "590", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Site internet — Vitrine (jusqu'à 5 pages)", "description": "Design sur-mesure, référencement local et formation", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "1690", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Site internet — Sur-Mesure", "description": "E-commerce, réservation, fonctions avancées et intégrations", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "2900", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Faire-part digital — Essentiel", "description": "Mini-site d'invitation privé (mariage, baptême, anniversaire, PACS) : site élégant à vos couleurs, infos pratiques, RSVP en ligne, galerie photo, partage par lien ou QR code", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "290", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Faire-part digital — Vivant", "description": "Formule phare — tout l'Essentiel, plus : album photo collaboratif, cagnotte et liste de cadeaux, plan de table interactif, révélations à date (timeline), RSVP avec tableau de bord et export, livre d'or et compte à rebours", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Faire-part digital — Signature", "description": "L'expérience complète accompagnée de bout en bout — tout le Vivant, plus : appli installable (PWA) et bande-son, pages personnalisées par invité, jeux et quiz interactifs, bilingue français/anglais, nom de domaine 1 an inclus", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "790", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Fiche Google Business — Création complète", "description": "Création, vérification et optimisation complète de la fiche Google Business : catégories, description, zone desservie, horaires, services, photos et premier post", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "250", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Fiche Google Business — Optimisation", "description": "Audit et optimisation d'une fiche Google Business existante : catégories, description, photos, attributs, produits, questions/réponses et stratégie d'avis", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "150", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Avis clients — campagne phoning & mailing", "description": "Sollicitation de votre base clients par e-mail et téléphone pour recueillir de vrais avis Google : rédaction des messages, lien d'avis, relances, appels de suivi et compte-rendu", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "190", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Référencement SEO — Audit + plan d'action", "description": "Analyse technique, on-page, contenu, concurrence et référencement local, avec rapport et actions priorisées", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "290", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Référencement SEO — Optimisation d'un site existant", "description": "Corrections techniques, balises, structure, vitesse, données structurées, fiche Google Business, Search Console et sitemap", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "490", "priceCurrency": "EUR" } },
-      { "@type": "Offer", "name": "Référencement SEO — Accompagnement Local", "description": "Fiche Google entretenue, stratégie d'avis, suivi Search Console, petites optimisations, rapport trimestriel", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "190", "priceCurrency": "EUR", "unitText": "par mois" } },
-      { "@type": "Offer", "name": "Référencement SEO — Accompagnement Croissance", "description": "Tout le pack Local, plus un contenu optimisé par mois, citations et netlinking, rapport mensuel", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "390", "priceCurrency": "EUR", "unitText": "par mois" } },
-      { "@type": "Offer", "name": "Référencement SEO — Accompagnement Autorité", "description": "Tout le pack Croissance, plus 2 à 3 contenus par mois, campagne de backlinks, technique avancée", "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "590", "priceCurrency": "EUR", "unitText": "par mois" } }
-    ]
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://francoisleterrier.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tarifs",
+   "item": "https://francoisleterrier.fr/tarifs.html"
   }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Les formules réseaux engagent-elles sur la durée ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non : sans engagement, facturation mensuelle, préavis de 30 jours."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le domaine et l'hébergement sont-ils compris ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, en sus (sur devis) — ils restent peu coûteux (~10 à 20 €/an pour le domaine)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Appliquez-vous la TVA ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, TVA non applicable selon l'article 293 B du Code général des impôts (micro-entreprise)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Les formules réseaux sociaux engagent-elles sur la durée ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, elles sont sans engagement, facturées au mois et résiliables avec un préavis de 30 jours."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le nom de domaine et l'hébergement sont-ils compris ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, le nom de domaine et l'hébergement sont en sus (sur devis), car ils dépendent du prestataire choisi. Ils restent peu coûteux (environ 10 à 20 € par an pour le domaine)."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "@id": "https://francoisleterrier.fr/#business",
+ "name": "François Leterrier — Community Manager & Création de site internet",
+ "url": "https://francoisleterrier.fr/",
+ "priceRange": "€€",
+ "areaServed": [
+  {
+   "@type": "AdministrativeArea",
+   "name": "Sud-Toulousain (Haute-Garonne)"
+  },
+  {
+   "@type": "Country",
+   "name": "France"
+  }
+ ],
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Tarifs — réseaux sociaux, création de sites internet & faire-part digital",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "name": "Réseaux sociaux — Essentiel",
+    "description": "2 publications/mois sur Facebook, Instagram et Google Business, sans engagement",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "290",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Réseaux sociaux — Croissance",
+    "description": "4 publications/mois, modération et bilan mensuel",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "490",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Réseaux sociaux — Premium",
+    "description": "4 publications + 1 vidéo/Reel monté + 1 story par semaine",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "790",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Site internet — Express (une page)",
+    "description": "Landing page responsive avec formulaire et mise en ligne",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "590",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Site internet — Vitrine (jusqu'à 5 pages)",
+    "description": "Design sur-mesure, référencement local et formation",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "1690",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Site internet — Sur-Mesure",
+    "description": "E-commerce, réservation, fonctions avancées et intégrations",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "2900",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Faire-part digital — Essentiel",
+    "description": "Mini-site d'invitation privé (mariage, baptême, anniversaire, PACS) : site élégant à vos couleurs, infos pratiques, RSVP en ligne, galerie photo, partage par lien ou QR code",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "290",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Faire-part digital — Vivant",
+    "description": "Formule phare — tout l'Essentiel, plus : album photo collaboratif, cagnotte et liste de cadeaux, plan de table interactif, révélations à date (timeline), RSVP avec tableau de bord et export, livre d'or et compte à rebours",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "490",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Faire-part digital — Signature",
+    "description": "L'expérience complète accompagnée de bout en bout — tout le Vivant, plus : appli installable (PWA) et bande-son, pages personnalisées par invité, jeux et quiz interactifs, bilingue français/anglais, nom de domaine 1 an inclus",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "790",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Fiche Google Business — Création complète",
+    "description": "Création, vérification et optimisation complète de la fiche Google Business : catégories, description, zone desservie, horaires, services, photos et premier post",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "250",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Fiche Google Business — Optimisation",
+    "description": "Audit et optimisation d'une fiche Google Business existante : catégories, description, photos, attributs, produits, questions/réponses et stratégie d'avis",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "150",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Avis clients — campagne phoning & mailing",
+    "description": "Sollicitation de votre base clients par e-mail et téléphone pour recueillir de vrais avis Google : rédaction des messages, lien d'avis, relances, appels de suivi et compte-rendu",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "190",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Référencement SEO — Audit + plan d'action",
+    "description": "Analyse technique, on-page, contenu, concurrence et référencement local, avec rapport et actions priorisées",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "290",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Référencement SEO — Optimisation d'un site existant",
+    "description": "Corrections techniques, balises, structure, vitesse, données structurées, fiche Google Business, Search Console et sitemap",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "490",
+     "priceCurrency": "EUR"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Référencement SEO — Accompagnement Local",
+    "description": "Fiche Google entretenue, stratégie d'avis, suivi Search Console, petites optimisations, rapport trimestriel",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "190",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Référencement SEO — Accompagnement Croissance",
+    "description": "Tout le pack Local, plus un contenu optimisé par mois, citations et netlinking, rapport mensuel",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "390",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Référencement SEO — Accompagnement Autorité",
+    "description": "Tout le pack Croissance, plus 2 à 3 contenus par mois, campagne de backlinks, technique avancée",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "minPrice": "590",
+     "priceCurrency": "EUR",
+     "unitText": "par mois"
+    }
+   }
+  ]
+ }
+}
+</script>
+<!-- fl-entity : entité commune (références par @id dans les autres blocs) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": [
+    "ProfessionalService",
+    "LocalBusiness"
+   ],
+   "@id": "https://francoisleterrier.fr/#business",
+   "name": "François Leterrier — Community Manager & Création de site internet",
+   "description": "Gestion des réseaux sociaux (Facebook, Instagram, Google Business) et création de sites internet pour artisans, commerçants et indépendants de Toulouse et du Sud-Toulousain.",
+   "url": "https://francoisleterrier.fr/",
+   "image": "https://francoisleterrier.fr/og-image.png",
+   "logo": "https://francoisleterrier.fr/logo.png",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "SIRET",
+    "value": "49938528400025"
+   },
+   "priceRange": "€€",
+   "currenciesAccepted": "EUR",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+   },
+   "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.4206,
+    "longitude": 1.2519
+   },
+   "hasMap": "https://share.google/2OdO1wQRwHTY5aaxs",
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Toulouse"
+    },
+    {
+     "@type": "City",
+     "name": "Auterive"
+    },
+    {
+     "@type": "City",
+     "name": "Beaumont-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Capens"
+    },
+    {
+     "@type": "City",
+     "name": "Carbonne"
+    },
+    {
+     "@type": "City",
+     "name": "Cazères"
+    },
+    {
+     "@type": "City",
+     "name": "Cintegabelle"
+    },
+    {
+     "@type": "City",
+     "name": "Cugnaux"
+    },
+    {
+     "@type": "City",
+     "name": "Eaunes"
+    },
+    {
+     "@type": "City",
+     "name": "Fonsorbes"
+    },
+    {
+     "@type": "City",
+     "name": "Frouzins"
+    },
+    {
+     "@type": "City",
+     "name": "Labarthe-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lavernose-Lacasse"
+    },
+    {
+     "@type": "City",
+     "name": "Le Fauga"
+    },
+    {
+     "@type": "City",
+     "name": "Le Vernet"
+    },
+    {
+     "@type": "City",
+     "name": "Lézat-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lherm"
+    },
+    {
+     "@type": "City",
+     "name": "Longages"
+    },
+    {
+     "@type": "City",
+     "name": "Muret"
+    },
+    {
+     "@type": "City",
+     "name": "Noé"
+    },
+    {
+     "@type": "City",
+     "name": "Pinsaguel"
+    },
+    {
+     "@type": "City",
+     "name": "Portet-sur-Garonne"
+    },
+    {
+     "@type": "City",
+     "name": "Rieumes"
+    },
+    {
+     "@type": "City",
+     "name": "Roques"
+    },
+    {
+     "@type": "City",
+     "name": "Roquettes"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Lys"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Sulpice-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Saubens"
+    },
+    {
+     "@type": "City",
+     "name": "Seysses"
+    },
+    {
+     "@type": "City",
+     "name": "Venerque"
+    },
+    {
+     "@type": "City",
+     "name": "Villeneuve-Tolosane"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Sud-Toulousain"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Haute-Garonne"
+    },
+    {
+     "@type": "Country",
+     "name": "France"
+    }
+   ],
+   "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00",
+    "description": "Sur rendez-vous"
+   },
+   "founder": {
+    "@id": "https://francoisleterrier.fr/#francois"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Facebook",
+    "Instagram",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local",
+    "SEO local Toulouse"
+   ],
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33698200208",
+    "contactType": "customer service",
+    "areaServed": "FR",
+    "availableLanguage": "French"
+   },
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413",
+    "https://www.google.com/search?kgmid=/g/11z8h9z1wb"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://francoisleterrier.fr/#francois",
+   "name": "François Leterrier",
+   "jobTitle": "Community Manager & Créateur de sites internet",
+   "url": "https://francoisleterrier.fr/a-propos.html",
+   "image": "https://francoisleterrier.fr/photo-francois.jpg",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressCountry": "FR"
+   },
+   "worksFor": {
+    "@id": "https://francoisleterrier.fr/#business"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local"
+   ],
+   "areaServed": "Sud-Toulousain",
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://francoisleterrier.fr/#website",
+   "url": "https://francoisleterrier.fr/",
+   "name": "François Leterrier — Community Manager & Création web",
+   "inLanguage": "fr-FR",
+   "publisher": {
+    "@id": "https://francoisleterrier.fr/#business"
+   }
+  }
+ ]
 }
 </script>
 </head>
@@ -185,7 +661,9 @@
       <h2 class="reveal">Questions fréquentes</h2>
       <details open><summary>Les formules réseaux engagent-elles sur la durée ?</summary><div class="a">Non : sans engagement, facturation mensuelle, préavis de 30 jours.</div></details>
       <details><summary>Le domaine et l'hébergement sont-ils compris ?</summary><div class="a">Non, en sus (sur devis) — ils restent peu coûteux (~10 à 20 €/an pour le domaine).</div></details>
-      <details><summary>Appliquez-vous la TVA ?</summary><div class="a">Non, TVA non applicable (art. 293 B du CGI, micro-entreprise).</div></details>
+      <details><summary>Appliquez-vous la TVA ?</summary><div class="a">Non, TVA non applicable selon l'article 293 B du Code général des impôts (micro-entreprise).</div></details>
+      <details><summary>Les formules réseaux sociaux engagent-elles sur la durée ?</summary><div class="a">Non, elles sont sans engagement, facturées au mois et résiliables avec un préavis de 30 jours.</div></details>
+      <details><summary>Le nom de domaine et l'hébergement sont-ils compris ?</summary><div class="a">Non, le nom de domaine et l'hébergement sont en sus (sur devis), car ils dépendent du prestataire choisi. Ils restent peu coûteux (environ 10 à 20 € par an pour le domaine).</div></details>
     </div>
 
     <div class="ctabox">

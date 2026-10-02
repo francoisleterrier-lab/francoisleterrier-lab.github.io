@@ -30,44 +30,81 @@
 <link rel="stylesheet" href="pages.css">
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Simulateur de visibilité locale",
-  "url": "https://francoisleterrier.fr/simulateur.html",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-  "description": "Simulateur interactif : tapez votre métier et votre ville pour visualiser votre présence en ligne (Google, fiche Google Business, réseaux sociaux, site) aujourd'hui et avec un accompagnement community management + web.",
-  "provider": {
-    "@type": "ProfessionalService",
-    "name": "François Leterrier — Community Manager & Création de site internet",
-    "telephone": "+33698200208",
-    "email": "francois.leterrier.cmw@gmail.com",
-    "areaServed": "Sud-Toulousain (Haute-Garonne)",
-    "address": { "@type": "PostalAddress", "addressLocality": "Lavernose-Lacasse", "postalCode": "31410", "addressCountry": "FR" }
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Simulateur de visibilité locale",
+ "url": "https://francoisleterrier.fr/simulateur.html",
+ "applicationCategory": "BusinessApplication",
+ "operatingSystem": "Web",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "EUR"
+ },
+ "description": "Simulateur interactif : tapez votre métier et votre ville pour visualiser votre présence en ligne (Google, fiche Google Business, réseaux sociaux, site) aujourd'hui et avec un accompagnement community management + web.",
+ "provider": {
+  "@id": "https://francoisleterrier.fr/#business"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://francoisleterrier.fr/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Simulateur de visibilité",
+   "item": "https://francoisleterrier.fr/simulateur.html"
   }
+ ]
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://francoisleterrier.fr/" },
-    { "@type": "ListItem", "position": 2, "name": "Simulateur de visibilité", "item": "https://francoisleterrier.fr/simulateur.html" }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "À quoi sert ce simulateur de visibilité ?", "acceptedAnswer": { "@type": "Answer", "text": "Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne : résultat Google, fiche Google Business, publication sur les réseaux et aperçu de site. Le but est de visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement." } },
-    { "@type": "Question", "name": "Les résultats affichés sont-ils réels ?", "acceptedAnswer": { "@type": "Answer", "text": "Non, ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers (Google, fiche, réseaux, site) ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé." } },
-    { "@type": "Question", "name": "Le diagnostic est-il vraiment gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes, que vous fassiez appel à moi ou non." } },
-    { "@type": "Question", "name": "Sur quelle zone intervenez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "Toulouse et tout le Sud-Toulousain (Muret, Carbonne, Auterive, Rieumes, Cazères, la vallée de la Lèze, le Volvestre…), depuis Lavernose-Lacasse (31410)." } }
-  ]
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "À quoi sert ce simulateur de visibilité ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne : résultat Google, fiche Google Business, publication sur les réseaux et aperçu de site. Le but est de visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Les résultats affichés sont-ils réels ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Non, ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers (Google, fiche, réseaux, site) ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Le diagnostic est-il vraiment gratuit ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes, que vous fassiez appel à moi ou non."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Sur quelle zone intervenez-vous ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Toulouse et tout le Sud-Toulousain (Muret, Carbonne, Auterive, Rieumes, Cazères, la vallée de la Lèze, le Volvestre…), depuis Lavernose-Lacasse (31410)."
+   }
+  }
+ ]
 }
 </script>
 <style>
@@ -206,6 +243,267 @@ html.fs-js #flsim .fs-reveal.fs-in{opacity:1;transform:none}
   #flsim .fs-reveal{opacity:1!important;transform:none!important}
 }
 </style>
+<!-- fl-entity : entité commune (références par @id dans les autres blocs) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": [
+    "ProfessionalService",
+    "LocalBusiness"
+   ],
+   "@id": "https://francoisleterrier.fr/#business",
+   "name": "François Leterrier — Community Manager & Création de site internet",
+   "description": "Gestion des réseaux sociaux (Facebook, Instagram, Google Business) et création de sites internet pour artisans, commerçants et indépendants de Toulouse et du Sud-Toulousain.",
+   "url": "https://francoisleterrier.fr/",
+   "image": "https://francoisleterrier.fr/og-image.png",
+   "logo": "https://francoisleterrier.fr/logo.png",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "SIRET",
+    "value": "49938528400025"
+   },
+   "priceRange": "€€",
+   "currenciesAccepted": "EUR",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+   },
+   "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.4206,
+    "longitude": 1.2519
+   },
+   "hasMap": "https://share.google/2OdO1wQRwHTY5aaxs",
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Toulouse"
+    },
+    {
+     "@type": "City",
+     "name": "Auterive"
+    },
+    {
+     "@type": "City",
+     "name": "Beaumont-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Capens"
+    },
+    {
+     "@type": "City",
+     "name": "Carbonne"
+    },
+    {
+     "@type": "City",
+     "name": "Cazères"
+    },
+    {
+     "@type": "City",
+     "name": "Cintegabelle"
+    },
+    {
+     "@type": "City",
+     "name": "Cugnaux"
+    },
+    {
+     "@type": "City",
+     "name": "Eaunes"
+    },
+    {
+     "@type": "City",
+     "name": "Fonsorbes"
+    },
+    {
+     "@type": "City",
+     "name": "Frouzins"
+    },
+    {
+     "@type": "City",
+     "name": "Labarthe-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lavernose-Lacasse"
+    },
+    {
+     "@type": "City",
+     "name": "Le Fauga"
+    },
+    {
+     "@type": "City",
+     "name": "Le Vernet"
+    },
+    {
+     "@type": "City",
+     "name": "Lézat-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Lherm"
+    },
+    {
+     "@type": "City",
+     "name": "Longages"
+    },
+    {
+     "@type": "City",
+     "name": "Muret"
+    },
+    {
+     "@type": "City",
+     "name": "Noé"
+    },
+    {
+     "@type": "City",
+     "name": "Pinsaguel"
+    },
+    {
+     "@type": "City",
+     "name": "Portet-sur-Garonne"
+    },
+    {
+     "@type": "City",
+     "name": "Rieumes"
+    },
+    {
+     "@type": "City",
+     "name": "Roques"
+    },
+    {
+     "@type": "City",
+     "name": "Roquettes"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Lys"
+    },
+    {
+     "@type": "City",
+     "name": "Saint-Sulpice-sur-Lèze"
+    },
+    {
+     "@type": "City",
+     "name": "Saubens"
+    },
+    {
+     "@type": "City",
+     "name": "Seysses"
+    },
+    {
+     "@type": "City",
+     "name": "Venerque"
+    },
+    {
+     "@type": "City",
+     "name": "Villeneuve-Tolosane"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Sud-Toulousain"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Haute-Garonne"
+    },
+    {
+     "@type": "Country",
+     "name": "France"
+    }
+   ],
+   "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+     "Monday",
+     "Tuesday",
+     "Wednesday",
+     "Thursday",
+     "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00",
+    "description": "Sur rendez-vous"
+   },
+   "founder": {
+    "@id": "https://francoisleterrier.fr/#francois"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Facebook",
+    "Instagram",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local",
+    "SEO local Toulouse"
+   ],
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33698200208",
+    "contactType": "customer service",
+    "areaServed": "FR",
+    "availableLanguage": "French"
+   },
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413",
+    "https://www.google.com/search?kgmid=/g/11z8h9z1wb"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://francoisleterrier.fr/#francois",
+   "name": "François Leterrier",
+   "jobTitle": "Community Manager & Créateur de sites internet",
+   "url": "https://francoisleterrier.fr/a-propos.html",
+   "image": "https://francoisleterrier.fr/photo-francois.jpg",
+   "telephone": "+33698200208",
+   "email": "francois.leterrier.cmw@gmail.com",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Lavernose-Lacasse",
+    "postalCode": "31410",
+    "addressCountry": "FR"
+   },
+   "worksFor": {
+    "@id": "https://francoisleterrier.fr/#business"
+   },
+   "knowsAbout": [
+    "Community management",
+    "Réseaux sociaux",
+    "Google Business Profile",
+    "Création de site internet",
+    "Référencement local"
+   ],
+   "areaServed": "Sud-Toulousain",
+   "sameAs": [
+    "https://www.facebook.com/francoisleterrierweb",
+    "https://www.instagram.com/francoisleterrierweb",
+    "https://www.linkedin.com/in/francois-leterrier-a0552b413"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://francoisleterrier.fr/#website",
+   "url": "https://francoisleterrier.fr/",
+   "name": "François Leterrier — Community Manager & Création web",
+   "inLanguage": "fr-FR",
+   "publisher": {
+    "@id": "https://francoisleterrier.fr/#business"
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
   <a class="skiplink" href="#contenu">Aller au contenu</a>
@@ -315,9 +613,9 @@ html.fs-js #flsim .fs-reveal.fs-in{opacity:1;transform:none}
 
       <div class="faqs">
         <h2>Questions fréquentes</h2>
-        <details open><summary>À quoi sert ce simulateur de visibilité ?</summary><div class="a">Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne (Google, fiche Google Business, réseaux, site). Le but : visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement.</div></details>
-        <details><summary>Les résultats affichés sont-ils réels ?</summary><div class="a">Non : ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé.</div></details>
-        <details><summary>Le diagnostic est-il vraiment gratuit ?</summary><div class="a">Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes.</div></details>
+        <details open><summary>À quoi sert ce simulateur de visibilité ?</summary><div class="a">Il montre concrètement, à partir de votre métier et de votre ville, à quoi peut ressembler votre présence en ligne : résultat Google, fiche Google Business, publication sur les réseaux et aperçu de site. Le but est de visualiser l'écart entre une présence à l'abandon et une présence animée régulièrement.</div></details>
+        <details><summary>Les résultats affichés sont-ils réels ?</summary><div class="a">Non, ce sont des aperçus illustratifs générés en direct pour l'exemple. Ils servent à comprendre les leviers (Google, fiche, réseaux, site) ; les résultats concrets dépendent de votre activité, de votre zone et du travail réalisé.</div></details>
+        <details><summary>Le diagnostic est-il vraiment gratuit ?</summary><div class="a">Oui. Le premier échange et le diagnostic de votre présence (réseaux + fiche Google) sont offerts et sans engagement, partout dans le Sud-Toulousain. Vous repartez avec des actions concrètes, que vous fassiez appel à moi ou non.</div></details>
         <details><summary>Sur quelle zone intervenez-vous ?</summary><div class="a">Toulouse et tout le Sud-Toulousain (Muret, Carbonne, Auterive, Rieumes, Cazères, la vallée de la Lèze, le Volvestre…), depuis Lavernose-Lacasse (31410).</div></details>
       </div>
 
