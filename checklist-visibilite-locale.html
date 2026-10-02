@@ -122,8 +122,8 @@ h1{font-family:'Fraunces',Georgia,serif!important;font-weight:500!important;lett
 <body>
   <a class="skiplink" href="#contenu">Aller au contenu</a>
   <header class="top"><div class="wrap">
-    <a class="brand" href="index.html"><img src="logo.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
-    <a class="back" href="index.html">← Accueil</a>
+    <a class="brand" href="/"><img src="logo.png" alt="Logo FL — François Leterrier" width="40" height="40">François Leterrier<small>Community Manager · Web</small></a>
+    <a class="back" href="/">← Accueil</a>
   </div></header>
 
   <section class="hero"><div class="wrap">
@@ -218,7 +218,7 @@ h1{font-family:'Fraunces',Georgia,serif!important;font-weight:500!important;lett
       <div id="planList"></div>
       <div class="actions">
         <button type="button" class="btn primary" id="printBtn">🖨️ Imprimer mon plan</button>
-        <a class="btn" href="index.html#contact">Besoin d'aide ? Diagnostic gratuit →</a>
+        <a class="btn" href="contact.html">Besoin d'aide ? Diagnostic gratuit →</a>
       </div>
       <p class="note">Auto-évaluation indicative : ce sont vos réponses, pas un audit technique de votre site. Pour un diagnostic approfondi, voir mes <a href="audit-gratuit.html">outils d'audit gratuits</a>.</p>
     </div>
@@ -260,7 +260,7 @@ h1{font-family:'Fraunces',Georgia,serif!important;font-weight:500!important;lett
     </div>
   </div></main>
 
-  <footer><div class="wrap">© <span id="y">2026</span> François Leterrier · Lavernose-Lacasse 31410 — <a href="index.html">Accueil</a> · <a href="methode.html">Ma méthode</a> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
+  <footer><div class="wrap">© <span id="y">2026</span> François Leterrier · Lavernose-Lacasse 31410 — <a href="/">Accueil</a> · <a href="methode.html">Ma méthode</a> · <a href="mentions-legales.html">Mentions légales</a></div></footer>
   <script>
     (function () {
       'use strict';
@@ -299,7 +299,7 @@ h1{font-family:'Fraunces',Georgia,serif!important;font-weight:500!important;lett
         var cats = [];
         for (var c in byCat) { if (byCat.hasOwnProperty(c)) cats.push(c); }
         if (answered === 0) { planIntro.textContent = 'Répondez aux 15 questions ci-dessus : votre plan d\'action personnalisé s\'affichera ici, priorisé.'; return; }
-        if (!cats.length) { planIntro.innerHTML = '🎉 Bravo, vous cochez toutes les cases ! Votre présence locale est solide. Envie d\'aller encore plus loin ? <a href="index.html#contact">Parlons-en</a>.'; return; }
+        if (!cats.length) { planIntro.innerHTML = '🎉 Bravo, vous cochez toutes les cases ! Votre présence locale est solide. Envie d\'aller encore plus loin ? <a href="contact.html">Parlons-en</a>.'; return; }
         planIntro.textContent = 'Voici vos actions prioritaires, dans l\'ordre. Cochez-les au fur et à mesure :';
         // order by predefined category priority
         var order = ['Fiche Google Business', 'Avis clients', 'Votre site internet', 'Cohérence & annuaires', 'Réseaux sociaux'];
