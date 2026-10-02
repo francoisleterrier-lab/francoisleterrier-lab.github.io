@@ -1,0 +1,11 @@
+/* TEAM */
+Créateur, community manager & développement : François Leterrier
+Site : https://francoisleterrier.fr/
+Lieu : Lavernose-Lacasse (31410), Sud-Toulousain, France
+Contact : 06 98 20 02 08 — francois.leterrier.cmw@gmail.com
+
+/* SITE */
+Dernière mise à jour : 2026-10-02
+Langue : français
+Technologies : HTML/CSS/JS statiques, GitHub Pages, Cloudflare (edge, Worker, Turnstile)
+Carte IA : https://francoisleterrier.fr/llms.txt
