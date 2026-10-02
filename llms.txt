@@ -59,7 +59,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Community manager à Toulouse : https://francoisleterrier.fr/community-manager-toulouse.html
 - Site internet pour artisan à Toulouse : https://francoisleterrier.fr/creation-site-internet-artisan-toulouse.html
 - Parrainage : https://francoisleterrier.fr/parrainage.html — Abonnement en ligne (Stripe) : https://francoisleterrier.fr/abonnement.html
-- Blog (23 guides) : https://francoisleterrier.fr/blog/
+- Blog (25 guides) : https://francoisleterrier.fr/blog/
 
 ## Outils gratuits en ligne (sans inscription)
 - Générateur de site instantané — indiquer métier + nom + ville, une vraie page d'accueil se compose en quelques secondes : https://francoisleterrier.fr/generateur.html
@@ -71,7 +71,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Comparateur de fiche Google face à un concurrent : https://francoisleterrier.fr/comparateur-fiche-google.html
 - Checklist visibilité locale — auto-diagnostic : https://francoisleterrier.fr/checklist-visibilite-locale.html
 - Glossaire du web et du référencement local : https://francoisleterrier.fr/glossaire.html
-- Moteur de réponses IA — répond à partir des 23 guides du site, sources citées : https://francoisleterrier.fr/reponses.html
+- Moteur de réponses IA — répond à partir des 25 guides du site, sources citées : https://francoisleterrier.fr/reponses.html
 - Kit d'intégration — widget IA embeddable et badge « Site réalisé par » : https://francoisleterrier.fr/kit.html
 
 ## Zone d'intervention — Sud-Toulousain / Haute-Garonne (31) : une page par commune
@@ -106,7 +106,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Seysses : community manager https://francoisleterrier.fr/community-manager-seysses.html · création de site https://francoisleterrier.fr/creation-site-internet-seysses.html
 - Venerque : community manager https://francoisleterrier.fr/community-manager-venerque.html · création de site https://francoisleterrier.fr/creation-site-internet-venerque.html
 
-## Les 23 guides du blog
+## Les 25 guides du blog
 ### Réseaux sociaux (community management)
 - Combien coûte un community manager à Toulouse ? (2026) : https://francoisleterrier.fr/blog/combien-coute-community-manager-toulouse.html
 - Réseaux sociaux pour une agence immobilière locale : https://francoisleterrier.fr/blog/community-manager-agence-immobiliere-sud-toulousain.html
@@ -118,6 +118,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Auto-entrepreneur Sud-Toulousain : présence en ligne : https://francoisleterrier.fr/blog/presence-en-ligne-auto-entrepreneur-sud-toulousain.html
 
 ### Création de site internet
+- Prix d'un site internet à Toulouse en 2026 : agence, freelance ou plateforme en ligne ? : https://francoisleterrier.fr/blog/prix-site-internet-toulouse-2026.html
 - Combien coûte un site internet en 2026 ? (prix) : https://francoisleterrier.fr/blog/combien-coute-site-internet.html
 - Créer le site d'un commerce de proximité à Saint-Lys : https://francoisleterrier.fr/blog/creer-site-commerce-proximite-saint-lys.html
 - Créer un site internet pour un artisan à Muret : le guide : https://francoisleterrier.fr/blog/creer-site-internet-artisan-muret.html
@@ -129,6 +130,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Site internet pour un professionnel de santé (guide) : https://francoisleterrier.fr/blog/site-internet-professionnel-sante.html
 
 ### Google, avis & SEO local
+- Être cité par ChatGPT, Perplexity et les aperçus IA de Google (commerce local, 12 points) : https://francoisleterrier.fr/blog/etre-cite-par-chatgpt-perplexity-commerce-local.html
 - Être visible sur Google : guide artisan du Sud-Toulousain : https://francoisleterrier.fr/blog/etre-visible-google-artisan-sud-toulousain.html
 - Google Business Profile : le guide des commerçants du 31 : https://francoisleterrier.fr/blog/google-business-profile-guide-commercants.html
 - Avis Google : comment en obtenir plus (guide 2026) : https://francoisleterrier.fr/blog/obtenir-avis-google-clients.html
