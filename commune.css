@@ -58,3 +58,4 @@ footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
 .skiplink{position:absolute;left:-9999px;top:0;z-index:9999;background:#fff;color:#060410;padding:10px 16px;border-radius:0 0 10px 0;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.35)}
 .skiplink:focus{left:0}
 .skiplink:focus-visible{outline:3px solid #7c5cff;outline-offset:2px}
+.cta-ghost{background:rgba(255,255,255,.06);color:#f2ecf4;border:1px solid rgba(255,255,255,.22);margin-left:8px}.hero p.proof{margin-top:12px;font-size:13px;color:#8b93a8;max-width:none}

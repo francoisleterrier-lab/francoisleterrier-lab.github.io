@@ -57,3 +57,5 @@ details .a{padding:0 18px 16px;color:#c4cbdb;font-size:15px;}
 footer{background:#05060c;color:var(--muted);font-size:12.5px;padding:26px 0;border-top:1px solid var(--line);text-align:center;}
 footer a{color:var(--muted);}footer a:hover{color:var(--cyan);}
 @media(max-width:680px){.top .wrap{padding:12px 24px;}}
+.blognav{font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);background:rgba(6,7,14,.6)}.blognav .wrap{max-width:860px;padding:8px 24px}.blognav a{color:var(--txt);font-weight:600}
+.author{display:flex;gap:16px;align-items:flex-start;margin-top:30px;padding:18px;border:1px solid var(--line2);border-radius:16px;background:rgba(255,255,255,.03)}.author img{width:72px;height:auto;border-radius:12px;flex:none}.author p{margin:0 0 8px;font-size:14.5px;color:#aab2c6}.author .author-links{font-size:13.5px}.author .author-links a{color:var(--cyan);font-weight:600}@media(max-width:520px){.author{flex-direction:column}}
