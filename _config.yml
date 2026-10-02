@@ -1,0 +1,19 @@
+# Jekyll / GitHub Pages — fichiers internes à NE PAS publier sur le site.
+# (Ne pas ajouter de .nojekyll : il désactiverait cette exclusion.)
+exclude:
+  - wrangler.toml
+  - src/
+  - test/
+  - schema.sql
+  - package.json
+  - README.md
+  - RUNBOOK-cloudflare-finalisation.md
+  - SETUP-cloudflare.md
+  - SETUP-secrets.md
+  - check-headers.sh
+  - check-url-parity.sh
+  - setup-resources.sh
+  - setup-resources.ps1
+  - .dev.vars.example
+  - scratchpad/
+  - node_modules/
