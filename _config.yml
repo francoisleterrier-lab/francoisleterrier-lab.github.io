@@ -15,5 +15,6 @@ exclude:
   - setup-resources.sh
   - setup-resources.ps1
   - .dev.vars.example
+  - tools/
   - scratchpad/
   - node_modules/
