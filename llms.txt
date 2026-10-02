@@ -53,6 +53,9 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Tarifs : https://francoisleterrier.fr/tarifs.html — Méthode : https://francoisleterrier.fr/methode.html — Réalisations : https://francoisleterrier.fr/realisations.html — Avis : https://francoisleterrier.fr/avis.html
 - À propos (entité) : https://francoisleterrier.fr/a-propos.html — Contact : https://francoisleterrier.fr/contact.html
 - Zone d'intervention (hub Sud-Toulousain, 30 communes) : https://francoisleterrier.fr/secteur-sud-toulousain.html
+- Haute-Garonne (31), périmètre complet : https://francoisleterrier.fr/agence-web-haute-garonne.html
+- Community manager à Toulouse : https://francoisleterrier.fr/community-manager-toulouse.html
+- Site internet pour artisan à Toulouse : https://francoisleterrier.fr/creation-site-internet-artisan-toulouse.html
 - Parrainage : https://francoisleterrier.fr/parrainage.html — Abonnement en ligne (Stripe) : https://francoisleterrier.fr/abonnement.html
 - Blog (23 guides) : https://francoisleterrier.fr/blog/
 
