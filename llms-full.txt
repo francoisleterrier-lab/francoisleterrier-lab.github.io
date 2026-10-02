@@ -33,6 +33,7 @@
 
 ## Preuves (chiffres réels, datés)
 - Étude de cas Concept Immo Plus (agence immobilière, Lavernose-Lacasse) — comptes gérés par François, chiffres relevés en juin 2026 : 400+ visites/mois sur le site, 2 000+ abonnés sur les réseaux, 5 000+ vues par publication, 12 000+ vues sur les meilleurs posts. Résultats propres à ce cas, sans promesse de reproductibilité. Site : conceptimmoplus.com. https://francoisleterrier.fr/realisations.html
+- Étude de cas complète Concept Immo Plus : https://francoisleterrier.fr/etude-de-cas-concept-immo-plus.html
 - Réalisation Domaine des Six (site vitrine) : domainedessix.fr — https://francoisleterrier.fr/realisations.html
 - Avis clients (verbatims réels) : « Réalisation d'un faire-part de mariage interactif unique et incroyable ! Du jamais vu. » (Yolène P.) · « Le site est soigné, élégant et parfaitement réalisé, chaque détail pensé avec goût. » (Leane P.) · « Un vrai partenaire de proximité dans le Sud-Toulousain. On recommande sans hésiter. » (Virginie P., agence immobilière) · « Sérieux, à l'écoute et professionnel pour développer votre visibilité. » (Emmanuelle C.) — https://francoisleterrier.fr/avis.html
 
@@ -53,6 +54,7 @@ Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences 
 - Tarifs : https://francoisleterrier.fr/tarifs.html — Méthode : https://francoisleterrier.fr/methode.html — Réalisations : https://francoisleterrier.fr/realisations.html — Avis : https://francoisleterrier.fr/avis.html
 - À propos (entité) : https://francoisleterrier.fr/a-propos.html — Contact : https://francoisleterrier.fr/contact.html
 - Zone d'intervention (hub Sud-Toulousain, 30 communes) : https://francoisleterrier.fr/secteur-sud-toulousain.html
+- Agence web à Muret (hub Muretain) : https://francoisleterrier.fr/agence-web-muret.html
 - Haute-Garonne (31), périmètre complet : https://francoisleterrier.fr/agence-web-haute-garonne.html
 - Community manager à Toulouse : https://francoisleterrier.fr/community-manager-toulouse.html
 - Site internet pour artisan à Toulouse : https://francoisleterrier.fr/creation-site-internet-artisan-toulouse.html

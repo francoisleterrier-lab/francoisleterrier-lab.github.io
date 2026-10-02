@@ -362,6 +362,29 @@
  ]
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Dataset",
+ "name": "Baromètre de la présence en ligne des commerçants, artisans et TPE",
+ "description": "Agrégats anonymisés issus des audits de présence en ligne réalisés sur francoisleterrier.fr : score moyen /100, répartition, moyennes par pilier (site web, fiche Google, réseaux sociaux, avis) et par secteur. Au 2 octobre 2026 : 10 analyses, score moyen 60/100.",
+ "url": "https://francoisleterrier.fr/barometre.html",
+ "creator": {
+  "@id": "https://francoisleterrier.fr/#business"
+ },
+ "dateModified": "2026-10-02",
+ "license": "https://creativecommons.org/licenses/by/4.0/",
+ "isAccessibleForFree": true,
+ "spatialCoverage": "France",
+ "variableMeasured": [
+  "Score de présence en ligne /100",
+  "Score site web",
+  "Score fiche Google",
+  "Score réseaux sociaux",
+  "Score avis et réputation"
+ ]
+}
+</script>
 </head>
 <body>
   <a class="skiplink" href="#contenu">Aller au contenu</a>
@@ -383,8 +406,9 @@
       <div class="crumb"><a href="/">Accueil</a> › Baromètre</div>
       <h1>Le <em>Baromètre</em> de la présence en ligne</h1>
       <p class="lede">Combien vaut vraiment la présence en ligne des commerçants, artisans et TPE&nbsp;? On la mesure en continu — <strong>site web, fiche Google, réseaux sociaux et avis</strong> — et on en tire un état des lieux chiffré. Chaque audit réalisé enrichit ce baromètre. Partout en France, ancré dans le Sud-Toulousain.</p>
+      <p class="lede" style="font-size:15px"><strong>Au 2 octobre 2026</strong> : 10 présences en ligne analysées, score moyen <strong>60/100</strong>, 20 % en difficulté, maillon faible = <strong>avis & réputation</strong> (20/100). Échantillon encore réduit : les tendances se confirmeront audit après audit.</p>
       <div class="baro-cards" id="baro-cards">
-        <div class="bcard"><div class="n grad">—</div><div class="l">Chargement…</div></div>
+        <div class="bcard"><div class="n grad">60</div><div class="l">Score moyen de présence en ligne /100</div></div><div class="bcard"><div class="n">10</div><div class="l">présences analysées</div></div><div class="bcard"><div class="n" style="color:#ff6b6b">20%</div><div class="l">en difficulté (score &lt; 50)</div></div><div class="bcard"><div class="n" style="color:#37d67a">20%</div><div class="l">bien visibles (score ≥ 80)</div></div>
       </div>
       <div class="baro-note" id="baro-note" hidden></div>
     </div></section>
@@ -392,13 +416,13 @@
     <section class="baro-sec"><div class="wrap">
       <h2>Le maillon faible</h2>
       <p class="sub">Score moyen de chaque pilier de présence en ligne. Le pilier le plus bas est celui qui coûte le plus de clients aux professionnels.</p>
-      <div id="baro-pillars"></div>
+      <div id="baro-pillars"><div class="brow"><span class="bl">Site web</span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:90%;border-radius:8px;background:#37d67a"></span></span><span class="bv">90</span></div><div class="brow"><span class="bl">Fiche Google</span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:33%;border-radius:8px;background:#ff6b6b"></span></span><span class="bv">33</span></div><div class="brow"><span class="bl">Réseaux sociaux</span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:65%;border-radius:8px;background:#f0a04b"></span></span><span class="bv">65</span></div><div class="brow"><span class="bl">Avis &amp; réputation</span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:20%;border-radius:8px;background:#ff6b6b"></span></span><span class="bv">20</span></div><div class="weak">🔎 Le point faible n°1 des professionnels analysés : <b>Avis & réputation</b> (20/100 en moyenne). C'est là qu'un accompagnement rapporte le plus vite.</div></div>
     </div></section>
 
     <section class="baro-sec"><div class="wrap">
       <h2>Par secteur d'activité</h2>
       <p class="sub">Score moyen de présence en ligne, par secteur. Une moyenne basse = un secteur où sortir du lot est le plus facile.</p>
-      <div id="baro-sectors"></div>
+      <div id="baro-sectors"><div class="brow"><span class="bl">Services<small>3 analyses</small></span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:47%;border-radius:8px;background:#ff6b6b"></span></span><span class="bv">47</span></div><div class="brow"><span class="bl">Immobilier<small>3 analyses</small></span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:77%;border-radius:8px;background:#f0a04b"></span></span><span class="bv">77</span></div><div class="brow"><span class="bl">Autres<small>3 analyses</small></span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:49%;border-radius:8px;background:#ff6b6b"></span></span><span class="bv">49</span></div><div class="brow"><span class="bl">Artisanat &amp; BTP<small>1 analyse</small></span><span class="btrack" style="display:block;height:13px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden"><span class="bfill" style="display:block;height:100%;width:83%;border-radius:8px;background:#37d67a"></span></span><span class="bv">83</span></div></div>
     </div></section>
 
     <section class="baro-sec baro-method"><div class="wrap">
@@ -415,7 +439,7 @@
       <h2>Et vous, où en êtes-vous&nbsp;?</h2>
       <p>Obtenez votre score de présence en ligne en quelques secondes — et contribuez au baromètre.</p>
       <a class="btn-go" href="audit.html">🔍 Faire mon audit gratuit →</a>
-      <div class="baro-upd" id="baro-upd"></div>
+      <div class="baro-upd" id="baro-upd">Mis à jour le 2 octobre 2026 · s'actualise à chaque audit.</div>
     </div></section>
   </main>
 
