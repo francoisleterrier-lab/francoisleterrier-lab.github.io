@@ -42,7 +42,6 @@
 <link rel="shortcut icon" href="favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
 
-<link rel="preconnect" href="https://api.web3forms.com">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-500-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-400-latin.woff2" crossorigin>
 <link rel="preload" href="/fonts.css" as="style" onload="this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/fonts.css"></noscript>
@@ -1197,17 +1196,12 @@
       </div>
     </div>
 
-    <form class="form reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+    <form class="form reveal" id="contactForm" data-fl-lead data-fl-src="accueil">
       <h3>Demander un devis ou un échange</h3>
       <p>Réponse sous 48h en moyenne. Champs marqués * obligatoires.</p>
       <a class="btn btn-ghost" href="https://calendly.com/fl-conceptimmoplus/30min" data-fl-calendly="https://calendly.com/fl-conceptimmoplus/30min" target="_blank" rel="noopener" style="width:100%;justify-content:center;">📅 Réserver un créneau de 30 min</a>
       <div style="text-align:center;color:#8b92a8;font-size:12.5px;margin:14px 0 2px;">— ou écrivez-moi —</div>
 
-      <!-- Web3Forms : clé d'accès du formulaire (envoi vers l'email configuré sur web3forms.com) -->
-      <input type="hidden" name="access_key" value="65a34e63-ed73-4214-a9b4-bc144d952cd5">
-      <input type="hidden" name="subject" value="Nouvelle demande depuis le site — François Leterrier">
-      <input type="hidden" name="from_name" value="Site François Leterrier">
-      <input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html?ok=1">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="frow">
@@ -1339,9 +1333,9 @@
   })();
 
   // Le formulaire est envoyé nativement vers Web3Forms (POST), qui redirige vers merci.html.
-  // (Pensez à renseigner votre clé access_key dans le champ caché du formulaire.)
 </script>
 <script src="/consent.js" defer></script>
+<script src="/lead-form.js" defer></script>
 <script src="/popups.js" defer></script>
 <script src="/interactive.js" defer></script>
 <script src="/fl-ui/fl-ui.js" defer></script>

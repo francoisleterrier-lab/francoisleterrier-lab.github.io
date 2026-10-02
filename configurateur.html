@@ -32,7 +32,6 @@
 <link rel="stylesheet" href="/fx.css">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
 <link rel="stylesheet" href="pages.css">
-<link rel="preconnect" href="https://api.web3forms.com">
 
 <script type="application/ld+json">
 {
@@ -187,11 +186,7 @@
       <div class="devis-wrap" id="devis">
         <h2>Recevez votre devis détaillé</h2>
         <p class="intro">Je vous réponds sous 48h en moyenne avec un chiffrage précis, adapté à votre projet. Champs marqués * obligatoires.</p>
-        <form action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="65a34e63-ed73-4214-a9b4-bc144d952cd5">
-          <input type="hidden" name="subject" value="Nouvelle demande — Configurateur de projet">
-          <input type="hidden" name="from_name" value="Configurateur François Leterrier">
-          <input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html?ok=1">
+        <form data-fl-lead data-fl-src="configurateur" data-fl-prefix="Configurateur">
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" id="f_estim" name="Estimation">
           <input type="hidden" id="f_config" name="Configuration">
@@ -299,6 +294,7 @@
   })();
   </script>
   <script src="/consent.js" defer></script>
+<script src="/lead-form.js" defer></script>
 <script src="/assistant.js" defer></script>
 <script src="/fx.js" defer></script>
 </body>

@@ -232,12 +232,8 @@
     d.appendChild(x);
     d.appendChild(el('h3', null, 'Devis express ⚡'));
     d.appendChild(el('p', { 'class': 'sub' }, 'Dites-moi l\'essentiel, je reviens vers vous sous 48 h en moyenne.'));
-    var form = el('form', { action: 'https://api.web3forms.com/submit', method: 'POST' });
+    var form = el('form', { 'data-fl-lead': '1', 'data-fl-src': 'devis-express', 'data-fl-prefix': 'Devis express' });
     form.innerHTML =
-      '<input type="hidden" name="access_key" value="65a34e63-ed73-4214-a9b4-bc144d952cd5">' +
-      '<input type="hidden" name="subject" value="Devis express depuis le site — François Leterrier">' +
-      '<input type="hidden" name="from_name" value="Site François Leterrier">' +
-      '<input type="hidden" name="redirect" value="https://francoisleterrier.fr/merci.html">' +
       '<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" aria-hidden="true">' +
       '<fieldset><legend>Je veux…</legend><div class="fl-pills" role="radiogroup" aria-label="Je veux…">' +
       '<label class="fl-pill"><input type="radio" name="besoin" value="Réseaux sociaux" checked><span>Réseaux sociaux</span></label>' +
@@ -245,10 +241,12 @@
       '<label class="fl-pill"><input type="radio" name="besoin" value="Les deux"><span>Les deux</span></label>' +
       '</div></fieldset>' +
       '<div class="fl-field"><label for="fldr-name">Votre prénom *</label><input id="fldr-name" name="name" type="text" required data-fl-autofocus="1"></div>' +
-      '<div class="fl-field"><label for="fldr-contact">Téléphone ou e-mail *</label><input id="fldr-contact" name="contact" type="text" required placeholder="06… ou vous@exemple.fr"></div>' +
+      '<div class="fl-field"><label for="fldr-email">E-mail *</label><input id="fldr-email" name="email" type="email" required placeholder="vous@exemple.fr"></div>' +
+      '<div class="fl-field"><label for="fldr-phone">Téléphone (facultatif)</label><input id="fldr-phone" name="phone" type="tel" placeholder="06…"></div>' +
       '<div class="fl-field"><label for="fldr-msg">En deux mots (facultatif)</label><textarea id="fldr-msg" name="message" placeholder="Votre activité, votre besoin…"></textarea></div>' +
-      '<button class="fl-btn fl-btn-primary" type="submit" style="width:100%;">Envoyer ma demande →</button>' +
-      '<p class="fl-drawer-note">En envoyant, vous acceptez la <a href="confidentialite.html">politique de confidentialité</a>.</p>';
+      '<label class="fl-drawer-note" style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;"><input type="checkbox" required style="margin-top:3px;"><span>J\'accepte d\'être recontacté et que mes données soient traitées selon la <a href="/confidentialite.html">politique de confidentialité</a>.</span></label>' +
+      '<div class="fl-ts"></div>' +
+      '<button class="fl-btn fl-btn-primary" type="submit" style="width:100%;">Envoyer ma demande →</button>';
     d.appendChild(form);
     ov.appendChild(d);
     ov.addEventListener('click', function (e) { if (e.target === ov) window.FLModal.close(); });

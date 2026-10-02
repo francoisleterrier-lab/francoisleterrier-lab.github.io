@@ -34,6 +34,24 @@
   </div></main>
   <footer><div class="wrap">François Leterrier · Community manager &amp; création de site · Lavernose-Lacasse 31410 — © <span id="y">2026</span></div></footer>
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>window.flGtagNow = true;</script>
+<script src="/consent.js" defer></script>
+<!-- Conversion GA4 « purchase » (retour Stripe) — une seule fois par session de paiement -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var qs = new URLSearchParams(location.search);
+    var id = qs.get('session_id') || qs.get('checkout_session') || '';
+    var key = 'fl-purchase:' + (id || location.pathname);
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+    var p = { currency: 'EUR' }; if (id) p.transaction_id = id;
+    if (window.flTrack) window.flTrack('purchase', p); else if (typeof gtag === 'function') gtag('event', 'purchase', p);
+    try { if (window.fbq) window.fbq('track', 'Purchase', { currency: 'EUR' }); } catch (_) {}
+    if (history.replaceState) history.replaceState(null, '', location.pathname);
+  } catch (e) {}
+});
+</script>
 <script src="/fx.js" defer></script>
 </body>
 </html>

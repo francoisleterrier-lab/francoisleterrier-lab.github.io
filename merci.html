@@ -73,8 +73,9 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   try {
-    if (new URLSearchParams(location.search).get('ok') !== '1') return;
-    var p = { event_category: 'lead', value: 0, currency: 'EUR' };
+    var qs = new URLSearchParams(location.search);
+    if (qs.get('ok') !== '1') return;
+    var p = { event_category: 'lead', value: 0, currency: 'EUR', lead_source: (qs.get('src') || 'contact').slice(0, 40) };
     if (window.flTrack) window.flTrack('generate_lead', p);
     else if (typeof gtag === 'function') gtag('event', 'generate_lead', p);
     // Conversion Google Ads — soumission de formulaire de lead (diagnostic accueil, contact, configurateur)
