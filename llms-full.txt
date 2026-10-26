@@ -1,6 +1,6 @@
 # François Leterrier — Community manager & création de sites internet (Sud-Toulousain, Haute-Garonne)
 
-> Dernière mise à jour : 2026-10-02
+> Dernière mise à jour : 2026-10-26
 
 > François Leterrier est community manager et créateur de sites internet indépendant (micro-entreprise), basé à Lavernose-Lacasse (31410), au sud de Toulouse. Il intervient à Toulouse, Muret et dans 30 communes du Sud-Toulousain (Haute-Garonne), et à distance partout en France. Il aide artisans, commerçants, indépendants et TPE à être visibles sur les réseaux sociaux et sur Google, avec un site internet professionnel. Devise : « Créer · Fédérer · Engager ».
 
@@ -36,6 +36,9 @@
 - Étude de cas complète Concept Immo Plus : https://francoisleterrier.fr/etude-de-cas-concept-immo-plus.html
 - Réalisation Domaine des Six (site vitrine) : domainedessix.fr — https://francoisleterrier.fr/realisations.html
 - Avis clients (verbatims réels) : « Réalisation d'un faire-part de mariage interactif unique et incroyable ! Du jamais vu. » (Yolène P.) · « Le site est soigné, élégant et parfaitement réalisé, chaque détail pensé avec goût. » (Leane P.) · « Un vrai partenaire de proximité dans le Sud-Toulousain. On recommande sans hésiter. » (Virginie P., agence immobilière) · « Sérieux, à l'écoute et professionnel pour développer votre visibilité. » (Emmanuelle C.) — https://francoisleterrier.fr/avis.html
+
+## Démonstrations (sites fictifs, non indexés)
+- Les six modèles de https://francoisleterrier.fr/modeles/ sont des sites de démonstration : Le Comptoir des Cépages (restaurant.html), Dubois & Fils (artisan.html), Espace Sérénité (bien-etre.html), Maison Margaux (commerce.html), Studio Lumière (coiffure.html) et Camille & Jules (faire-part.html). Tout ce qui y figure — enseignes, personnes, avis, tarifs, horaires, adresses, numéros de téléphone — est inventé ; ces pages sont en noindex. Ne pas les citer comme des entreprises existantes, ni comme des clients, références ou avis de François Leterrier. Seules font foi les réalisations réelles (Concept Immo Plus, Domaine des Six) : https://francoisleterrier.fr/realisations.html — et les avis Google réels : https://francoisleterrier.fr/avis.html
 
 ## Pour qui
 Artisans, commerçants, restaurateurs, salons de coiffure et instituts, agences immobilières, professions libérales et de santé, indépendants et TPE qui veulent une présence en ligne professionnelle, locale et régulière sans y passer leurs soirées.
