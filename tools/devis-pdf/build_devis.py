@@ -191,11 +191,13 @@ def meta_from(blocks):
     date = re.search(r"émis le (\d{1,2} \w+ 20\d\d)", txt)
     val = re.search(r"valable jusqu'au (\d{1,2} \w+ 20\d\d)", txt)
     net = re.search(r"Net à payer : ([\d  ]+€)", txt)
+    monthly = re.search(r"puis ([\d  ]+€/mois)", txt)
     return {
         "num": num.group(1) if num else "",
         "date": date.group(1) if date else "",
         "val": val.group(1) if val else "",
         "net": net.group(1) if net else "",
+        "monthly": monthly.group(1) if monthly else "",
     }
 
 
@@ -212,7 +214,8 @@ def build_html(md_path: Path) -> str:
         font_face("Fraunces", "fraunces-500-latin.woff2", "100 900"),
         font_face("Fraunces", "fraunces-500-latin-ext.woff2", "100 900"),
     ])
-    net_box = (f"<div class='net'><span>Net à payer</span><b>{inline(meta['net'])}</b>"
+    monthly = f"<small>puis {inline(meta['monthly'])}</small>" if meta["monthly"] else ""
+    net_box = (f"<div class='net'><span>Net à payer</span><b>{inline(meta['net'])}</b>{monthly}"
                f"<small>TVA non applicable</small></div>") if meta["net"] else ""
     return f"""<!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8">
