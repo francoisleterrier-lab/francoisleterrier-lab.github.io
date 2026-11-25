@@ -156,7 +156,8 @@ def render_table(rows):
         if len(r[1]) > 450:
             cls += ' long'
         trs.append(f"<tr class='{cls}'>{tds}</tr>")
-    return f"<table class='grid'><thead><tr>{ths}</tr></thead><tbody>{''.join(trs)}</tbody></table>"
+    klass = 'grid recap' if (head[0] == '' and ncol == 2) else 'grid'
+    return f"<table class='{klass}'><thead><tr>{ths}</tr></thead><tbody>{''.join(trs)}</tbody></table>"
 
 
 def render(blocks):
@@ -258,6 +259,8 @@ table.grid td:first-child {{ font-weight:700; color:{B['ink']}; width:21%; }}
 table.grid th.num, table.grid td.num {{ text-align:right; white-space:nowrap; }}
 table.grid tr {{ break-inside:avoid; }}
 table.grid tr.long {{ break-inside:auto; }}
+table.recap td:first-child {{ width:auto; font-weight:600; }}
+table.recap td.num {{ width:28mm; }}
 table.grid tr.gift td {{ color:{B['purple']}; font-weight:700; background:#f7f3ff; }}
 table.grid tr.total td {{ font-weight:800; color:{B['ink']}; background:{B['soft']}; }}
 .parties, .signatures {{ display:flex; gap:5mm; margin:0 0 3mm; }}
